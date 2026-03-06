@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <title>BTB Lacrosse | Long Island's Premier Lacrosse Development Program</title>
     <meta name="description"
         content="BTB Lacrosse builds complete lacrosse players through structured development, film study, small-group training, and accountability. Long Island's premier lacrosse academy.">
@@ -286,6 +287,16 @@
             opacity: 0;
             transform: translateY(20px);
             animation: fadeUp 0.8s forwards 0.3s;
+        }
+
+        .hero-logo {
+            width: 140px;
+            height: auto;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px) scale(0.9);
+            animation: fadeUp 0.8s forwards 0.1s;
+            filter: drop-shadow(0 4px 20px rgba(210, 38, 48, 0.3));
         }
 
         .hero h1 {
@@ -1040,6 +1051,135 @@
             color: rgba(255, 255, 255, 0.25);
         }
 
+        /* ── Spotlight (Coach & Player of the Month) ── */
+        .spotlight-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .spotlight-card {
+            position: relative;
+            border-radius: 10px;
+            padding: 2.5rem 2rem;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .spotlight-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .spotlight-card.coach-spotlight {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            border: 1px solid rgba(210, 38, 48, 0.2);
+        }
+
+        .spotlight-card.player-spotlight {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            border: 1px solid rgba(210, 38, 48, 0.2);
+        }
+
+        .spotlight-label {
+            display: inline-block;
+            font-size: 0.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--primary);
+            border: 1px solid rgba(210, 38, 48, 0.3);
+            padding: 0.3rem 0.8rem;
+            border-radius: 3px;
+            margin-bottom: 1.5rem;
+        }
+
+        .spotlight-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.6rem;
+            color: var(--white);
+            margin-bottom: 1.2rem;
+            border: 3px solid rgba(210, 38, 48, 0.4);
+        }
+
+        .spotlight-photo img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .spotlight-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.6rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--white);
+            margin-bottom: 0.3rem;
+            line-height: 1.1;
+        }
+
+        .spotlight-role {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 1rem;
+        }
+
+        .spotlight-quote {
+            font-size: 0.88rem;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.7;
+            margin-bottom: 1.2rem;
+            border-left: 2px solid var(--primary);
+            padding-left: 1rem;
+        }
+
+        .spotlight-stats {
+            display: flex;
+            gap: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .spotlight-stat {
+            text-align: center;
+        }
+
+        .spotlight-stat-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem;
+            color: var(--primary);
+            line-height: 1;
+        }
+
+        .spotlight-stat-label {
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.35);
+            margin-top: 0.2rem;
+        }
+
+        .spotlight-month {
+            font-size: 0.68rem;
+            color: rgba(255, 255, 255, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 1rem;
+        }
+
         /* ── Animations ── */
         .reveal {
             opacity: 0;
@@ -1132,6 +1272,10 @@
                 gap: 2rem;
             }
 
+            .spotlight-grid {
+                grid-template-columns: 1fr;
+            }
+
             .footer-grid {
                 grid-template-columns: 1fr;
                 gap: 2rem;
@@ -1159,12 +1303,13 @@
     <!-- Header -->
     <header class="btb-header" id="navbar" role="banner">
         <a href="index.html" class="btb-logo">
-            <img src="assets/btb-logo-flat.png" alt="BTB Lacrosse — Home">
+            <img src="assets/B 3d Metal Logo copy.png" alt="BTB Lacrosse — Home">
         </a>
         <nav class="btb-nav" id="navLinks" role="navigation" aria-label="Main navigation">
             <a href="#standard">Our Standard</a>
             <a href="academy-landing.html">Academy</a>
             <a href="world-series.html">World Series</a>
+            <a href="gallery.html">Gallery</a>
             <a href="coach-bios.html">Coaches</a>
             <a href="faq.html">FAQ</a>
             <a href="#apply" class="btb-cta">Register Now</a>
@@ -1198,6 +1343,7 @@
 
         <div class="hero-particles" id="particles"></div>
         <div class="hero-inner">
+            <img src="assets/B 3d Metal Logo copy.png" alt="BTB Logo" class="hero-logo">
             <div class="hero-badge">Long Island Lacrosse Development</div>
             <h1>We Don't<br>Develop <span class="highlight">Talent.</span><br>We Build<br><span
                     class="highlight">Players.</span></h1>
@@ -1554,11 +1700,75 @@
         </div>
     </section>
 
-    <!-- BTB ACADEMY — commented out until ready
-    <section id="btb-academy">
-        ...
+    <!-- ═══════════════════════════════ -->
+    <!-- COACH & PLAYER OF THE MONTH -->
+    <!-- ═══════════════════════════════ -->
+    <section class="section-alt" id="spotlight">
+        <div class="section-inner">
+            <div class="section-header centered reveal">
+                <div class="section-tag">Monthly Spotlight</div>
+                <h2 class="section-title">Coach & Player of the Month</h2>
+                <p class="section-subtitle">Recognizing the people who define what it means to Be The Best — on and off the field.</p>
+            </div>
+            <div class="spotlight-grid">
+
+                <!-- Coach of the Month -->
+                <div class="spotlight-card coach-spotlight reveal">
+                    <div class="spotlight-label">Coach of the Month</div>
+                    <div class="spotlight-photo">
+                        <!-- Replace initials with <img src="path.jpg" alt="Coach Name"> -->
+                        MB
+                    </div>
+                    <div class="spotlight-name">Coach Mike B.</div>
+                    <div class="spotlight-role">2028 Travel Team &bull; Head Coach</div>
+                    <div class="spotlight-quote">"Development isn't about talent — it's about showing up prepared, staying accountable, and doing the work nobody sees."</div>
+                    <div class="spotlight-stats">
+                        <div class="spotlight-stat">
+                            <div class="spotlight-stat-num">6</div>
+                            <div class="spotlight-stat-label">Seasons</div>
+                        </div>
+                        <div class="spotlight-stat">
+                            <div class="spotlight-stat-num">45+</div>
+                            <div class="spotlight-stat-label">Players Dev'd</div>
+                        </div>
+                        <div class="spotlight-stat">
+                            <div class="spotlight-stat-num">12</div>
+                            <div class="spotlight-stat-label">Commits</div>
+                        </div>
+                    </div>
+                    <div class="spotlight-month">March 2026</div>
+                </div>
+
+                <!-- Player of the Month -->
+                <div class="spotlight-card player-spotlight reveal">
+                    <div class="spotlight-label">Player of the Month</div>
+                    <div class="spotlight-photo">
+                        <!-- Replace initials with <img src="path.jpg" alt="Player Name"> -->
+                        JR
+                    </div>
+                    <div class="spotlight-name">Jake R.</div>
+                    <div class="spotlight-role">Class of 2028 &bull; Attack</div>
+                    <div class="spotlight-quote">"The film study and extra reps changed the way I see the field. I went from hoping to play varsity to starting as a sophomore."</div>
+                    <div class="spotlight-stats">
+                        <div class="spotlight-stat">
+                            <div class="spotlight-stat-num">3</div>
+                            <div class="spotlight-stat-label">Years at BTB</div>
+                        </div>
+                        <div class="spotlight-stat">
+                            <div class="spotlight-stat-num">28</div>
+                            <div class="spotlight-stat-label">Goals</div>
+                        </div>
+                        <div class="spotlight-stat">
+                            <div class="spotlight-stat-num">15</div>
+                            <div class="spotlight-stat-label">Assists</div>
+                        </div>
+                    </div>
+                    <div class="spotlight-month">March 2026</div>
+                </div>
+
+            </div>
+        </div>
     </section>
-    -->
 
     <!-- ═══════════════════════════════ -->
     <!-- CTA / APPLY -->
