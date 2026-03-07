@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <title>Coaching Staff | BTB Lacrosse</title>
     <meta name="description" content="Meet the coaches behind BTB Lacrosse. Varsity-level staff dedicated to developing complete lacrosse players on Long Island.">
     <meta property="og:title" content="Coaching Staff | BTB Lacrosse">
@@ -13,135 +14,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="shared.css">
     <style>
-        /* ========================================
-           CSS VARIABLES
-           ======================================== */
-        :root {
-            --primary: #D22630;
-            --primary-dark: #a01e26;
-            --dark: #000000;
-            --light: #DADADA;
-            --gray: #4A4A4A;
-            --white: #FFFFFF;
-            --off-white: #F5F5F5;
-        }
-
-        /* ========================================
-           RESET & BASE
-           ======================================== */
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--dark);
-            background: var(--white);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Bebas Neue', sans-serif;
-            letter-spacing: 1px;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        img { max-width: 100%; }
-
-        /* ========================================
-           HEADER
-           ======================================== */
-        .btb-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background: var(--white);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 40px;
-            height: 70px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            transition: box-shadow 0.3s ease;
-        }
-
-        .btb-logo img {
-            height: 60px;
-            display: block;
-        }
-
-        .btb-nav {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-        }
-
-        .btb-nav a {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--dark);
-            transition: color 0.3s ease;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .btb-nav a:hover {
-            color: var(--primary);
-        }
-
-        .btb-nav .btb-cta {
-            background: var(--primary);
-            color: var(--white);
-            padding: 10px 24px;
-            border-radius: 6px;
-            font-weight: 700;
-            transition: background 0.3s ease, transform 0.2s ease;
-        }
-
-        .btb-nav .btb-cta:hover {
-            background: var(--primary-dark);
-            color: var(--white);
-            transform: translateY(-1px);
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            z-index: 1001;
-        }
-
-        .hamburger span {
-            width: 28px;
-            height: 3px;
-            background: var(--dark);
-            border-radius: 2px;
-            transition: all 0.3s ease;
-        }
-
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 6px);
-        }
-
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -6px);
-        }
-
         /* ========================================
            HERO
            ======================================== */
@@ -529,95 +401,6 @@
         }
 
         /* ========================================
-           FOOTER
-           ======================================== */
-        footer {
-            background: var(--dark);
-            color: rgba(255,255,255,0.5);
-            padding: 4rem 2rem 2rem;
-            border-top: 1px solid rgba(255,255,255,0.06);
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 3rem;
-            max-width: 1000px;
-            margin: 0 auto 3rem;
-        }
-
-        .footer-brand .logo {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.3rem;
-            color: var(--white);
-            letter-spacing: 2px;
-            display: block;
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-brand .logo span {
-            color: var(--primary);
-        }
-
-        .footer-brand p {
-            font-size: 0.82rem;
-            line-height: 1.6;
-        }
-
-        .footer-social {
-            display: flex;
-            gap: 0.8rem;
-            margin-top: 1.2rem;
-        }
-
-        .footer-social a {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            border: 1px solid rgba(255,255,255,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-            font-size: 0.75rem;
-            color: rgba(255,255,255,0.4);
-        }
-
-        .footer-social a:hover {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: var(--white);
-        }
-
-        .footer-col h4 {
-            font-family: 'Bebas Neue', sans-serif;
-            color: var(--white);
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            margin-bottom: 1rem;
-        }
-
-        .footer-col a {
-            display: block;
-            color: rgba(255,255,255,0.4);
-            text-decoration: none;
-            font-size: 0.82rem;
-            padding: 0.25rem 0;
-            transition: color 0.3s;
-        }
-
-        .footer-col a:hover { color: var(--primary); }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.06);
-            font-size: 0.75rem;
-            color: rgba(255,255,255,0.25);
-        }
-
-        /* ========================================
            ANIMATIONS
            ======================================== */
         .reveal {
@@ -635,33 +418,6 @@
            RESPONSIVE — 768px
            ======================================== */
         @media (max-width: 768px) {
-            .btb-header {
-                padding: 0 20px;
-            }
-
-            .btb-nav {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 280px;
-                height: 100vh;
-                background: var(--white);
-                flex-direction: column;
-                padding: 80px 30px 30px;
-                gap: 20px;
-                box-shadow: -4px 0 20px rgba(0,0,0,0.1);
-                transition: right 0.3s ease;
-                z-index: 999;
-            }
-
-            .btb-nav.active {
-                right: 0;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-
             .hero {
                 padding: 110px 16px 50px;
             }
@@ -691,11 +447,6 @@
 
             .cta-section h2 {
                 font-size: 36px;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
             }
         }
     </style>
@@ -760,15 +511,16 @@
          ============================================ -->
     <header class="btb-header" id="navbar">
         <a href="index.html" class="btb-logo">
-            <img src="assets/btb-logo-flat.png" alt="Be The Best Lacrosse">
+            <img src="assets/B 3d Metal Logo copy.png" alt="Be The Best Lacrosse">
         </a>
         <nav class="btb-nav" id="navLinks">
             <a href="index.html">Home</a>
             <a href="academy-landing.html">Academy</a>
             <a href="world-series.html">World Series</a>
+            <a href="gallery.html">Gallery</a>
             <a href="coach-bios.html">Coaches</a>
             <a href="faq.html">FAQ</a>
-            <a href="index.html#apply" class="btb-cta">Register</a>
+            <a href="index.html#apply" class="btb-cta">Register Now</a>
         </nav>
         <div class="hamburger" id="hamburger" onclick="toggleMenu()">
             <span></span><span></span><span></span>

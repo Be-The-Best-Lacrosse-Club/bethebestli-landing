@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <title>Coaches Hub | Be The Best LI</title>
+    <meta name="description" content="BTB Lacrosse Coaches Hub — resources, session plans, and tools for the coaching staff behind Long Island's premier lacrosse development program.">
+    <meta property="og:title" content="Coaches Hub | Be The Best LI">
+    <meta property="og:description" content="BTB Lacrosse Coaches Hub — resources, session plans, and tools for the coaching staff behind Long Island's premier lacrosse development program.">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#D22630">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="shared.css">
     <style>
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
         :root {
             --red: #D22630;
             --red-dark: #a01e26;
@@ -19,85 +23,12 @@
             --bg: #f4f4f4;
         }
 
-        html { scroll-behavior: smooth; }
-
         body {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--black);
             background: var(--bg);
-            overflow-x: hidden;
-        }
-
-        /* ── Header ── */
-        .btb-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background: var(--white);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 40px;
-            height: 70px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            transition: box-shadow 0.3s ease;
-        }
-
-        .btb-logo img {
-            height: 60px;
-            display: block;
-        }
-
-        .btb-nav {
-            display: flex;
-            align-items: center;
-            gap: 30px;
         }
 
         .btb-nav a {
-            font-size: 16px;
-            font-weight: 600;
             color: var(--black);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .btb-nav a:hover {
-            color: var(--red);
-        }
-
-        .btb-cta {
-            display: inline-block;
-            padding: 8px 16px;
-            border: none;
-            background: var(--red);
-            color: #fff !important;
-            font-size: 16px;
-            font-weight: 700;
-            border-radius: 4px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background 0.2s ease;
-        }
-
-        .btb-cta:hover {
-            background: var(--red-dark);
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-        }
-
-        .hamburger span {
-            width: 28px; height: 3px;
-            background: #101010;
-            border-radius: 2px;
-            transition: all 0.3s;
         }
 
         /* ── Hero ── */
@@ -709,19 +640,10 @@
         }
 
         .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
             padding: 0.8rem 1.8rem;
             font-size: 0.9rem;
             font-weight: 600;
-            text-decoration: none;
-            border-radius: 4px;
-            text-transform: uppercase;
             letter-spacing: 1px;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
         }
 
         .btn-white {
@@ -735,11 +657,10 @@
         }
 
         footer {
-            background: var(--black);
-            color: rgba(255,255,255,0.5);
             text-align: center;
             padding: 2rem;
             font-size: 0.85rem;
+            border-top: none;
         }
 
         footer a {
@@ -749,23 +670,6 @@
 
         /* ── Responsive ── */
         @media (max-width: 768px) {
-            .btb-nav {
-                display: none;
-                position: fixed;
-                inset: 0;
-                background: rgba(255,255,255,0.98);
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                gap: 1.8rem;
-                z-index: 1000;
-            }
-
-            .btb-nav.open { display: flex; }
-            .btb-nav a { font-size: 1.1rem; }
-            .btb-logo img { height: 48px; }
-            .hamburger { display: flex; z-index: 1001; }
-
             .filter-inner { flex-direction: column; }
             .search-box { width: 100%; }
             .result-count { margin-left: 0; }
@@ -813,15 +717,16 @@
     <!-- Header -->
     <header class="btb-header" id="navbar">
         <a href="index.html" class="btb-logo">
-            <img src="assets/btb-logo-flat.png" alt="Be The Best Lacrosse">
+            <img src="assets/B 3d Metal Logo copy.png" alt="Be The Best Lacrosse">
         </a>
         <nav class="btb-nav" id="navLinks">
             <a href="index.html">Home</a>
             <a href="academy-landing.html">Academy</a>
             <a href="world-series.html">World Series</a>
+            <a href="gallery.html">Gallery</a>
             <a href="coach-bios.html">Coaches</a>
             <a href="faq.html">FAQ</a>
-            <a href="index.html#apply" class="btb-cta">Register</a>
+            <a href="index.html#apply" class="btb-cta">Register Now</a>
         </nav>
         <div class="hamburger" id="hamburger" onclick="toggleMenu()">
             <span></span><span></span><span></span>
