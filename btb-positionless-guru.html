@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <title>BTB Offensive Guru | Positionless Lacrosse Knowledge System</title>
+    <meta name="description" content="BTB Positionless Offensive Guru — D1-level coaching breakdowns on positionless lacrosse concepts, spacing, reads, off-ball movement, and more.">
+    <meta property="og:title" content="BTB Offensive Guru | Positionless Lacrosse Knowledge System">
+    <meta property="og:description" content="D1-level coaching breakdowns on positionless lacrosse. Tap a topic, get a complete coaching lesson.">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#D4A843">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared.css">
+    <style>
+        /* ========================================
+           ROOT OVERRIDES — DARK + GOLD THEME
+           ======================================== */
+        :root {
+            --accent: #D4A843;
+            --accent-dark: #b8912e;
+            --accent-glow: rgba(212, 168, 67, 0.15);
+            --accent-border: rgba(212, 168, 67, 0.3);
+            --bg: #0a0a0a;
+            --bg-card: #131313;
+            --bg-card-hover: #1a1a1a;
+            --bg-input: #111111;
+            --text: #FFFFFF;
+            --text-muted: rgba(255,255,255,0.55);
+            --text-faint: rgba(255,255,255,0.3);
+            --border: rgba(255,255,255,0.08);
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* ── Override shared.css header for dark ── */
+        .btb-header {
+            background: #0f0f0f;
+            border-bottom: 1px solid var(--border);
+            box-shadow: none;
+            height: 56px;
+            padding: 0 20px;
+        }
+
+        .btb-header.scrolled { box-shadow: none; }
+
+        .btb-nav a { color: rgba(255,255,255,0.6); }
+        .btb-nav a:hover { color: var(--accent); }
+
+        .hamburger span { background: rgba(255,255,255,0.7); }
+
+        @media (max-width: 768px) {
+            .btb-nav {
+                background: rgba(10,10,10,0.98);
+            }
+            .btb-nav a { color: rgba(255,255,255,0.8); }
+        }
+
+        /* ========================================
+           PASSWORD GATE
+           ======================================== */
+        .gate-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            transition: opacity 0.6s ease;
+        }
+
+        .gate-overlay.unlocking {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .gate-box {
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .gate-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 48px;
+            color: var(--text);
+            letter-spacing: 4px;
+            margin-bottom: 4px;
+        }
+
+        .gate-logo span { color: var(--accent); }
+
+        .gate-tagline {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-faint);
+            margin-bottom: 48px;
+        }
+
+        .gate-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+
+        .gate-input-wrap {
+            position: relative;
+            margin-bottom: 14px;
+        }
+
+        .gate-input {
+            width: 100%;
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 8px;
+            color: var(--text);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            padding: 16px 50px 16px 20px;
+            outline: none;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .gate-input:focus { border-color: var(--accent); }
+
+        .gate-input.error {
+            border-color: #D22630;
+            animation: shake 0.4s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%       { transform: translateX(-8px); }
+            40%       { transform: translateX(8px); }
+            60%       { transform: translateX(-6px); }
+            80%       { transform: translateX(6px); }
+        }
+
+        .gate-toggle {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.35);
+            cursor: pointer;
+            font-size: 18px;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .gate-toggle:hover { color: rgba(255,255,255,0.7); }
+
+        .gate-error {
+            font-size: 12px;
+            color: #D22630;
+            font-weight: 600;
+            letter-spacing: 1px;
+            min-height: 18px;
+            margin-bottom: 16px;
+        }
+
+        .gate-btn {
+            width: 100%;
+            background: var(--accent);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 20px;
+            letter-spacing: 3px;
+            padding: 16px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .gate-btn:hover { background: var(--accent-dark); }
+        .gate-btn:active { transform: scale(0.98); }
+
+        /* ========================================
+           APP LAYOUT
+           ======================================== */
+        .app-wrap {
+            padding-top: 56px; /* header height */
+            min-height: 100vh;
+        }
+
+        /* ── Page Header ── */
+        .page-header {
+            background: linear-gradient(180deg, #111 0%, var(--bg) 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 40px 20px 32px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 36px;
+            letter-spacing: 3px;
+            color: var(--text);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .page-header h1 span { color: var(--accent); }
+
+        .page-header p {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        /* ── Welcome Area ── */
+        .welcome-area {
+            text-align: center;
+            padding: 40px 20px 24px;
+        }
+
+        .welcome-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: var(--accent-glow);
+            border: 2px solid var(--accent-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+        }
+
+        .welcome-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--accent);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .welcome-area h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        .welcome-area p {
+            font-size: 13px;
+            color: var(--text-muted);
+            max-width: 440px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        /* ── Tag Pills ── */
+        .tag-pills {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            padding: 0 20px 32px;
+        }
+
+        .tag-pill {
+            background: rgba(212, 168, 67, 0.08);
+            border: 1px solid rgba(212, 168, 67, 0.2);
+            border-radius: 20px;
+            padding: 6px 16px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        /* ── Topics List ── */
+        .topics-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 16px 80px;
+        }
+
+        .topic-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .topic-card:hover {
+            border-color: var(--accent-border);
+            background: var(--bg-card-hover);
+            transform: translateY(-1px);
+        }
+
+        .topic-card:active {
+            transform: translateY(0);
+        }
+
+        .topic-num {
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: var(--accent-glow);
+            border: 1px solid var(--accent-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 18px;
+            color: var(--accent);
+        }
+
+        .topic-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .topic-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+
+        .topic-preview {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.4;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .topic-arrow {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            color: var(--text-faint);
+            transition: color 0.2s, transform 0.2s;
+        }
+
+        .topic-card:hover .topic-arrow {
+            color: var(--accent);
+            transform: translateX(3px);
+        }
+
+        /* ========================================
+           CONTENT PANEL (shown when topic clicked)
+           ======================================== */
+        .content-panel {
+            display: none;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 16px 80px;
+        }
+
+        .content-panel.active {
+            display: block;
+            animation: fadeSlideIn 0.35s ease;
+        }
+
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Back Button */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            border: 1px solid var(--accent-border);
+            border-radius: 8px;
+            color: var(--accent);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 10px 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 24px;
+        }
+
+        .back-btn:hover {
+            background: var(--accent-glow);
+            border-color: var(--accent);
+        }
+
+        .back-btn svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--accent);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        /* Question Bubble */
+        .question-bubble {
+            background: var(--accent-glow);
+            border: 1px solid var(--accent-border);
+            border-radius: 14px;
+            padding: 18px 22px;
+            margin-bottom: 28px;
+        }
+
+        .question-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .question-text {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+            line-height: 1.5;
+            font-style: italic;
+        }
+
+        /* Answer Body */
+        .answer-body {
+            color: rgba(255,255,255,0.88);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .answer-body .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 22px;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-top: 32px;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .answer-body .section-title:first-child {
+            margin-top: 0;
+        }
+
+        .answer-body strong {
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        .answer-body .gold-strong {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .answer-body p {
+            margin-bottom: 14px;
+        }
+
+        .answer-body ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 16px;
+        }
+
+        .answer-body ul li {
+            padding: 6px 0 6px 20px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .answer-body ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 14px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        .answer-body .step-block {
+            background: rgba(255,255,255,0.03);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 8px 8px 0;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+        }
+
+        .answer-body .step-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+
+        .answer-body .callout {
+            background: var(--accent-glow);
+            border: 1px solid var(--accent-border);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin: 20px 0;
+            font-weight: 600;
+            color: var(--text);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .answer-body .drill-card {
+            background: #161616;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-bottom: 10px;
+        }
+
+        .answer-body .drill-name {
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 4px;
+            font-size: 14px;
+        }
+
+        .answer-body .drill-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ── Topic Nav (Prev/Next) ── */
+        .topic-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        .topic-nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--accent);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 10px 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .topic-nav-btn:hover:not(.disabled) {
+            background: var(--accent-glow);
+            border-color: var(--accent-border);
+        }
+
+        .topic-nav-btn.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .topic-nav-btn svg {
+            flex-shrink: 0;
+        }
+
+        .topic-counter {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: var(--text-faint);
+        }
+
+        /* ── Progress Counter ── */
+        .progress-bar {
+            text-align: center;
+            padding: 0 20px 24px;
+        }
+
+        .progress-text {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: var(--text-faint);
+            text-transform: uppercase;
+        }
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+        .simple-footer {
+            background: #060606;
+            border-top: 1px solid var(--border);
+            padding: 24px 20px;
+            text-align: center;
+        }
+
+        .simple-footer p {
+            font-size: 11px;
+            color: var(--text-faint);
+            letter-spacing: 1px;
+        }
+
+        .simple-footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .simple-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+        @media (max-width: 600px) {
+            .page-header { padding: 32px 16px 24px; }
+            .page-header h1 { font-size: 28px; }
+
+            .welcome-area { padding: 28px 16px 16px; }
+
+            .topic-card { padding: 16px; gap: 12px; }
+            .topic-title { font-size: 14px; }
+            .topic-preview { font-size: 11px; }
+
+            .question-bubble { padding: 14px 16px; }
+            .question-text { font-size: 14px; }
+
+            .answer-body { font-size: 13px; }
+            .answer-body .section-title { font-size: 19px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ── Password Gate ── -->
+    <div class="gate-overlay" id="gateOverlay">
+        <div class="gate-box">
+            <div class="gate-logo">BTB <span>LAX</span></div>
+            <div class="gate-tagline">Players Hub — Members Only</div>
+            <div class="gate-label">Enter Access Code</div>
+            <div class="gate-input-wrap">
+                <input
+                    class="gate-input"
+                    id="gateInput"
+                    type="password"
+                    placeholder="Enter code"
+                    autocomplete="off"
+                    spellcheck="false"
+                    onkeydown="if(event.key==='Enter')gateSubmit()"
+                >
+                <button class="gate-toggle" id="gateToggle" onclick="gateToggleVisibility()" aria-label="Show/hide password" type="button">&#128065;</button>
+            </div>
+            <div class="gate-error" id="gateError"></div>
+            <button class="gate-btn" onclick="gateSubmit()">ENTER</button>
+        </div>
+    </div>
+
+    <!-- ── Site Header (dark) ── -->
+    <header class="btb-header">
+        <a class="btb-logo" href="index.html">
+            <img src="assets/B 3d Metal Logo copy.png" alt="BTB Lacrosse">
+        </a>
+        <nav class="btb-nav" id="mainNav">
+            <a href="index.html">Home</a>
+            <a href="players-hub.html">Players Hub</a>
+            <a href="player-development.html">Drills</a>
+            <a href="academy-landing.html">Academy</a>
+            <a href="btb-positionless-guru.html" style="color:var(--accent);">Offensive Guru</a>
+        </nav>
+        <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleNav()">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+
+    <!-- ── App Wrapper ── -->
+    <div class="app-wrap">
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>BTB <span>Offensive Guru</span></h1>
+            <p>Positionless Lacrosse Knowledge System</p>
+        </div>
+
+        <!-- ── TOPIC LIST VIEW ── -->
+        <div id="topicListView">
+
+            <!-- Welcome -->
+            <div class="welcome-area">
+                <div class="welcome-icon">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                </div>
+                <h2>Tap a topic for D1-level coaching on positionless offense</h2>
+                <p>Each topic includes a complete coaching breakdown with drills, teaching progressions, and D1 film references.</p>
+            </div>
+
+            <!-- Tag Pills -->
+            <div class="tag-pills">
+                <span class="tag-pill">Spacing</span>
+                <span class="tag-pill">Reads</span>
+                <span class="tag-pill">Off-Ball</span>
+                <span class="tag-pill">Ball Movement</span>
+                <span class="tag-pill">Finishing</span>
+            </div>
+
+            <!-- Progress -->
+            <div class="progress-bar">
+                <span class="progress-text" id="progressCounter">0 of 10 topics explored</span>
+            </div>
+
+            <!-- Topic Cards -->
+            <div class="topics-container" id="topicsContainer">
+
+                <div class="topic-card" onclick="openTopic(0)">
+                    <div class="topic-num">01</div>
+                    <div class="topic-info">
+                        <div class="topic-title">Install Positionless for Youth</div>
+                        <div class="topic-preview">I coach U14 boys who only know 3-3. How do I transition to positionless?</div>
+                    </div>
+                    <svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                </div>
+
+                <div class="topic-card" onclick="openTopic(1)">
+                    <div class="topic-num">02</div>
+                    <div class="topic-info">
+                        <div class="topic-title">Read the Slide</div>
+                        <div class="topic-preview">My players dodge and draw the slide, but then panic. How do I teach slide reads?</div>
+                    </div>
+                    <svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                </div>
+
+                <div class="topic-card" onclick="openTopic(2)">
+                    <div class="topic-num">03</div>
+                    <div class="topic-info">
+                        <div class="topic-title">Beat a 3-3 Zone</div>
+                        <div class="topic-preview">We face a 3-3 zone next game. What positionless concepts beat it?</div>
+                    </div>
+                    <svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                </div>
+
+                <div class="topic-card" onclick="openTopic(3)">
+                    <div class="topic-num">04</div>
+                    <div class="topic-info">
+                        <div class="topic-title">Fix Spacing</div>
+                        <div class="topic-preview">Our offense is always bunched up. Players gravitate toward the ball.</div>
+                    </div>
+                    <svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                </div>
+
+                <div class="topic-card" onclick="openTopic(4)">
+                    <div class="topic-num">05</div>
+                    <div class="topic-info">
+                        <div class="topic-title">Off-Ball Movement</div>
+                        <div class="topic-preview">Our off-ball players stand and watch when someone dodges. How do I fix this?</div>
+                    </div>
+                    <svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                </div>
+
+                <div class="topic-card" onclick="openTopic(5)">
+                    <div class="topic-num">06</div>
+                    <div class="topic-info">
+                        <div class="topic-title">2-Man Games (Ohio State Pairs)</div>
+                        <div class="topic-preview">How do I install Ohio State-style pick-and-roll and pick-and-pop?</div>
+                    </div>
+                    <svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                </div>
+
+                <div class="topic-card" onclick="openTopic(6)">
+                    <div class="topic-num">07</div>
+                    <div class="topic-info">
+                        <div class="topic-title">Virginia Offense Breakdown</div>
+                        <div class="topic-preview">How does Virginia run their positionless offense?</div>
+                    </div>
+                    <svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                </div>
+
+                <div class="topic-card" onclick="openTopic(7)">
+                    <div class="topic-num">08</div>
+                    <div class="topic-info">
+                        <div class="topic-title">Practice Plan</div>
+                        <div class="topic-preview">Build me a 90-min practice for positionless offensive concepts.</div>
+                    </div>
+                    <svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                </div>
+
+                <div class="topic-card" onclick="openTopic(8)">
+                    <div class="topic-num">09</div>
+                    <div class="topic-info">
+                        <div class="topic-title">Assisted Goals</div>
+                        <div class="topic-preview">Most of our goals come from individual dodges. How do I create more assisted goals?</div>
+                    </div>
+                    <svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                </div>
+
+                <div class="topic-card" onclick="openTopic(9)">
+                    <div class="topic-num">10</div>
+                    <div class="topic-info">
+                        <div class="topic-title">Complete Dodger</div>
+                        <div class="topic-preview">I have a player who dodges well from up top but freezes from X.</div>
+                    </div>
+                    <svg class="topic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ── CONTENT PANEL (populated by JS) ── -->
+        <div class="content-panel" id="contentPanel">
+            <button class="back-btn" onclick="closeTopic()">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+                All Topics
+            </button>
+            <div class="question-bubble">
+                <div class="question-label">Question</div>
+                <div class="question-text" id="contentQuestion"></div>
+            </div>
+            <div class="answer-body" id="contentAnswer"></div>
+            <div class="topic-nav" id="topicNavButtons"></div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="simple-footer">
+        <p>&copy; 2026 <a href="index.html">Be The Best Lacrosse</a>. All rights reserved.</p>
+    </div>
+
+    <script>
+        /* ========================================
+           PASSWORD GATE
+           ======================================== */
+        var GATE_KEY = 'btb_hub_unlocked';
+        var GATE_PASS = '#BTBLAX26';
+
+        function gateCheck() {
+            if (sessionStorage.getItem(GATE_KEY) === '1') {
+                document.getElementById('gateOverlay').style.display = 'none';
+            } else {
+                setTimeout(function() {
+                    document.getElementById('gateInput').focus();
+                }, 100);
+            }
+        }
+
+        function gateSubmit() {
+            var input = document.getElementById('gateInput');
+            var errorEl = document.getElementById('gateError');
+            if (input.value === GATE_PASS) {
+                sessionStorage.setItem(GATE_KEY, '1');
+                var overlay = document.getElementById('gateOverlay');
+                overlay.classList.add('unlocking');
+                setTimeout(function() { overlay.style.display = 'none'; }, 600);
+            } else {
+                errorEl.textContent = 'Incorrect code. Try again.';
+                input.classList.add('error');
+                input.value = '';
+                setTimeout(function() {
+                    input.classList.remove('error');
+                    errorEl.textContent = '';
+                    input.focus();
+                }, 1000);
+            }
+        }
+
+        function gateToggleVisibility() {
+            var input = document.getElementById('gateInput');
+            input.type = input.type === 'password' ? 'text' : 'password';
+        }
+
+        gateCheck();
+
+        /* ========================================
+           NAVIGATION
+           ======================================== */
+        function toggleNav() {
+            var nav = document.getElementById('mainNav');
+            var burger = document.getElementById('hamburger');
+            nav.classList.toggle('active');
+            burger.classList.toggle('active');
+        }
+
+        /* ========================================
+           TOPICS DATA
+           ======================================== */
+        var TOPICS = [
+
+            // ── 0: Install Positionless for Youth ──
+            {
+                question: "I coach U14 boys who only know 3-3. How do I transition to positionless?",
+                answer: function() {
+                    return ''
+                    + '<div class="section-title">The 4-Week Installation Plan</div>'
+                    + '<p>You don\'t blow up what they know. You build ON TOP of it. Keep the 3-3 formation they\'re comfortable in and gradually add positionless concepts. By week 4, they\'ll be reading and reacting instead of running memorized plays.</p>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Week 1 — Spacing &amp; Ball Movement</div>'
+                    + '<p>Keep the 3-3 formation. Add ONE new rule: <strong>"Move after every pass."</strong> When you throw the ball, you must relocate. No standing and watching. This single rule changes everything because it forces off-ball movement without overwhelming them with new concepts.</p>'
+                    + '<p>Drill: 6v0 passing — every player must touch a different spot on the field after every pass. If two players end up within 5 yards, it\'s a turnover. Run this for 10 minutes every practice.</p>'
+                    + '</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Week 2 — Position Swapping</div>'
+                    + '<p>Now players rotate through all 6 spots during drills. Your attackman plays midfield. Your midfielder plays X. <strong>Nobody "owns" a spot.</strong> This breaks the mindset that "I\'m a middie, I only play up top."</p>'
+                    + '<p>Drill: "Musical Chairs Offense" — every 30 seconds, coach blows the whistle and everyone rotates one spot clockwise. Keep the ball moving during rotation. After 2 full rotations, go live.</p>'
+                    + '</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Week 3 — 2-Man Games (Ohio State Pairs)</div>'
+                    + '<p>Introduce pick-and-roll between adjacent players. This is the foundation of positionless offense — two players creating together, reading the defense together.</p>'
+                    + '<p><strong>Pick-and-Roll:</strong> Player A sets a screen for Player B. Player B uses the screen to dodge. Player A rolls to the goal after setting the screen. If the defense switches, Player A is open on the roll. If they don\'t switch, Player B has a clear driving lane.</p>'
+                    + '<p><strong>Pick-and-Pop:</strong> Same setup, but Player A pops to the perimeter for a shot instead of rolling to goal. Use when Player A is a shooter.</p>'
+                    + '<p><strong>Give-and-Go:</strong> Quick pass from A to B, A immediately cuts to goal. Simple, effective, teaches players to move after passing.</p>'
+                    + '</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Week 4 — Read-Based Decisions</div>'
+                    + '<p>Now they\'re ready for reads. Before every dodge, the ball carrier asks three questions:</p>'
+                    + '<ul>'
+                    + '<li><strong>Read 1:</strong> "How is my defender playing me?" If tight, dodge. If sagging, shoot or feed.</li>'
+                    + '<li><strong>Read 2:</strong> "Where is the slide coming from?" The player the slide LEFT is your target.</li>'
+                    + '<li><strong>Read 3:</strong> "Is there a second slide?" If yes, move the ball one more time. The second rotation creates the widest open shot.</li>'
+                    + '</ul>'
+                    + '</div>'
+
+                    + '<div class="callout">Key Principle: Build the HABIT of reading and reacting, not memorizing plays. A player who can read the defense will always beat a player who runs a pattern. Plays are predictable. Reads are not.</div>'
+
+                    + '<div class="section-title">Common Mistakes to Avoid</div>'
+                    + '<ul>'
+                    + '<li><strong>Don\'t try to install everything at once.</strong> One concept per week. If you rush it, nothing sticks.</li>'
+                    + '<li><strong>Don\'t abandon ship after week 1.</strong> It will look ugly at first. That\'s normal. The learning curve is steep but short.</li>'
+                    + '<li><strong>Don\'t let parents dictate positions.</strong> "My kid is an attackman" is the enemy of positionless. Every kid plays every spot in practice.</li>'
+                    + '<li><strong>Don\'t skip the 3v0 reps.</strong> Walking through movement patterns without defense feels silly but builds the muscle memory that shows up in games.</li>'
+                    + '</ul>'
+
+                    + '<div class="section-title">Success Markers</div>'
+                    + '<p>How do you know it\'s working? Look for these signs:</p>'
+                    + '<ul>'
+                    + '<li>Players start calling out defensive positions before dodging (they\'re reading)</li>'
+                    + '<li>Off-ball players move BEFORE the dodge, not after (they\'re anticipating)</li>'
+                    + '<li>Multiple players score in a game, not just your best dodger (the system creates opportunities)</li>'
+                    + '<li>Your assist-to-goal ratio climbs above 40% (the ball is moving)</li>'
+                    + '</ul>';
+                }
+            },
+
+            // ── 1: Read the Slide ──
+            {
+                question: "My players dodge and draw the slide, but then panic. How do I teach slide reads?",
+                answer: function() {
+                    return ''
+                    + '<div class="section-title">The Slide Read System</div>'
+                    + '<p>Your players aren\'t panicking because they can\'t handle pressure. They\'re panicking because they don\'t have a <strong>pre-dodge plan</strong>. Before the dodge even starts, the ball carrier should already know what he\'s going to do when the slide comes.</p>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Pre-Dodge Read</div>'
+                    + '<p>Before initiating the dodge, the ball carrier scans the defense and identifies the help defender — the player most likely to slide. This takes 1-2 seconds. That\'s all it takes. Once you know WHERE the slide is coming from, you know WHO will be open.</p>'
+                    + '</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Read 1 — "How is my defender playing me?"</div>'
+                    + '<p><strong>Tight (hands on, body close):</strong> Dodge. He\'s giving you a chance to beat him. Use a split dodge or face dodge to create separation.</p>'
+                    + '<p><strong>Sagging (off, playing the pass):</strong> Shoot or feed. He\'s taking away the dodge but giving you time and space. Use it.</p>'
+                    + '</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Read 2 — "Where is the slide coming from?"</div>'
+                    + '<p>The player the slide LEFT is your primary target. If the adjacent defender slides to you, his man is now open. <strong>Find that player and deliver the ball.</strong> This is the bread-and-butter of positionless offense — the dodge creates the advantage, and the pass exploits it.</p>'
+                    + '</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Read 3 — "Is there a second slide?"</div>'
+                    + '<p>If the defense rotates well, your first passing option might be covered by a second slider. That\'s OK. <strong>Move the ball one more time.</strong> The second rotation creates the widest open shot because the defense is now scrambling to cover two rotations.</p>'
+                    + '</div>'
+
+                    + '<div class="section-title">The Drill: "Read the Slide"</div>'
+                    + '<div class="drill-card">'
+                    + '<div class="drill-name">2v1 + 1 Off-Ball Setup</div>'
+                    + '<div class="drill-desc">Ball carrier dodges against 1 on-ball defender. 1 off-ball defender is the "slide." 1 offensive player is the "open man." Ball carrier must dodge, draw the slide, and find the open teammate. Start at half speed. Coach announces "SLIDE" to trigger the help defender. Progress to live reads where the slide comes on his own.</div>'
+                    + '</div>'
+
+                    + '<div class="section-title">Film Study Approach</div>'
+                    + '<p>Watch Virginia offense film. Pause the video right as the dodger draws the slide. Ask your players: "Where was the slide? Who is open? What should the ball carrier do?" This builds recognition speed. Do it for 5 minutes every practice — it translates directly to game performance.</p>'
+
+                    + '<div class="callout">The best dodgers in college lacrosse don\'t react to the slide — they anticipate it. They know where it\'s coming from before they start their dodge. That\'s what separates D1 from D3.</div>'
+
+                    + '<div class="section-title">Advanced: Double Slide Reads</div>'
+                    + '<p>Once your players can handle single-slide reads, introduce the double slide. This is where the defense sends a second helper after the first slide. The ball carrier must recognize that the first pass isn\'t the final pass — the ball needs to move one more time.</p>'
+                    + '<div class="drill-card">'
+                    + '<div class="drill-name">3v3 + 1 Floater</div>'
+                    + '<div class="drill-desc">3 offensive players, 3 defenders, plus 1 floating defender who acts as the second slide. Ball carrier dodges, draws the first slide (passes to open man), the floater slides to that man (forces the second pass). Now the offense must find the SECOND open man. This drill teaches players that positionless offense often requires 3 touches to create the best shot. Run it for 10 minutes, rotate roles, track assisted goals.</div>'
+                    + '</div>'
+
+                    + '<div class="section-title">The Mental Model</div>'
+                    + '<p>Teach your players to think of slides as a gift, not a threat. When the defense slides, they\'re giving you someone open. Your job is to find that person and deliver the ball. The slide READ is the most important offensive skill in positionless lacrosse — more important than dodging, more important than shooting. A player who can read slides makes everyone around him better.</p>';
+                }
+            },
+
+            // ── 2: Beat a 3-3 Zone ──
+            {
+                question: "We face a 3-3 zone next game. What positionless concepts beat it?",
+                answer: function() {
+                    return ''
+                    + '<div class="section-title">Attacking a 3-3 Zone with Positionless Principles</div>'
+                    + '<p>Most teams struggle against zone because they try to run their man-offense concepts against it. That won\'t work. Zone defense takes away driving lanes and collapses on the ball. You need a completely different approach.</p>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Formation: 1-4-1 or 2-3-1</div>'
+                    + '<p>Put your players in the <strong>SEAMS between zone defenders</strong>, not directly in front of them. If the zone has 3 up and 3 down, your 4 across the middle sit in the gaps between the top 3 and the bottom 3. The zone can\'t cover you without leaving a seam open.</p>'
+                    + '</div>'
+
+                    + '<div class="section-title">The 5 Zone-Killing Principles</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Principle 1 — Move the Ball East-West</div>'
+                    + '<p>Swing the ball from one side of the field to the other. Every swing forces the entire zone to shift. After 2-3 swings, a gap opens because the zone can\'t rotate as fast as the ball moves. <strong>Patience is the weapon.</strong></p>'
+                    + '</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Principle 2 — Attack the Gaps</div>'
+                    + '<p>Drive INTO the seams between two zone defenders. When you split two defenders, you force BOTH of them to commit to you. That means someone is open. Read which defender commits harder and pass to the man he left.</p>'
+                    + '</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Principle 3 — Skip Passes</div>'
+                    + '<p>The ball travels faster than defenders can rotate. Throw OVER the zone to the opposite side. By the time the zone shifts to cover, your teammate has a clean look. Skip passes are the cheat code against zone.</p>'
+                    + '</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Principle 4 — Inside-Out Game</div>'
+                    + '<p>Feed the crease first. When the zone collapses inside to protect the goal, kick the ball back out for an open perimeter shot. The zone can\'t protect both the crease and the perimeter at the same time. Make them pick one, then attack the other.</p>'
+                    + '</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Principle 5 — Screen the Zone Defenders</div>'
+                    + '<p>Zone defenders are responsible for an AREA, not a man. Set a pick on a zone defender and his entire zone is now uncovered. He can\'t switch with a teammate like in man defense — there\'s no one to switch with. The offense walks into the open zone.</p>'
+                    + '</div>'
+
+                    + '<div class="section-title">The Kill Shot Sequence</div>'
+                    + '<div class="callout">Ball goes right (zone shifts right) &#8594; skip pass to the left (zone scrambles left) &#8594; drive the gap on the left side (zone collapses) &#8594; one more pass to the open man &#8594; wide open shot. Four touches, four seconds, goal.</div>'
+
+                    + '<p><strong>Key: Patience.</strong> Zone teams WANT you to force early shots. They want you to try to dodge through the zone. Don\'t give them what they want. Move the ball, swing it, skip it, and wait for the opening. It will come. Every. Single. Time.</p>';
+                }
+            },
+
+            // ── 3: Fix Spacing ──
+            {
+                question: "Our offense is always bunched up. Players gravitate toward the ball. How do I fix spacing?",
+                answer: function() {
+                    return ''
+                    + '<div class="section-title">The Spacing Fix</div>'
+                    + '<p>Bunching is the #1 killer of youth offense. It happens because players are drawn to the ball like magnets. The fix isn\'t yelling "SPREAD OUT" from the sideline — it\'s building habits through drills that make good spacing feel natural.</p>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">The Concept: The 15-Yard Rule</div>'
+                    + '<p>Adjacent players should be approximately <strong>15 yards apart</strong> at all times. If two players are closer than 10 yards, one defender can guard both of them. At 15 yards, the defender must choose. That choice is where offense happens.</p>'
+                    + '</div>'
+
+                    + '<div class="section-title">3 Drills That Fix Spacing</div>'
+
+                    + '<div class="drill-card">'
+                    + '<div class="drill-name">Drill 1: Cone Offense</div>'
+                    + '<div class="drill-desc">Place 6 cones in your offensive formation (2-3-1, 1-4-1, etc.) with 15-yard spacing. Players must stay within 3 yards of their cone while the ball moves. If a player drifts more than 3 yards from their cone, it\'s a turnover. This trains spatial awareness by giving players a physical reference point. Run 6v0 first (just passing and moving), then add defenders. After 2 weeks, remove the cones — the habit is built.</div>'
+                    + '</div>'
+
+                    + '<div class="drill-card">'
+                    + '<div class="drill-name">Drill 2: Gravity Pull</div>'
+                    + '<div class="drill-desc">4v4 half-field. If any two offensive players are within 5 yards of each other at any point, it\'s an automatic turnover. Players learn FAST because the punishment is immediate. They start actively checking their spacing in real time. This drill creates "spacing awareness" that transfers directly to 6v6. Play for 10 minutes at the end of practice. Keep score — team with fewer spacing turnovers wins.</div>'
+                    + '</div>'
+
+                    + '<div class="drill-card">'
+                    + '<div class="drill-name">Drill 3: Silent Offense</div>'
+                    + '<div class="drill-desc">6v6 half-field with NO talking allowed. Zero verbal communication. Players must communicate through MOVEMENT — eye contact, cuts, spacing adjustments. When you remove talking, players become hyper-aware of where their teammates are. They look up more, they adjust their position constantly, and they learn to "feel" the spacing. Play one possession silent, one possession normal. The contrast is the lesson.</div>'
+                    + '</div>'
+
+                    + '<div class="callout">Mindset Shift: "I am more dangerous AWAY from the ball than near it." When a player understands this, spacing fixes itself. If he knows that being 15 yards from the ball carrier makes him a scoring threat, he\'ll maintain his spacing because it benefits HIM, not just the team.</div>'
+
+                    + '<p><strong>The Reality Check:</strong> Spacing is a daily battle, not a one-time fix. You will need to reinforce it every single practice for the entire season. The drills build the habit, but the habit needs constant maintenance. Put 2 minutes of spacing work into every practice warm-up.</p>';
+                }
+            },
+
+            // ── 4: Off-Ball Movement ──
+            {
+                question: "Our off-ball players stand and watch when someone dodges. How do I fix this?",
+                answer: function() {
+                    return ''
+                    + '<div class="section-title">Building Off-Ball Movement</div>'
+                    + '<p>Standing and watching is the default behavior for every young lacrosse player. It\'s natural — the ball is exciting and they want to see what happens. Your job is to replace that instinct with a new one: <strong>when the ball moves, I move.</strong></p>'
+
+                    + '<div class="section-title">The 4 Off-Ball Rules</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Rule 1 — When the Ball Moves, YOU Move</div>'
+                    + '<p>Every pass triggers movement from every off-ball player. It doesn\'t have to be a dramatic cut — even 2-3 steps of repositioning counts. The goal is constant adjustment. A defense that faces 5 moving targets is infinitely harder to play than a defense that faces 1 dodger and 4 statues.</p>'
+                    + '</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Rule 2 — Clear-Throughs</div>'
+                    + '<p>After your action (cut, screen, pass), <strong>clear to the opposite side of the field</strong>. Don\'t hang around the area where you just were. Clearing through creates space for the next action and prevents bunching. Think of it like a conveyor belt — move through, create space, reset.</p>'
+                    + '</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Rule 3 — Basket Cuts (V-Cuts)</div>'
+                    + '<p>Move AWAY from where you want to go, then cut HARD back. The "away" step gets your defender leaning the wrong direction. The "cut" step puts you in scoring position. Every V-cut should be 3-5 yards out, then a hard change of direction back to the ball or the goal. Slow out, FAST back.</p>'
+                    + '</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Rule 4 — Seal and Re-Cut</div>'
+                    + '<p>After setting a screen, <strong>seal your defender</strong> (put your body between the defender and where you want to go), then re-cut to the ball or the goal. Most players set the screen and stand there. The re-cut is where the scoring opportunity lives. The screen creates the initial advantage; the re-cut exploits it.</p>'
+                    + '</div>'
+
+                    + '<div class="section-title">The Key Drill</div>'
+
+                    + '<div class="drill-card">'
+                    + '<div class="drill-name">3v2 Continuous</div>'
+                    + '<div class="drill-desc">3 offensive players, 2 defenders. Before the ball carrier can shoot, the two off-ball players must complete at least 2 cuts each. Not 2 cuts total — 2 cuts EACH. This forces off-ball movement because the ball carrier literally cannot shoot until his teammates move. Start with coach counting cuts out loud. After a week, let players self-police. Track goals-per-possession — it will skyrocket once the cutting starts.</div>'
+                    + '</div>'
+
+                    + '<div class="section-title">Film Study Cue</div>'
+                    + '<p><strong>"Watch the off-ball defender\'s hips."</strong> When you\'re studying film with your players, tell them to ignore the ball and watch the off-ball defenders. When a defender\'s hips open toward the ball (he\'s ball-watching), that\'s the window for a cut. Teach your players to recognize that body language and attack it in real time.</p>'
+
+                    + '<div class="callout">The truth about off-ball movement: it takes 3-4 weeks of daily reinforcement before it becomes habit. The first week, players will forget constantly. The second week, they\'ll do it when reminded. The third week, they\'ll do it without reminders in practice. The fourth week, it shows up in games. Be patient. It\'s coming.</div>';
+                }
+            },
+
+            // ── 5: 2-Man Games (Ohio State Pairs) ──
+            {
+                question: "How do I install Ohio State-style pick-and-roll and pick-and-pop?",
+                answer: function() {
+                    return ''
+                    + '<div class="section-title">Ohio State Pairs Offense</div>'
+                    + '<p>The Ohio State Pairs concept is the bridge between traditional positional lacrosse and full positionless play. Instead of teaching all 6 players a complex motion system, you pair up two adjacent players and give them a simple 2-man game. It\'s elegant, effective, and the easiest offensive system to install.</p>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Setup</div>'
+                    + '<p>Two adjacent players are the "pair." They work together to create a scoring opportunity using one of four actions. The other 4 players maintain spacing and are ready to receive the ball if the defense collapses on the pair. <strong>The pair creates. The 4 support.</strong></p>'
+                    + '</div>'
+
+                    + '<div class="section-title">The 4 Actions</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Action 1 — Pick-and-Roll</div>'
+                    + '<p>Player A (the screener) sets a pick on Player B\'s defender. Player B uses the screen to dodge. Player A rolls to the goal immediately after the screen. <strong>If the defense switches:</strong> the roller (Player A) has a smaller defender on him and a clear path to goal. <strong>If they don\'t switch:</strong> Player B has a wide-open driving lane off the screen.</p>'
+                    + '</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Action 2 — Pick-and-Pop</div>'
+                    + '<p>Same setup as pick-and-roll, but instead of rolling to goal, Player A pops to the perimeter for a catch-and-shoot. <strong>Use this when Player A is a shooter.</strong> The defense expects the roll — the pop catches them off guard. Player B drives, draws the help, and kicks it to the popping Player A for a clean shot.</p>'
+                    + '</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Action 3 — Give-and-Go</div>'
+                    + '<p>Quick pass from A to B, then A immediately cuts hard to the goal. The simplest action but one of the most effective. The pass freezes B\'s defender for a split second. In that split second, A is cutting with a head of steam. If A\'s defender follows the ball (ball-watches), A is wide open on the cut.</p>'
+                    + '</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Action 4 — Shallow Cut</div>'
+                    + '<p>Player B cuts across the crease while Player A has the ball. This drags B\'s defender across the formation, creating space on the side B just left. If B\'s defender loses him on the cut, B is open on the crease for a quick feed and finish.</p>'
+                    + '</div>'
+
+                    + '<div class="section-title">Teaching Progression</div>'
+                    + '<ul>'
+                    + '<li><strong>Practices 1-3:</strong> Pick-and-roll ONLY. Get this one action clean. 2v0, then 2v1, then 2v2. Don\'t add anything else until the pick-and-roll is automatic.</li>'
+                    + '<li><strong>Practices 4-5:</strong> Add pick-and-pop. Same setup, new option. Now the pair has a choice: roll or pop. The defense\'s reaction dictates the choice.</li>'
+                    + '<li><strong>Practices 6-7:</strong> Add give-and-go. Three options now. Drill 2v2 where the pair must read the defense and pick the best action.</li>'
+                    + '<li><strong>Practice 8+:</strong> Add shallow cut. Full menu. The pair reads the defense and chooses from 4 actions. Run it in 6v6 live.</li>'
+                    + '</ul>'
+
+                    + '<div class="callout">The cardinal rule of Pairs Offense: while the pair works, the other 4 players MUST stay spaced. No drifting toward the action. No "helping." Their job is to hold their position and be ready if the ball swings to them. If they drift, the driving lanes collapse and the pair has nowhere to go.</div>';
+                }
+            },
+
+            // ── 6: Virginia Offense Breakdown ──
+            {
+                question: "How does Virginia run their positionless offense?",
+                answer: function() {
+                    return ''
+                    + '<div class="section-title">Virginia: The Gold Standard of Positionless</div>'
+                    + '<p>Virginia\'s offense under Lars Tiffany is the blueprint for positionless lacrosse at the highest level. They don\'t run plays in the traditional sense. They run a system of reads, reactions, and principles that allows any player to play any position at any time.</p>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Formation: Fluid 2-3-1 / 1-4-1 Hybrid</div>'
+                    + '<p>Virginia doesn\'t lock into one formation. They flow between 2-3-1 and 1-4-1 based on where the ball is and how the defense sets up. An attackman might start at X and end up playing a midfield spot. A midfielder might finish a possession on the crease. The formation is a starting point, not a cage.</p>'
+                    + '</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Core Principle: "The Ball Finds Energy"</div>'
+                    + '<p>This is the defining concept. Whoever is in the best position to attack — regardless of what position they "play" — gets the ball. If the midfielder has a better matchup than the attackman, the midfielder initiates. If the attackman is open on the crease, he gets the feed. <strong>The ball doesn\'t care about your position on the depth chart.</strong></p>'
+                    + '</div>'
+
+                    + '<div class="section-title">The Virginia Motion Sequence</div>'
+                    + '<ul>'
+                    + '<li><strong>Step 1: Ball Enters.</strong> The ball comes into the offensive zone. All 6 players are in their base formation.</li>'
+                    + '<li><strong>Step 2: Quick Reversal.</strong> The ball swings to the opposite side of the field within 2-3 passes. This gets the defense moving and reveals how they\'re guarding the ball side vs. the help side.</li>'
+                    + '<li><strong>Step 3: Off-Ball Cuts Create Chaos.</strong> While the ball moves, 2-3 off-ball players execute coordinated cuts — V-cuts, screen-and-rolls, through cuts. These cuts pull defenders out of position.</li>'
+                    + '<li><strong>Step 4: Ball Finds the Open Man.</strong> The dodger reads the defense, identifies who got open from the off-ball movement, and delivers the ball. The shot comes from the player with the best look, period.</li>'
+                    + '</ul>'
+
+                    + '<div class="section-title">Why It Works</div>'
+                    + '<p><strong>Interchangeable players.</strong> Virginia recruits and develops players who can dodge, shoot, feed, and play defense from every position. When any player can do anything, the defense can\'t game-plan against one player or one play. They have to defend 6 threats simultaneously.</p>'
+                    + '<p><strong>60-70% assisted goals.</strong> This is the stat that defines Virginia\'s offense. The majority of their goals come from an assist, meaning the defense was broken down by ball movement and player movement before the shot was taken. Unassisted goals are the backup plan, not the primary strategy.</p>'
+
+                    + '<div class="section-title">What Makes It Hard to Copy</div>'
+                    + '<p>Virginia recruits <strong>complete players</strong> — athletes who can handle the ball in traffic, shoot from anywhere, and make reads at full speed. Most youth and high school programs don\'t have 6 players who can do everything. That\'s OK.</p>'
+
+                    + '<div class="callout">You don\'t need to BE Virginia. Take the principles — fluid formations, the ball finds energy, off-ball movement, assisted goals — and apply them at your level. Start with 2-man games. Build to 3-man movement. Eventually, you\'ll have a system that looks different from Virginia but runs on the same engine.</div>'
+
+                    + '<div class="section-title">3 Things to Steal from Virginia Right Now</div>'
+                    + '<ul>'
+                    + '<li><strong>Ball reversal speed.</strong> Virginia reverses the ball faster than any team in the country. Time your team\'s ball reversal (from one side to the other). If it takes more than 4 passes or 6 seconds, it\'s too slow. Drill quick reversals until they\'re automatic.</li>'
+                    + '<li><strong>The "hot hand" mentality.</strong> Virginia gives the ball to whoever has the best look, regardless of position. If your midfielder has a better angle than your attackman, the midfielder gets the ball. Remove the hierarchy.</li>'
+                    + '<li><strong>Cutting without the ball.</strong> Virginia\'s off-ball players are in constant motion. Even when they don\'t receive a pass, their movement creates space for someone else. Teach your players that a cut that doesn\'t get the ball is still a GREAT cut if it pulled a defender out of position.</li>'
+                    + '</ul>'
+
+                    + '<div class="section-title">Film Study Assignment</div>'
+                    + '<p>Watch any Virginia full-game highlight reel on YouTube. For each goal, pause and count: how many passes occurred before the shot? How many off-ball cuts happened? Where did the scoring player receive the ball? This exercise will show your players what positionless offense looks like at full speed. Then challenge them: "Can we do this? What would it take?" Plant the seed and let them grow into it.</p>';
+                }
+            },
+
+            // ── 7: Practice Plan ──
+            {
+                question: "Build me a 90-min practice for positionless offensive concepts.",
+                answer: function() {
+                    return ''
+                    + '<div class="section-title">90-Minute Positionless Offense Practice</div>'
+                    + '<p>This practice is designed to build positionless habits through progressive drill sequences. Every activity connects to the next. By the end of the session, your players will have worked on spacing, off-ball movement, 2-man games, and live application.</p>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">0:00 - 0:10 — Dynamic Warm-Up + Position Swap Passing</div>'
+                    + '<p>Partner passing while jogging. Every 30 seconds, switch hands. After 5 minutes of passing, transition to <strong>Position Swap Passing:</strong> set up your 6-spot formation (2-3-1 or 1-4-1). Ball moves around the formation. After every pass, the passer runs to a DIFFERENT spot. No player can return to the same spot twice in a row. This warms up sticks AND builds the habit of playing multiple positions.</p>'
+                    + '</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">0:10 - 0:25 — Off-Ball Movement Circuit</div>'
+                    + '<p><strong>Station 1 (5 min):</strong> V-Cut Drill. Player starts at a cone, takes 3 steps away, then cuts HARD back to the cone. Coach delivers pass on the cut. Catch and shoot. Both sides, both hands.</p>'
+                    + '<p><strong>Station 2 (5 min):</strong> Screen-and-Roll. Two players. Set pick, roll to goal, receive pass, finish. 5 reps each, then swap roles.</p>'
+                    + '<p><strong>Station 3 (5 min):</strong> Give-and-Go. Quick pass, immediate cut. Finish on the crease. Focus on the SPEED of the cut after the pass — the pass should trigger an explosion to the goal.</p>'
+                    + '</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">0:25 - 0:40 — 2v2 Pairs Work</div>'
+                    + '<p>Two adjacent players work against two defenders. The pair must use one of the 4 actions: pick-and-roll, pick-and-pop, give-and-go, or shallow cut. <strong>Coach calls out which action</strong> for the first 5 minutes. Then let the pair READ the defense and choose. Rotate pairs every 3 minutes so every player works with every partner.</p>'
+                    + '</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">0:40 - 0:55 — 4v3 Read-Based Offense</div>'
+                    + '<p>4 offensive players, 3 defenders. The offense has a numbers advantage but must earn the goal through ball movement and reads — no individual dodges allowed. <strong>Every goal must be assisted.</strong> This forces the offense to move the ball, read the defense, and find the open man. Track assists. The team with the most assists wins.</p>'
+                    + '</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">0:55 - 1:10 — 6v6 Live (Positionless Rules)</div>'
+                    + '<p>Full 6v6 half-field with two special rules:</p>'
+                    + '<ul>'
+                    + '<li><strong>Rule 1:</strong> No player can dodge from the same spot twice in a row. If you dodged from up top last possession, you must dodge from the wing or X this possession.</li>'
+                    + '<li><strong>Rule 2:</strong> Every 2 minutes, coach calls "SWAP" and all offensive players must rotate one spot clockwise before the next possession starts.</li>'
+                    + '</ul>'
+                    + '<p>These rules force positionless play in a live setting. Players can\'t fall back on comfort zones.</p>'
+                    + '</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">1:10 - 1:20 — Spacing Reinforcement Game</div>'
+                    + '<p>"Gravity Pull" — 6v6 half-field. If any two offensive players are within 5 yards of each other, it\'s an automatic turnover. Play to 5 goals. This is the spacing drill that sticks. Players police their own spacing because the consequence is immediate.</p>'
+                    + '</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">1:20 - 1:30 — Cool Down + Film</div>'
+                    + '<p>Stretch as a team. Show 3 clips from today\'s practice (if you filmed) or 3 Virginia offensive clips. Point out: spacing, off-ball movement, the pass that created the goal. End with one takeaway for each player.</p>'
+                    + '</div>'
+
+                    + '<div class="callout">Every drill in this practice connects to the same core ideas: spacing, off-ball movement, reads, and ball movement. The repetition of these themes across different drill formats is what builds positionless habits. One practice won\'t do it. But 10 practices like this will transform your offense.</div>';
+                }
+            },
+
+            // ── 8: Assisted Goals ──
+            {
+                question: "Most of our goals come from individual dodges. How do I create more assisted goals?",
+                answer: function() {
+                    return ''
+                    + '<div class="section-title">Building an Assisted-Goal Offense</div>'
+                    + '<p>If most of your goals come from one player dodging and finishing, you have an individual offense, not a team offense. That works until you face a team with a shutdown defender or a good slide package — then your offense disappears. Assisted goals are the antidote.</p>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Why Assisted Goals Beat Unassisted Goals</div>'
+                    + '<p>When a player dodges and shoots, he\'s beating <strong>three layers of defense:</strong> his on-ball defender, the slide, and the goalie. That\'s a low-percentage play. When the ball moves and creates an open shot for a teammate, that teammate only has to beat <strong>one layer:</strong> the goalie. Open shots convert at 2-3x the rate of contested shots. The math is simple.</p>'
+                    + '</div>'
+
+                    + '<div class="section-title">The "One More" Mindset</div>'
+                    + '<p>Teach your players this phrase: <strong>"One more."</strong> When you think you have a shot, make one more pass. That one extra pass usually finds a teammate who is MORE open than you are. The "one more" mindset doesn\'t mean never shoot — it means always check if there\'s a better option before pulling the trigger.</p>'
+
+                    + '<div class="section-title">4 Steps to Build Assisted-Goal Culture</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Step 1 — Reward the Pass, Not Just the Goal</div>'
+                    + '<p>Start tracking assists in practice and games. Announce assists out loud during scrimmages: "Great feed, Jackson! That\'s an assist!" When the passer gets as much recognition as the scorer, players start looking to pass. Put assists on the stat board next to goals.</p>'
+                    + '</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Step 2 — Punish Selfish Shots in Scrimmage</div>'
+                    + '<p>In practice scrimmages, contested shots (defender within 3 yards with hands up) result in a goal for the OTHER team. This is aggressive, but it works. Players learn FAST that forcing shots hurts the team. Only open shots count. Within 2-3 practices, shot selection improves dramatically.</p>'
+                    + '</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Step 3 — "No Shot Until Skip" Drill</div>'
+                    + '<p>In 6v6 half-field, the offense cannot shoot until the ball has traveled to BOTH sides of the field. Ball starts on the right, must swing to the left, then someone can shoot. This forces east-west ball movement and guarantees multiple players touch the ball before a shot. The goal that comes after this drill is almost always assisted because the defense is scrambling to cover the ball movement.</p>'
+                    + '</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Step 4 — Inside-Out Game</div>'
+                    + '<p>Every possession, the ball must go inside (crease feed) before it can go outside (perimeter shot). Feed the crease player first. If he doesn\'t have a shot, he kicks it back out. If he does have a shot, he finishes. The crease feed collapses the defense inside, which opens perimeter shooters. This is how Virginia generates 60-70% of their goals as assisted.</p>'
+                    + '</div>'
+
+                    + '<div class="section-title">Track Your Percentage</div>'
+                    + '<p>Virginia\'s standard: <strong>60-70% assisted goals.</strong> Start tracking your team\'s assisted goal percentage. If you\'re at 30%, set a goal of 40%. Build from there. Post the number in the locker room. Make it a team stat that everyone owns.</p>'
+
+                    + '<div class="callout">Here\'s the hard truth: if your best player scores 5 goals on individual dodges and you lose because the defense shuts him down in the second half, that\'s a coaching problem, not a player problem. An assisted-goal offense has no single point of failure. When anyone can score because the TEAM creates the shot, you become very hard to beat.</div>'
+
+                    + '<div class="section-title">The Assist Tracking Sheet</div>'
+                    + '<p>Create a simple chart for every game and scrimmage:</p>'
+                    + '<ul>'
+                    + '<li><strong>Column 1:</strong> Goal scorer</li>'
+                    + '<li><strong>Column 2:</strong> Assist (who passed)</li>'
+                    + '<li><strong>Column 3:</strong> Assisted or Unassisted (A or U)</li>'
+                    + '<li><strong>Column 4:</strong> Shot type (open shot, contested shot, fast break)</li>'
+                    + '</ul>'
+                    + '<p>At the end of every game, calculate your assisted goal percentage. Post it. Track the trend over the season. When your team sees the number climbing, they\'ll buy in even more because they can SEE the results of their ball movement.</p>'
+
+                    + '<div class="section-title">The Ripple Effect</div>'
+                    + '<p>When you build an assisted-goal culture, something unexpected happens: your unassisted goals also get better. Why? Because defenders stop overplaying individual dodgers. They know the ball is going to move, so they stay home on their man. That actually opens up MORE one-on-one opportunities for your dodgers. The threat of passing creates better dodging opportunities. And the threat of dodging creates better passing opportunities. It\'s a virtuous cycle that makes your entire offense better.</p>';
+                }
+            },
+
+            // ── 9: Complete Dodger ──
+            {
+                question: "I have a player who dodges well from up top but freezes from X. How do I develop a complete dodger?",
+                answer: function() {
+                    return ''
+                    + '<div class="section-title">Every Spot, Every Dodge</div>'
+                    + '<p>A player who can only dodge from one spot on the field is a one-dimensional player. Defenses will figure him out by halftime. A complete dodger can attack from up top, the wing, AND behind the goal. Here\'s how to build that.</p>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Why He Freezes at X</div>'
+                    + '<p>Behind the goal is <strong>disorienting</strong>. The player can\'t see the goal (it\'s behind him). The crease is a wall of bodies. The angles are different — everything he knows about dodging from up top doesn\'t directly translate. It\'s like asking someone who drives a car to fly a plane. The skills overlap, but the environment is completely different. He needs to build comfort through repetition, not instruction.</p>'
+                    + '</div>'
+
+                    + '<div class="section-title">The 5-Step Fix</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Fix 1 — Footwork Only (No Stick)</div>'
+                    + '<p>Remove the stick entirely. Have him run dodge moves from X without a ball. Split dodge footwork, roll dodge footwork, question mark dodge footwork. The stick adds complexity — remove it first and let him learn the FEET. 5 minutes per practice, just footwork behind the goal. This builds spatial awareness without the pressure of handling the ball.</p>'
+                    + '</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Fix 2 — Feed Before Finish</div>'
+                    + '<p>At X, teach him to <strong>FEED before thinking about shooting.</strong> Most young players try to score from X, which is very hard. The highest-percentage play from X is the dodge-and-feed to the crease. Take the scoring pressure off. His job from X is to dodge, draw the slide, and find the crease player. Once he\'s comfortable feeding, the finishes will come naturally.</p>'
+                    + '</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Fix 3 — The Question Mark Dodge</div>'
+                    + '<p>This is THE dodge from behind the goal. Drive up the alley toward GLE (goal line extended) like you\'re going to goal — this pulls the defender toward the cage. Then curl BACK toward the center of the field. The path looks like a question mark. The curl-back creates separation because the defender committed toward the goal and now has to reverse. Practice this 20 times per day from both sides.</p>'
+                    + '</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Fix 4 — "Blind Dodging" Drill</div>'
+                    + '<p>1v1 at X. The dodger MUST either score or feed the crease within 6 seconds. No resetting, no passing back up top. This forces him to make decisions from X under pressure. The time limit prevents overthinking — he has to act. Start with a passive defender, then go live. Track his completion rate (score or successful feed). He\'ll start at 30% and climb to 60%+ within 2 weeks.</p>'
+                    + '</div>'
+
+                    + '<div class="step-block">'
+                    + '<div class="step-label">Fix 5 — Position Swap in Live Play</div>'
+                    + '<p>In 6v6 scrimmages, require your up-top dodger to play X for a minimum of 3 consecutive possessions per scrimmage. No exceptions. He doesn\'t get to go back to his comfort zone until he\'s completed 3 possessions from X. This forces live-game reps from the position he\'s weakest at. The discomfort is the point — comfort comes from repetition under pressure.</p>'
+                    + '</div>'
+
+                    + '<div class="section-title">Timeline</div>'
+                    + '<p><strong>2-3 weeks</strong> of daily X work (10-15 minutes per practice) = competent. He can handle the ball, make a feed, and execute the question mark dodge without hesitation.</p>'
+                    + '<p><strong>6 weeks</strong> of daily X work = comfortable. He can read the defense, choose the right option, and attack from X with the same confidence he has from up top.</p>'
+
+                    + '<div class="callout">The goal isn\'t to make him a "from X" specialist. The goal is to make him a player who can attack from ANYWHERE. When your best dodger can beat his man from up top, the wing, and X, the defense has no answer. They can\'t overplay one spot because he\'ll just go somewhere else. That\'s positionless lacrosse.</div>';
+                }
+            }
+
+        ];
+
+        /* ========================================
+           TOPIC NAVIGATION
+           ======================================== */
+        var currentTopicIndex = -1;
+
+        function openTopic(index) {
+            var topic = TOPICS[index];
+            if (!topic) return;
+
+            currentTopicIndex = index;
+
+            // Populate content
+            document.getElementById('contentQuestion').textContent = topic.question;
+            document.getElementById('contentAnswer').innerHTML = topic.answer();
+
+            // Update nav buttons
+            updateTopicNav();
+
+            // Toggle views
+            document.getElementById('topicListView').style.display = 'none';
+            var panel = document.getElementById('contentPanel');
+            panel.classList.add('active');
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Track read topics in session
+            var readTopics = JSON.parse(sessionStorage.getItem('btb_guru_read') || '[]');
+            if (readTopics.indexOf(index) === -1) {
+                readTopics.push(index);
+                sessionStorage.setItem('btb_guru_read', JSON.stringify(readTopics));
+            }
+            updateReadIndicators();
+        }
+
+        function closeTopic() {
+            currentTopicIndex = -1;
+            document.getElementById('contentPanel').classList.remove('active');
+            document.getElementById('topicListView').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            updateReadIndicators();
+        }
+
+        function goToPrevTopic() {
+            if (currentTopicIndex > 0) {
+                openTopic(currentTopicIndex - 1);
+            }
+        }
+
+        function goToNextTopic() {
+            if (currentTopicIndex < TOPICS.length - 1) {
+                openTopic(currentTopicIndex + 1);
+            }
+        }
+
+        function updateTopicNav() {
+            var navEl = document.getElementById('topicNavButtons');
+            if (!navEl) return;
+
+            var prevDisabled = currentTopicIndex <= 0;
+            var nextDisabled = currentTopicIndex >= TOPICS.length - 1;
+
+            var prevTitle = prevDisabled ? '' : TOPICS[currentTopicIndex - 1].question.substring(0, 40) + '...';
+            var nextTitle = nextDisabled ? '' : TOPICS[currentTopicIndex + 1].question.substring(0, 40) + '...';
+
+            navEl.innerHTML = ''
+                + '<button class="topic-nav-btn' + (prevDisabled ? ' disabled' : '') + '" onclick="goToPrevTopic()" ' + (prevDisabled ? 'disabled' : '') + '>'
+                + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M15 18l-6-6 6-6"/></svg>'
+                + ' Previous'
+                + '</button>'
+                + '<span class="topic-counter">' + (currentTopicIndex + 1) + ' / ' + TOPICS.length + '</span>'
+                + '<button class="topic-nav-btn' + (nextDisabled ? ' disabled' : '') + '" onclick="goToNextTopic()" ' + (nextDisabled ? 'disabled' : '') + '>'
+                + 'Next '
+                + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M9 18l6-6-6-6"/></svg>'
+                + '</button>';
+        }
+
+        /* ========================================
+           READ INDICATORS
+           ======================================== */
+        function updateReadIndicators() {
+            var readTopics = JSON.parse(sessionStorage.getItem('btb_guru_read') || '[]');
+            var cards = document.querySelectorAll('.topic-card');
+            cards.forEach(function(card, index) {
+                var numEl = card.querySelector('.topic-num');
+                if (readTopics.indexOf(index) !== -1) {
+                    numEl.style.background = 'rgba(212, 168, 67, 0.25)';
+                    numEl.style.borderColor = 'var(--accent)';
+                } else {
+                    numEl.style.background = '';
+                    numEl.style.borderColor = '';
+                }
+            });
+
+            // Update progress counter
+            var progressEl = document.getElementById('progressCounter');
+            if (progressEl) {
+                progressEl.textContent = readTopics.length + ' of ' + TOPICS.length + ' topics explored';
+            }
+        }
+
+        /* ========================================
+           NAVIGATION
+           ======================================== */
+        function toggleNav() {
+            var nav = document.getElementById('mainNav');
+            var burger = document.getElementById('hamburger');
+            nav.classList.toggle('active');
+            burger.classList.toggle('active');
+        }
+
+        /* ========================================
+           KEYBOARD NAVIGATION
+           ======================================== */
+        document.addEventListener('keydown', function(e) {
+            if (currentTopicIndex >= 0) {
+                if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    goToPrevTopic();
+                } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    goToNextTopic();
+                } else if (e.key === 'Escape') {
+                    closeTopic();
+                }
+            }
+        });
+
+        /* ========================================
+           INIT
+           ======================================== */
+        window.addEventListener('load', function() {
+            updateReadIndicators();
+        });
+    </script>
+
+</body>
+</html>

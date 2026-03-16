@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<title>Transition & Special Teams Playbook | BTB Lacrosse Boys Program</title>
+<meta name="description" content="BTB Boys Transition & Special Teams Playbook — Rides, clears, faceoff plays, man up offense, man down defense, and substitution systems with D1 film breakdowns.">
+<meta property="og:title" content="Transition & Special Teams Playbook | BTB Lacrosse Boys Program">
+<meta property="og:description" content="D1 film breakdowns — rides, clears, faceoff plays, man up, man down, and substitution systems.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#D22630">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* ── Dark Theme Overrides ── */
+body {
+    background: #0a0a0a;
+    color: #fff;
+}
+
+.btb-header {
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.4);
+}
+.btb-header.scrolled { box-shadow: 0 2px 30px rgba(0,0,0,0.6); }
+.btb-nav a { color: rgba(255,255,255,0.7); }
+.btb-nav a:hover { color: #D22630; }
+.hamburger span { background: #fff; }
+
+@media (max-width: 768px) {
+    .btb-nav {
+        background: rgba(10,10,10,0.98) !important;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+    .btb-nav a { color: rgba(255,255,255,0.7) !important; }
+    .btb-nav a:hover { color: #D22630 !important; }
+}
+
+/* ── Hero ── */
+.hero {
+    position: relative;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    overflow: hidden;
+    padding: 8rem 2rem 4rem;
+}
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 40%, #0d0d0d 100%);
+    z-index: 0;
+}
+.hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 100%, rgba(210,38,48,0.15) 0%, transparent 60%);
+}
+.hero-inner { position: relative; z-index: 2; max-width: 800px; }
+.hero-badge {
+    display: inline-block;
+    border: 1px solid rgba(210,38,48,0.4);
+    color: rgba(255,255,255,0.7);
+    padding: 0.35rem 1.2rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    border-radius: 2px;
+    margin-bottom: 1.2rem;
+    font-family: 'Montserrat', sans-serif;
+}
+.hero h1 {
+    font-size: 3.5rem;
+    line-height: 1;
+    margin-bottom: 1rem;
+    letter-spacing: 3px;
+}
+.hero h1 .highlight { color: #D22630; }
+.hero-sub {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.5);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* ── Playbook Tabs ── */
+.playbook-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0 20px;
+    margin-bottom: 40px;
+}
+.playbook-tab {
+    background: #111;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.6);
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+}
+.playbook-tab:hover { border-color: #D22630; color: #fff; }
+.playbook-tab.active { background: #D22630; border-color: #D22630; color: #fff; }
+
+/* ── Tab Panels ── */
+.tab-panel { display: none; max-width: 900px; margin: 0 auto; padding: 0 20px; }
+.tab-panel.active { display: block; }
+
+/* ── Video Cards ── */
+.video-card {
+    background: #111;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 32px;
+}
+.video-embed { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+.video-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+.video-info { padding: 20px; }
+.video-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-right: 6px;
+    margin-bottom: 8px;
+    background: #D22630;
+    color: #fff;
+}
+.video-badge.d1 { background: #C5A44E; }
+.video-badge.coaching { background: #2563EB; }
+.video-title { font-family: 'Bebas Neue', sans-serif; font-size: 24px; margin: 8px 0 16px; }
+.coach-note {
+    background: rgba(210,38,48,0.08);
+    border-left: 3px solid #D22630;
+    padding: 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 16px 0;
+    font-size: 14px;
+    line-height: 1.7;
+    font-style: italic;
+}
+.teaching-point {
+    background: rgba(197,164,78,0.08);
+    border-left: 3px solid #C5A44E;
+    padding: 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 16px 0;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* ── Term Box ── */
+.term-box {
+    background: #111;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 24px 0;
+}
+.term-box h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    color: #D22630;
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+.term-item { margin-bottom: 12px; font-size: 14px; line-height: 1.6; }
+.term-item strong { color: #fff; }
+
+/* ── Communication Box ── */
+.comm-box {
+    background: #111;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 24px 0;
+}
+.comm-box h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    color: #D22630;
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+.comm-call { margin-bottom: 16px; }
+.comm-call .call { font-family: 'Bebas Neue', sans-serif; color: #D22630; font-size: 18px; }
+.comm-call .meaning { color: rgba(255,255,255,0.7); font-size: 14px; margin-top: 4px; }
+
+/* ── Section Intro ── */
+.section-intro {
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 32px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.section-intro h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: #fff;
+    margin-bottom: 12px;
+}
+
+/* ── Cross-Link Box ── */
+.cross-link {
+    background: rgba(210,38,48,0.06);
+    border: 1px solid rgba(210,38,48,0.2);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 24px 0;
+    text-align: center;
+}
+.cross-link h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    color: #D22630;
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+.cross-link p {
+    color: rgba(255,255,255,0.6);
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+.cross-link a {
+    display: inline-block;
+    padding: 10px 24px;
+    background: #D22630;
+    color: #fff;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.cross-link a:hover { background: #a01e26; }
+
+/* ── Scroll Reveal ── */
+.reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 2.4rem; }
+    .hero { min-height: 40vh; padding: 7rem 1.2rem 3rem; }
+    .playbook-tabs { gap: 6px; }
+    .playbook-tab { padding: 8px 14px; font-size: 11px; }
+    .video-title { font-size: 20px; }
+    .video-info { padding: 16px; }
+    .coach-note, .teaching-point { padding: 12px; font-size: 13px; }
+    .comm-call .call { font-size: 16px; }
+}
+@media (max-width: 480px) {
+    .hero h1 { font-size: 1.8rem; }
+    .playbook-tab { padding: 7px 12px; font-size: 10px; letter-spacing: 0.5px; }
+}
+</style>
+</head>
+<body>
+
+    <!-- ── Header ── -->
+    <header class="btb-header" id="navbar" role="banner">
+        <a href="index.html" class="btb-logo">
+            <img src="assets/B 3d Metal Logo copy.png" alt="BTB Lacrosse — Home">
+        </a>
+        <nav class="btb-nav" id="navLinks" role="navigation" aria-label="Main navigation">
+            <a href="index.html">Our Standard</a>
+            <a href="players-hub.html">Players Hub</a>
+            <a href="world-series.html">World Series</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="coach-bios.html">Coaches</a>
+            <a href="faq.html">FAQ</a>
+            <a href="mailto:info@bethebestli.com?subject=BTB%20Registration" class="btb-cta">Register</a>
+        </nav>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle navigation menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+
+    <!-- ── Hero ── -->
+    <section class="hero" id="main-content">
+        <div class="hero-bg"></div>
+        <div class="hero-inner">
+            <div class="hero-badge">Boys Program</div>
+            <h1>TRANSITION & <span class="highlight">SPECIAL TEAMS</span></h1>
+            <p class="hero-sub">Rides &bull; Clears &bull; Faceoff &bull; Man Up &bull; Man Down</p>
+        </div>
+    </section>
+
+    <!-- ── Tab Navigation ── -->
+    <div class="playbook-tabs" role="tablist">
+        <button class="playbook-tab active" role="tab" aria-selected="true" data-tab="rides">Rides</button>
+        <button class="playbook-tab" role="tab" aria-selected="false" data-tab="clears">Clears</button>
+        <button class="playbook-tab" role="tab" aria-selected="false" data-tab="substitution">Substitution</button>
+        <button class="playbook-tab" role="tab" aria-selected="false" data-tab="faceoff">Faceoff</button>
+        <button class="playbook-tab" role="tab" aria-selected="false" data-tab="wing">Wing Play</button>
+        <button class="playbook-tab" role="tab" aria-selected="false" data-tab="man-up">Man Up</button>
+        <button class="playbook-tab" role="tab" aria-selected="false" data-tab="man-down">Man Down</button>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- TAB: RIDES                              -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="tab-panel active" id="rides" role="tabpanel">
+
+        <div class="section-intro reveal">
+            <h2>Riding — Your First Line of Defense</h2>
+            <p>Riding is your team's first line of defense after a shot or turnover. A good ride creates turnovers and extra possessions. A bad ride gives up fast breaks and easy goals. At BTB, we install multiple ride packages so we can match our aggression to the game situation. Every ride has a specific assignment for every player — nobody freelances, nobody quits on a ride early. The whistle has not blown. Keep riding.</p>
+        </div>
+
+        <div class="video-card reveal">
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/131gO57WErA" loading="lazy" allowfullscreen title="The Riding Playbook"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-badge">POWLAX</span>
+                <span class="video-badge d1">D1 Film</span>
+                <h3 class="video-title">The Riding Playbook — Four Complete Ride Packages</h3>
+                <div class="coach-note">
+                    <strong>Coach's Playbook:</strong> Four complete ride packages in one film session. <strong>3-3 Deep Zone</strong> is your base ride — 3 attackmen force the ball carrier and cut off the outlet, 3 middies plug the passing lanes across midfield. It is safe, organized, and hard for the opponent to clear against because every lane is covered. <strong>Windshield Wiper</strong> is the press ride for must-ride situations — attackmen slide across the field like wipers, pressuring every short pass option. <strong>Goalie Ride</strong> uses the goalie as a 10th field player to create a numbers advantage on the ride. <strong>Zero Ride</strong> is the bail — sprint home and set up your defense, no pressure applied. Use it when you are gassed or protecting a lead and cannot afford a fast break the other way.
+                </div>
+                <div class="teaching-point">
+                    <strong>Key Teaching Point:</strong> Install the 3-3 Deep Zone first. It is safe, organized, and teaches players to ride by assignment rather than by instinct. Once your team can execute the base ride consistently, then add the press rides and specialty packages. A team with one great ride is better than a team with four mediocre ones.
+                </div>
+            </div>
+        </div>
+
+        <div class="video-card reveal">
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/bjIKPeCmhwc" loading="lazy" allowfullscreen title="10 Man Ride"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-badge">POWLAX</span>
+                <span class="video-badge d1">D1 Film</span>
+                <h3 class="video-title">10 Man Ride — The Nuclear Option</h3>
+                <div class="coach-note">
+                    <strong>Coach's Playbook:</strong> The nuclear option. Your goalie leaves the cage and becomes a 10th rider, creating a 10v9 numbers advantage on the clear. Extremely aggressive — you are leaving an empty net behind you. Use when you MUST get a possession: end of a half, down 2 with 3 minutes left, or whenever the momentum demands a statement play. The 10-man ride sends a message to the opponent and to your own team: we are not backing down.
+                </div>
+                <div class="teaching-point">
+                    <strong>Key Teaching Point:</strong> This is a CALLED ride from the sideline. Never freelance it. The goalie must know the call before the whistle — he sprints to a specific position, usually at midfield to cut off the long outlet. Practice the bail: when to abandon the ride and sprint home. If the clear breaks the ride, the goalie must get back to the cage before the ball gets there. Timing and conditioning are everything.
+                </div>
+            </div>
+        </div>
+
+        <div class="comm-box reveal">
+            <h3>Ride Communication Calls</h3>
+            <div class="comm-call">
+                <div class="call">"RIDE 1!" / "RIDE 2!" / "RIDE 3!"</div>
+                <div class="meaning">The specific ride package being called from the sideline. Every player must know which ride is which — there is no time to explain during a live clear. Drill the names until they are automatic.</div>
+            </div>
+            <div class="comm-call">
+                <div class="call">"ZERO! ZERO!"</div>
+                <div class="meaning">Bail on the ride. Sprint home and set up defense. No pressure — just get back. Used when the ride is broken or when you are protecting a lead and cannot risk a fast break.</div>
+            </div>
+            <div class="comm-call">
+                <div class="call">"TURN HIM!"</div>
+                <div class="meaning">The ball carrier is approaching the midline. Force him to change direction and go back toward his own goal. Turning the ball carrier buys time for the ride to set up.</div>
+            </div>
+            <div class="comm-call">
+                <div class="call">"DEAD BALL SIDE!"</div>
+                <div class="meaning">The ball is on one side of the field. The riders on the opposite side should pinch toward the ball to cut off cross-field passes. Do not hang out on the weak side — compress the space.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- TAB: CLEARS                             -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="tab-panel" id="clears" role="tabpanel">
+
+        <div class="section-intro reveal">
+            <h2>Clearing — Moving the Ball Up the Field</h2>
+            <p>Clearing is the offense before the offense. If you cannot get the ball past midfield, you cannot run your half-field sets, your EMO, or your designed plays. A good clearing team converts 85-90% of their clear attempts. A bad clearing team gives the ball back and lets the opponent generate extra possessions. At BTB, we install structured clearing formations with named routes so every player knows where to go on every clear.</p>
+        </div>
+
+        <div class="video-card reveal">
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/RnYRtSWkBug" loading="lazy" allowfullscreen title="2-3-2 Clear"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-badge">POWLAX</span>
+                <span class="video-badge d1">D1 Film</span>
+                <h3 class="video-title">2-3-2 Clear — D1 Standard Formation</h3>
+                <div class="coach-note">
+                    <strong>Coach's Playbook:</strong> The 2-3-2 is the most common D1 clearing formation. Two defensemen behind the cage, three middies across the midfield area, and two attackmen up at the restraining line. The formation provides width — stretching the ride horizontally — and gives the goalie multiple short passing options. The ball typically moves from the goalie to a defenseman, up the alley to a middie, and then across midfield to an attackman. Each route is named and practiced until it is automatic.
+                </div>
+                <div class="teaching-point">
+                    <strong>Key Teaching Point:</strong> The goalie is the quarterback of the clear. He reads the ride, calls the formation, and makes the first pass. A goalie who panics and throws blind passes will lose clearing percentage fast. Train your goalie to read the pressure, step toward the open man, and deliver an accurate outlet pass. The first pass sets up the entire clear.
+                </div>
+            </div>
+        </div>
+
+        <div class="video-card reveal">
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/sX7_dwPEUHs" loading="lazy" allowfullscreen title="4-3 Clear"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-badge">POWLAX</span>
+                <span class="video-badge d1">D1 Film</span>
+                <h3 class="video-title">4-3 Clear — Basic Spread Formation</h3>
+                <div class="coach-note">
+                    <strong>Coach's Playbook:</strong> Basic spread clear — 4 players across the defensive end, 3 ahead near midfield. Simple routes, easy to teach, and effective against most press rides. The 4-3 gives you numbers behind the ball (4 against typically 3 riders) which means someone is always open. The challenge is finding the open man quickly before the ride can adjust. Ball movement must be fast — catch and throw, no cradling, no holding. The ball moves faster than any player can run.
+                </div>
+                <div class="teaching-point">
+                    <strong>Key Teaching Point:</strong> When you receive a clear pass, your first look should be up the field, not back to the goalie. If you can advance the ball toward midfield, do it. If you cannot, swing it to a teammate who can. The worst outcome on a clear is going backward — it gives the ride time to set up and tighten the pressure.
+                </div>
+            </div>
+        </div>
+
+        <div class="video-card reveal">
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/4LOocXTxHNw" loading="lazy" allowfullscreen title="4-3 Alpha Clear"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-badge">POWLAX</span>
+                <span class="video-badge d1">D1 Film</span>
+                <h3 class="video-title">4-3 Alpha Clear — Scripted Routes</h3>
+                <div class="coach-note">
+                    <strong>Coach's Playbook:</strong> Scripted clearing routes off the 4-3 set. Named routes that every player memorizes — Alpha is the base route tree, with each player running a specific path based on where the first pass goes. If the goalie throws right, the right-side players run their Alpha routes (up the alley, curling to the middle, stretching to the sideline). If the goalie throws left, mirror the routes. The scripted nature removes decision-making under pressure — you catch the ball, you run your route. Simple and repeatable.
+                </div>
+                <div class="teaching-point">
+                    <strong>Key Teaching Point:</strong> Walk through the Alpha routes at half speed before going live. Every player must know not only his own route but the routes of the two players next to him. If you know where your teammates are going, you can adjust on the fly when the ride takes away your primary option. Clearing is a team choreography — everyone must know the dance.
+                </div>
+            </div>
+        </div>
+
+        <div class="video-card reveal">
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/oI9-zj4tdeo" loading="lazy" allowfullscreen title="Clear Pass Terminology"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-badge">POWLAX</span>
+                <span class="video-badge coaching">Coaching</span>
+                <h3 class="video-title">Clear Pass Terminology — Standardized Language</h3>
+                <div class="coach-note">
+                    <strong>Coach's Playbook:</strong> Standardized language for clear calls. Everyone must know the vocabulary before running the plays. Terms like "outlet," "breakout," "midline," "dump," and "wall pass" must mean the same thing to every player on the field. This film establishes the common language that makes clearing communication instant and unambiguous. At BTB, we use these same terms from the youngest age group through the oldest — so when a player moves up, the language is already installed.
+                </div>
+                <div class="teaching-point">
+                    <strong>Key Teaching Point:</strong> Post the clearing terminology in the locker room, in the team group chat, and in the pregame warm-up sheet. Repetition builds fluency. A player who hesitates to remember what "outlet left" means is a player who will be late on the route. Make the language second nature.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- TAB: SUBSTITUTION                       -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="tab-panel" id="substitution" role="tabpanel">
+
+        <div class="section-intro reveal">
+            <h2>Substitution Systems</h2>
+            <p>Substitution in lacrosse is not just swapping tired players for fresh ones. It is a tactical weapon. The substitution box is a 20-yard area at midfield where players enter and exit the game. How you manage that box determines whether your team plays with the right personnel at the right time — or whether you are caught with illegal procedures, too many men on the field, and blown defensive matchups. At BTB, we drill substitution patterns until they are as automatic as our offensive sets.</p>
+        </div>
+
+        <div class="video-card reveal">
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/-xpNBfHYKqA" loading="lazy" allowfullscreen title="Running the Box"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-badge">POWLAX</span>
+                <span class="video-badge coaching">Coaching</span>
+                <h3 class="video-title">Running the Box — Standard Substitution Pattern</h3>
+                <div class="coach-note">
+                    <strong>Coach's Playbook:</strong> Standard substitution pattern used by every organized lacrosse program. Players enter from one end of the box and exit from the other, creating a one-way flow that prevents collisions and confusion. The player coming off the field makes eye contact with his replacement and calls his number. The replacement enters at a sprint — not a jog — and immediately finds his assignment. The entire exchange should take 2-3 seconds. Any longer and you risk a fast break against a defense that is still sorting out matchups.
+                </div>
+                <div class="teaching-point">
+                    <strong>Key Teaching Point:</strong> The biggest substitution mistake is subbing during a live ball in a dangerous area. If the ball is near midfield and the defense is under pressure, do NOT substitute. Wait for a dead ball or a clear possession before sending fresh legs in. A substitution at the wrong time is a guaranteed odd-man rush against you.
+                </div>
+            </div>
+        </div>
+
+        <div class="video-card reveal">
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/c3cfEOWJt70" loading="lazy" allowfullscreen title="Subbing Through the Midline"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-badge">POWLAX</span>
+                <span class="video-badge coaching">Coaching</span>
+                <h3 class="video-title">Subbing Through the Midline — Tactical Substitution</h3>
+                <div class="coach-note">
+                    <strong>Coach's Playbook:</strong> Trap the opponent's personnel on the wrong side of midfield by timing your substitutions aggressively. This is an advanced tactic: when the opponent clears the ball and their defensemen are jogging back, you substitute offensive middies who sprint into the attack, creating a brief numbers advantage. The opponent's slow midfielders are caught in no-man's land — too far up the field to get back on defense, too committed to sub out without a penalty. It is a legal, strategic way to manufacture fast break opportunities.
+                </div>
+                <div class="teaching-point">
+                    <strong>Key Teaching Point:</strong> This tactic requires conditioning and communication. The incoming midfielders must sprint — not jog — onto the field and immediately push the pace. If they enter slowly, the advantage disappears. Drill this as a special situation in practice: clear, sub, attack. The whole sequence should happen in under 5 seconds.
+                </div>
+            </div>
+        </div>
+
+        <div class="term-box reveal">
+            <h3>Substitution Rules and Awareness</h3>
+            <div class="term-item"><strong>The Horn:</strong> The substitution box area. Named for the horn that sounds when there are too many men on the field. Avoid the horn at all costs — it is a 30-second penalty and a completely avoidable mistake.</div>
+            <div class="term-item"><strong>Hot Sub:</strong> A substitution on the fly during a live ball. Requires precise timing — the player coming off must be fully off the field before the replacement enters. If they overlap, it is too many men.</div>
+            <div class="term-item"><strong>Dead Ball Sub:</strong> A substitution during a stoppage. Safer and easier to execute. Use dead ball subs for line changes and matchup adjustments. Use hot subs only when conditioning demands it.</div>
+            <div class="term-item"><strong>Matchup Sub:</strong> Subbing in a specific player to defend a specific opponent. For example, bringing in your best on-ball defender when the opponent's star attackman enters the game. This requires sideline awareness and communication between coaches and the substitution coordinator.</div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- TAB: FACEOFF                            -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="tab-panel" id="faceoff" role="tabpanel">
+
+        <div class="section-intro reveal">
+            <h2>Faceoff Plays and Tactics</h2>
+            <p>The faceoff is the most specialized skill in lacrosse. It determines possession, and possession determines opportunity. At the D1 level, faceoff specialists train as much as any other position — they study film on their opponents, they drill specific clamp techniques, and they have designed plays for both won and lost faceoffs. At BTB, we teach our faceoff players the fundamentals AND the tactical plays that turn a won clamp into a fast break goal.</p>
+        </div>
+
+        <div class="video-card reveal">
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/YfAveIh47Pc" loading="lazy" allowfullscreen title="Faceoff Plays and Tactics"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-badge">POWLAX</span>
+                <span class="video-badge d1">D1 Film</span>
+                <h3 class="video-title">Faceoff Plays and Tactics — Complete Breakdown</h3>
+                <div class="coach-note">
+                    <strong>Coach's Playbook:</strong> Designed plays off won and lost faceoffs. When you win the clamp, the wing players must know exactly where to go — is it a fast break push, a controlled clear, or a set play off the win? When you lose the faceoff, the wings must know where to recover — do they sprint back on defense, do they ride the opponent's clear, or do they contest the ground ball in the scrum? Every scenario has a plan. This film covers the tactical playbook for every faceoff outcome.
+                </div>
+                <div class="teaching-point">
+                    <strong>Key Teaching Point:</strong> The faceoff is not just the FOGO's job. The two wing players and the two defensive midfielders are all part of the faceoff unit. Their positioning, their ground ball technique, and their decision-making after the clamp are just as important as the clamp itself. A great FOGO with bad wings will lose faceoff possessions.
+                </div>
+            </div>
+        </div>
+
+        <div class="term-box reveal">
+            <h3>Faceoff Techniques</h3>
+            <div class="term-item"><strong>The Clamp:</strong> The most common faceoff move. On the whistle, the FOGO clamps his stick head over the ball, trapping it under the pocket. From the clamp, he can rake the ball out to a wing, pop it forward to himself, or pin it and grind for possession. The clamp wins the initial battle — what happens next determines whether you get the ball.</div>
+            <div class="term-item"><strong>The Rake:</strong> After the clamp, the FOGO rakes the ball backward or sideways to a wing player. This is the safest exit from a clamp because it gets the ball out of the scrum quickly. The wing player must be in position and ready to scoop — a late wing means a loose ground ball.</div>
+            <div class="term-item"><strong>The Pop:</strong> Instead of raking, the FOGO pops the ball forward past his opponent and chases it. This is more aggressive — the FOGO is essentially playing a one-on-one ground ball with the opponent's FOGO. Win the pop and you have a fast break. Lose it and the opponent has the ball in your end.</div>
+            <div class="term-item"><strong>Counter Moves:</strong> When the opponent's FOGO is dominant with the clamp, you counter with a jump, a plunger, or a lateral exit. Each counter is designed to disrupt the opponent's primary move. Film study on the opposing FOGO is essential — know his go-to move and have the counter ready.</div>
+        </div>
+
+        <div class="term-box reveal">
+            <h3>Ground Ball Fundamentals</h3>
+            <div class="term-item"><strong>Get Low:</strong> Your butt should be lower than your opponent's. Low man wins ground balls. Bend your knees, not your waist. A player who bends at the waist will get pushed over. A player who bends at the knees has a stable base and can absorb contact.</div>
+            <div class="term-item"><strong>Hands Together:</strong> Both hands should be on the bottom third of the shaft when scooping a ground ball. This gives you maximum control and allows you to cradle through contact. Hands apart means the stick bounces on the scoop and the ball pops out.</div>
+            <div class="term-item"><strong>Scoop Through:</strong> Do not stop when you pick up the ball. Scoop and accelerate through the contact. Stopping over a ground ball invites a check, a strip, or a pile-up. Treat every ground ball like a sprint — pick it up and go.</div>
+            <div class="term-item"><strong>Box Out:</strong> Before the scoop, use your body to seal the opponent away from the ball. Just like a basketball rebound — get your body between the opponent and the ball, then scoop. Position wins ground balls more often than speed does.</div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- TAB: WING PLAY                          -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="tab-panel" id="wing" role="tabpanel">
+
+        <div class="section-intro reveal">
+            <h2>Wing Play — The Unsung Heroes of Faceoffs</h2>
+            <p>Wing players are the most overlooked part of the faceoff. They stand on the wing lines during every faceoff and their job is deceptively simple: win the ground ball if it comes to their side, and get the ball to the right place if the FOGO wins the clamp. But "simple" does not mean "easy." Wing play requires anticipation, ground ball toughness, quick decision-making, and the fitness to sprint in transition immediately after securing possession. At BTB, we assign our best athletes to the wing because the faceoff unit determines 50% of possessions.</p>
+        </div>
+
+        <div class="term-box reveal">
+            <h3>Wing Player Responsibilities</h3>
+            <div class="term-item"><strong>Pre-Faceoff Positioning:</strong> Line up on the wing line with your inside foot forward, knees bent, weight on your toes. You should be leaning toward the faceoff dot, ready to explode in either direction. Do not stand upright and flat-footed — you will be a full step behind the opponent's wing.</div>
+            <div class="term-item"><strong>Read the Clamp:</strong> Watch the FOGO's hands, not the ball. If your FOGO wins the clamp, he will rake it to your side. Start moving toward the outlet spot before the ball arrives. If the opponent's FOGO wins, sprint to the ground ball or sprint back on defense — do not stand and watch.</div>
+            <div class="term-item"><strong>Ground Ball Technique on the Wing:</strong> The ball will be moving when it comes to you — rolling, bouncing, or skipping off a stick. Get your body in front of the ball's path, get low, and scoop through. Do not try to one-hand it or bat at it. Secure the ball with two hands and then make your next decision.</div>
+            <div class="term-item"><strong>After Securing Possession:</strong> If you win the ground ball, immediately look up the field. If there is a fast break, push it. If there is no fast break, look for the FOGO or a middie filling up the field. Do not hold the ball — move it. Every second you hold the ball on the wing is a second the defense uses to set up.</div>
+        </div>
+
+        <div class="term-box reveal">
+            <h3>Wing Play Scenarios</h3>
+            <div class="term-item"><strong>Scenario 1 — Clean Win:</strong> Your FOGO wins the clamp cleanly and rakes to your side. Sprint to the ball, scoop it, and immediately look for the fast break. If the defense is still setting up, push. If they are set, pull it out and let the offense get organized. A clean win should result in a fast break attempt at least 50% of the time.</div>
+            <div class="term-item"><strong>Scenario 2 — Contested Ground Ball:</strong> The clamp is messy and the ball pops out to the wing area. This is a 50/50 ground ball between you and the opponent's wing. Get lower, get there first, and box out. Win the battle with your body, then scoop through contact. This is where toughness matters more than skill.</div>
+            <div class="term-item"><strong>Scenario 3 — Lost Faceoff:</strong> The opponent's FOGO wins and their wing secures the ball. Your job immediately switches from offense to defense. Sprint back to your defensive end and find your man. Do not chase the ball carrier — get to your assignment and let the team defense handle the rest. Discipline after a lost faceoff prevents fast break goals.</div>
+            <div class="term-item"><strong>Scenario 4 — Ball Goes to Opposite Wing:</strong> The clamp sends the ball to the far wing, away from you. Do not stand and watch. Fill into the midfield area and become an outlet option if your team wins the ground ball on the other side. If the opponent wins it, you are already in position to get back on defense. Stay active — there are no spectators on the faceoff unit.</div>
+        </div>
+
+        <div class="comm-box reveal">
+            <h3>Wing Communication</h3>
+            <div class="comm-call">
+                <div class="call">"MINE! MINE!"</div>
+                <div class="meaning">You are going for the ground ball. Call off your FOGO or the other wing so you do not collide. The first player to call "Mine!" takes the ground ball. Everyone else clears the path and gets to an outlet position.</div>
+            </div>
+            <div class="comm-call">
+                <div class="call">"PUSH! PUSH!"</div>
+                <div class="meaning">We have the ball and the fast break is on. Sprint up the field — the ball is coming. Everyone in front of the ball must get wide and give the ball carrier lanes.</div>
+            </div>
+            <div class="comm-call">
+                <div class="call">"BACK! BACK!"</div>
+                <div class="meaning">We lost the faceoff. Sprint home to defense. No riding, no chasing — just get back to your assignment and set up the half-field defense. This call prevents the panic that leads to fast break goals.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- TAB: MAN UP                             -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="tab-panel" id="man-up" role="tabpanel">
+
+        <div class="section-intro reveal">
+            <h2>Man Up Offense (EMO)</h2>
+            <p>Extra Man Offense is your best opportunity to score. You have a 6-on-5 advantage — there is always an open man. The question is how quickly you find him and how efficiently you execute once you do. D1 teams convert 35-45% of their EMO opportunities into goals. That conversion rate comes from preparation: knowing your plays, knowing the defense's tendencies, and having the discipline to execute instead of freelance. At BTB, we install specific EMO plays that create 3-4 scoring options in sequence.</p>
+        </div>
+
+        <div class="video-card reveal">
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/HwZ3IUpPbz8" loading="lazy" allowfullscreen title="Cheddar/Pepper Jack Man Up"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-badge">POWLAX</span>
+                <span class="video-badge d1">D1 Film</span>
+                <h3 class="video-title">Cheddar / Pepper Jack Man Up — Quick Hitters</h3>
+                <div class="coach-note">
+                    <strong>Coach's Playbook:</strong> Two quick-hitter plays designed to score within the first 10 seconds of the EMO. <strong>Cheddar</strong> is a specific passing sequence — ball starts at the top, swings to the wing, and the crease man pops to an open spot for a catch-and-shoot. It is a three-pass play with a specific finish. <strong>Pepper Jack</strong> gives 3-4 scoring options in succession: the first look is a dodge from the top, the second is a feed to the crease on the slide, the third is a skip pass to the backside shooter, and the fourth is a reset and re-attack. If the defense takes away one option, the next one opens up.
+                </div>
+                <div class="teaching-point">
+                    <strong>Key Teaching Point:</strong> Name your plays something memorable. "Cheddar" and "Pepper Jack" are easy to call from the sideline and easy for players to remember under pressure. The name does not matter — the recall speed does. When the coach calls "Cheddar!" every player must know exactly where to go and what to do. No thinking, just executing.
+                </div>
+            </div>
+        </div>
+
+        <div class="video-card reveal">
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/qLht8H1LofY" loading="lazy" allowfullscreen title="22 Quick Man Up"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-badge">POWLAX</span>
+                <span class="video-badge d1">D1 Film</span>
+                <h3 class="video-title">22 Quick Man Up — Tempo Play</h3>
+                <div class="coach-note">
+                    <strong>Coach's Playbook:</strong> Tempo play — the ball touches 2 sticks in 2 seconds. That is the name: 22. The idea is to catch the man-down defense before they set up their zone or their rotation. As soon as the ball is in play, the first pass goes to a specific spot and the second pass goes directly to a shooter. No ball movement, no patience — just speed and a shot. This works best when the penalty is whistled during a live ball and the defense is still scrambling to get into their man-down set. If they are already set, save the 22 Quick and run your standard EMO.
+                </div>
+                <div class="teaching-point">
+                    <strong>Key Teaching Point:</strong> The 22 Quick is called from the sideline BEFORE the ball is put in play. The players must know it is coming so they can be in position for the two-touch sequence. If the players are not ready, the play breaks down and you waste 10 seconds of EMO time. Preparation is the key — call it early, execute it fast.
+                </div>
+            </div>
+        </div>
+
+        <div class="video-card reveal">
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/0A6U07_WC8E" loading="lazy" allowfullscreen title="3-3 Four Man Wheel"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-badge">POWLAX</span>
+                <span class="video-badge d1">D1 Film</span>
+                <h3 class="video-title">3-3 Four Man Wheel — Continuous Rotation</h3>
+                <div class="coach-note">
+                    <strong>Coach's Playbook:</strong> Continuous rotation by 4 players creates constant defensive confusion. The offense sets up in a 3-3 formation (3 up top, 3 across the crease/wing area). Four of the six players begin rotating in a circular pattern — up from the crease, across the top, down to the wing, back to the crease. The wheel keeps moving until a seam opens. Because the defense is playing 5v6, they cannot match the rotation without opening a lane. The two stationary players (usually the top center and the opposite crease) read the defense and call for the ball when the seam opens.
+                </div>
+                <div class="teaching-point">
+                    <strong>Key Teaching Point:</strong> The wheel only works if the rotation speed is consistent. If one player speeds up or slows down, the spacing breaks and the defense can recover. Practice the wheel at a specific tempo — count "one-two-three-four" as each player hits his spot. Once the tempo is set, the defense will always be one step behind.
+                </div>
+            </div>
+        </div>
+
+        <div class="term-box reveal">
+            <h3>EMO Principles</h3>
+            <div class="term-item"><strong>Find the Open Man:</strong> In a 6-on-5, someone is always open. Move the ball until you find him. Do not settle for a contested shot when an uncontested one exists one more pass away.</div>
+            <div class="term-item"><strong>Shot Selection:</strong> EMO shots should be high-percentage — inside 12 yards with a clear lane to the goal. Perimeter shots from 15+ yards waste the advantage. If you are shooting from outside, you are settling. Move the ball and get a better look.</div>
+            <div class="term-item"><strong>Time Management:</strong> A penalty is typically 30 seconds to 2 minutes. You have time to be patient but not time to be passive. Aim to get a quality shot within the first 20 seconds. If it does not come, reset and attack again. You should generate 2-3 quality scoring chances per EMO possession.</div>
+            <div class="term-item"><strong>Clock Awareness:</strong> If you are up by 1 in the fourth quarter with an EMO, possession is more valuable than a goal. Run the clock, force the opponent to play defense for the full penalty, and only shoot if the look is perfect. Situational EMO is a coaching chess move.</div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- TAB: MAN DOWN                           -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="tab-panel" id="man-down" role="tabpanel">
+
+        <div class="section-intro reveal">
+            <h2>Man Down Defense — Quick Reference</h2>
+            <p>This is a quick-reference version of our man-down packages. Each video below covers a specific formation and rotation. For the full breakdowns, coaching notes, and teaching progressions, visit the Defense Playbook where these concepts are covered in depth with additional context.</p>
+        </div>
+
+        <div class="video-card reveal">
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/pev8Lh9e6ng" loading="lazy" allowfullscreen title="Box and 1 Man-Down"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-badge">POWLAX</span>
+                <span class="video-badge d1">D1 Film</span>
+                <h3 class="video-title">Box and 1 Man-Down</h3>
+                <div class="coach-note">
+                    <strong>Coach's Playbook:</strong> Foundation formation — 4 defenders in a box, 1 chaser on the ball. The box shifts as the ball moves. Your base man-down package and the first one to install with any team.
+                </div>
+            </div>
+        </div>
+
+        <div class="video-card reveal">
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/9B-DbHoCERg" loading="lazy" allowfullscreen title="House Zone Man-Down"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-badge">POWLAX</span>
+                <span class="video-badge d1">D1 Film</span>
+                <h3 class="video-title">House Zone Man-Down — Virginia 2019</h3>
+                <div class="coach-note">
+                    <strong>Coach's Playbook:</strong> Virginia's championship rotation — more aggressive than standard box. Defenders jump passing lanes and anticipate. Higher IQ required but creates more turnovers.
+                </div>
+            </div>
+        </div>
+
+        <div class="video-card reveal">
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/hrzYFIyQWTI" loading="lazy" allowfullscreen title="Pushin P Man-Down"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-badge">POWLAX</span>
+                <span class="video-badge d1">D1 Film</span>
+                <h3 class="video-title">Pushin P Man-Down — Pressure Package</h3>
+                <div class="coach-note">
+                    <strong>Coach's Playbook:</strong> Pressure the ball carrier instead of sitting back. High risk, high reward — use sparingly to disrupt opponent's EMO rhythm when they are in a groove.
+                </div>
+            </div>
+        </div>
+
+        <div class="video-card reveal">
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/R26pAhoXoNA" loading="lazy" allowfullscreen title="Box and Surprise Lock"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-badge">POWLAX</span>
+                <span class="video-badge d1">D1 Film</span>
+                <h3 class="video-title">Box and Surprise Lock Man-Down</h3>
+                <div class="coach-note">
+                    <strong>Coach's Playbook:</strong> Start in zone (Box and 1), then on a sideline call, shift to man-to-man lock. Catches the offense off guard and disrupts scripted EMO plays.
+                </div>
+            </div>
+        </div>
+
+        <div class="cross-link reveal">
+            <h3>Full Man-Down Breakdowns</h3>
+            <p>For complete coaching notes, teaching progressions, and tactical context on each man-down formation, visit the Defense Playbook.</p>
+            <a href="btb-boys-defense-playbook.html#man-down">View Defense Playbook &rarr;</a>
+        </div>
+    </div>
+
+    <!-- ── Footer ── -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">BTB <span>LACROSSE</span></a>
+                <p>A structured lacrosse development program built on accountability, film study, and intentional coaching. Long Island, NY.</p>
+                <div class="footer-social">
+                    <a href="https://www.instagram.com/bethebestli/" target="_blank" rel="noopener" title="Instagram" aria-label="BTB on Instagram">IG</a>
+                    <a href="https://www.youtube.com/@bethebestlacrosse" target="_blank" rel="noopener" title="YouTube" aria-label="BTB on YouTube">YT</a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Program</h4>
+                <a href="index.html">Our Standard</a>
+                <a href="index.html#development">Development Model</a>
+                <a href="index.html#filmstudy">Film Study</a>
+                <a href="coach-bios.html">Coach Bios</a>
+                <a href="index.html#results">Results</a>
+            </div>
+            <div class="footer-col">
+                <h4>Resources</h4>
+                <a href="btb-boys-offense-playbook.html">Offense Playbook</a>
+                <a href="btb-boys-defense-playbook.html">Defense Playbook</a>
+                <a href="btb-boys-transition-playbook.html">Transition Playbook</a>
+                <a href="faq.html">FAQ</a>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <a href="mailto:info@bethebestli.com">info@bethebestli.com</a>
+                <a href="https://www.instagram.com/bethebestli/" target="_blank" rel="noopener">@bethebestli</a>
+                <a>Long Island, NY</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Be The Best Lacrosse. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // ── Tab Switching ──
+        const tabs = document.querySelectorAll('.playbook-tab');
+        const panels = document.querySelectorAll('.tab-panel');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => {
+                    t.classList.remove('active');
+                    t.setAttribute('aria-selected', 'false');
+                });
+                panels.forEach(p => p.classList.remove('active'));
+
+                tab.classList.add('active');
+                tab.setAttribute('aria-selected', 'true');
+                const target = document.getElementById(tab.dataset.tab);
+                if (target) {
+                    target.classList.add('active');
+                    target.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
+                }
+                window.scrollTo({ top: document.querySelector('.playbook-tabs').offsetTop - 80, behavior: 'smooth' });
+            });
+        });
+
+        // ── Navbar scroll shadow ──
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('navbar');
+            if (window.scrollY > 40) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // ── Mobile Menu Toggle ──
+        function toggleMenu() {
+            const nav = document.getElementById('navLinks');
+            const btn = document.getElementById('hamburger');
+            nav.classList.toggle('open');
+            btn.classList.toggle('active');
+            const expanded = nav.classList.contains('open');
+            btn.setAttribute('aria-expanded', expanded);
+        }
+
+        document.querySelectorAll('.btb-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('open');
+                document.getElementById('hamburger').classList.remove('active');
+                document.getElementById('hamburger').setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // ── Scroll Reveal ──
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // ── Handle hash links ──
+        window.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash.replace('#', '');
+            if (hash) {
+                const targetTab = document.querySelector(`[data-tab="${hash}"]`);
+                if (targetTab) {
+                    targetTab.click();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

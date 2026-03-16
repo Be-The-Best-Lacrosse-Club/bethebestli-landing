@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<title>Motion Offense Video Playbook | BTB Lacrosse Boys Program</title>
+<meta name="description" content="BTB Boys Motion Offense Video Playbook — Men's D1 film breakdowns, coaching notes, and real game footage covering fades, follows, cuts, picks, and full offensive systems.">
+<meta property="og:title" content="Motion Offense Video Playbook | BTB Lacrosse Boys Program">
+<meta property="og:description" content="Men's D1 film breakdowns with coaching notes — fades, follows, cuts, picks, and full offensive systems.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#D22630">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* ── Dark Theme Overrides ── */
+body {
+    background: #0a0a0a;
+    color: #fff;
+}
+
+.btb-header {
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.4);
+}
+.btb-header.scrolled { box-shadow: 0 2px 30px rgba(0,0,0,0.6); }
+.btb-nav a { color: rgba(255,255,255,0.7); }
+.btb-nav a:hover { color: #D22630; }
+.hamburger span { background: #fff; }
+
+/* ── Mobile Nav Dark ── */
+@media (max-width: 768px) {
+    .btb-nav {
+        background: rgba(10,10,10,0.98) !important;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+    .btb-nav a { color: rgba(255,255,255,0.7) !important; }
+    .btb-nav a:hover { color: #D22630 !important; }
+}
+
+/* ── Hero ── */
+.hero {
+    position: relative;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    overflow: hidden;
+    padding: 8rem 2rem 4rem;
+}
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 40%, #0d0d0d 100%);
+    z-index: 0;
+}
+.hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 100%, rgba(210,38,48,0.15) 0%, transparent 60%);
+}
+.hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+}
+.hero-badge {
+    display: inline-block;
+    border: 1px solid rgba(210,38,48,0.4);
+    color: rgba(255,255,255,0.7);
+    padding: 0.35rem 1.2rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    border-radius: 2px;
+    margin-bottom: 1.2rem;
+    font-family: 'Montserrat', sans-serif;
+}
+.hero h1 {
+    font-size: 3.5rem;
+    line-height: 1;
+    margin-bottom: 1rem;
+    letter-spacing: 3px;
+}
+.hero h1 .highlight { color: #D22630; }
+.hero-sub {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.5);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* ── Playbook Tabs ── */
+.playbook-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0 20px;
+    margin-bottom: 40px;
+}
+.playbook-tab {
+    background: #111;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.6);
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+}
+.playbook-tab:hover {
+    border-color: #D22630;
+    color: #fff;
+}
+.playbook-tab.active {
+    background: #D22630;
+    border-color: #D22630;
+    color: #fff;
+}
+
+/* ── Tab Panels ── */
+.tab-panel {
+    display: none;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.tab-panel.active { display: block; }
+
+/* ── Video Cards ── */
+.video-card {
+    background: #111;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 32px;
+}
+.video-embed {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+}
+.video-embed iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+.video-info { padding: 20px; }
+.video-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-right: 6px;
+    margin-bottom: 8px;
+    background: #D22630;
+    color: #fff;
+}
+.video-badge.d1 { background: #C5A44E; }
+.video-badge.coaching { background: #2563EB; }
+.video-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    margin: 8px 0 16px;
+}
+.coach-note {
+    background: rgba(210,38,48,0.08);
+    border-left: 3px solid #D22630;
+    padding: 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 16px 0;
+    font-size: 14px;
+    line-height: 1.7;
+    font-style: italic;
+}
+.teaching-point {
+    background: rgba(197,164,78,0.08);
+    border-left: 3px solid #C5A44E;
+    padding: 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 16px 0;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* ── Term Box ── */
+.term-box {
+    background: #111;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 24px 0;
+}
+.term-box h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    color: #D22630;
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+.term-item {
+    margin-bottom: 12px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+.term-item strong { color: #fff; }
+
+/* ── Protocol Box ── */
+.protocol-box {
+    background: #111;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 24px 0;
+}
+.protocol-box h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    color: #D22630;
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+.protocol-step {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+.protocol-step .step-num {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    background: #D22630;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+}
+.protocol-step .step-text { color: rgba(255,255,255,0.8); }
+
+/* ── Section Intro ── */
+.section-intro {
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 32px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.section-intro h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: #fff;
+    margin-bottom: 12px;
+}
+
+/* ── Scroll Reveal ── */
+.reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 2.4rem; }
+    .hero { min-height: 40vh; padding: 7rem 1.2rem 3rem; }
+    .playbook-tabs { gap: 6px; }
+    .playbook-tab { padding: 8px 14px; font-size: 11px; }
+    .video-title { font-size: 20px; }
+    .video-info { padding: 16px; }
+    .coach-note, .teaching-point { padding: 12px; font-size: 13px; }
+}
+@media (max-width: 480px) {
+    .hero h1 { font-size: 1.8rem; }
+    .playbook-tab { padding: 7px 12px; font-size: 10px; letter-spacing: 0.5px; }
+}
+</style>
+</head>
+<body>
+
+    <!-- ── Header ── -->
+    <header class="btb-header" id="navbar" role="banner">
+        <a href="index.html" class="btb-logo">
+            <img src="assets/B 3d Metal Logo copy.png" alt="BTB Lacrosse — Home">
+        </a>
+        <nav class="btb-nav" id="navLinks" role="navigation" aria-label="Main navigation">
+            <a href="index.html">Our Standard</a>
+            <a href="players-hub.html">Players Hub</a>
+            <a href="world-series.html">World Series</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="coach-bios.html">Coaches</a>
+            <a href="faq.html">FAQ</a>
+            <a href="mailto:info@bethebestli.com?subject=BTB%20Registration" class="btb-cta">Register</a>
+        </nav>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle navigation menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+
+    <!-- ── Hero ── -->
+    <section class="hero" id="main-content">
+        <div class="hero-bg"></div>
+        <div class="hero-inner">
+            <div class="hero-badge">Boys Program</div>
+            <h1>MOTION OFFENSE <span class="highlight">VIDEO PLAYBOOK</span></h1>
+            <p class="hero-sub">Men's D1 Film &bull; Coaching Breakdowns &bull; Real Game Footage</p>
+        </div>
+    </section>
+
+    <!-- ── Tab Navigation ── -->
+    <div class="playbook-tabs" role="tablist">
+        <button class="playbook-tab active" role="tab" aria-selected="true" data-tab="overview">Overview</button>
+        <button class="playbook-tab" role="tab" aria-selected="false" data-tab="fade">Fade</button>
+        <button class="playbook-tab" role="tab" aria-selected="false" data-tab="follow">Follow</button>
+        <button class="playbook-tab" role="tab" aria-selected="false" data-tab="cut-clear">Cut & Clear</button>
+        <button class="playbook-tab" role="tab" aria-selected="false" data-tab="picks">Picks & Slip</button>
+        <button class="playbook-tab" role="tab" aria-selected="false" data-tab="systems">Full Systems</button>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- TAB: OVERVIEW                           -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="tab-panel active" id="overview" role="tabpanel">
+
+        <div class="section-intro reveal">
+            <h2>How to Use This Playbook</h2>
+            <p>Every video in this playbook is real men's D1 game footage. These are not drills on an empty field — they are live possessions with coaching breakdowns and telestration so you can see exactly what we teach at BTB in action at the highest level. Watch the off-ball movement. Watch the spacing. Watch how the defense reacts. Then bring that understanding to practice.</p>
+        </div>
+
+        <div class="protocol-box reveal">
+            <h3>Player Watch Protocol</h3>
+            <div class="protocol-step">
+                <div class="step-num">1</div>
+                <div class="step-text"><strong>Watch #1: Full speed.</strong> Just watch the play develop. Get a feel for the tempo, the spacing, and where the goal comes from. Do not pause or rewind — absorb the whole possession.</div>
+            </div>
+            <div class="protocol-step">
+                <div class="step-num">2</div>
+                <div class="step-text"><strong>Watch #2: Focus ONLY on the off-ball players.</strong> What are they doing while the dodger has the ball? Are they fading, following, cutting, or standing still? Off-ball movement is what separates organized offense from backyard lacrosse.</div>
+            </div>
+            <div class="protocol-step">
+                <div class="step-num">3</div>
+                <div class="step-text"><strong>Watch #3: Watch the DEFENSE.</strong> Where does the slide come from? Who is left open? How does the defense communicate? Understanding slides is how you learn to make the right read as an offensive player.</div>
+            </div>
+        </div>
+
+        <div class="term-box reveal">
+            <h3>Key Men's Lacrosse Terminology</h3>
+            <div class="term-item"><strong>X (Behind the Goal):</strong> The area directly behind the goal. It is the quarterback position in lacrosse — the safest place to initiate offense and the spot where most D1 possessions begin.</div>
+            <div class="term-item"><strong>GLE (Goal Line Extended):</strong> The imaginary line that extends from the goal line out to the sideline. Dodging from above GLE gives the dodger a shooting angle; below GLE means you are behind the cage.</div>
+            <div class="term-item"><strong>Alley:</strong> The space between the crease and the sideline at GLE. This is prime real estate for cutters, feeders, and off-ball shooters. Coaches call it "the alley" because it is a high-traffic lane.</div>
+            <div class="term-item"><strong>Hot / Slide:</strong> "Hot" is the first defender who leaves his man to help on the ball carrier. The slide is the actual help rotation. If you hear "I'm hot!" the defense is telling you who will slide first.</div>
+            <div class="term-item"><strong>Two-Slide:</strong> The second rotation after the first slide. When the hot defender leaves his man to slide, the two-slide defender rotates to cover the now-open attacker. This is the chain reaction that creates open shots.</div>
+            <div class="term-item"><strong>2-Man Game:</strong> Any offensive action involving two players — a ball carrier and one off-ball player working together. Picks, pick-and-rolls, give-and-gos, and screen actions are all 2-man games.</div>
+            <div class="term-item"><strong>Stepdown:</strong> When a defender intentionally sags off his man toward the crease to clog the middle or take away a driving lane. It is a controlled help position, not a full slide.</div>
+        </div>
+
+        <div class="section-intro reveal">
+            <h2>What Makes Motion Offense Work</h2>
+            <p>Motion offense is not a set play. It is a system of principles: move with purpose, read the defense, and react. Every tab in this playbook covers one concept — a specific off-ball action and how it fits into the whole system. Master each concept individually, then watch the Full Systems tab to see how they combine in live D1 possessions. At BTB, we believe that understanding WHY you move is more important than memorizing WHERE to move.</p>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- TAB: FADE                               -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="tab-panel" id="fade" role="tabpanel">
+
+        <div class="section-intro reveal">
+            <h2>The Fade</h2>
+            <p>When the dodger drives, the off-ball player on the same side FADES away from the action — moving to a spot where he can receive a skip or swing pass if the slide comes. Fading creates space for the dodger and sets up an open shot. The fade is the most fundamental off-ball concept in lacrosse because it solves two problems at once: it clears the driving lane for the dodger, and it puts the fading player in a position to score when the defense overcommits.</p>
+        </div>
+
+        <div class="video-card reveal">
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/jzXt-EBhGKE" loading="lazy" allowfullscreen title="Adjacent Fade Concept"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-badge">POWLAX</span>
+                <span class="video-badge d1">D1 Film</span>
+                <h3 class="video-title">Adjacent Fade — Reading the Slide</h3>
+                <div class="coach-note">
+                    <strong>Coach's Playbook:</strong> The fade is not just running away from the ball. It is a deliberate reposition to a shooting window. Watch how the off-ball attacker reads the slide — the moment the adjacent defender commits to the dodger, the fading player plants his feet and gets his hands ready. The timing of the catch-and-shoot is everything. A good fade puts you in triple-threat position before the two-slide can recover.
+                </div>
+                <div class="teaching-point">
+                    <strong>Key Teaching Point:</strong> Fade to a spot where you have both a passing lane FROM the dodger and a shooting lane TO the goal. If you fade to a dead spot behind a defender, the pass cannot get to you. Always fade to open grass with vision of the cage.
+                </div>
+            </div>
+        </div>
+
+        <div class="video-card reveal">
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/P8G6yAZCHbw" loading="lazy" allowfullscreen title="Fade Spacing and Timing"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-badge">POWLAX</span>
+                <span class="video-badge d1">D1 Film</span>
+                <h3 class="video-title">Fade Spacing — Why Distance Matters</h3>
+                <div class="coach-note">
+                    <strong>Coach's Playbook:</strong> Most young players fade too close or too far. Too close and the sliding defender can recover to both the dodger and the fader. Too far and the pass is a 25-yard skip that gets intercepted. The sweet spot is 12-15 yards — close enough for a crisp one-hop pass, far enough that the defender cannot split the difference. Watch how D1 attackmen maintain that spacing instinctively.
+                </div>
+                <div class="teaching-point">
+                    <strong>Key Teaching Point:</strong> Your stick needs to be up and ready BEFORE the pass arrives. The defense recovers in under 2 seconds — if you need to catch, cradle, wind up, and shoot, you are too late. Catch and release. One motion.
+                </div>
+            </div>
+        </div>
+
+        <div class="term-box reveal">
+            <h3>Coaching Notes: When to Fade vs. When to Follow</h3>
+            <div class="term-item"><strong>Fade when:</strong> The dodger is driving from up top or from the wing and there is a clear adjacent slide. Your job is to be the outlet. If the defense sends a crease slide, you are the skip pass option opposite the action.</div>
+            <div class="term-item"><strong>Do not fade when:</strong> The dodger is behind the cage at X and driving up. In this case, the off-ball player should follow or cut — fading puts you farther from the goal with a worse angle. Read the dodge origin to decide your off-ball action.</div>
+            <div class="term-item"><strong>Common Mistake:</strong> Fading to the sideline and dying there. The fade is a reposition, not an exit. If the ball swings to the other side of the field, you need to cut through and fill the next spot. Do not become a spectator on the wing.</div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- TAB: FOLLOW                             -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="tab-panel" id="follow" role="tabpanel">
+
+        <div class="section-intro reveal">
+            <h2>The Follow</h2>
+            <p>The Follow is the opposite of the Fade. When the dodger drives, the off-ball player FOLLOWS the dodger — cutting behind him toward the goal. This puts extreme pressure on the defense because they must decide: slide to the dodger, or stay home on the cutter. The follow is an aggressive off-ball action that creates layup-range scoring chances. It is especially effective when the defense is in an adjacent slide package because the sliding defender has his back turned to the following cutter.</p>
+        </div>
+
+        <div class="video-card reveal">
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/R5vlQc-632E" loading="lazy" allowfullscreen title="Follow Cut Concept"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-badge">POWLAX</span>
+                <span class="video-badge d1">D1 Film</span>
+                <h3 class="video-title">The Follow Cut — Backside Pressure</h3>
+                <div class="coach-note">
+                    <strong>Coach's Playbook:</strong> The follow is all about timing. You do not start your cut the moment the dodger catches the ball. You wait until the dodger engages his defender and commits to the drive. Then you cut behind him, using the dodger's body and his defender as a screen. The sliding defender is focused on the ball — he does not see you coming from behind. This is how you get layups in a half-field offense.
+                </div>
+                <div class="teaching-point">
+                    <strong>Key Teaching Point:</strong> Your cut must have a destination. Do not just drift toward the cage. Attack a specific spot — the back pipe, the crease, the GLE — and get there with your stick ready to catch and finish. The feed from the dodger will be quick and short. Be ready for a one-handed finish.
+                </div>
+            </div>
+        </div>
+
+        <div class="video-card reveal">
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/U0L9DJBxvPE" loading="lazy" allowfullscreen title="Follow Timing and Reads"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-badge">POWLAX</span>
+                <span class="video-badge d1">D1 Film</span>
+                <h3 class="video-title">Follow Timing — When to Cut and When to Hold</h3>
+                <div class="coach-note">
+                    <strong>Coach's Playbook:</strong> The hardest part of the follow is knowing when NOT to cut. If the slide comes from the crease and the crease defender is already in the lane, your follow cut runs directly into help defense. In that case, you fade or hold your position. The read is simple: if the lane is open behind the dodger, follow. If there is a body in the lane, fade or replace. Film study is where you train your eyes to see these reads in real time.
+                </div>
+                <div class="teaching-point">
+                    <strong>Key Teaching Point:</strong> Communicate with the dodger. A quick "I'm coming behind!" tells him to look for the dump-off feed. Without communication, the dodger does not know you are there and the timing breaks down. Talk on offense — it is not just a defensive skill.
+                </div>
+            </div>
+        </div>
+
+        <div class="term-box reveal">
+            <h3>Follow vs. Fade: The Decision Tree</h3>
+            <div class="term-item"><strong>Step 1:</strong> Where is the dodge coming from? Top-side dodges from above GLE usually create better follow opportunities because the dodger is driving toward the goal and there is space behind him.</div>
+            <div class="term-item"><strong>Step 2:</strong> Where is the slide coming from? Adjacent slide = follow is open behind. Crease slide = the lane is clogged, so fade instead.</div>
+            <div class="term-item"><strong>Step 3:</strong> How far away are you? If you are one pass away on the same side, the follow works. If you are two passes away across the field, a follow cut would clog the middle — fade and space instead.</div>
+            <div class="term-item"><strong>Step 4:</strong> What did the defense do last time? If they over-rotated on fades last possession, the follow will be wide open this time. Read and react, not memorize and repeat.</div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- TAB: CUT & CLEAR                       -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="tab-panel" id="cut-clear" role="tabpanel">
+
+        <div class="section-intro reveal">
+            <h2>Cut & Clear</h2>
+            <p>Cut through the lane, then clear out to create space. The cut forces the defense to react; the clear resets spacing for the next action. This is the heartbeat of motion offense. Without disciplined cutting and clearing, the offense stagnates — players stand still, the defense settles, and the dodger has nowhere to go. Every player on the field must cycle through cut-and-clear actions to keep the defense in rotation.</p>
+        </div>
+
+        <div class="video-card reveal">
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/bsKmFPBe5qo" loading="lazy" allowfullscreen title="Cut Through and Clear"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-badge">POWLAX</span>
+                <span class="video-badge d1">D1 Film</span>
+                <h3 class="video-title">Cut Through and Clear — Creating Space</h3>
+                <div class="coach-note">
+                    <strong>Coach's Playbook:</strong> The cut is the threat; the clear is the discipline. Every off-ball player should be asking: "Can I get open right now?" If yes, cut hard to the cage. If no — because the lane is clogged, the timing is wrong, or the ball is on the other side — clear through and fill the next spot. The best offenses in college lacrosse have constant motion because every player is either cutting or clearing on every possession.
+                </div>
+                <div class="teaching-point">
+                    <strong>Key Teaching Point:</strong> When you clear, sprint out of the lane. Do not jog. A lazy clear clogs the middle for an extra second and that second is the difference between an open dodge and a clogged driving lane. Treat every clear like it matters — because it does.
+                </div>
+            </div>
+        </div>
+
+        <div class="video-card reveal">
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/2oJVT38BwBE" loading="lazy" allowfullscreen title="Off-Ball Movement Principles"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-badge">POWLAX</span>
+                <span class="video-badge coaching">Coaching</span>
+                <h3 class="video-title">Off-Ball Movement — The Engine of Motion Offense</h3>
+                <div class="coach-note">
+                    <strong>Coach's Playbook:</strong> The best offensive players in college lacrosse touch the ball 3-4 times per possession. The rest of the time they are cutting, clearing, screening, and spacing. If you only know how to play when you have the ball, you are a liability 90% of the time. This film breaks down how D1 attackmen create value without the ball — and why coaches recruit players who move without the ball as much as they recruit shooters.
+                </div>
+                <div class="teaching-point">
+                    <strong>Key Teaching Point:</strong> Every cut needs a purpose. Do not cut because coach said to "keep moving." Cut because you see an opening. Cut because you want to draw a defender away from the dodger. Cut because you are setting up a back-door look two passes from now. Purposeful movement beats constant movement.
+                </div>
+            </div>
+        </div>
+
+        <div class="term-box reveal">
+            <h3>The 3 Rules of Cutting and Clearing</h3>
+            <div class="term-item"><strong>Rule 1 — Cut with conviction:</strong> A half-speed cut is worse than standing still. When you cut, explode to the cage. Make your defender react. If he does not react, you are open — call for the ball. If he recovers, clear out and reset. But the initial burst must be game speed.</div>
+            <div class="term-item"><strong>Rule 2 — Clear through, not back:</strong> After your cut, clear through to the opposite side of the field. Do not cut to the crease and then backpedal to where you started. Clearing through keeps the rotation moving and opens up the next man's cut.</div>
+            <div class="term-item"><strong>Rule 3 — Fill behind:</strong> When someone cuts through, someone else must fill the spot they left. This is the chain reaction of motion offense. If the wing man cuts to the crease, the top man fills the wing, and X fills the top. The ball does not need to move for the offense to reset — just the bodies.</div>
+        </div>
+
+        <div class="video-card reveal">
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/QVF1tXBfJGk" loading="lazy" allowfullscreen title="Spacing and Lane Discipline"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-badge">POWLAX</span>
+                <span class="video-badge d1">D1 Film</span>
+                <h3 class="video-title">Spacing Discipline — Avoiding the Clog</h3>
+                <div class="coach-note">
+                    <strong>Coach's Playbook:</strong> The number one offense killer at the youth and high school level is clogging. Two or three players drift into the same area, defenders sag and help each other, and the dodge has nowhere to go. Watch this D1 film and count how many players are ever within 5 yards of each other. The answer is almost never. Spacing is a skill. It requires awareness, unselfishness, and discipline.
+                </div>
+                <div class="teaching-point">
+                    <strong>Key Teaching Point:</strong> If you can reach out and touch a teammate, you are too close. Spread the defense by spreading yourselves. A 15-yard spacing grid means every slide is a long rotation — and long slides create open shots.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- TAB: PICKS & SLIP                      -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="tab-panel" id="picks" role="tabpanel">
+
+        <div class="section-intro reveal">
+            <h2>Picks & Slip</h2>
+            <p>Off-ball screens create advantages when the defense switches, hedges, or gets caught. The pick-and-roll drives to goal; the pick-and-pop spaces to the perimeter. The slip is reading that the defense is jumping the screen early and cutting before contact. These 2-man game actions are the building blocks of organized offense at every level, and they become especially dangerous when combined with motion offense principles — a pick after two passes of ball movement catches the defense out of position.</p>
+        </div>
+
+        <div class="video-card reveal">
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/rKZU6IMtJvo" loading="lazy" allowfullscreen title="2-Man Game Basics"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-badge">POWLAX</span>
+                <span class="video-badge d1">D1 Film</span>
+                <h3 class="video-title">Defending 2-Man Games — Know the Defense to Beat the Defense</h3>
+                <div class="coach-note">
+                    <strong>Coach's Playbook:</strong> To run great picks, you need to understand how defenses defend them. This film breaks down the 3 main defensive responses: switch (swap assignments), hedge and recover (the screener's defender jumps out then retreats), and fight through (the on-ball defender squeezes past the screen). Each response has an offensive counter. Switch = slip the pick. Hedge = pick and pop to space. Fight through = re-screen or drive the other way.
+                </div>
+                <div class="teaching-point">
+                    <strong>Key Teaching Point:</strong> The screener is the decision-maker, not the ball carrier. The screener sees the defense's response first and must react — roll to the goal, pop to space, or slip before contact. The ball carrier just needs to use the screen and look for the screener's read.
+                </div>
+            </div>
+        </div>
+
+        <div class="video-card reveal">
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/3802fpuzdkE" loading="lazy" allowfullscreen title="Pick Locations and Angles"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-badge">POWLAX</span>
+                <span class="video-badge d1">D1 Film</span>
+                <h3 class="video-title">2-Man Game Pick Locations — Where You Set It Changes Everything</h3>
+                <div class="coach-note">
+                    <strong>Coach's Playbook:</strong> A pick at the top of the box creates a different advantage than a pick at GLE. Top-side picks give the ball carrier a north-south driving lane to the cage. Wing picks create east-west movement and swing opportunities. X-area picks open up feeds from behind. The location dictates the advantage, and the advantage dictates the finish. Watch how D1 teams choose their pick locations based on the scouting report — they set picks where the defense is weakest.
+                </div>
+                <div class="teaching-point">
+                    <strong>Key Teaching Point:</strong> Set picks with your feet set and your body still. A moving screen is a penalty. Get to your spot early, plant your feet shoulder-width apart, and let the ball carrier use you. The screen does not need to be violent — it just needs to be in the right spot at the right time.
+                </div>
+            </div>
+        </div>
+
+        <div class="video-card reveal">
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/qcN0RdFFF_M" loading="lazy" allowfullscreen title="Executing and Defending 2-Man Games"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-badge">POWLAX</span>
+                <span class="video-badge d1">D1 Film</span>
+                <span class="video-badge coaching">Full Session</span>
+                <h3 class="video-title">Executing & Defending 2-Man Games — Complete Breakdown</h3>
+                <div class="coach-note">
+                    <strong>Coach's Playbook:</strong> This is the comprehensive 2-man game film session — over 1:51 of D1 footage and coaching breakdowns. Use the timestamps to focus on specific actions: shallow cuts at 14:30-22:15, pick-and-roll execution at 35:00-48:00, defensive responses at 52:00-1:05:00, and full live possessions at 1:20:00-1:45:00. This is a film session, not a highlight reel — pause it, rewind it, and take notes.
+                </div>
+                <div class="teaching-point">
+                    <strong>Key Teaching Point:</strong> The Ohio State "pairs" concept — two players working together as a unit within the larger offense. One sets, one uses. Then they switch roles. This constant role reversal makes it impossible for the defense to pre-determine who is screening and who is driving. It is motion offense at its most dangerous.
+                </div>
+            </div>
+        </div>
+
+        <div class="term-box reveal">
+            <h3>Pick Terminology</h3>
+            <div class="term-item"><strong>Pick and Roll:</strong> The screener sets the pick, then rolls toward the goal looking for a feed. This is the aggressive option — it puts the screener in scoring position and forces the defense to rotate.</div>
+            <div class="term-item"><strong>Pick and Pop:</strong> The screener sets the pick, then pops away to the perimeter for a catch-and-shoot. This is the spacing option — it keeps the middle open for the ball carrier while giving him an outlet if the slide comes.</div>
+            <div class="term-item"><strong>Slip:</strong> The screener reads that the defense is cheating the screen (either switching early or the on-ball defender is going under) and cuts to the goal BEFORE making contact. The slip is the counter to aggressive defensive adjustments.</div>
+            <div class="term-item"><strong>Re-screen:</strong> If the first screen does not create separation, the screener immediately sets a second screen on the opposite side. The defense rarely recovers positioning for two screens in a row.</div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- TAB: FULL SYSTEMS                       -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="tab-panel" id="systems" role="tabpanel">
+
+        <div class="section-intro reveal">
+            <h2>Full Offensive Systems</h2>
+            <p>Complete offensive possessions combining all concepts — fades, follows, cuts, picks — into cohesive team motion. Watch how the ball moves east-west, how off-ball players read and react, and how D1 teams create assisted goals through patient execution. Virginia's championship teams consistently recorded a 60-70% assisted goal rate — meaning most of their goals came from an extra pass, not a solo dodge. The "one more pass" philosophy is not passive. It is the most efficient way to score against organized defenses.</p>
+        </div>
+
+        <div class="video-card reveal">
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/1xfq3NXRKKY" loading="lazy" allowfullscreen title="Virginia Motion Offense System"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-badge">POWLAX</span>
+                <span class="video-badge d1">D1 Film</span>
+                <h3 class="video-title">Virginia Motion Offense — The Gold Standard</h3>
+                <div class="coach-note">
+                    <strong>Coach's Playbook:</strong> Virginia under Lars Tiffany built arguably the best half-field offense in college lacrosse history. Their system is built on trust: trust that the ball will move, trust that the off-ball players will be in the right spots, and trust that the open shot will come if everyone does their job. Watch their ball movement — the ball rarely sticks in one player's stick for more than 2 seconds. Count the passes before the goal. It is almost always 3 or more.
+                </div>
+                <div class="teaching-point">
+                    <strong>Key Teaching Point:</strong> The "one more pass" mentality does not mean never shoot. It means never force a bad shot when a better one exists. If you are open, shoot. If a teammate is more open, pass. The system only works when every player is willing to give up a good shot for a great one.
+                </div>
+            </div>
+        </div>
+
+        <div class="video-card reveal">
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/owtbhJ62s-0" loading="lazy" allowfullscreen title="2-3-1 Offense"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-badge">POWLAX</span>
+                <span class="video-badge d1">D1 Film</span>
+                <h3 class="video-title">2-3-1 Motion Offense — Spacing and Flow</h3>
+                <div class="coach-note">
+                    <strong>Coach's Playbook:</strong> The 2-3-1 set — two up top, three across the middle, one behind at X — is the most common formation in college lacrosse. It creates natural spacing and gives every player a defined role within the motion. The two top players initiate, the three middle players cut and screen, and X is the reset valve. When the offense stalls, the ball goes back to X and the motion resets. It is organized chaos — structured enough to teach, flexible enough to adapt.
+                </div>
+                <div class="teaching-point">
+                    <strong>Key Teaching Point:</strong> In a 2-3-1, every player should be able to play every spot. If you only know how to play X, you are predictable. Rotate through all six positions in practice so that in a game, you can fill wherever the motion takes you. Positionless offense is the future of lacrosse.
+                </div>
+            </div>
+        </div>
+
+        <div class="video-card reveal">
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/djPh1m1F-qY" loading="lazy" allowfullscreen title="Ball Movement Creates Goals"></iframe>
+            </div>
+            <div class="video-info">
+                <span class="video-badge">POWLAX</span>
+                <span class="video-badge d1">D1 Film</span>
+                <h3 class="video-title">Ball Movement Creates Goals — Assisted Offense</h3>
+                <div class="coach-note">
+                    <strong>Coach's Playbook:</strong> This film session is a montage of D1 assisted goals — every goal comes off a pass, not a solo dodge. Watch how the ball moves from one side of the field to the other. Every pass forces the defense to shift. Every shift creates a gap. Three or four passes later, that gap becomes a wide-open shot. This is what BTB offense looks like when it is running: patient, connected, and lethal.
+                </div>
+                <div class="teaching-point">
+                    <strong>Key Teaching Point:</strong> Track the hockey assist — the pass before the assist. That is the pass that truly broke the defense. The goal scorer and the assister get the stats, but the player who made the swing pass that shifted the defense deserves the credit. In BTB film review, we highlight the hockey assist as much as the goal.
+                </div>
+            </div>
+        </div>
+
+        <div class="term-box reveal">
+            <h3>Systems Concepts</h3>
+            <div class="term-item"><strong>East-West Ball Movement:</strong> Moving the ball from one side of the field to the other. This forces the entire defense to shift and creates seams on the backside. The best offenses move the ball east-west before attacking north-south.</div>
+            <div class="term-item"><strong>Pace:</strong> The speed of the ball movement. Fast pace creates scramble situations; slow pace allows the offense to pick apart a set defense. D1 teams change pace within a possession — slow to set up, fast to attack.</div>
+            <div class="term-item"><strong>Reset:</strong> When the offense moves the ball back to X or a safe position to restart the motion. Resets are not failures — they are opportunities to re-read the defense and attack a new weakness.</div>
+            <div class="term-item"><strong>Assisted Goal Rate:</strong> The percentage of goals that come from a pass rather than a solo effort. Championship teams consistently have 55-70% assisted goal rates. At BTB, we track this stat because it tells us whether the system is working.</div>
+        </div>
+    </div>
+
+    <!-- ── Footer ── -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">BTB <span>LACROSSE</span></a>
+                <p>A structured lacrosse development program built on accountability, film study, and intentional coaching. Long Island, NY.</p>
+                <div class="footer-social">
+                    <a href="https://www.instagram.com/bethebestli/" target="_blank" rel="noopener" title="Instagram" aria-label="BTB on Instagram">IG</a>
+                    <a href="https://www.youtube.com/@bethebestlacrosse" target="_blank" rel="noopener" title="YouTube" aria-label="BTB on YouTube">YT</a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Program</h4>
+                <a href="index.html">Our Standard</a>
+                <a href="index.html#development">Development Model</a>
+                <a href="index.html#filmstudy">Film Study</a>
+                <a href="coach-bios.html">Coach Bios</a>
+                <a href="index.html#results">Results</a>
+            </div>
+            <div class="footer-col">
+                <h4>Resources</h4>
+                <a href="btb-boys-offense-playbook.html">Offense Playbook</a>
+                <a href="btb-boys-defense-playbook.html">Defense Playbook</a>
+                <a href="btb-boys-transition-playbook.html">Transition Playbook</a>
+                <a href="faq.html">FAQ</a>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <a href="mailto:info@bethebestli.com">info@bethebestli.com</a>
+                <a href="https://www.instagram.com/bethebestli/" target="_blank" rel="noopener">@bethebestli</a>
+                <a>Long Island, NY</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Be The Best Lacrosse. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // ── Tab Switching ──
+        const tabs = document.querySelectorAll('.playbook-tab');
+        const panels = document.querySelectorAll('.tab-panel');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => {
+                    t.classList.remove('active');
+                    t.setAttribute('aria-selected', 'false');
+                });
+                panels.forEach(p => p.classList.remove('active'));
+
+                tab.classList.add('active');
+                tab.setAttribute('aria-selected', 'true');
+                const target = document.getElementById(tab.dataset.tab);
+                if (target) {
+                    target.classList.add('active');
+                    // Re-observe reveal elements in the newly active panel
+                    target.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
+                }
+                window.scrollTo({ top: document.querySelector('.playbook-tabs').offsetTop - 80, behavior: 'smooth' });
+            });
+        });
+
+        // ── Navbar scroll shadow ──
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('navbar');
+            if (window.scrollY > 40) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // ── Mobile Menu Toggle ──
+        function toggleMenu() {
+            const nav = document.getElementById('navLinks');
+            const btn = document.getElementById('hamburger');
+            nav.classList.toggle('open');
+            btn.classList.toggle('active');
+            const expanded = nav.classList.contains('open');
+            btn.setAttribute('aria-expanded', expanded);
+        }
+
+        document.querySelectorAll('.btb-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('open');
+                document.getElementById('hamburger').classList.remove('active');
+                document.getElementById('hamburger').setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // ── Scroll Reveal ──
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

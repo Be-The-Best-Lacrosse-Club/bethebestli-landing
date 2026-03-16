@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <title>BTB Coach AI | D1 Men's Lacrosse Coaching Agent</title>
+    <meta name="description" content="BTB Coach AI — D1 Men's Lacrosse Coaching Agent. Ask lacrosse strategy questions and get instant, expert-level answers.">
+    <meta property="og:title" content="BTB Coach AI | D1 Men's Lacrosse Coaching Agent">
+    <meta property="og:description" content="Ask lacrosse strategy questions and get instant, expert-level answers from the BTB coaching knowledge base.">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#D22630">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared.css">
+    <style>
+        /* ========================================
+           ROOT OVERRIDES — DARK THEME
+           ======================================== */
+        :root {
+            --accent: #D22630;
+            --accent-dark: #a01e26;
+            --bg: #0a0a0a;
+            --bg-card: #1A1A1A;
+            --bg-input: #111111;
+            --text: #FFFFFF;
+            --text-muted: rgba(255,255,255,0.55);
+            --text-faint: rgba(255,255,255,0.3);
+            --border: rgba(255,255,255,0.08);
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ── Override shared.css header for dark ── */
+        .btb-header {
+            background: #0f0f0f;
+            border-bottom: 1px solid var(--border);
+            box-shadow: none;
+            height: 56px;
+            padding: 0 20px;
+        }
+
+        .btb-header.scrolled { box-shadow: none; }
+
+        .btb-nav a { color: rgba(255,255,255,0.6); }
+        .btb-nav a:hover { color: var(--accent); }
+
+        .hamburger span { background: rgba(255,255,255,0.7); }
+
+        @media (max-width: 768px) {
+            .btb-nav {
+                background: rgba(10,10,10,0.98);
+            }
+            .btb-nav a { color: rgba(255,255,255,0.8); }
+        }
+
+        /* ========================================
+           PASSWORD GATE
+           ======================================== */
+        .gate-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            transition: opacity 0.6s ease;
+        }
+
+        .gate-overlay.unlocking {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .gate-box {
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .gate-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 48px;
+            color: var(--text);
+            letter-spacing: 4px;
+            margin-bottom: 4px;
+        }
+
+        .gate-logo span { color: var(--accent); }
+
+        .gate-tagline {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-faint);
+            margin-bottom: 48px;
+        }
+
+        .gate-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+
+        .gate-input-wrap {
+            position: relative;
+            margin-bottom: 14px;
+        }
+
+        .gate-input {
+            width: 100%;
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 8px;
+            color: var(--text);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            padding: 16px 50px 16px 20px;
+            outline: none;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .gate-input:focus { border-color: var(--accent); }
+
+        .gate-input.error {
+            border-color: var(--accent);
+            animation: shake 0.4s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%       { transform: translateX(-8px); }
+            40%       { transform: translateX(8px); }
+            60%       { transform: translateX(-6px); }
+            80%       { transform: translateX(6px); }
+        }
+
+        .gate-toggle {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.35);
+            cursor: pointer;
+            font-size: 18px;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .gate-toggle:hover { color: rgba(255,255,255,0.7); }
+
+        .gate-error {
+            font-size: 12px;
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 1px;
+            min-height: 18px;
+            margin-bottom: 16px;
+        }
+
+        .gate-btn {
+            width: 100%;
+            background: var(--accent);
+            color: var(--text);
+            border: none;
+            border-radius: 8px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 20px;
+            letter-spacing: 3px;
+            padding: 16px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .gate-btn:hover { background: var(--accent-dark); }
+        .gate-btn:active { transform: scale(0.98); }
+
+        /* ========================================
+           APP LAYOUT
+           ======================================== */
+        .app-wrap {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            overflow: hidden;
+            padding-top: 56px; /* header height */
+        }
+
+        /* ── Chat Header ── */
+        .chat-header {
+            background: #0f0f0f;
+            border-bottom: 1px solid var(--border);
+            padding: 16px 20px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .chat-header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            letter-spacing: 3px;
+            color: var(--text);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .chat-header h1 span { color: var(--accent); }
+
+        .chat-header p {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        /* ── Chat Area ── */
+        .chat-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            scroll-behavior: smooth;
+        }
+
+        .chat-area::-webkit-scrollbar { width: 6px; }
+        .chat-area::-webkit-scrollbar-track { background: transparent; }
+        .chat-area::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+
+        /* ── Welcome State ── */
+        .welcome {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .welcome-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: rgba(210,38,48,0.12);
+            border: 2px solid rgba(210,38,48,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .welcome-icon svg {
+            width: 32px;
+            height: 32px;
+            stroke: var(--accent);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .welcome h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 24px;
+            letter-spacing: 2px;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .welcome p {
+            font-size: 13px;
+            color: var(--text-muted);
+            max-width: 400px;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+
+        /* ── Quick Topics Grid ── */
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .topic-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 16px;
+            color: var(--text);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            line-height: 1.4;
+        }
+
+        .topic-btn:hover {
+            border-color: var(--accent);
+            background: rgba(210,38,48,0.06);
+            transform: translateY(-1px);
+        }
+
+        .topic-btn .topic-icon {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: rgba(210,38,48,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        /* ── Message Bubbles ── */
+        .message {
+            max-width: 85%;
+            animation: messageIn 0.3s ease;
+        }
+
+        @keyframes messageIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.user {
+            align-self: flex-end;
+        }
+
+        .message.user .bubble {
+            background: var(--accent);
+            color: var(--text);
+            border-radius: 16px 16px 4px 16px;
+            padding: 12px 18px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .message.ai {
+            align-self: flex-start;
+        }
+
+        .message.ai .bubble {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text);
+            border-radius: 16px 16px 16px 4px;
+            padding: 16px 20px;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .message .label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-faint);
+            margin-bottom: 6px;
+        }
+
+        .message.user .label { text-align: right; }
+
+        .bubble strong {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .bubble .line {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .bubble .line:last-child { margin-bottom: 0; }
+
+        .bubble .blank-line {
+            display: block;
+            height: 8px;
+        }
+
+        /* ── Typing Indicator ── */
+        .typing {
+            align-self: flex-start;
+            display: flex;
+            gap: 6px;
+            padding: 12px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px 16px 16px 4px;
+        }
+
+        .typing span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--text-muted);
+            animation: typingDot 1.2s infinite ease-in-out;
+        }
+
+        .typing span:nth-child(2) { animation-delay: 0.15s; }
+        .typing span:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes typingDot {
+            0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+            30%            { opacity: 1;   transform: translateY(-4px); }
+        }
+
+        /* ── Input Bar ── */
+        .input-bar {
+            flex-shrink: 0;
+            background: #0f0f0f;
+            border-top: 1px solid var(--border);
+            padding: 12px 16px;
+            padding-bottom: max(12px, env(safe-area-inset-bottom));
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .input-bar input {
+            flex: 1;
+            background: var(--bg-input);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            color: var(--text);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            padding: 14px 20px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .input-bar input::placeholder {
+            color: var(--text-faint);
+        }
+
+        .input-bar input:focus {
+            border-color: var(--accent);
+        }
+
+        .send-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, transform 0.1s;
+            flex-shrink: 0;
+        }
+
+        .send-btn:hover { background: var(--accent-dark); }
+        .send-btn:active { transform: scale(0.92); }
+
+        .send-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--text);
+        }
+
+        /* ── Back-to-Topics Button ── */
+        .back-topics {
+            align-self: center;
+            margin-top: 8px;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            color: var(--text-muted);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 8px 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .back-topics:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+        @media (max-width: 600px) {
+            .topics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chat-header h1 { font-size: 22px; }
+
+            .message { max-width: 92%; }
+
+            .message.ai .bubble,
+            .message.user .bubble {
+                font-size: 13px;
+                padding: 12px 14px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .chat-area {
+                padding: 32px 40px;
+                max-width: 900px;
+                margin: 0 auto;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ── Password Gate ── -->
+    <div class="gate-overlay" id="gateOverlay">
+        <div class="gate-box">
+            <div class="gate-logo">BTB <span>COACH</span></div>
+            <div class="gate-tagline">Coaches Hub — Staff Only</div>
+            <div class="gate-label">Enter Access Code</div>
+            <div class="gate-input-wrap">
+                <input
+                    class="gate-input"
+                    id="gateInput"
+                    type="password"
+                    placeholder="Enter code"
+                    autocomplete="off"
+                    spellcheck="false"
+                    onkeydown="if(event.key==='Enter')gateSubmit()"
+                >
+                <button class="gate-toggle" id="gateToggle" onclick="gateToggleVisibility()" aria-label="Show/hide password" type="button">&#128065;</button>
+            </div>
+            <div class="gate-error" id="gateError"></div>
+            <button class="gate-btn" onclick="gateSubmit()">ENTER</button>
+        </div>
+    </div>
+
+    <!-- ── Site Header (dark) ── -->
+    <header class="btb-header">
+        <a class="btb-logo" href="index.html">
+            <img src="assets/B 3d Metal Logo copy.png" alt="BTB Lacrosse">
+        </a>
+        <nav class="btb-nav" id="mainNav">
+            <a href="index.html">Home</a>
+            <a href="coaches.html">Coaches Hub</a>
+            <a href="coach-bios.html">Coach Bios</a>
+            <a href="player-development.html">Drills</a>
+            <a href="btb-coach-ai.html" style="color:var(--accent);">Coach AI</a>
+        </nav>
+        <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleNav()">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+
+    <!-- ── App Wrapper ── -->
+    <div class="app-wrap">
+
+        <!-- Chat Header -->
+        <div class="chat-header">
+            <h1>BTB <span>Coach AI</span></h1>
+            <p>D1 Men's Lacrosse Coaching Agent</p>
+        </div>
+
+        <!-- Chat Area -->
+        <div class="chat-area" id="chatArea">
+
+            <!-- Welcome State -->
+            <div class="welcome" id="welcomeState">
+                <div class="welcome-icon">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <h2>What can I help you coach?</h2>
+                <p>Ask me about offensive systems, defensive slides, transition, special teams, drills, or coaching philosophy. Or tap a topic below.</p>
+
+                <div class="topics-grid">
+                    <button class="topic-btn" onclick="askTopic('practice plan')">
+                        <span class="topic-icon">&#128203;</span>
+                        Build a practice plan
+                    </button>
+                    <button class="topic-btn" onclick="askTopic('zone offense')">
+                        <span class="topic-icon">&#127919;</span>
+                        Best offense vs zone
+                    </button>
+                    <button class="topic-btn" onclick="askTopic('adjacent slides')">
+                        <span class="topic-icon">&#128737;</span>
+                        Teach adjacent slides
+                    </button>
+                    <button class="topic-btn" onclick="askTopic('faceoff wing')">
+                        <span class="topic-icon">&#9878;</span>
+                        Faceoff wing play
+                    </button>
+                    <button class="topic-btn" onclick="askTopic('man up strategy')">
+                        <span class="topic-icon">&#9889;</span>
+                        Man-up strategy
+                    </button>
+                    <button class="topic-btn" onclick="askTopic('clear under pressure')">
+                        <span class="topic-icon">&#128640;</span>
+                        Clear under pressure
+                    </button>
+                    <button class="topic-btn" onclick="askTopic('1v1 defense drills')">
+                        <span class="topic-icon">&#128170;</span>
+                        1v1 defense drills
+                    </button>
+                    <button class="topic-btn" onclick="askTopic('motion offense basics')">
+                        <span class="topic-icon">&#127944;</span>
+                        Motion offense basics
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Input Bar -->
+        <div class="input-bar">
+            <input
+                type="text"
+                id="userInput"
+                placeholder="Ask a lacrosse coaching question..."
+                autocomplete="off"
+                onkeydown="if(event.key==='Enter')sendMessage()"
+            >
+            <button class="send-btn" onclick="sendMessage()" aria-label="Send">
+                <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+            </button>
+        </div>
+
+    </div>
+
+    <script>
+        /* ========================================
+           PASSWORD GATE
+           ======================================== */
+        var GATE_KEY = 'btb_coach_hub_unlocked';
+        var GATE_PASS = '#BTBCOACH26';
+
+        function gateCheck() {
+            if (sessionStorage.getItem(GATE_KEY) === '1') {
+                document.getElementById('gateOverlay').style.display = 'none';
+            } else {
+                setTimeout(function() {
+                    document.getElementById('gateInput').focus();
+                }, 100);
+            }
+        }
+
+        function gateSubmit() {
+            var input = document.getElementById('gateInput');
+            var errorEl = document.getElementById('gateError');
+            if (input.value === GATE_PASS) {
+                sessionStorage.setItem(GATE_KEY, '1');
+                var overlay = document.getElementById('gateOverlay');
+                overlay.classList.add('unlocking');
+                setTimeout(function() { overlay.style.display = 'none'; }, 600);
+            } else {
+                errorEl.textContent = 'Incorrect code. Try again.';
+                input.classList.add('error');
+                input.value = '';
+                setTimeout(function() {
+                    input.classList.remove('error');
+                    errorEl.textContent = '';
+                    input.focus();
+                }, 1000);
+            }
+        }
+
+        function gateToggleVisibility() {
+            var input = document.getElementById('gateInput');
+            input.type = input.type === 'password' ? 'text' : 'password';
+        }
+
+        gateCheck();
+
+        /* ========================================
+           NAVIGATION
+           ======================================== */
+        function toggleNav() {
+            var nav = document.getElementById('mainNav');
+            var burger = document.getElementById('hamburger');
+            nav.classList.toggle('active');
+            burger.classList.toggle('active');
+        }
+
+        /* ========================================
+           KNOWLEDGE BASE
+           ======================================== */
+        var KNOWLEDGE_BASE = {
+
+            // ── OFFENSIVE SYSTEMS ──
+
+            "motion offense": {
+                keywords: ["motion", "offense", "2-1-2", "movement", "ball movement", "off-ball", "basics"],
+                response: "**Motion Offense (2-1-2 / 2-3-1)**\n\nThe standard D1 offense. Dodger initiates, off-ball players read and react. The key: EVERY player must know what to do when the ball moves.\n\n**The 5 Off-Ball Reactions:**\n1. **Fade** — Move away from the drive to create space\n2. **Follow** — Cut behind the dodger toward the goal\n3. **Clear Through** — Exit the area after your action\n4. **Replace** — Fill the spot vacated by the dodger\n5. **Screen Away** — Set a pick for a teammate away from the ball\n\n**D1 Programs Running This:** Syracuse, Duke, Virginia, Penn State\n\n**POWLAX has great breakdowns** on all 5 off-ball movements with D1 game film.\n\n**How to Install It:**\nStart with 3v0 walkthroughs — ball moves, off-ball players react. Then 3v2 to introduce help defense. Then 4v4, then 6v6. Build one reaction at a time. Don't try to teach all 5 in one day.\n\n**Most Common Mistake:** Coaches teach motion offense as a play. It's NOT a play — it's a READ system. If your players are running patterns instead of reading, you've installed it wrong."
+            },
+
+            "1-4-1 offense": {
+                keywords: ["1-4-1", "formation", "wide", "wing", "midfield"],
+                response: "**1-4-1 Offense**\n\nOne behind (X), four across the middle, one up top. Great for teams with wing dodgers.\n\n**Strengths:**\n- Creates wide spacing and opens driving lanes\n- Isolates matchups on the wing\n- Forces defense to cover the full width of the field\n- Excellent against zone defense\n\n**Best For:** Teams with strong midfield dodgers who can beat their man 1v1 from the wing.\n\n**Key Concept:** The 4 across the middle must maintain 15-yard spacing. If they bunch, driving lanes collapse.\n\n**Against Zone:** The 1-4-1 puts 4 players in the seams between defenders — devastating against a 3-3 zone. Swing the ball east-west and let your dodger attack the gap created by the zone shift.\n\n**D1 Film to Watch:** Look at how Notre Dame and Maryland use the 1-4-1 to create isolation matchups on the wing. The dodger has a clear lane, and the 4 across give him passing options in every direction."
+            },
+
+            "2-3-1 offense": {
+                keywords: ["2-3-1", "balanced", "two behind"],
+                response: "**2-3-1 Offense**\n\nTwo behind, three across, one up top. Balanced set for teams with strong attackmen.\n\n**Strengths:**\n- Multiple initiation points (X left, X right, or up top)\n- Balanced floor spacing — hard for defense to overplay one area\n- Easier to teach than 1-4-1 because spacing feels more natural\n- Both attackmen can initiate from behind the goal\n\n**Best For:** Teams with two quality attackmen and a strong midfield unit.\n\n**Why D1 Programs Love It:**\nThe 2-3-1 gives you 3 initiation points. If your X left is getting shut down, go X right. If both are covered, top mid initiates. Defense can't game-plan against one dodger because you have options.\n\n**Key Teaching Point:** The two behind players must stay on opposite sides of the crease. If they drift to the same side, you lose the balance that makes this set dangerous."
+            },
+
+            "pairs offense": {
+                keywords: ["pairs", "ohio state", "pick and roll", "pick and pop", "2-man game", "pick"],
+                response: "**Ohio State Pairs Offense**\n\nTwo-man games between adjacent players. The easiest entry point to positionless lacrosse.\n\n**The 4 Actions:**\n1. **Pick-and-Roll** — Screener sets pick, ball carrier uses it, screener rolls to goal\n2. **Pick-and-Pop** — Same setup but screener pops to perimeter for a shot\n3. **Give-and-Go** — Quick pass, immediate cut to goal\n4. **Shallow Cut** — Partner cuts across the crease\n\n**Teaching Progression:**\nWeek 1: Pick-and-roll only (3 practices). Get this ONE action clean.\nWeek 2: Add pick-and-pop (2 practices).\nWeek 3: Add give-and-go.\nWeek 4: Layer in shallow cut. Now your pair has 4 options.\n\n**Key Rule:** While the pair works, the other 4 players MUST stay spaced. No drifting toward the action. This is the #1 mistake teams make — everyone gravitates to the ball.\n\n**Why It Works:** The defense has to decide: switch the pick, hedge, or go over/under. Each choice opens a different option for the offense. If they switch → roll. If they hedge → pop. If they go under → shoot off the pick."
+            },
+
+            // ── DEFENSIVE SYSTEMS ──
+
+            "adjacent slide": {
+                keywords: ["adjacent", "slide", "help defense", "rotation", "sliding", "slides"],
+                response: "**Adjacent Slide System**\n\nThe defender NEXT TO the on-ball defender slides first. Creates short, fast rotations.\n\n**How to Teach It (4-Step Progression):**\n1. **3v0** — Just rotations, no offense. Ball moves, defenders shift. Get the footwork right.\n2. **3v2** — Now defenders must slide and recover with a numbers disadvantage.\n3. **3v3** — Live reps with consequences. This is where it gets real.\n4. **6v6 Half-Field** — Full team sliding with communication.\n\n**Communication Required:**\n- On-ball defender: \"BALL! BALL!\" (constant)\n- Adjacent defender: \"HOT! I got your slide!\" (pre-loaded position)\n- Two-away defender: \"TWO! I'm in the hole!\" (ready to cover the slide's man)\n\n**POWLAX Video:** Watch TsTgsq2vcPE for the complete breakdown with D1 film.\n\n**The Key That Most Coaches Miss:**\nThe adjacent slider must be in a **pre-loaded position** — one step toward the ball carrier, hips open, hands ready. If he's flat-footed when the dodge starts, the slide is already too late.\n\n**Adjacent vs Crease Slide:**\n- Adjacent = short rotations, fast recovery\n- Crease = long slide from the crease, protects the middle\n- Use adjacent against teams that dodge from up top or the wing\n- Use crease against teams that attack from X"
+            },
+
+            "crease slide": {
+                keywords: ["crease", "crease defender", "crease slide"],
+                response: "**Crease Slide System**\n\nThe crease defender slides first on all drives. Longer distance but protects the middle of the field.\n\n**When to Use:**\n- Against teams that attack from X or the wings\n- When you want to protect the prime scoring area at all costs\n- When your crease defender is your best athlete\n\n**The Trade-off:**\nYou give up the crease temporarily when the crease defender slides. The two-slide (usually the adjacent defender) must be FAST to cover the now-open crease player.\n\n**Rotation Sequence:**\n1. Ball carrier dodges\n2. Crease defender slides to the ball\n3. Adjacent defender drops to cover crease\n4. Two-away rotates to cover adjacent's man\n5. Everyone recovers when the ball moves\n\n**POWLAX Video:** Watch JITcbrt8g8M for the complete breakdown.\n\n**Key Point:** The crease defender must communicate EARLY. 'I'm sliding!' before the dodge even starts. If your crease D waits to see the dodge, the slide will be late every time."
+            },
+
+            "zone defense": {
+                keywords: ["zone", "3-3 zone", "wesleyan", "backer zone", "zone defense", "3-3"],
+                response: "**3-3 Zone Defense**\n\nThree defenders up top, three on the crease. Each owns a zone — not a man.\n\n**Best For:**\n- Teams with less athletic defenders (zone hides weak individual defenders)\n- Changing the pace of the game (disrupts the opponent's offensive rhythm)\n- Bad weather games where ball movement is sloppy\n- When an opponent has one dominant dodger you want to take away\n\n**Wesleyan ran this to a championship** — watch POWLAX video MQEnQtZem-o for the full breakdown.\n\n**Wild Cat Trap Zone** is an aggressive variation — traps ball carriers in specific zones to force turnovers. Watch MWg_b503Ijw.\n\n**Backer Zone:**\nA floating defender behind the pressure defenders. Originally a men's game concept, now widely used in women's lacrosse. The backer reads the ball and jumps passing lanes.\n\n**Key Coaching Point:**\nZone defense requires MORE communication than man defense, not less. Every defender must constantly talk about who's entering and leaving their zone.\n\n**How to Attack a Zone (Know Your Enemy):**\n- Quick ball movement (east-west swings)\n- Skip passes over the top\n- Attack the seams between zone defenders\n- Use screens on zone defenders (they can't switch)"
+            },
+
+            "man down": {
+                keywords: ["man down", "man-down", "penalty", "short-handed", "box and 1", "EMD", "down a man"],
+                response: "**Man-Down Defense**\n\n**Box and 1 (The Foundation):**\n4 defenders in a box around the crease, 1 chases ball. Practice the rotation until it's automatic. The box rotates as the ball moves. The chaser applies pressure but doesn't overcommit.\n\n**House Zone (Virginia's Championship):**\nMore aggressive — defenders jump passing lanes and anticipate offensive flow. Higher IQ required but creates turnovers. Virginia rode this to a national title.\n\n**Pushin P (Aggressive Pressure):**\nFlip the script — pressure the ball carrier instead of sitting back. High risk, high reward. Disrupts EMO rhythm and forces rushed passes. Best used in short bursts.\n\n**Box and Surprise Lock:**\nStart in Box and 1, then on a sideline call, shift to man-to-man. Catches offense completely off guard because they've been running plays against a zone.\n\n**POWLAX Videos:**\n- pev8Lh9e6ng (Box and 1 — start here)\n- 9B-DbHoCERg (House Zone — Virginia)\n- hrzYFIyQWTI (Pushin P — aggressive)\n- R26pAhoXoNA (Surprise Lock)\n\n**Install Order:**\nBox and 1 is your base. Every player must know it cold. Then add House Zone for more experienced teams. Pushin P and Surprise Lock are situational — use them to change the look."
+            },
+
+            "man up": {
+                keywords: ["man up", "man-up", "EMO", "extra man", "power play", "advantage", "man-up strategy"],
+                response: "**Man-Up Offense (EMO)**\n\nYou have an extra player. This should be a guaranteed scoring chance. Here's how to maximize it.\n\n**Cheddar:**\nQuick-hitter with a specific passing sequence. Ball goes 1 to 2 to 3 to shot in under 3 seconds. The speed of the ball movement is the key — the man-down defense can't rotate fast enough.\n\n**Pepper Jack:**\nMulti-look play with 3-4 scoring options in succession. If option 1 isn't there, flow to option 2, then option 3. Keeps the defense guessing and prevents them from cheating.\n\n**22 Quick:**\nBall touches 2 sticks in 2 seconds. Tempo play that catches the man-down defense before they set up. Call it right off a face-off win or sideline restart for maximum impact.\n\n**3-3 Four Man Wheel:**\nContinuous rotation by 4 players creates constant defensive confusion. The defense has to track moving targets while also covering the crease. Eventually someone gets lost.\n\n**POWLAX Videos:**\n- HwZ3IUpPbz8 (Cheddar / Pepper Jack)\n- qLht8H1LofY (22 Quick)\n- 0A6U07_WC8E (3-3 Wheel)\n\n**Key Teaching Point:**\nPractice man-up plays against YOUR OWN man-down defense. Both units get better simultaneously. If you only practice EMO against cones, you're wasting reps.\n\n**The Mental Edge:**\nMan-up percentage should be 40%+ at the D1 level. If you're below 30%, it's not a talent problem — it's a preparation problem. Rep your plays until the passing sequence is automatic."
+            },
+
+            // ── TRANSITION ──
+
+            "rides": {
+                keywords: ["ride", "riding", "pressure", "turnover", "after shot"],
+                response: "**Riding System**\n\n**3-3 Deep Zone (Base Ride):**\n3 attackmen force the clear near the goal, 3 middies plug passing lanes at midfield. This is your base — safe, organized, teaches ride by assignment. Your attackmen are NOT sprinting at the goalie. They're taking away specific passing lanes.\n\n**Windshield Wiper (Press Ride):**\nAggressive press when you need a turnover. All 6 players pressure the clear aggressively. High risk — if they break it, they have a fast break. Layer this in after they master 3-3.\n\n**10 Man Ride (Nuclear Option):**\nGoalie leaves the cage and becomes the 10th rider. Used end of half, down 2 with 3 minutes left, or any desperation situation. If they break it, empty cage. Practice it at least once a week.\n\n**Zero Ride (Fall Back):**\nSprint home and set up defense. Call from the sideline when you don't want to risk giving up a fast break. No shame in Zero — it's the smart call after a bad turnover.\n\n**POWLAX Videos:**\n- 131gO57WErA (Complete Riding Playbook — all formations)\n- bjIKPeCmhwc (10 Man Ride breakdown)\n\n**Install Order:**\n1. 3-3 Deep Zone first (your base for the whole season)\n2. Windshield Wiper (add after 2-3 weeks)\n3. Zero Ride (teach early, it's simple)\n4. 10 Man Ride (practice once a week, use situationally)"
+            },
+
+            "clears": {
+                keywords: ["clear", "clearing", "break out", "goalie clear", "under pressure"],
+                response: "**Clearing System**\n\nClearing is your transition from defense to offense. A failed clear is a wasted possession.\n\n**4-3 Clear (Foundation):**\nBasic spread formation. 4 across the field, 3 behind. Simple routes that every player memorizes. This is your Day 1 install.\n\n**4-3 Alpha (Named Routes):**\nScripted routes off the 4-3 formation. Named plays everyone memorizes. 'Alpha' sends the left wing deep, 'Bravo' sends the right mid on a curl. Call from the sideline.\n\n**2-3-2 Clear (D1 Standard):**\nThe most common D1 clearing formation. Width across the field with depth. Organized routes with multiple options. Install after your team is comfortable with 4-3.\n\n**POWLAX Videos:**\n- sX7_dwPEUHs (4-3 Clear)\n- 4LOocXTxHNw (4-3 Alpha plays)\n- RnYRtSWkBug (2-3-2 Clear)\n- oI9-zj4tdeo (Clear Pass Terminology)\n\n**Key Teaching Point:**\nTeach clear pass terminology FIRST. Everyone must speak the same language. If the goalie says 'RIGHT' and the defenseman thinks he means the goalie's right while the goalie means field right, the ball goes to the other team.\n\n**Clear Under Pressure:**\n- Goalie must stay calm in the cage. 5-second rule: make a decision in 5 seconds.\n- Short-short-long pattern: two short passes to break pressure, then hit the long ball.\n- Your best clear player should be a defenseman, not a midfielder. D-men have the most time and space."
+            },
+
+            "faceoff": {
+                keywords: ["faceoff", "face-off", "face off", "clamp", "wing", "faceoff wing"],
+                response: "**Faceoff System**\n\n**Clamp Technique (The Foundation):**\nWin the clamp, direct the ball to your wing. The clamp is step 1 — but winning the clamp is only 50% of winning the faceoff. The other 50% is wing play.\n\n**Wing Play (The Difference Maker):**\nYour wings must be the best ground ball players on your team. They're the difference between winning the clamp and winning the faceoff.\n\n**Wing Positioning:**\n- Stand at the edge of the wing area, closest to where YOUR faceoff man will direct the ball\n- Weight forward, ready to explode\n- Eyes on the ball, NOT the faceoff man's hands\n- First step is FORWARD, not sideways\n\n**Ground Ball Technique for Wings:**\n1. Get your feet to the ball (run THROUGH the ground ball)\n2. Hands together on the stick, butt end through the ball\n3. Scoop and immediately protect with your body between the ball and the defender\n4. Outlet pass or turn upfield — never stop moving\n\n**Designed Plays Off Faceoffs:**\n- Won faceoff: fast break opportunity (3v2 or 4v3 if the wings push)\n- Lost faceoff: ride immediately (everyone sprints to their ride assignment)\n\n**POWLAX Video:** YfAveIh47Pc (Faceoff Plays and Tactics)\n\n**Key Teaching Point:**\nYour wings are losing every ground ball because they're WATCHING the faceoff instead of READING the ball direction. Train wings to REACT to the ball, not WATCH the X. Use 'ball direction' drills where you roll balls in random directions and wings have to react."
+            },
+
+            // ── INDIVIDUAL SKILLS ──
+
+            "dodging": {
+                keywords: ["dodge", "dodging", "split dodge", "face dodge", "bull dodge", "roll dodge", "question mark"],
+                response: "**Dodging Arsenal**\n\n**Split Dodge:**\nChange hands at top speed. The most common and most effective dodge. Sell it with a hard first step in one direction, then split to the other hand. Practice at full speed — a slow split dodge is useless.\n\n**Face Dodge:**\nPull stick across your face, keep same hand. Sell it with your eyes — look one way, dodge the other. Best used when the defender overcommits to one side.\n\n**Bull Dodge:**\nPower through the defender. Use against smaller or less physical defenders. Lower your shoulder, protect your stick, and drive through contact. Not pretty, but effective.\n\n**Roll Dodge:**\nSpin 360 degrees. Use from X or the wing. The key is keeping your stick protected during the spin. Practice rolling BOTH directions — most players can only go one way.\n\n**Question Mark Dodge:**\nTHE dodge from behind the goal. Drive up the alley toward GLE like you're going to goal, then curl back toward the center of the field. The path looks like a question mark. Devastating from X.\n\n**Key Teaching Point:**\nA dodge without a plan is just running. Before every dodge, the player must read:\n1. How is my defender playing me? (tight = dodge, sagging = shoot)\n2. Where is the slide coming from? (know your outlet pass)\n3. What's my best option if I draw the slide? (pre-plan the pass)\n\n**Practice Structure:**\n- 1v0 footwork reps (get the mechanics right)\n- 1v1 with passive defense (add a body)\n- 1v1 live (full speed, full competition)\n- 2v2 with slides (dodge and read the help)"
+            },
+
+            "shooting": {
+                keywords: ["shooting", "shot", "time and room", "on the run", "finishing"],
+                response: "**Shooting Development**\n\n**Time and Room:**\nStep into it, full wind-up. Used when the defender is 5+ yards away. Plant your front foot, rotate your hips, follow through. This is the shot you practice on the wall.\n\n**On-the-Run:**\nMomentum toward the goal, quick release. The most common in-game shot because most shots happen while moving. Practice shooting while running at game speed, not standing still.\n\n**Inside Finishing:**\nClose range, quick stick, change release angle. THE money shots. Shovel, backhand, around-the-world. The best finishers can score from any angle within 5 yards.\n\n**Behind-the-Back:**\nLast resort or surprise element. Don't rely on it, but have it in your bag. Practice it so it's there when you need it, not something you try for the first time in a game.\n\n**Shot Placement:**\n- Low-to-low: Hardest shot for a goalie to save. Shoot off-hip, bounce shot.\n- High-to-high: Risky but effective when the goalie is deep in the cage.\n- Change levels: High fake, low shot. Or low fake, high finish.\n\n**Key Principle:**\nAccuracy before velocity. A perfectly placed 65 mph shot beats a wild 80 mph shot every single time. Work on hitting corners before you work on adding speed.\n\n**Daily Shooting Routine:**\n1. 50 wall ball passes (warm up hands)\n2. 20 time-and-room shots on cage (5 per corner)\n3. 20 on-the-run shots (10 from each side)\n4. 10 close-range finishes (variety of angles)"
+            },
+
+            "1v1 defense": {
+                keywords: ["1v1", "individual defense", "defense drills", "defensive", "footwork"],
+                response: "**1v1 Defense — Top 3 Drills**\n\n**Drill 1: Mirror Footwork**\nSetup: Two lines, one offense, one defense. Offensive player has a ball and moves laterally — no dodging yet. Defender mirrors with proper footwork: lead step, drop step, hips open, body between the attacker and the goal.\n**Key:** Feet NEVER cross. If the defender's feet cross, he's beat. Start at 50% speed, build to full.\n**Time:** 2 minutes per pair, 3 rounds.\n\n**Drill 2: Caged 1v1**\nSetup: 10-yard box. Attacker must beat the defender within the box. If the attacker leaves the box, it's a turnover. This forces the dodger to go THROUGH the defender, not around him.\n**Key:** Defender practices driving his hips into the dodger's hands. Take away his top hand.\n**Time:** 30-second reps, winner stays on.\n\n**Drill 3: Recovery Slide**\nSetup: Defender starts 2 yards behind the attacker. Attacker has a 2-step head start. Defender must recover, get hip-to-hip, and force a bad shot or turnover.\n**Key:** This simulates getting beat on a dodge and recovering. Every defender gets beat — the question is, can you recover?\n**Time:** 1-minute rotations, track recovery rate.\n\n**Defensive Principles:**\n- Stay between your man and the goal at all times\n- Hands UP, not reaching for the ball\n- Talk constantly — silent defenders get beat\n- Force the dodger to his weak hand\n- The first slide doesn't have to make the stop — it just has to slow the dodge"
+            },
+
+            // ── DRILL DESIGN & PRACTICE ──
+
+            "practice plan": {
+                keywords: ["practice", "plan", "drill", "session", "90 minute", "workout", "build"],
+                response: "**90-Minute Practice Plan Template**\n\n**0:00 - 0:10 — Dynamic Warm-Up + Stick Work**\nPartner passing while jogging. Switch hands every 30 seconds. Quick stick catches, behind-the-back passes, ground balls on the move. Get sticks warm, get feet moving, get voices going.\n\n**0:10 - 0:20 — Individual Skill Focus**\nPick ONE skill for the day: dodging, shooting, ground balls, or defensive footwork. 10 focused minutes of deliberate practice. Quality over quantity — 20 perfect reps beat 50 sloppy ones.\n\n**0:20 - 0:35 — Small-Sided Game (Concept Introduction)**\n3v2 or 4v3 focused on today's concept. This is controlled chaos — you're teaching the concept in a live-ish environment, but the offense has numbers. Coaches can freeze play and teach.\n\n**0:35 - 0:50 — Team Concept Install**\nNew play, new defensive look, or new transition concept. The teaching progression: Walk-through (everyone sees their role) then half-speed (add movement) then live (game tempo). If they can't do it at half speed, don't go live.\n\n**0:50 - 1:05 — 6v6 Half-Field**\nLive play implementing today's concept. Coaches can freeze play to highlight what's working or correct mistakes. Track a specific stat (slides made, assists, shot placement) to keep it focused.\n\n**1:05 - 1:20 — Special Teams**\nRotate through: man-up/man-down one day, faceoffs the next, rides/clears the next. Don't try to do all three in one practice. Give each unit 15 quality minutes.\n\n**1:20 - 1:30 — Cool Down + Film Review**\nStretch as a team. Show 2-3 video clips illustrating today's concept — either from your own practice film or D1 game film. End with one takeaway for each player.\n\n**Core Teaching Principle: Part-Whole Method**\nBreak the concept into pieces, teach each piece, then combine. The progression: 3v0 (just movement, no defense) then 3v2 (add some defense) then 3v3 (even numbers) then 5v5 then 6v6. Every layer adds complexity. Don't skip layers.\n\n**Practice Planning Tips:**\n- NEVER go longer than 15 minutes on one drill without changing the activity\n- Every drill needs a PURPOSE. If you can't explain WHY you're doing it, cut it.\n- Water breaks are coaching moments — talk about what you just saw\n- End practice with something fun and competitive (relay race, shooting contest)"
+            },
+
+            // ── COACHING PHILOSOPHY ──
+
+            "philosophy": {
+                keywords: ["philosophy", "culture", "development", "coaching", "teach", "principle"],
+                response: "**BTB Coaching Philosophy**\n\n**The 5 Pillars:**\n1. **Defense wins championships. Offense wins fans.** Build your identity on the defensive end. The offense will come, but defense requires effort, communication, and trust — the things that make great teams.\n\n2. **Communication before contact.** Talk first, play second. A team that communicates will beat a more talented team that doesn't. Communication drills are as important as skill drills.\n\n3. **Systems over talent at the youth level.** Teach the GAME, not just athleticism. A kid who understands slide packages, clears, and rides at 14 will be ahead of the pure athlete at 18.\n\n4. **Every player must know the slide package, the clear, AND the ride** — not just their position. Positionless lacrosse starts with positionless understanding.\n\n5. **The best coaches simplify. The worst coaches over-complicate.** If a 12-year-old can't understand your play call, it's too complicated. Simplify until it clicks, then add layers.\n\n**Development Principles:**\n- Part-whole teaching: break it down, then build it up\n- 3v0 then 3v2 then 3v3 then 5v5 then 6v6 progression\n- Every drill should have a purpose. If you can't explain WHY, cut it.\n- Communication drills are as important as skill drills\n- Film study starts at U14 — even 5 minutes of video changes how kids see the game\n- Celebrate effort and IQ, not just goals\n\n**On Game Day:**\n- Halftime adjustments should be ONE thing, not seven\n- Your best player should guard their best player. Don't overthink matchups.\n- If you're losing, don't panic-install a new play. Execute what you've practiced.\n- The best coaches are the calmest on the sideline"
+            },
+
+            // ── ZONE-SPECIFIC OFFENSE TOPIC ──
+
+            "zone offense": {
+                keywords: ["zone offense", "beat zone", "attack zone", "against zone", "vs zone"],
+                response: "**How to Attack a 3-3 Zone with Positionless Concepts**\n\nMost teams struggle against zone because they try to run their man-offense concepts. That won't work. Zone defense takes away driving lanes and collapses on the ball. You need a different approach.\n\n**Formation: 1-4-1 or 2-3-1**\nPut your players in the SEAMS between zone defenders, not directly in front of them.\n\n**The 5 Principles:**\n\n**1. Move the Ball East-West**\nSwing the ball from one side to the other. Every swing forces the zone to shift. After 2-3 swings, a gap opens.\n\n**2. Attack the Gaps**\nDrive INTO the seams between two zone defenders. Force TWO defenders to commit to you. This opens a teammate.\n\n**3. Skip Passes**\nThe ball arrives before the zone rotates. Throw OVER the zone to the opposite side. The defender covering that area is still recovering from the last ball swing.\n\n**4. Inside-Out Game**\nFeed the crease first. When the zone collapses inside, kick the ball out for an open perimeter shot. The zone can't protect both the crease and the perimeter.\n\n**5. Screen the Zone Defenders**\nZone defenders can't switch assignments. Set a pick on a zone defender and his zone is wide open. The offense walks in.\n\n**The Kill Shot Sequence:**\nBall goes right (zone shifts) then skip pass left (zone scrambles) then drive the gap (zone collapses) then one more pass to the open man (wide open shot).\n\n**Key: Patience.**\nZone teams WANT you to force shots. Move the ball, move the ball, move the ball. The opening will come."
+            },
+
+            // ── GROUND BALLS ──
+
+            "ground balls": {
+                keywords: ["ground ball", "ground balls", "scoop", "loose ball", "gb"],
+                response: "**Ground Ball Domination**\n\nThe team that wins ground balls wins the game. Period.\n\n**Technique:**\n1. **Get your feet to the ball** — run THROUGH the ground ball, don't bend and reach\n2. **Hands together** on the shaft, low to the ground\n3. **Butt end through the ball** — scoop through, don't stab at it\n4. **Immediately protect** — get your body between the ball and the nearest defender\n5. **Outlet or go** — make a decision in 1 second: pass to an open teammate or turn upfield\n\n**The 3 Ground Ball Drills Every Team Needs:**\n\n**Drill 1: Line GB's**\n2 lines facing each other, coach rolls ball between them. First player from each line competes. Winner scoops, protects, and outlets. Loser sprints. Simple, competitive, effective.\n\n**Drill 2: Chaos GB's**\nCoach throws 3 balls into a 20x20 box with 6 players. Pure chaos. Players must scoop, protect, and find an outlet. Builds toughness and decision-making under pressure.\n\n**Drill 3: Faceoff Wing GB's**\nSimulate faceoff ground balls. Coach tosses ball in random direction, two players react. The player who reacts fastest wins. Train reaction, not anticipation.\n\n**Mindset:**\nGround balls are about want-to, not skill. The player who wants it more will get it. Coach effort and aggression on every loose ball."
+            },
+
+            // ── COMMUNICATION ──
+
+            "communication": {
+                keywords: ["communication", "talk", "talking", "verbal", "calls"],
+                response: "**Defensive Communication System**\n\nA silent defense is a losing defense. Here's how to build a team that never stops talking.\n\n**The Required Calls:**\n\n**On-Ball:**\n- \"BALL! BALL! BALL!\" — the on-ball defender announces he has the ball\n- Call it LOUD and CONTINUOUS\n\n**Adjacent (Slide Ready):**\n- \"HOT! HOT! I got your slide!\" — the adjacent defender announces he's ready to help\n- Must be in a pre-loaded stance (one step toward ball, hips open)\n\n**Two-Away:**\n- \"TWO! I'm in the hole!\" — two defenders away, covering the crease area\n- Ready to rotate if the adjacent slides\n\n**Off-Ball:**\n- \"CHECK!\" — I see my man, I've got him\n- \"CUTTER!\" — my man is cutting, need help\n- \"SCREEN LEFT/RIGHT!\" — screen coming, call the direction\n\n**How to Build Communication Habits:**\n\n**Drill: Silent to Loud**\nPlay 6v6 defense. First possession is SILENT — no one talks. Watch how badly it goes. Second possession, EVERYONE must be talking constantly. The contrast is the lesson.\n\n**Drill: Penalty for Silence**\nIf the on-ball defender isn't calling 'BALL,' it's a goal for the offense — even if they don't score. Same for adjacent not calling 'HOT.' Make communication a requirement, not a suggestion.\n\n**Key Principle:**\nCommunication is a skill. Practice it like you practice shooting. 5 minutes of every practice should be dedicated to communication drills."
+            },
+
+            // ── GOALIE PLAY ──
+
+            "goalie": {
+                keywords: ["goalie", "goalkeeper", "goaltender", "save", "saves", "cage"],
+                response: "**Goalie Development**\n\n**Positioning:**\nArc positioning is everything. The goalie should be one step out from the center of the goal on an arc toward the shooter. Too deep = too much net showing. Too far out = beaten by fakes and low shots.\n\n**The Save Progression:**\n1. **See the ball** — eyes track the ball from the shooter's stick\n2. **Step to the ball** — lead with the top hand, step toward the shot\n3. **Make the save** — hands move to the ball, body follows\n4. **Outlet immediately** — save then clear, don't hold the ball\n\n**3 Goalie Drills:**\n\n**Drill 1: Rapid Fire**\n3 shooters, 5 yards out, alternate shots every 2 seconds. Forces quick recovery between saves. 10 rounds, track save percentage.\n\n**Drill 2: Arc Movement**\nBall moves around the perimeter (no shots). Goalie tracks the ball and adjusts arc position. Coach checks positioning at each spot. This is about FEET, not hands.\n\n**Drill 3: Screen Shots**\nPlace a cone or player in front of the goalie. Shooter moves and shoots from behind the screen. Trains the goalie to find the ball through traffic.\n\n**Mental Game:**\nGoalies will give up goals. The best goalies have short memories. A bad goal can't affect the next save. Teach your goalie to flush it and reset.\n\n**Clearing Responsibility:**\nYour goalie is the quarterback of the clear. He must know every clearing formation, every route, and every call. A goalie who can clear under pressure is worth 2 goals per game."
+            },
+
+            // ── POSITIONLESS LACROSSE ──
+
+            "positionless": {
+                keywords: ["positionless", "interchangeable", "position-less", "modern offense", "position swap"],
+                response: "**Positionless Lacrosse — The Complete Guide**\n\nPositionless lacrosse means every player can play every spot on the field. An attackman can play midfield. A midfielder can play X. Nobody is locked into one role.\n\n**Why It's Taking Over:**\nDefenses can't game-plan against a positionless team. You can't say 'their best player is their X attackman, put our best defender on him' because that player might be up top one possession and on the wing the next.\n\n**How to Start:**\n1. **Week 1:** Keep your current formation, add 'move after every pass' rule\n2. **Week 2:** Require players to rotate positions during drills\n3. **Week 3:** Install Ohio State Pairs (2-man games between adjacent players)\n4. **Week 4:** Add read-based decisions (read the defense, not a play call)\n\n**The Barriers:**\n- Parents will say 'my kid is an attackman, why is he playing midfield?'\n- Players will resist leaving their comfort zone\n- It takes 4-6 weeks before it looks good in games\n\n**The Reality:**\nD1 programs are ALL moving toward positionless. Virginia won championships with it. Ohio State popularized the pairs concept. If you're not teaching positionless principles by U14, your players will be behind.\n\n**Key Principle:** Positionless doesn't mean chaos. It means every player has the skills AND the IQ to play every spot. You still need structure — but the structure is based on reads and spacing, not fixed positions."
+            },
+
+            // ── FAST BREAK ──
+
+            "fast break": {
+                keywords: ["fast break", "transition offense", "numbers", "unsettled", "break"],
+                response: "**Fast Break & Transition Offense**\n\n**The 3v2 Fast Break:**\nThe most common fast break opportunity. Ball carrier stays wide, two wings fill the lanes.\n\n**Principles:**\n1. **Wide first, then attack.** Spread the 2 defenders before going to goal.\n2. **Make the defender commit.** Don't pass until a defender slides to you.\n3. **Last pass, first shot.** The player who receives the final pass should shoot immediately — no extra passes.\n\n**The 4v3 Fast Break:**\nFour attackers vs three defenders. Same principles but now you have a trailer.\n\n**Trailer Role:** The 4th player trails the play. He's the safety valve. If the initial 3v2 doesn't produce a shot, kick it to the trailer for a clean look.\n\n**4v3 Diamond vs 4v3 Box:**\n- Diamond: 1 up top, 2 wings, 1 behind. More driving lanes.\n- Box: 2 up, 2 down. More passing angles.\n\n**Teaching Fast Breaks:**\n1. **3v0 first** — just teach the lanes and the timing\n2. **3v1** — one defender forces a decision\n3. **3v2** — live reps, keep score\n4. **Add the trail** — 4v3 with trailer\n\n**The Rule:** If the fast break isn't there within 5 seconds of crossing midfield, pull out and set up your half-field offense. A bad fast break is worse than a slow possession.\n\n**Common Mistake:** Players try to do too much on the fast break. One dodge, one pass, one shot. That's it. If it takes more than 3 touches, you've lost the advantage."
+            },
+
+            // ── STICK SKILLS ──
+
+            "stick skills": {
+                keywords: ["stick skills", "wall ball", "passing", "catching", "stick work", "cradling"],
+                response: "**Stick Skills Development Program**\n\n**Daily Wall Ball Routine (15 minutes):**\n1. Right hand — 50 passes (mix overhand, sidearm, underhand)\n2. Left hand — 50 passes (same variety)\n3. Quick stick — 30 passes each hand (catch and throw immediately, no cradle)\n4. Behind-the-back — 20 each hand\n5. Canadian — 20 (one-handed catches)\n\n**The Truth About Wall Ball:**\nEvery D1 player did thousands of hours of wall ball. It's boring. It's repetitive. It's the single best thing a player can do to improve. A player who does 200 wall ball reps per day will have elite hands within 6 months.\n\n**Passing Priorities:**\n1. **Accuracy first.** Hit your teammate's stick every time.\n2. **Speed second.** Quick passes move the ball before the defense rotates.\n3. **Variety third.** Overhand, sidearm, underhand, behind-the-back.\n\n**Weak Hand Development:**\nMost players have a dominant hand they're comfortable with and a weak hand they avoid. The fix:\n- Week 1-2: All wall ball with weak hand only\n- Week 3-4: Alternate reps (weak-strong-weak-strong)\n- Week 5+: Game-speed catches and passes with weak hand in drills\n\n**Timeline:** 30 days of dedicated weak hand work = functional. 90 days = confident. 6 months = natural.\n\n**Catching Fundamentals:**\n- Give with the pass (soft hands)\n- Look the ball into your stick\n- Immediately get into triple-threat position (shoot, pass, or dodge)"
+            },
+
+            // ── GAME MANAGEMENT ──
+
+            "game management": {
+                keywords: ["game", "management", "halftime", "adjustments", "timeout", "clock", "strategy"],
+                response: "**Game Management for Coaches**\n\n**Pre-Game:**\n- Walk the field with your team. Get comfortable with the environment.\n- Warm-up should mirror practice warm-up. Same routine, same energy.\n- Identify their best player. Put your best defender on him.\n- Have 3 things you want to accomplish. Not 10. Three.\n\n**Halftime Adjustments:**\nThe halftime trap: coaches try to fix everything at once. Your players will remember ONE thing, not seven.\n\n**The Halftime Formula:**\n1. ONE thing we need to START doing\n2. ONE thing we need to STOP doing\n3. ONE thing we're doing WELL (positive reinforcement)\n\nThat's it. Three sentences. Then hydrate and get back out there.\n\n**Timeout Strategy:**\n- Save timeouts for momentum shifts, not X's and O's\n- Call a timeout when the OTHER team scores 3 in a row — break their momentum\n- Don't call a timeout to install a new play. Call it to refocus.\n\n**Clock Management:**\n- Up 2 with 4 minutes left: possess the ball, force them to ride aggressively\n- Down 2 with 4 minutes left: press ride, fast breaks, aggressive defense\n- Tie game with 2 minutes left: play for the last shot\n\n**Sideline Demeanor:**\nYour team mirrors your energy. If you're screaming, they're panicking. If you're calm and confident, they're calm and confident. The best coaches are the quietest on the sideline during games.\n\n**Post-Game:**\n- Win: 'What can we improve?' Stay hungry.\n- Loss: 'What did we do well?' Find positives before corrections.\n- Never criticize a player by name in front of the team after a loss."
+            },
+
+            // ── CONDITIONING ──
+
+            "conditioning": {
+                keywords: ["conditioning", "fitness", "running", "speed", "agility", "endurance", "conditioning drills"],
+                response: "**Lacrosse-Specific Conditioning**\n\nDon't make your players run distance. Lacrosse is a sprint-recovery sport. Train accordingly.\n\n**The Lacrosse Energy System:**\n- Sprint 10-30 yards (3-5 seconds)\n- Recover 15-30 seconds\n- Sprint again\n- Repeat for 12-minute shifts\n\n**Conditioning Drills:**\n\n**1. 33s (The Classic)**\nSideline to far sideline and back (roughly 120 yards total). Complete in 33 seconds. Rest 33 seconds. Repeat 8 times. This mimics a full shift of game intensity.\n\n**2. Shuttle Sprints**\n4 cones, 5 yards apart. Sprint to each cone and back. 20 seconds of work, 40 seconds of rest. 6 rounds. Short bursts with quick direction changes — exactly like a real game.\n\n**3. Competitive Conditioning**\nDon't just run. Make it competitive. Relay races, 1v1 races, team challenges with consequences. Players will run harder when they're competing than when they're just running laps.\n\n**4. Stick in Hand**\nAll conditioning should be done with a stick in hand and a ball in the stick. This builds stick endurance and cradle strength under fatigue. A player who can handle the ball when exhausted is worth more than a player who can run fast but drops the ball in the 4th quarter.\n\n**When to Condition:**\n- Never as punishment (this creates a negative association with fitness)\n- End of practice, never the beginning (warm bodies condition better)\n- 10-12 minutes max — quality over quantity\n\n**The Math:**\nA lacrosse game is 48 minutes. A player plays about 50-60% of that. That's 25-30 minutes of actual game time, with breaks built in. Your conditioning should prepare them for 30 minutes of intermittent sprinting, not a 5K."
+            },
+
+            // ── TEAM CULTURE ──
+
+            "culture": {
+                keywords: ["team", "culture", "leadership", "captains", "team building", "buy-in"],
+                response: "**Building Team Culture**\n\n**The Foundation — Non-Negotiables:**\nEvery team needs 3-5 non-negotiable behaviors. Not goals, not slogans — BEHAVIORS.\n\nExamples:\n- We sprint to every loose ball\n- We communicate on every defensive possession\n- We are early to everything\n- We pick up every teammate's stick after a ground ball\n- We finish every drill at full speed\n\nPost these in the locker room. Hold everyone accountable — including coaches.\n\n**Captain Selection:**\nDon't pick captains based on talent. Pick them based on:\n1. Who do players go to when they have a problem?\n2. Who works hardest when coaches aren't watching?\n3. Who puts the team before themselves consistently?\n\nThe best player is often NOT the best captain. Sometimes your best leader is your 7th midfielder.\n\n**Building Buy-In:**\n- Explain WHY before WHAT. 'We're doing this drill because...' not just 'Do this drill.'\n- Give players ownership of something (warm-ups, music, team traditions)\n- Celebrate effort publicly, correct mistakes privately\n\n**Handling Adversity:**\nEvery team will face a losing streak, an injury to a key player, or internal conflict. The culture you build in September determines how you handle adversity in May.\n\n**The 24-Hour Rule:**\nAfter a tough loss, you have 24 hours to be upset. After that, it's film, corrections, and moving forward. Teach your players this. Dwelling loses games. Learning wins championships."
+            },
+
+            // ── FILM STUDY ──
+
+            "film": {
+                keywords: ["film", "video", "film study", "watch", "review", "tape", "breakdown"],
+                response: "**Film Study System**\n\n**Why Film Matters:**\nFilm doesn't lie. A player might think he was in the right position. Film shows he was 3 yards off. Film accelerates learning by 10x because players can SEE what you've been telling them.\n\n**How to Run Film Sessions:**\n\n**Keep It Short:** 15-20 minutes max. After 20 minutes, attention drops off a cliff.\n\n**The 3-Clip Rule:** Show 3 clips per topic. No more.\n- Clip 1: Here's what happened\n- Clip 2: Here's what should have happened\n- Clip 3: Here's us doing it RIGHT\n\nAlways end on a positive clip. Players leave feeling empowered, not defeated.\n\n**What to Film:**\n- Every game (at minimum)\n- 1 practice per week\n- Faceoffs (film from behind the X)\n- Rides and clears (film from the press box/high angle)\n\n**Individual Film Sessions:**\nPull a player aside for 5 minutes. Show him 2 clips of his play — one good, one to correct. Ask HIM what he sees before you tell him. When he identifies his own mistakes, the correction sticks 3x longer.\n\n**D1 Film for Teaching:**\nPOWLAX on YouTube is the best free resource for D1 coaching film. Virginia, Maryland, Duke, Syracuse — all broken down play by play. Show your players what the best look like. Give them a target to aim for.\n\n**Key Principle:**\nFilm study is not about embarrassing players. It's about building IQ. Frame every clip as a learning opportunity, never as a call-out."
+            },
+
+            // ── WARM-UP ──
+
+            "warm up": {
+                keywords: ["warm up", "warm-up", "warmup", "stretching", "dynamic", "pre-game"],
+                response: "**Dynamic Warm-Up Protocol**\n\nStatic stretching before practice is dead. Research shows it decreases power output. Dynamic warm-up is the standard.\n\n**BTB Dynamic Warm-Up (12 Minutes):**\n\n**Phase 1 — Jog & Activate (3 min):**\n- Light jog around half the field\n- High knees (20 yards)\n- Butt kicks (20 yards)\n- Karaoke/Carioca (20 yards each direction)\n- Lateral shuffle (20 yards each direction)\n\n**Phase 2 — Dynamic Stretch (4 min):**\n- Walking lunges with twist (10 each leg)\n- Inchworms (8 reps)\n- Leg swings — front/back (10 each leg)\n- Leg swings — side to side (10 each leg)\n- Hip circles (10 each direction)\n- Arm circles (10 each direction)\n\n**Phase 3 — Stick Work (5 min):**\n- Partner passing while jogging (switch hands every 30 sec)\n- Quick stick catches (20 each hand)\n- Ground ball pickups on the move (5 each side)\n- One cradle, pass (builds quick-release habit)\n\n**Pre-Game Warm-Up:**\nSame routine plus:\n- 10 shots on cage (5 each side)\n- Defensive slide drill (30 seconds)\n- Team breakout chant\n\n**Key:** The warm-up sets the tone. If the warm-up is sloppy, practice will be sloppy. If the warm-up is sharp and focused, practice follows suit. Hold the standard from minute one."
+            },
+
+            // ── YOUTH DEVELOPMENT ──
+
+            "youth": {
+                keywords: ["youth", "young", "u12", "u14", "u10", "beginner", "kids", "new players", "age"],
+                response: "**Youth Lacrosse Development Guide**\n\n**Ages 8-10 (U10):**\nPriority: FUN and FUNDAMENTALS. If they don't love the game at this age, nothing else matters.\n- Teach catching and throwing (both hands from day 1)\n- Ground balls (proper form, not just effort)\n- Cradling while running\n- 3v3 and 4v4 small-sided games (more touches per player)\n- Minimal positional play — everyone plays everywhere\n- NO zone defense at this age. Man-to-man only.\n\n**Ages 11-12 (U12):**\nPriority: SKILL DEVELOPMENT and GAME IQ.\n- Wall ball routine introduced (100 per day minimum)\n- Weak hand emphasis (left hand for right-handed players)\n- Basic offensive concepts (2-3-1 formation, spacing)\n- Basic defensive concepts (on-ball, adjacent help)\n- Start teaching 'why' not just 'what'\n- Introduce film study (5 minutes per practice)\n\n**Ages 13-14 (U14):**\nPriority: SYSTEMS and POSITIONLESS PRINCIPLES.\n- Install full slide packages (adjacent, crease)\n- Clearing and riding formations\n- Ohio State Pairs (2-man games)\n- Man-up and man-down basics\n- Position swapping in practice\n- Read-based offense (read the defense, don't memorize plays)\n\n**The Golden Rule of Youth Development:**\nDon't sacrifice long-term development for short-term wins. Teaching a 10-year-old to ride aggressively might win you a game today, but teaching him to catch with both hands wins him a scholarship in 8 years.\n\n**Parent Communication:**\nSend a one-page document at the start of the season explaining your development philosophy. Parents support what they understand. If they know WHY their kid is playing a different position every game, they won't complain about it."
+            },
+
+            // ── DEFENSIVE GAME PLANS ──
+
+            "game plan defense": {
+                keywords: ["game plan", "scout", "scouting", "prepare", "opponent", "defensive game plan"],
+                response: "**Defensive Game Planning**\n\n**Pre-Game Scouting (What to Look For):**\n1. Who is their best dodger? What side does he dodge from? What's his go-to move?\n2. What formation do they run? 2-3-1? 1-4-1? Do they change formations?\n3. Where do they initiate? Up top? X? Wings?\n4. Do they run set plays or motion?\n5. Who are their shooters? (Track jersey numbers)\n6. What do they do in man-up? Faceoffs?\n\n**Building the Game Plan:**\n\n**Step 1: Matchups**\nPut your best on-ball defender on their best dodger. Not your best athlete — your best DEFENDER. There's a difference.\n\n**Step 2: Slide Package**\nAdjacent or crease? If they attack from up top, use adjacent. If they attack from X, use crease. Have a backup plan ready.\n\n**Step 3: Special Situations**\nScout their man-up plays. Usually teams have 2-3 EMO plays. If you can identify the play, you can defend it before the shot.\n\n**Step 4: Simplify**\nDon't install a new defense for every opponent. Adjust your existing defense. Change the slide direction, the matchup, or the pressure level — don't change the entire system.\n\n**The 80/20 Rule:**\n80% of your game plan should be what YOU do well. 20% should be opponent-specific adjustments. If you spend all week preparing for them, you've forgotten how to play YOUR game.\n\n**In-Game Adjustments:**\n- If their dodger is killing you: switch to a double-team or zone look for 3-4 possessions\n- If they're killing you on the crease: switch from adjacent to crease slide\n- If they're beating your zone: go back to man-to-man"
+            },
+
+            // ── SPACING FUNDAMENTALS ──
+
+            "spacing": {
+                keywords: ["spacing", "spread", "formation", "width", "bunching", "bunched"],
+                response: "**Offensive Spacing Fundamentals**\n\nSpacing is the foundation of every offensive system. Without spacing, nothing works. With spacing, everything works.\n\n**The 15-Yard Rule:**\nAdjacent players should be approximately 15 yards apart. This forces individual defenders to choose between helping and guarding their man. That choice is where offense happens.\n\n**Why Players Bunch:**\n1. Ball magnetism — young players gravitate toward the ball\n2. Fear — they want to be close to the action in case something happens\n3. Bad habits — they've never been taught spacing\n4. Lack of confidence — they don't believe they can contribute from 15 yards away\n\n**The Fix:**\n\n**Drill 1: Cone Offense**\n6 cones in your formation with proper spacing. Players must stay within 3 yards of their cone. Ball moves, players adjust to nearby cones, but never crowd the same cone.\n\n**Drill 2: Gravity Pull**\n4v4 or 6v6 — if two offensive players are within 5 yards, automatic turnover. Players learn to check spacing constantly.\n\n**Drill 3: Shrink/Expand**\nCoach calls 'SHRINK' — offense plays in a tight box (to show how hard it is). Coach calls 'EXPAND' — offense spreads to full formation. The contrast teaches the value of spacing.\n\n**The Mindset Shift:**\n'I am more dangerous AWAY from the ball than near it.' Teach this phrase. When a player understands that his spacing creates a driving lane for a teammate, he'll maintain his position because it benefits him AND the team.\n\n**Spacing applies to EVERY system:** Motion offense, pairs offense, 1-4-1, 2-3-1 — all of them require 15-yard spacing to work. If you fix nothing else in your offense, fix spacing first."
+            },
+
+            // ── OFF-BALL MOVEMENT ──
+
+            "off-ball": {
+                keywords: ["off-ball", "off ball", "cutting", "cuts", "screens", "movement"],
+                response: "**Off-Ball Movement System**\n\nThe 5 off-ball players are more important than the dodger. If they stand still, the defense can collapse on the ball carrier. If they move, the defense is scrambling.\n\n**The 5 Off-Ball Reactions:**\n1. **Fade** — Move away from the drive to create space for the dodger\n2. **Follow** — Cut behind the dodger toward the goal (back-door cut)\n3. **Clear Through** — Exit the area after your action to prevent bunching\n4. **Replace** — Fill the spot vacated by the dodger\n5. **Screen Away** — Set a pick for a teammate away from the ball\n\n**Teaching Off-Ball Movement:**\nStart with ONE reaction. Teach 'Fade' first because it's the simplest — when the ball carrier dodges, move away. Once Fade is automatic, add Follow. Then Clear Through. Layer one at a time.\n\n**The Cut Hierarchy (When to Cut):**\n1. V-Cut (change direction) when your defender is ball-watching\n2. Back-door cut when your defender overplays the passing lane\n3. Pick-and-Roll when you want to create for a teammate\n4. Relocate when your area is crowded\n\n**Film Cue:** Watch the off-ball defender's hips. When they open toward the ball (ball-watching), THAT is your window to cut. Train your players to read this body language.\n\n**Key Drill: 3v2 Continuous**\n3 offense, 2 defense. Before the ball carrier can shoot, BOTH off-ball players must complete 2 cuts. Forces movement. Track goals-per-possession — it will spike once cutting begins.\n\n**The Rule:** When the ball moves, YOU move. Every single pass triggers movement from every player on the field."
+            },
+
+            // ── SUBSTITUTION STRATEGY ──
+
+            "substitution": {
+                keywords: ["substitution", "subs", "rotation", "lineup", "playing time", "lines", "roster"],
+                response: "**Substitution & Rotation Strategy**\n\n**The On-the-Fly System:**\nLacrosse subs happen on the fly, like hockey. Your players must know WHEN and HOW to sub without breaking the flow of the game.\n\n**When to Sub:**\n- After a clear is completed (defense subbing for offense)\n- After a ride is finished (offense subbing for defense)\n- During dead balls (stoppages, timeouts)\n- NEVER during a fast break opportunity\n- NEVER when the ball is in your defensive end and live\n\n**The Horn System:**\nMany teams use a horn or whistle from the bench to signal a substitution. One horn = attack subs. Two horns = midfield subs. This prevents confusion about who's going in and who's coming off.\n\n**Line Strategy:**\nAt the youth level, run 2 midfield lines. At the high school level, run 2-3 lines depending on roster depth.\n\n**Line 1:** Your starters. They play the most important possessions — starts of quarters, man-up, end of game.\n**Line 2:** Your rotation players. They get full shifts and play significant minutes.\n**Line 3 (if applicable):** Development players. They get reps in lower-pressure situations.\n\n**The Playing Time Talk:**\nBe upfront with players about their role at the start of the season. 'You're on the second line. Here's what you need to do to earn more time.' Players respect honesty. They don't respect being surprised.\n\n**Key Principle:** Fresh legs beat tired talent. A second-line midfielder who's been resting for 3 minutes will outperform a first-line midfielder who's been running for 8 minutes straight. Rotate smartly."
+            },
+
+            // ── PENALTY MANAGEMENT ──
+
+            "penalties": {
+                keywords: ["penalty", "penalties", "foul", "flag", "man down", "discipline", "illegal"],
+                response: "**Penalty Management & Discipline**\n\n**The Cost of Penalties:**\nA 1-minute penalty gives the opponent roughly a 40-50% chance of scoring. A 2-minute penalty is almost a guaranteed goal against a good team. Penalties are the fastest way to lose a game.\n\n**Common Penalties and How to Eliminate Them:**\n\n**Slash (most common youth penalty):**\nFix: Emphasize body positioning over stick checks. A defender who is in good position doesn't need to slash. Drill proper body checks — chest to chest, feet to feet.\n\n**Illegal Body Check:**\nFix: Teach the legal check zone — from the shoulders to the waist, from the front and side. Never from behind, never to the head. Walk through legal checks in practice every week.\n\n**Offsides:**\nFix: Assign one player on each end as the 'anchor' who NEVER crosses midfield. Use a buddy system — when a midfielder goes over, he points to the player staying back.\n\n**Warding:**\nFix: Free hand DOWN, not out. Practice cradling one-handed with the free hand at your side. If the free hand goes to the defender's body, it's a ward every time.\n\n**The Penalty Kill Formula:**\n1. Box and 1 as your base man-down defense\n2. Practice 5v6 at least once per week\n3. Track penalty stats by player — if one player has 3+ penalties, he sits\n4. Reward penalty-free games\n\n**The Best Penalty Management:** Prevention. A disciplined team that plays clean wins more games than a talented team that plays dirty."
+            },
+
+            // ── IN-GAME COMMUNICATION ──
+
+            "sideline": {
+                keywords: ["sideline", "bench", "coaching", "in-game", "play calling", "signal"],
+                response: "**Sideline Communication & Play Calling**\n\n**Calling Plays from the Sideline:**\nKeep your play-calling system SIMPLE. If it takes more than 2 seconds to communicate, it's too complicated.\n\n**The Color + Number System:**\n- Color = formation (Red = 2-3-1, Blue = 1-4-1, White = Ohio State Pairs)\n- Number = action (1 = dodger choice, 2 = pick-and-roll, 3 = set play, 4 = slow it down)\n- Example: 'RED 2!' = 2-3-1 formation with a pick-and-roll\n\n**Defensive Calls:**\n- 'FIRE!' = press ride (full pressure)\n- 'ZERO!' = fall back, no ride\n- 'HOT!' = switch from adjacent to crease slide (or vice versa)\n- 'ZONE!' = switch to zone defense\n\n**The Whiteboard:**\nDuring timeouts, draw ONE thing on the whiteboard. Not the entire play — the ONE adjustment. Point to it, explain it in 10 seconds, break.\n\n**Communication Chain:**\nHead Coach → signals to the captain on the field → captain relays to teammates. If you're yelling instructions to all 6 players from the sideline, your players are listening to 6 different voices. Talk to ONE player. Let him distribute.\n\n**The Greatest Sideline Skill:**\nKnowing when to stay quiet. Your players don't need a coach screaming every 5 seconds during live play. They need you during stoppages. During live play, trust your preparation.\n\n**Halftime Whiteboard:**\n3 topics max. More than 3 and nobody remembers anything. Draw it, say it, break."
+            },
+
+            // ── DEFENSIVE FOOTWORK ──
+
+            "footwork": {
+                keywords: ["footwork", "defensive footwork", "lateral", "drop step", "approach", "stance"],
+                response: "**Defensive Footwork Masterclass**\n\n**The Athletic Stance:**\n- Feet shoulder-width apart\n- Weight on the balls of your feet (not heels)\n- Knees slightly bent\n- Hips low (not standing upright)\n- Hands up, stick in one hand\n- Eyes on the attacker's hips (hips don't lie — where the hips go, the body follows)\n\n**Lead Step (approach):**\nUsed when closing out on a ball carrier. Lead with the foot closest to the attacker. Stay balanced. Don't lunge.\n\n**Drop Step (retreat):**\nUsed when the attacker has speed. Open your hips, drop the back foot, turn and run with the dodger. Keep your body between the attacker and the goal.\n\n**Lateral Shuffle:**\nUsed when mirroring the ball carrier. Feet never cross. Push off the trailing foot, slide the leading foot. Stay low. If your feet cross, you're beat.\n\n**The Breakdown:**\nWhen the attacker approaches and you need to slow your momentum. Chop your feet rapidly, lower your center of gravity, and prepare to react in any direction. This is the most important footwork skill in lacrosse defense.\n\n**3 Footwork Drills:**\n\n**Drill 1: Mirror Drill**\n2 players face each other. Offensive player moves laterally. Defender mirrors. 30 seconds each, 3 rounds. Add a cone for the offensive player to dodge past. Track how many times the defender maintains position.\n\n**Drill 2: Box Drill**\n4 cones in a 5-yard box. Defender shuffles from cone to cone in a pattern (forward, lateral, backward, lateral). 2 rounds clockwise, 2 rounds counterclockwise. 15 seconds each round. Focus on staying low and keeping feet from crossing.\n\n**Drill 3: Hip Turn Drill**\nDefender starts facing the attacker. On the coach's whistle, the attacker sprints past. Defender must open his hips, drop step, and sprint to stay hip-to-hip. This is the most game-like defensive footwork drill you can run.\n\n**The Key:** Defensive footwork is boring to practice and devastating in games. The team with the best footwork gives up the fewest goals. Period."
+            },
+
+            // ── LONG POLE DEFENSE ──
+
+            "long pole": {
+                keywords: ["long pole", "long stick", "LSM", "defenseman", "d-pole", "close defense"],
+                response: "**Long Pole / Close Defense Development**\n\n**The Long Stick Advantage:**\nA 6-foot pole gives you reach that short sticks don't have. But that reach is only useful if you know how to use it.\n\n**Stick Skills for Long Poles:**\nMost defensemen don't practice enough stick work. A defenseman who can catch, throw, and clear the ball is 10x more valuable than one who can only check.\n\n**Daily Long Pole Routine:**\n1. Wall ball — 100 reps (50 right, 50 left) with the long pole\n2. Ground ball scoops — 20 reps (both sides)\n3. Clearing passes — 20 long outlet passes\n4. Cradling at full sprint — 4 sprints sideline to sideline\n\n**Checking Technique:**\n\n**Poke Check:** The bread and butter. Extended arm, quick jab at the attacker's bottom hand. Don't wind up. Quick, sharp pokes.\n\n**Lift Check:** Get underneath the attacker's bottom hand and lift his stick up. This disrupts his cradle and often causes a turnover.\n\n**Wrap Check:** Reach around the attacker's body to check his stick from the back side. High-level technique — only use when you've mastered poke and lift.\n\n**Trail Check:** When the attacker gets past you, a quick check from behind to dislodge the ball. Legal as long as it's on the gloves or stick.\n\n**The LSM (Long Stick Middie):**\nYour best defensive midfielder should carry a long pole. He plays the midfield line, takes faceoff wings, and can guard the opposing team's best middie. The LSM is the most versatile defensive player on the field.\n\n**LSM Skills:** Must be able to play both ways — carry the ball on the clear, make smart decisions in transition, AND lock down on defense. It's the hardest position in lacrosse.\n\n**Key Principle:** Feet first, stick second. Position your body before using your stick. A well-positioned defenseman with average stick skills beats a poorly-positioned defenseman with great checks every time."
+            },
+
+            // ── ATTACK STRATEGY ──
+
+            "attack": {
+                keywords: ["attack", "attackman", "x position", "behind the goal", "feeding", "crease"],
+                response: "**Attackman Development & Strategy**\n\n**The 3 Roles of an Attackman:**\n1. **Dodger** — Can beat his man 1v1 from X or the wing\n2. **Feeder** — Can deliver passes to the crease from any angle\n3. **Finisher** — Can score from inside 10 yards with quick stick and deception\n\nThe best attackmen can do all three. Most youth attackmen can do one. Your job is to build all three skills.\n\n**Playing from X (Behind the Goal):**\n- This is the attackman's office. He should be the most comfortable player on the field behind the cage.\n- The Question Mark Dodge is the signature X move — drive up the alley toward GLE, then curl back to the center\n- Feeding from X is the highest-percentage play in lacrosse — the defense is facing away from you, and the crease player can seal for position\n\n**Crease Play:**\nThe crease attackman has the hardest job — find open space in the most crowded area of the field.\n\n**Crease Player Rules:**\n1. Stay on the opposite side of the ball (create a feeding angle)\n2. Seal your defender (body between the defender and the ball)\n3. Show your stick as a target (the feeder needs to see where to throw)\n4. Quick stick finish — catch and shoot in one motion\n\n**2v2 on the Crease:**\nTwo attackmen working together on the crease is devastating. Player A seals, Player B cuts. If the defense rotates to cover B, A re-seals on the other side. Constant movement, constant pressure.\n\n**The Assist Mentality:**\nThe best attackmen in college lacrosse average more assists than goals. Feed first, finish second. A great feeder makes everyone around him better."
+            },
+
+            // ── MIDFIELD STRATEGY ──
+
+            "midfield": {
+                keywords: ["midfield", "midfielder", "middie", "two-way", "transition midfield"],
+                response: "**Midfielder Development & Strategy**\n\n**The Complete Midfielder:**\nMidfielders play the entire field — offense, defense, transition, rides, clears, and faceoffs. The demands on a midfielder are unlike any other position in sports.\n\n**Offensive Midfield:**\n- Dodge from up top or the wing (split dodge, face dodge, bull dodge)\n- Catch-and-shoot from 12-15 yards (time and room)\n- Set screens and roll to goal (Ohio State Pairs)\n- Recognize when to dodge and when to pass\n\n**Defensive Midfield:**\n- On-ball defense against opposing middies\n- Slide responsibilities in the half-field\n- Communication on screens and cuts\n- Ride responsibilities after shots\n\n**The Transition Midfielder:**\nThe most valuable skill for a midfielder is transition play. A middie who can carry the ball coast-to-coast on a clear and then immediately get back on defense is worth two normal players.\n\n**Midfield Line Strategy:**\nRun 2-3 midfield lines.\n- Line 1: Your best all-around middies. They play the big minutes.\n- Line 2: High-energy middies who can sub in and maintain intensity.\n- Line 3: Specialist middies (faceoff, LSM, or developmental).\n\n**The Sub Box:**\nMiddies must know the sub timing. Sprint to the box, tap the line, next middie enters. No jogging. A slow sub kills transition.\n\n**Conditioning for Middies:**\nMiddies run more than any other position. A typical middie covers 3-5 miles per game. Your conditioning program must prepare them for sustained sprinting with short rest periods.\n\n**Key:** The best teams have midfield depth. If your first line plays 75% of the game, they'll be gassed in the 4th quarter. Build your second line so you can rotate fresh legs all game."
+            },
+
+            // ── PRACTICE STRUCTURE ──
+
+            "drills": {
+                keywords: ["drills", "drill ideas", "training", "exercises", "skill work"],
+                response: "**Essential Drill Library**\n\n**Stick Skills:**\n- Wall Ball Routine (15 min) — 100 each hand, mix up passes\n- 2-Man Keep Away — in a 10x10 box, one on ball, one off ball, one defender\n- Star Drill — 5 players in a star pattern, pass and follow your pass\n\n**Shooting:**\n- Corner Drill — 4 cones at 4 corners of the goal, hit each corner 5 times\n- On-the-Run Shooting — player catches while running, shoots without stopping\n- Time and Space — defender backs off 5 yards, shooter steps in and fires\n\n**Defensive:**\n- Mirror Footwork — defender mirrors attacker's lateral movement\n- 1v1 from X — live 1v1 starting behind the goal\n- 6v6 Slide Package — full team defensive rotations, coach calls slide direction\n\n**Ground Balls:**\n- Line GBs — two lines face each other, compete for ground balls\n- Chaos GBs — 6 players, 3 balls thrown into a box\n- Wing GBs — simulate faceoff ground balls\n\n**Transition:**\n- 3v2 Fast Break — continuous with a trail player\n- 4v3 Diamond Break — 4 attackers vs 3 defenders in fast break\n- Clear-to-Offense — start with a clear, transition to half-field offense\n\n**Small-Sided Games:**\n- 2v2 — teaches individual offense and defense\n- 3v3 — adds help defense and off-ball movement\n- 4v4 — the perfect learning number for team concepts\n\n**The Drill Design Rule:**\nEvery drill should be (1) game-like, (2) competitive, (3) have consequences for losing. If it doesn't meet all three criteria, replace it with something better.\n\n**Key: Drill tempo matters.** If your drills are slow, your games will be slow. Keep the pace high, the rest periods short, and the competition fierce."
+            },
+
+            // ── SEASON PLANNING ──
+
+            "season": {
+                keywords: ["season", "preseason", "schedule", "season plan", "calendar", "tournament"],
+                response: "**Season Planning Guide**\n\n**Preseason (Weeks 1-3):**\n- Individual skill development (stick work, footwork, shooting)\n- Install your base offensive formation\n- Install your base slide package\n- Establish team culture and non-negotiables\n- Conditioning emphasis\n\n**Early Season (Weeks 4-6):**\n- Layering second offensive concepts (add pairs, secondary formation)\n- Add clearing and riding systems\n- Man-up / man-down installation\n- First games — focus on execution, not results\n- Identify roles and rotations\n\n**Mid-Season (Weeks 7-10):**\n- Refine systems based on game film\n- Add advanced concepts (zone defense, press rides, multiple man-up plays)\n- Game-plan for specific opponents\n- Address weaknesses from early-season games\n- Peak conditioning\n\n**Late Season / Playoffs (Weeks 11+):**\n- No new installs — execute what you have\n- Practice intensity goes up, volume goes down\n- Film study increases (opponent scouting)\n- Focus on special teams (man-up, man-down, faceoffs)\n- Mental preparation — visualization, confidence building\n\n**Tournament Preparation:**\n- Know your bracket and potential matchups\n- Have 3 game plans ready (base, zone-heavy, press-heavy)\n- Hydration and nutrition planning (multiple games per day)\n- Manage playing time to keep everyone fresh\n\n**The Season Arc Principle:**\nYou should be your worst in February and your best in May. Don't peak early. Build toward the playoffs. The teams that peak in March have nothing left for May.\n\n**Key:** Plan your season backward. Start with the championship game and work back. What do you need your team to execute by then? Build toward that, week by week."
+            }
+        };
+
+        /* ========================================
+           QUICK TOPIC MAPPING
+           ======================================== */
+        var QUICK_TOPIC_MAP = {
+            "practice plan": {
+                intro: "Here's my recommendation for a complete 90-minute practice session. Adapt it to your team's level and needs.",
+                key: "practice plan"
+            },
+            "zone offense": {
+                intro: "Great question. Zone defense shuts down a lot of teams. Here's exactly how to attack it with positionless concepts.",
+                key: "zone offense"
+            },
+            "adjacent slides": {
+                intro: "Adjacent slides are the foundation of team defense. Here's the full teaching progression I recommend.",
+                key: "adjacent slide"
+            },
+            "faceoff wing": {
+                intro: "Faceoff wing play is one of the most under-coached areas in lacrosse. Here's how to make your wings game-changers.",
+                key: "faceoff"
+            },
+            "man up strategy": {
+                intro: "Man-up should be an automatic scoring opportunity. Here are the plays and the teaching approach to make it happen.",
+                key: "man up"
+            },
+            "clear under pressure": {
+                intro: "Clearing under pressure separates good teams from great teams. Here's the complete clearing system.",
+                key: "clears"
+            },
+            "1v1 defense drills": {
+                intro: "Individual defense is built in practice. Here are my top 3 drills for making your defenders lockdown one-on-one.",
+                key: "1v1 defense"
+            },
+            "motion offense basics": {
+                intro: "Motion offense is the foundation of modern lacrosse. Here's how to install it and make it work for your team.",
+                key: "motion offense"
+            }
+        };
+
+        /* ========================================
+           KEYWORD MATCHING
+           ======================================== */
+        function findBestMatch(input) {
+            var tokens = input.toLowerCase().replace(/[?.,!]/g, '').split(/\s+/);
+            var bestScore = 0;
+            var bestKey = null;
+
+            for (var key in KNOWLEDGE_BASE) {
+                if (!KNOWLEDGE_BASE.hasOwnProperty(key)) continue;
+                var entry = KNOWLEDGE_BASE[key];
+                var score = 0;
+
+                for (var t = 0; t < tokens.length; t++) {
+                    var token = tokens[t];
+                    if (token.length < 2) continue; // skip tiny words
+
+                    for (var k = 0; k < entry.keywords.length; k++) {
+                        var keyword = entry.keywords[k];
+                        if (keyword === token) {
+                            score += 3; // exact match
+                        } else if (keyword.includes(token) || token.includes(keyword)) {
+                            score += 1; // partial match
+                        }
+                    }
+
+                    // Also check the key itself
+                    if (key.includes(token)) {
+                        score += 2;
+                    }
+                }
+
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestKey = key;
+                }
+            }
+
+            return bestScore >= 2 ? KNOWLEDGE_BASE[bestKey] : null;
+        }
+
+        /* ========================================
+           MESSAGE RENDERING
+           ======================================== */
+        function renderMarkdown(text) {
+            var lines = text.split('\n');
+            var html = '';
+            for (var i = 0; i < lines.length; i++) {
+                var line = lines[i];
+                if (line.trim() === '') {
+                    html += '<span class="blank-line"></span>';
+                } else {
+                    // Bold **text**
+                    line = line.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+                    html += '<span class="line">' + line + '</span>';
+                }
+            }
+            return html;
+        }
+
+        function addMessage(text, sender) {
+            var chatArea = document.getElementById('chatArea');
+            var welcome = document.getElementById('welcomeState');
+            if (welcome) {
+                welcome.style.display = 'none';
+            }
+
+            var msg = document.createElement('div');
+            msg.className = 'message ' + sender;
+
+            var label = document.createElement('div');
+            label.className = 'label';
+            label.textContent = sender === 'user' ? 'You' : 'BTB Coach AI';
+
+            var bubble = document.createElement('div');
+            bubble.className = 'bubble';
+
+            if (sender === 'ai') {
+                bubble.innerHTML = renderMarkdown(text);
+            } else {
+                bubble.textContent = text;
+            }
+
+            msg.appendChild(label);
+            msg.appendChild(bubble);
+            chatArea.appendChild(msg);
+
+            // Scroll to bottom
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+
+        function showTyping() {
+            var chatArea = document.getElementById('chatArea');
+            var typing = document.createElement('div');
+            typing.className = 'typing';
+            typing.id = 'typingIndicator';
+            typing.innerHTML = '<span></span><span></span><span></span>';
+            chatArea.appendChild(typing);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+
+        function hideTyping() {
+            var typing = document.getElementById('typingIndicator');
+            if (typing) typing.remove();
+        }
+
+        /* ========================================
+           SEND MESSAGE
+           ======================================== */
+        var NO_MATCH_RESPONSE = "I'm not sure about that specific topic. Try one of the quick topics, or rephrase your question using terms like: offense, defense, slides, rides, clears, faceoff, man-up, man-down, zone, dodging, shooting, ground balls, goalie, communication, or practice plan.";
+
+        function sendMessage() {
+            var input = document.getElementById('userInput');
+            var text = input.value.trim();
+            if (!text) return;
+
+            // Add user message
+            addMessage(text, 'user');
+            input.value = '';
+
+            // Show typing
+            showTyping();
+
+            // Find match with slight delay for realism
+            setTimeout(function() {
+                hideTyping();
+
+                var match = findBestMatch(text);
+                if (match) {
+                    addMessage(match.response, 'ai');
+                } else {
+                    addMessage(NO_MATCH_RESPONSE, 'ai');
+                }
+
+                // Add back-to-topics button
+                addBackButton();
+            }, 600 + Math.random() * 400);
+        }
+
+        /* ========================================
+           QUICK TOPIC
+           ======================================== */
+        function askTopic(topicKey) {
+            var mapping = QUICK_TOPIC_MAP[topicKey];
+            if (!mapping) return;
+
+            var entry = KNOWLEDGE_BASE[mapping.key];
+            if (!entry) return;
+
+            // Show user's "question" as the topic button text
+            var topicLabels = {
+                "practice plan": "Build me a practice plan",
+                "zone offense": "What's the best offense against a zone?",
+                "adjacent slides": "How do I teach adjacent slides?",
+                "faceoff wing": "How do I coach faceoff wing play?",
+                "man up strategy": "What are your best man-up plays?",
+                "clear under pressure": "How do we clear under pressure?",
+                "1v1 defense drills": "What are the best 1v1 defense drills?",
+                "motion offense basics": "How do I install motion offense?"
+            };
+
+            addMessage(topicLabels[topicKey] || topicKey, 'user');
+
+            // Show typing
+            showTyping();
+
+            setTimeout(function() {
+                hideTyping();
+                var fullResponse = mapping.intro + '\n\n' + entry.response;
+                addMessage(fullResponse, 'ai');
+                addBackButton();
+            }, 500 + Math.random() * 300);
+        }
+
+        /* ========================================
+           BACK TO TOPICS BUTTON
+           ======================================== */
+        function addBackButton() {
+            // Remove existing back button if any
+            var existing = document.querySelector('.back-topics');
+            if (existing) existing.remove();
+
+            var chatArea = document.getElementById('chatArea');
+            var btn = document.createElement('button');
+            btn.className = 'back-topics';
+            btn.textContent = 'Show Quick Topics';
+            btn.onclick = function() {
+                showTopicsInChat();
+            };
+            chatArea.appendChild(btn);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+
+        function showTopicsInChat() {
+            // Remove back button
+            var existing = document.querySelector('.back-topics');
+            if (existing) existing.remove();
+
+            var chatArea = document.getElementById('chatArea');
+
+            // Add a mini topics grid as a message
+            var topicsMsg = document.createElement('div');
+            topicsMsg.className = 'message ai';
+            topicsMsg.style.maxWidth = '100%';
+
+            var label = document.createElement('div');
+            label.className = 'label';
+            label.textContent = 'BTB Coach AI';
+
+            var bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            bubble.innerHTML = '<span class="line"><strong>Pick another topic:</strong></span>';
+
+            var grid = document.createElement('div');
+            grid.className = 'topics-grid';
+            grid.style.marginTop = '12px';
+            grid.style.maxWidth = '100%';
+
+            var topics = [
+                { key: 'practice plan', icon: '&#128203;', label: 'Build a practice plan' },
+                { key: 'zone offense', icon: '&#127919;', label: 'Best offense vs zone' },
+                { key: 'adjacent slides', icon: '&#128737;', label: 'Teach adjacent slides' },
+                { key: 'faceoff wing', icon: '&#9878;', label: 'Faceoff wing play' },
+                { key: 'man up strategy', icon: '&#9889;', label: 'Man-up strategy' },
+                { key: 'clear under pressure', icon: '&#128640;', label: 'Clear under pressure' },
+                { key: '1v1 defense drills', icon: '&#128170;', label: '1v1 defense drills' },
+                { key: 'motion offense basics', icon: '&#127944;', label: 'Motion offense basics' }
+            ];
+
+            for (var i = 0; i < topics.length; i++) {
+                var btn = document.createElement('button');
+                btn.className = 'topic-btn';
+                btn.innerHTML = '<span class="topic-icon">' + topics[i].icon + '</span>' + topics[i].label;
+                btn.setAttribute('data-topic', topics[i].key);
+                btn.onclick = (function(key) {
+                    return function() { askTopic(key); };
+                })(topics[i].key);
+                grid.appendChild(btn);
+            }
+
+            bubble.appendChild(grid);
+            topicsMsg.appendChild(label);
+            topicsMsg.appendChild(bubble);
+            chatArea.appendChild(topicsMsg);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+
+        /* ========================================
+           CONVERSATIONAL RESPONSES
+           ======================================== */
+        var GREETINGS = [
+            "Hey coach! I'm ready to talk lacrosse. What topic can I help with today? You can ask me about offense, defense, transition, special teams, drills, or coaching philosophy.",
+            "Welcome to BTB Coach AI. I've got the full coaching knowledge base loaded up. What are you working on with your team?",
+            "Coach! Let's get to work. Ask me about any lacrosse topic — offensive systems, defensive slides, practice planning, game management — whatever you need."
+        ];
+
+        var THANKS_RESPONSES = [
+            "You got it, coach. If you need anything else, just ask. Let's build something great for your team.",
+            "Glad I could help. Don't hesitate to come back — I've got breakdowns on offense, defense, transition, special teams, and more.",
+            "That's what I'm here for. Good luck at practice — your players are going to love this stuff."
+        ];
+
+        var GREETING_WORDS = ["hi", "hey", "hello", "sup", "what's up", "yo", "howdy", "good morning", "good afternoon"];
+        var THANKS_WORDS = ["thanks", "thank you", "appreciate", "thx", "ty", "awesome", "great", "perfect", "love it"];
+
+        function checkConversational(input) {
+            var lower = input.toLowerCase().trim();
+            var words = lower.split(/\s+/);
+
+            // Check greetings (only if input is short — 1-4 words)
+            if (words.length <= 4) {
+                for (var i = 0; i < GREETING_WORDS.length; i++) {
+                    if (lower.includes(GREETING_WORDS[i])) {
+                        return GREETINGS[Math.floor(Math.random() * GREETINGS.length)];
+                    }
+                }
+            }
+
+            // Check thanks
+            for (var j = 0; j < THANKS_WORDS.length; j++) {
+                if (lower.includes(THANKS_WORDS[j])) {
+                    return THANKS_RESPONSES[Math.floor(Math.random() * THANKS_RESPONSES.length)];
+                }
+            }
+
+            // Check for "help" or "what can you do"
+            if (lower.includes('help') || lower.includes('what can you') || lower.includes('what do you know') || lower.includes('what topics')) {
+                return "**Here's what I can help with:**\n\n**Offensive Systems:** Motion offense, 1-4-1, 2-3-1, Ohio State Pairs, positionless lacrosse, zone offense\n\n**Defensive Systems:** Adjacent slides, crease slides, zone defense, man-down defense\n\n**Special Teams:** Man-up (EMO) plays, faceoff strategy, wing play\n\n**Transition:** Rides, clears, fast breaks\n\n**Individual Skills:** Dodging, shooting, 1v1 defense, defensive footwork, stick skills, long pole play, goalie development\n\n**Coaching:** Practice planning, game management, film study, warm-ups, conditioning, team culture, youth development, season planning, substitutions, penalties, attack & midfield strategy\n\nJust type your question or tap one of the quick topics!";
+            }
+
+            return null;
+        }
+
+        /* ========================================
+           ENHANCED SEND MESSAGE WITH CONVERSATIONAL CHECK
+           ======================================== */
+        // Override the sendMessage to include conversational checks
+        var _originalSendMessage = sendMessage;
+        sendMessage = function() {
+            var input = document.getElementById('userInput');
+            var text = input.value.trim();
+            if (!text) return;
+
+            // Add user message
+            addMessage(text, 'user');
+            input.value = '';
+
+            // Show typing
+            showTyping();
+
+            setTimeout(function() {
+                hideTyping();
+
+                // Check conversational responses first
+                var conversational = checkConversational(text);
+                if (conversational) {
+                    addMessage(conversational, 'ai');
+                    addBackButton();
+                    return;
+                }
+
+                // Then check knowledge base
+                var match = findBestMatch(text);
+                if (match) {
+                    addMessage(match.response, 'ai');
+                } else {
+                    addMessage(NO_MATCH_RESPONSE, 'ai');
+                }
+
+                addBackButton();
+            }, 600 + Math.random() * 400);
+        };
+
+        /* ========================================
+           MULTI-TOPIC DETECTION
+           ======================================== */
+        // Additional keyword synonyms that map to existing entries
+        var SYNONYM_MAP = {
+            "pick": "pairs offense",
+            "screen": "pairs offense",
+            "2 man": "pairs offense",
+            "two man": "pairs offense",
+            "ohio": "pairs offense",
+            "virginia": "zone offense",
+            "uva": "zone offense",
+            "duke": "motion offense",
+            "syracuse": "motion offense",
+            "defensive": "adjacent slide",
+            "help d": "adjacent slide",
+            "emo": "man up",
+            "power play": "man up",
+            "extra man": "man up",
+            "short handed": "man down",
+            "penalty kill": "man down",
+            "pk": "man down",
+            "gb": "ground balls",
+            "loose ball": "ground balls",
+            "wall ball": "stick skills",
+            "passing": "stick skills",
+            "catching": "stick skills",
+            "weak hand": "stick skills",
+            "timeout": "game management",
+            "halftime": "game management",
+            "pregame": "warm up",
+            "warmup": "warm up",
+            "stretch": "warm up",
+            "captain": "culture",
+            "leadership": "culture",
+            "buy in": "culture",
+            "young players": "youth",
+            "beginner": "youth",
+            "new team": "youth",
+            "u12": "youth",
+            "u14": "youth",
+            "scouting": "game plan defense",
+            "scout": "game plan defense",
+            "lsm": "long pole",
+            "defenseman": "long pole",
+            "d pole": "long pole",
+            "crease attack": "attack",
+            "feeding": "attack",
+            "finisher": "attack",
+            "middie": "midfield",
+            "midfielder": "midfield",
+            "two way": "midfield",
+            "lines": "substitution",
+            "rotation": "substitution",
+            "playing time": "substitution",
+            "flag": "penalties",
+            "foul": "penalties",
+            "discipline": "penalties",
+            "signals": "sideline",
+            "play calling": "sideline",
+            "practice ideas": "drills",
+            "drill ideas": "drills",
+            "training": "drills",
+            "preseason": "season",
+            "playoff": "season",
+            "tournament": "season"
+        };
+
+        // Enhanced matching with synonym support
+        var _originalFindBestMatch = findBestMatch;
+        findBestMatch = function(input) {
+            // First try synonym map for quick matches
+            var lower = input.toLowerCase().replace(/[?.,!]/g, '');
+            for (var phrase in SYNONYM_MAP) {
+                if (SYNONYM_MAP.hasOwnProperty(phrase) && lower.includes(phrase)) {
+                    var targetKey = SYNONYM_MAP[phrase];
+                    if (KNOWLEDGE_BASE[targetKey]) {
+                        return KNOWLEDGE_BASE[targetKey];
+                    }
+                }
+            }
+
+            // Fall back to keyword scoring
+            return _originalFindBestMatch(input);
+        };
+
+        /* ========================================
+           MESSAGE COUNT TRACKING
+           ======================================== */
+        var messageCount = 0;
+
+        var _originalAddMessage = addMessage;
+        addMessage = function(text, sender) {
+            _originalAddMessage(text, sender);
+            if (sender === 'user') {
+                messageCount++;
+            }
+        };
+
+        /* ========================================
+           KEYBOARD SHORTCUTS
+           ======================================== */
+        document.addEventListener('keydown', function(e) {
+            // Focus input on any letter key press when not already focused
+            if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+                var active = document.activeElement;
+                var input = document.getElementById('userInput');
+                var gateInput = document.getElementById('gateInput');
+                if (active !== input && active !== gateInput) {
+                    // Only focus if gate is dismissed
+                    if (sessionStorage.getItem(GATE_KEY) === '1') {
+                        input.focus();
+                    }
+                }
+            }
+        });
+
+        /* ========================================
+           FOCUS INPUT ON LOAD
+           ======================================== */
+        window.addEventListener('load', function() {
+            if (sessionStorage.getItem(GATE_KEY) === '1') {
+                document.getElementById('userInput').focus();
+            }
+        });
+
+        /* ========================================
+           PREVENT BODY SCROLL ON IOS
+           ======================================== */
+        document.body.addEventListener('touchmove', function(e) {
+            var chatArea = document.getElementById('chatArea');
+            if (!chatArea.contains(e.target)) {
+                // Allow scroll only within chat area
+            }
+        }, { passive: true });
+    </script>
+
+</body>
+</html>
