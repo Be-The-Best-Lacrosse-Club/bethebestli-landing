@@ -22,7 +22,7 @@
   --border: rgba(255,255,255,0.08);
   --text: rgba(255,255,255,0.78);
   --sidebar-w: 240px;
-  --gold: #C5A44E;
+
 }
 html { scroll-behavior: smooth; }
 body {
@@ -331,10 +331,10 @@ li { margin-bottom: 6px; }
   margin-bottom: 16px;
   overflow: hidden;
 }
-.practice-plan.phase-1 { border-left-color: #4aa3e0; }
+.practice-plan.phase-1 { border-left-color: #D22630; }
 .practice-plan.phase-2 { border-left-color: var(--red); }
 .practice-plan.phase-3 { border-left-color: #27ae60; }
-.practice-plan.phase-4 { border-left-color: var(--gold); }
+.practice-plan.phase-4 { border-left-color: var(--red); }
 .practice-plan.phase-5 { border-left-color: #9b59b6; }
 
 .plan-header {
@@ -697,10 +697,10 @@ li { margin-bottom: 6px; }
 .phase-tab{padding:8px 16px;border-radius:4px;font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:2px;cursor:pointer;border:1px solid var(--border);color:rgba(255,255,255,0.5);background:transparent;transition:all .2s}
 .phase-tab:hover{color:#fff;background:rgba(255,255,255,0.06)}
 .phase-tab.active-tab{color:#fff;border-color:var(--red);background:rgba(210,38,48,0.15)}
-.phase-tab[data-phase="1"]{border-color:#4aa3e0;} .phase-tab[data-phase="1"].active-tab{background:rgba(74,163,224,0.15);border-color:#4aa3e0}
+.phase-tab[data-phase="1"]{border-color:#D22630;} .phase-tab[data-phase="1"].active-tab{background:rgba(74,163,224,0.15);border-color:#D22630}
 .phase-tab[data-phase="2"]{border-color:var(--red);} .phase-tab[data-phase="2"].active-tab{background:rgba(210,38,48,0.15);border-color:var(--red)}
 .phase-tab[data-phase="3"]{border-color:#27ae60;} .phase-tab[data-phase="3"].active-tab{background:rgba(39,174,96,0.15);border-color:#27ae60}
-.phase-tab[data-phase="4"]{border-color:var(--gold);} .phase-tab[data-phase="4"].active-tab{background:rgba(197,164,78,0.15);border-color:var(--gold)}
+.phase-tab[data-phase="4"]{border-color:var(--red);} .phase-tab[data-phase="4"].active-tab{background:rgba(197,164,78,0.15);border-color:var(--red)}
 .phase-tab[data-phase="5"]{border-color:#9b59b6;} .phase-tab[data-phase="5"].active-tab{background:rgba(155,89,182,0.15);border-color:#9b59b6}
 .practice-plan.hidden{display:none}
 
@@ -1646,7 +1646,7 @@ li { margin-bottom: 6px; }
         <path d="M 80 120 Q 200 60 320 120" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="3,4"/>
         <defs>
           <marker id="arr2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
-            <path d="M0,0 L6,3 L0,6 Z" fill="#4aa3e0"/>
+            <path d="M0,0 L6,3 L0,6 Z" fill="#D22630"/>
           </marker>
           <marker id="arr2r" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
             <path d="M0,0 L6,3 L0,6 Z" fill="#D22630"/>
@@ -1656,15 +1656,15 @@ li { margin-bottom: 6px; }
         <path d="M 80 120 Q 200 60 320 120 L 320 145 Q 200 85 80 145 Z" fill="rgba(74,163,224,0.07)"/>
         <!-- BASE: 5 defenders in 2-3 -->
         <g class="step-base">
-          <circle cx="150" cy="130" r="10" fill="#4aa3e0" stroke="#fff" stroke-width="1.5"/>
+          <circle cx="150" cy="130" r="10" fill="#D22630" stroke="#fff" stroke-width="1.5"/>
           <text x="150" y="134" fill="#fff" font-size="8" text-anchor="middle" font-weight="bold">D1</text>
-          <circle cx="250" cy="130" r="10" fill="#4aa3e0" stroke="#fff" stroke-width="1.5"/>
+          <circle cx="250" cy="130" r="10" fill="#D22630" stroke="#fff" stroke-width="1.5"/>
           <text x="250" y="134" fill="#fff" font-size="8" text-anchor="middle" font-weight="bold">D2</text>
-          <circle cx="200" cy="68" r="10" fill="#4aa3e0" stroke="#fff" stroke-width="1.5"/>
+          <circle cx="200" cy="68" r="10" fill="#D22630" stroke="#fff" stroke-width="1.5"/>
           <text x="200" y="72" fill="#fff" font-size="8" text-anchor="middle" font-weight="bold">CR</text>
-          <circle cx="125" cy="80" r="10" fill="#4aa3e0" stroke="#fff" stroke-width="1.5"/>
+          <circle cx="125" cy="80" r="10" fill="#D22630" stroke="#fff" stroke-width="1.5"/>
           <text x="125" y="84" fill="#fff" font-size="8" text-anchor="middle" font-weight="bold">LP</text>
-          <circle cx="275" cy="80" r="10" fill="#4aa3e0" stroke="#fff" stroke-width="1.5"/>
+          <circle cx="275" cy="80" r="10" fill="#D22630" stroke="#fff" stroke-width="1.5"/>
           <text x="275" y="84" fill="#fff" font-size="8" text-anchor="middle" font-weight="bold">RP</text>
           <text x="60" y="130" fill="rgba(255,255,255,0.3)" font-size="9">TOP 2</text>
           <text x="60" y="80" fill="rgba(255,255,255,0.3)" font-size="9">BTM 3</text>
@@ -1673,25 +1673,25 @@ li { margin-bottom: 6px; }
         <g class="step step-1">
           <circle cx="310" cy="150" r="8" fill="#D22630" stroke="#fff" stroke-width="1" opacity="0.7"/>
           <text x="310" y="154" fill="#fff" font-size="6" text-anchor="middle">BALL</text>
-          <line x1="160" y1="130" x2="195" y2="130" stroke="#4aa3e0" stroke-width="2" marker-end="url(#arr2)"/>
-          <line x1="260" y1="130" x2="295" y2="135" stroke="#4aa3e0" stroke-width="2" marker-end="url(#arr2)"/>
-          <text x="200" y="120" fill="#4aa3e0" font-size="8" font-weight="bold">SHIFT RIGHT</text>
+          <line x1="160" y1="130" x2="195" y2="130" stroke="#D22630" stroke-width="2" marker-end="url(#arr2)"/>
+          <line x1="260" y1="130" x2="295" y2="135" stroke="#D22630" stroke-width="2" marker-end="url(#arr2)"/>
+          <text x="200" y="120" fill="#D22630" font-size="8" font-weight="bold">SHIFT RIGHT</text>
         </g>
         <!-- STEP 2: D2 pressures ball, D1 covers center -->
         <g class="step step-2">
-          <path d="M260,128 Q280,135 298,145" fill="none" stroke="#4aa3e0" stroke-width="2" marker-end="url(#arr2)"/>
-          <text x="282" y="125" fill="#4aa3e0" font-size="7" font-weight="bold">PRESS</text>
-          <path d="M155,128 Q175,125 195,125" fill="none" stroke="#4aa3e0" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arr2)"/>
-          <text x="165" y="118" fill="#4aa3e0" font-size="7">COVER CENTER</text>
+          <path d="M260,128 Q280,135 298,145" fill="none" stroke="#D22630" stroke-width="2" marker-end="url(#arr2)"/>
+          <text x="282" y="125" fill="#D22630" font-size="7" font-weight="bold">PRESS</text>
+          <path d="M155,128 Q175,125 195,125" fill="none" stroke="#D22630" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arr2)"/>
+          <text x="165" y="118" fill="#D22630" font-size="7">COVER CENTER</text>
         </g>
         <!-- STEP 3: Bottom 3 rotate — RP shifts out, CR holds, LP drops -->
         <g class="step step-3">
-          <path d="M275,88 Q290,100 290,110" fill="none" stroke="#4aa3e0" stroke-width="1.5" marker-end="url(#arr2)"/>
-          <text x="298" y="100" fill="#4aa3e0" font-size="7">DENY</text>
-          <circle cx="200" cy="68" r="12" fill="none" stroke="#4aa3e0" stroke-width="2" stroke-dasharray="3,2"/>
-          <text x="220" y="60" fill="#4aa3e0" font-size="7">HOLD</text>
-          <path d="M125,88 Q140,90 160,80" fill="none" stroke="#4aa3e0" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arr2)"/>
-          <text x="115" y="100" fill="#4aa3e0" font-size="7">ROTATE</text>
+          <path d="M275,88 Q290,100 290,110" fill="none" stroke="#D22630" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <text x="298" y="100" fill="#D22630" font-size="7">DENY</text>
+          <circle cx="200" cy="68" r="12" fill="none" stroke="#D22630" stroke-width="2" stroke-dasharray="3,2"/>
+          <text x="220" y="60" fill="#D22630" font-size="7">HOLD</text>
+          <path d="M125,88 Q140,90 160,80" fill="none" stroke="#D22630" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arr2)"/>
+          <text x="115" y="100" fill="#D22630" font-size="7">ROTATE</text>
         </g>
         <text x="200" y="292" fill="rgba(255,255,255,0.3)" font-size="9" text-anchor="middle">2-3 Zone · Ball Shifts Top Two</text>
       </svg>
@@ -1723,8 +1723,8 @@ li { margin-bottom: 6px; }
           <circle cx="200" cy="248" r="8" fill="#555" stroke="#fff" stroke-width="1"/>
           <text x="200" y="252" fill="#fff" font-size="7" text-anchor="middle">GK</text>
           <!-- Clearing defenders (opponent) -->
-          <circle cx="130" cy="240" r="8" fill="none" stroke="#4aa3e0" stroke-width="1.5" stroke-dasharray="3,2"/>
-          <circle cx="270" cy="240" r="8" fill="none" stroke="#4aa3e0" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <circle cx="130" cy="240" r="8" fill="none" stroke="#D22630" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <circle cx="270" cy="240" r="8" fill="none" stroke="#D22630" stroke-width="1.5" stroke-dasharray="3,2"/>
           <!-- Attack press (red) -->
           <circle cx="130" cy="220" r="10" fill="#D22630" stroke="#fff" stroke-width="1.5"/>
           <text x="130" y="224" fill="#fff" font-size="7" text-anchor="middle">A1</text>
@@ -1799,9 +1799,9 @@ li { margin-bottom: 6px; }
         <g class="step-base">
           <circle cx="200" cy="50" r="10" fill="#27ae60" stroke="#fff" stroke-width="1.5"/>
           <text x="200" y="54" fill="#fff" font-size="7" text-anchor="middle">GK</text>
-          <circle cx="80" cy="60" r="10" fill="#4aa3e0" stroke="#fff" stroke-width="1.5"/>
+          <circle cx="80" cy="60" r="10" fill="#D22630" stroke="#fff" stroke-width="1.5"/>
           <text x="80" y="64" fill="#fff" font-size="7" text-anchor="middle">D1</text>
-          <circle cx="80" cy="130" r="10" fill="#4aa3e0" stroke="#fff" stroke-width="1.5"/>
+          <circle cx="80" cy="130" r="10" fill="#D22630" stroke="#fff" stroke-width="1.5"/>
           <text x="80" y="134" fill="#fff" font-size="7" text-anchor="middle">M1</text>
           <circle cx="200" cy="210" r="10" fill="#D22630" stroke="#fff" stroke-width="1.5"/>
           <text x="200" y="214" fill="#fff" font-size="7" text-anchor="middle">ATK</text>
@@ -1814,7 +1814,7 @@ li { margin-bottom: 6px; }
         <!-- STEP 2: D1 to M1 (Short 2) -->
         <g class="step step-2">
           <line x1="80" y1="70" x2="80" y2="120" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arr3)"/>
-          <text x="55" y="100" fill="#4aa3e0" font-size="9" font-weight="bold">SHORT 2</text>
+          <text x="55" y="100" fill="#D22630" font-size="9" font-weight="bold">SHORT 2</text>
         </g>
         <!-- STEP 3: M1 to ATK (Long) -->
         <g class="step step-3">
@@ -1849,16 +1849,16 @@ li { margin-bottom: 6px; }
         <circle cx="200" cy="150" r="10" fill="#D22630" stroke="#fff" stroke-width="1.5"/>
         <text x="200" y="154" fill="#fff" font-size="7" text-anchor="middle" font-weight="bold">DS</text>
         <!-- Opp specialist -->
-        <circle cx="200" cy="132" r="8" fill="none" stroke="#4aa3e0" stroke-width="1.5" stroke-dasharray="3,2"/>
-        <text x="200" y="136" fill="#4aa3e0" font-size="7" text-anchor="middle">OPP</text>
+        <circle cx="200" cy="132" r="8" fill="none" stroke="#D22630" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <text x="200" y="136" fill="#D22630" font-size="7" text-anchor="middle">OPP</text>
         <!-- Wings BTB -->
         <circle cx="130" cy="150" r="10" fill="#D22630" stroke="#fff" stroke-width="1.5"/>
         <text x="130" y="154" fill="#fff" font-size="7" text-anchor="middle">LW</text>
         <circle cx="270" cy="150" r="10" fill="#D22630" stroke="#fff" stroke-width="1.5"/>
         <text x="270" y="154" fill="#fff" font-size="7" text-anchor="middle">RW</text>
         <!-- Opp wings -->
-        <circle cx="145" cy="110" r="8" fill="none" stroke="#4aa3e0" stroke-width="1.5" stroke-dasharray="3,2"/>
-        <circle cx="255" cy="110" r="8" fill="none" stroke="#4aa3e0" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <circle cx="145" cy="110" r="8" fill="none" stroke="#D22630" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <circle cx="255" cy="110" r="8" fill="none" stroke="#D22630" stroke-width="1.5" stroke-dasharray="3,2"/>
         <!-- Crash arrows for wings -->
         <defs>
           <marker id="arr4" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
@@ -1887,26 +1887,26 @@ li { margin-bottom: 6px; }
         <circle cx="100" cy="100" r="10" fill="rgba(255,200,0,0.8)" stroke="#fff" stroke-width="1.5"/>
         <text x="100" y="104" fill="#000" font-size="7" text-anchor="middle" font-weight="bold">ATK</text>
         <!-- Original defender beaten -->
-        <circle cx="115" cy="115" r="8" fill="#4aa3e0" stroke="#fff" stroke-width="1" opacity="0.5"/>
+        <circle cx="115" cy="115" r="8" fill="#D22630" stroke="#fff" stroke-width="1" opacity="0.5"/>
         <text x="115" y="119" fill="#fff" font-size="6" text-anchor="middle">D-OG</text>
         <!-- Crease defender slides -->
-        <circle cx="195" cy="68" r="10" fill="#4aa3e0" stroke="#fff" stroke-width="1.5"/>
+        <circle cx="195" cy="68" r="10" fill="#D22630" stroke="#fff" stroke-width="1.5"/>
         <text x="195" y="72" fill="#fff" font-size="7" text-anchor="middle">CR-D</text>
         <!-- Slide arrow -->
         <defs>
           <marker id="arr5" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
-            <path d="M0,0 L6,3 L0,6 Z" fill="#4aa3e0"/>
+            <path d="M0,0 L6,3 L0,6 Z" fill="#D22630"/>
           </marker>
           <marker id="arr5r" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
             <path d="M0,0 L6,3 L0,6 Z" fill="#D22630"/>
           </marker>
         </defs>
-        <path d="M185,73 Q140,75 110,100" fill="none" stroke="#4aa3e0" stroke-width="2" marker-end="url(#arr5)"/>
-        <text x="140" y="68" fill="#4aa3e0" font-size="9">SLIDE!</text>
+        <path d="M185,73 Q140,75 110,100" fill="none" stroke="#D22630" stroke-width="2" marker-end="url(#arr5)"/>
+        <text x="140" y="68" fill="#D22630" font-size="9">SLIDE!</text>
         <!-- Weakside recovery -->
-        <circle cx="290" cy="100" r="10" fill="#4aa3e0" stroke="#fff" stroke-width="1.5"/>
+        <circle cx="290" cy="100" r="10" fill="#D22630" stroke="#fff" stroke-width="1.5"/>
         <text x="290" y="104" fill="#fff" font-size="7" text-anchor="middle">WS-D</text>
-        <path d="M290,110 Q260,100 210,72" fill="none" stroke="#4aa3e0" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr5)"/>
+        <path d="M290,110 Q260,100 210,72" fill="none" stroke="#D22630" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr5)"/>
         <text x="270" y="80" fill="rgba(74,163,224,0.6)" font-size="8">RECOVER</text>
         <text x="200" y="292" fill="rgba(255,255,255,0.3)" font-size="9" text-anchor="middle">Crease First · Weakside Recovers</text>
       </svg>
@@ -1929,9 +1929,9 @@ li { margin-bottom: 6px; }
         <circle cx="280" cy="160" r="10" fill="#D22630" stroke="#fff" stroke-width="1.5"/>
         <text x="280" y="164" fill="#fff" font-size="7" text-anchor="middle">A3</text>
         <!-- 2 defenders (blue) -->
-        <circle cx="165" cy="115" r="10" fill="#4aa3e0" stroke="#fff" stroke-width="1.5"/>
+        <circle cx="165" cy="115" r="10" fill="#D22630" stroke="#fff" stroke-width="1.5"/>
         <text x="165" y="119" fill="#fff" font-size="7" text-anchor="middle">D1</text>
-        <circle cx="235" cy="115" r="10" fill="#4aa3e0" stroke="#fff" stroke-width="1.5"/>
+        <circle cx="235" cy="115" r="10" fill="#D22630" stroke="#fff" stroke-width="1.5"/>
         <text x="235" y="119" fill="#fff" font-size="7" text-anchor="middle">D2</text>
         <!-- Movement arrows -->
         <defs>
@@ -1960,7 +1960,7 @@ li { margin-bottom: 6px; }
         <circle cx="200" cy="90" r="12" fill="#D22630" stroke="#fff" stroke-width="2"/>
         <text x="200" y="94" fill="#fff" font-size="7" text-anchor="middle" font-weight="bold">SHT</text>
         <!-- Defenders 4m back -->
-        <circle cx="165" cy="112" r="9" fill="#4aa3e0" stroke="#fff" stroke-width="1.5"/>
+        <circle cx="165" cy="112" r="9" fill="#D22630" stroke="#fff" stroke-width="1.5"/>
         <text x="165" y="116" fill="#fff" font-size="6" text-anchor="middle">D</text>
         <!-- BLUE-3 crease cutter -->
         <circle cx="200" cy="60" r="9" fill="#D22630" stroke="#fff" stroke-width="1.5"/>

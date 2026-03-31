@@ -10,7 +10,7 @@
 <style>
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--red:#D22630;--black:#000;--bg:#0a0a0a;--sidebar-bg:#111;--card-bg:#111;--border:rgba(255,255,255,0.08);--text:rgba(255,255,255,0.78);--sidebar-w:240px;--gold:#C5A44E}
+:root{--red:#D22630;--black:#000;--bg:#0a0a0a;--sidebar-bg:#111;--card-bg:#111;--border:rgba(255,255,255,0.08);--text:rgba(255,255,255,0.78);--sidebar-w:240px}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'Montserrat',sans-serif;font-size:15px;line-height:1.8;display:flex;min-height:100vh}
 #sidebar{width:var(--sidebar-w);min-width:var(--sidebar-w);background:var(--sidebar-bg);border-right:1px solid var(--border);position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column;z-index:100;transition:transform .3s ease}
@@ -59,10 +59,10 @@ li{margin-bottom:6px}
 .info-card h4{margin-top:0;color:var(--red);font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px}
 .info-card p{margin:0;font-size:14px}
 .practice-plan{background:var(--card-bg);border-left:4px solid var(--red);border-radius:0 6px 6px 0;margin-bottom:16px;overflow:hidden}
-.practice-plan.phase-1{border-left-color:#4aa3e0}
+.practice-plan.phase-1{border-left-color:#D22630}
 .practice-plan.phase-2{border-left-color:var(--red)}
 .practice-plan.phase-3{border-left-color:#27ae60}
-.practice-plan.phase-4{border-left-color:var(--gold)}
+.practice-plan.phase-4{border-left-color:var(--red)}
 .practice-plan.phase-5{border-left-color:#9b59b6}
 .plan-header{display:flex;align-items:center;padding:18px 24px;cursor:pointer;user-select:none;gap:16px;transition:background .2s}
 .plan-header:hover{background:rgba(255,255,255,0.03)}
@@ -159,10 +159,10 @@ li{margin-bottom:6px}
 .phase-tab{padding:8px 16px;border-radius:4px;font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:2px;cursor:pointer;border:1px solid var(--border);color:rgba(255,255,255,0.5);background:transparent;transition:all .2s}
 .phase-tab:hover{color:#fff;background:rgba(255,255,255,0.06)}
 .phase-tab.active-tab{color:#fff;border-color:var(--red);background:rgba(210,38,48,0.15)}
-.phase-tab[data-phase="1"]{border-color:#4aa3e0;} .phase-tab[data-phase="1"].active-tab{background:rgba(74,163,224,0.15);border-color:#4aa3e0}
+.phase-tab[data-phase="1"]{border-color:#D22630;} .phase-tab[data-phase="1"].active-tab{background:rgba(74,163,224,0.15);border-color:#D22630}
 .phase-tab[data-phase="2"]{border-color:var(--red);} .phase-tab[data-phase="2"].active-tab{background:rgba(210,38,48,0.15);border-color:var(--red)}
 .phase-tab[data-phase="3"]{border-color:#27ae60;} .phase-tab[data-phase="3"].active-tab{background:rgba(39,174,96,0.15);border-color:#27ae60}
-.phase-tab[data-phase="4"]{border-color:var(--gold);} .phase-tab[data-phase="4"].active-tab{background:rgba(197,164,78,0.15);border-color:var(--gold)}
+.phase-tab[data-phase="4"]{border-color:var(--red);} .phase-tab[data-phase="4"].active-tab{background:rgba(197,164,78,0.15);border-color:var(--red)}
 .phase-tab[data-phase="5"]{border-color:#9b59b6;} .phase-tab[data-phase="5"].active-tab{background:rgba(155,89,182,0.15);border-color:#9b59b6}
 .practice-plan.hidden{display:none}
 .stage-card{background:#111;border:1px solid var(--border);border-radius:6px;padding:24px;margin-bottom:16px;position:relative}
@@ -1168,7 +1168,7 @@ a{color:#000;text-decoration:none}
 <svg viewBox="0 0 400 350" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <marker id="arrowRed3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#D22630"/></marker>
-<marker id="arrowBlue3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#4aa3e0"/></marker>
+<marker id="arrowBlue3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#D22630"/></marker>
 <marker id="arrowGreen3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#27ae60"/></marker>
 </defs>
 <rect width="400" height="350" fill="#111"/>
@@ -1184,14 +1184,14 @@ a{color:#000;text-decoration:none}
 <!-- Offense crease -->
 <text x="170" y="270" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">X</text>
 <!-- Defense markers -->
-<text x="310" y="140" text-anchor="middle" fill="#4aa3e0" font-family="Bebas Neue,sans-serif" font-size="22" font-weight="bold">O</text>
+<text x="310" y="140" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="22" font-weight="bold">O</text>
 <text x="310" y="153" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Montserrat,sans-serif">ON-BALL</text>
-<text x="200" y="260" text-anchor="middle" fill="#4aa3e0" font-family="Bebas Neue,sans-serif" font-size="22" font-weight="bold">O</text>
+<text x="200" y="260" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="22" font-weight="bold">O</text>
 <text x="200" y="273" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Montserrat,sans-serif">CREASE D</text>
-<text x="100" y="190" text-anchor="middle" fill="#4aa3e0" font-family="Bebas Neue,sans-serif" font-size="22" font-weight="bold">O</text>
+<text x="100" y="190" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="22" font-weight="bold">O</text>
 <text x="100" y="203" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Montserrat,sans-serif">ADJ D</text>
 <!-- Backside D -->
-<text x="100" y="120" text-anchor="middle" fill="#4aa3e0" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
+<text x="100" y="120" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
 <text x="100" y="133" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Montserrat,sans-serif">BACK D</text>
 <!-- Goalie -->
 <text x="200" y="305" text-anchor="middle" fill="#fff" font-family="Bebas Neue,sans-serif" font-size="16" font-weight="bold">G</text>
@@ -1204,10 +1204,10 @@ a{color:#000;text-decoration:none}
 </g>
 <!-- Step 2: Crease slides to ball, Adjacent fills crease -->
 <g class="step step-2">
-<line x1="210" y1="248" x2="248" y2="195" stroke="#4aa3e0" stroke-width="2.5" stroke-dasharray="6,3" marker-end="url(#arrowBlue3)"/>
-<text x="245" y="230" text-anchor="middle" fill="#4aa3e0" font-size="10" font-weight="bold" font-family="Montserrat,sans-serif">SLIDE</text>
-<line x1="115" y1="195" x2="178" y2="255" stroke="#4aa3e0" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arrowBlue3)"/>
-<text x="130" y="240" text-anchor="middle" fill="#4aa3e0" font-size="10" font-weight="bold" font-family="Montserrat,sans-serif">FILL</text>
+<line x1="210" y1="248" x2="248" y2="195" stroke="#D22630" stroke-width="2.5" stroke-dasharray="6,3" marker-end="url(#arrowBlue3)"/>
+<text x="245" y="230" text-anchor="middle" fill="#D22630" font-size="10" font-weight="bold" font-family="Montserrat,sans-serif">SLIDE</text>
+<line x1="115" y1="195" x2="178" y2="255" stroke="#D22630" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arrowBlue3)"/>
+<text x="130" y="240" text-anchor="middle" fill="#D22630" font-size="10" font-weight="bold" font-family="Montserrat,sans-serif">FILL</text>
 </g>
 <!-- Step 3: Recovery rotation — backside covers adjacent's man -->
 <g class="step step-3">
@@ -1256,11 +1256,11 @@ a{color:#000;text-decoration:none}
 <text x="300" y="280" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">X</text>
 <text x="300" y="291" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Montserrat,sans-serif">M3</text>
 <!-- Clearing team (blue) -->
-<text x="130" y="420" text-anchor="middle" fill="#4aa3e0" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
-<text x="270" y="420" text-anchor="middle" fill="#4aa3e0" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
-<text x="200" y="400" text-anchor="middle" fill="#4aa3e0" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
-<text x="110" y="295" text-anchor="middle" fill="#4aa3e0" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
-<text x="310" y="295" text-anchor="middle" fill="#4aa3e0" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
+<text x="130" y="420" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
+<text x="270" y="420" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
+<text x="200" y="400" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
+<text x="110" y="295" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
+<text x="310" y="295" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
 <text x="200" y="445" text-anchor="middle" fill="#fff" font-family="Bebas Neue,sans-serif" font-size="14">G</text>
 </g>
 <!-- Step 1: Attackmen press D-men, deny outlet -->
@@ -1296,7 +1296,7 @@ a{color:#000;text-decoration:none}
 <div class="diagram-label">5. STANDARD CLEAR 1-4-2 — PASSING SEQUENCE (INTERACTIVE)</div>
 <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
 <defs>
-<marker id="arrowBlue5" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#4aa3e0"/></marker>
+<marker id="arrowBlue5" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#D22630"/></marker>
 <marker id="arrowGreen5" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#27ae60"/></marker>
 </defs>
 <rect width="400" height="500" fill="#111"/>
@@ -1311,21 +1311,21 @@ a{color:#000;text-decoration:none}
 <line x1="185" y1="440" x2="215" y2="440" stroke="#fff" stroke-width="2"/>
 <circle cx="200" cy="440" r="25" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
 <!-- Goalie with ball -->
-<text x="200" y="445" text-anchor="middle" fill="#4aa3e0" font-family="Bebas Neue,sans-serif" font-size="14" font-weight="bold">G</text>
-<circle cx="200" cy="440" r="12" fill="none" stroke="#4aa3e0" stroke-width="1.5"/>
+<text x="200" y="445" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="14" font-weight="bold">G</text>
+<circle cx="200" cy="440" r="12" fill="none" stroke="#D22630" stroke-width="1.5"/>
 <!-- D-men -->
-<text x="120" y="400" text-anchor="middle" fill="#4aa3e0" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
+<text x="120" y="400" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
 <text x="120" y="411" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Montserrat,sans-serif">D1</text>
-<text x="280" y="400" text-anchor="middle" fill="#4aa3e0" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
+<text x="280" y="400" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
 <text x="280" y="411" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Montserrat,sans-serif">D2</text>
 <!-- Midfielders -->
-<text x="80" y="290" text-anchor="middle" fill="#4aa3e0" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
+<text x="80" y="290" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
 <text x="80" y="301" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Montserrat,sans-serif">M1</text>
-<text x="170" y="260" text-anchor="middle" fill="#4aa3e0" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
+<text x="170" y="260" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
 <text x="170" y="271" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Montserrat,sans-serif">M2</text>
-<text x="230" y="260" text-anchor="middle" fill="#4aa3e0" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
+<text x="230" y="260" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
 <text x="230" y="271" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Montserrat,sans-serif">M3</text>
-<text x="320" y="290" text-anchor="middle" fill="#4aa3e0" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
+<text x="320" y="290" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
 <text x="320" y="301" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Montserrat,sans-serif">M4</text>
 <!-- Attackmen -->
 <text x="100" y="155" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">X</text>
@@ -1335,13 +1335,13 @@ a{color:#000;text-decoration:none}
 </g>
 <!-- Step 1: Goalie outlets to D1 -->
 <g class="step step-1">
-<line x1="193" y1="435" x2="135" y2="400" stroke="#4aa3e0" stroke-width="2.5" stroke-dasharray="5,3" marker-end="url(#arrowBlue5)"/>
-<text x="150" y="425" text-anchor="middle" fill="#4aa3e0" font-size="9" font-weight="bold" font-family="Montserrat,sans-serif">OUTLET</text>
+<line x1="193" y1="435" x2="135" y2="400" stroke="#D22630" stroke-width="2.5" stroke-dasharray="5,3" marker-end="url(#arrowBlue5)"/>
+<text x="150" y="425" text-anchor="middle" fill="#D22630" font-size="9" font-weight="bold" font-family="Montserrat,sans-serif">OUTLET</text>
 </g>
 <!-- Step 2: D1 swings to D2 -->
 <g class="step step-2">
-<line x1="132" y1="392" x2="268" y2="392" stroke="#4aa3e0" stroke-width="2.5" stroke-dasharray="5,3" marker-end="url(#arrowBlue5)"/>
-<text x="200" y="385" text-anchor="middle" fill="#4aa3e0" font-size="9" font-weight="bold" font-family="Montserrat,sans-serif">SWING</text>
+<line x1="132" y1="392" x2="268" y2="392" stroke="#D22630" stroke-width="2.5" stroke-dasharray="5,3" marker-end="url(#arrowBlue5)"/>
+<text x="200" y="385" text-anchor="middle" fill="#D22630" font-size="9" font-weight="bold" font-family="Montserrat,sans-serif">SWING</text>
 </g>
 <!-- Step 3: D2 throws long to breaking M4, M4 carries across midfield -->
 <g class="step step-3">
@@ -1378,15 +1378,15 @@ a{color:#000;text-decoration:none}
 <text x="185" y="155" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="20" font-weight="bold">X</text>
 <text x="170" y="170" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="9" font-family="Montserrat,sans-serif">FOGO</text>
 <!-- Opponent FOGO (blue) -->
-<text x="215" y="155" text-anchor="middle" fill="#4aa3e0" font-family="Bebas Neue,sans-serif" font-size="20" font-weight="bold">O</text>
+<text x="215" y="155" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="20" font-weight="bold">O</text>
 <!-- Our wings -->
 <text x="55" y="115" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">X</text>
 <text x="55" y="128" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="8" font-family="Montserrat,sans-serif">WING L</text>
 <text x="55" y="195" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">X</text>
 <text x="55" y="208" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="8" font-family="Montserrat,sans-serif">WING R</text>
 <!-- Opponent wings -->
-<text x="345" y="115" text-anchor="middle" fill="#4aa3e0" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
-<text x="345" y="195" text-anchor="middle" fill="#4aa3e0" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
+<text x="345" y="115" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
+<text x="345" y="195" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
 <!-- Midfielders behind -->
 <text x="55" y="55" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="16" font-weight="bold">X</text>
 <text x="55" y="66" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Montserrat,sans-serif">M (DEF)</text>
@@ -1423,11 +1423,11 @@ a{color:#000;text-decoration:none}
 <text x="245" y="260" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="22" font-weight="bold">X</text>
 <text x="245" y="273" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="9" font-family="Montserrat,sans-serif">R CREASE</text>
 <!-- 5 defenders (blue pentagon) -->
-<text x="200" y="130" text-anchor="middle" fill="#4aa3e0" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
-<text x="120" y="200" text-anchor="middle" fill="#4aa3e0" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
-<text x="280" y="200" text-anchor="middle" fill="#4aa3e0" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
-<text x="148" y="280" text-anchor="middle" fill="#4aa3e0" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
-<text x="252" y="280" text-anchor="middle" fill="#4aa3e0" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
+<text x="200" y="130" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
+<text x="120" y="200" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
+<text x="280" y="200" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
+<text x="148" y="280" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
+<text x="252" y="280" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="18" font-weight="bold">O</text>
 <!-- Goalie -->
 <text x="200" y="305" text-anchor="middle" fill="#fff" font-family="Bebas Neue,sans-serif" font-size="14">G</text>
 <!-- Skip pass arrow -->
@@ -1447,15 +1447,15 @@ a{color:#000;text-decoration:none}
 <line x1="185" y1="300" x2="215" y2="300" stroke="#fff" stroke-width="3"/>
 <rect x="182" y="300" width="36" height="12" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1"/>
 <!-- 5 defenders in pentagon -->
-<text x="200" y="140" text-anchor="middle" fill="#4aa3e0" font-family="Bebas Neue,sans-serif" font-size="22" font-weight="bold">O</text>
+<text x="200" y="140" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="22" font-weight="bold">O</text>
 <text x="200" y="155" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Montserrat,sans-serif">TOP</text>
-<text x="105" y="200" text-anchor="middle" fill="#4aa3e0" font-family="Bebas Neue,sans-serif" font-size="22" font-weight="bold">O</text>
+<text x="105" y="200" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="22" font-weight="bold">O</text>
 <text x="105" y="215" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Montserrat,sans-serif">L WING</text>
-<text x="295" y="200" text-anchor="middle" fill="#4aa3e0" font-family="Bebas Neue,sans-serif" font-size="22" font-weight="bold">O</text>
+<text x="295" y="200" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="22" font-weight="bold">O</text>
 <text x="295" y="215" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Montserrat,sans-serif">R WING</text>
-<text x="145" y="280" text-anchor="middle" fill="#4aa3e0" font-family="Bebas Neue,sans-serif" font-size="22" font-weight="bold">O</text>
+<text x="145" y="280" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="22" font-weight="bold">O</text>
 <text x="145" y="295" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Montserrat,sans-serif">L LOW</text>
-<text x="255" y="280" text-anchor="middle" fill="#4aa3e0" font-family="Bebas Neue,sans-serif" font-size="22" font-weight="bold">O</text>
+<text x="255" y="280" text-anchor="middle" fill="#D22630" font-family="Bebas Neue,sans-serif" font-size="22" font-weight="bold">O</text>
 <text x="255" y="295" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Montserrat,sans-serif">R LOW</text>
 <!-- Pentagon lines -->
 <line x1="200" y1="132" x2="105" y2="192" stroke="rgba(74,163,224,0.25)" stroke-width="1"/>
@@ -1491,7 +1491,7 @@ a{color:#000;text-decoration:none}
 <h1>Practice Plans</h1>
 <p>25 scripted practice plans organized across five progressive phases. Each plan is 90 minutes (unless noted) with a minute-by-minute breakdown. Every drill has a purpose. Every minute is accounted for.</p>
 
-<div class="highlight-box" style="border-left-color:var(--gold);">
+<div class="highlight-box" style="border-left-color:var(--red);">
 <strong>Supplemental Video Library:</strong> The HGR Coach's Vault playlist is a curated collection of coaching drills and demonstrations. Use these as supplemental references for any practice plan below.
 <div class="video-ref" style="margin-top:12px;margin-bottom:0;">
   <div class="video-ref-icon">&#9654;</div>

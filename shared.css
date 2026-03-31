@@ -15,12 +15,7 @@
     --red: #D22630;
     --red-dark: #A01E26;
     --red-light: #E8434C;
-    --navy: #1B2A4A;
-    --navy-dark: #0D1B2E;
-    --purple: #6B2D8B;
-    --purple-dark: #3D1952;
-    --gold: #C5A44E;
-    --gold-dark: #A8893A;
+    /* Brand palette: red / black / white */
     --black: #000000;
     --gray-900: #111111;
     --gray-800: #1A1A1A;
@@ -309,15 +304,15 @@ img {
     box-shadow: 0 8px 25px rgba(210, 38, 48, 0.3);
 }
 
-.btn--gold {
-    background: var(--gold);
+.btn--red-alt {
+    background: var(--red-dark);
     color: var(--white);
 }
 
-.btn--gold:hover {
-    background: var(--gold-dark);
+.btn--red-alt:hover {
+    background: var(--red);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(197, 164, 78, 0.3);
+    box-shadow: 0 8px 25px rgba(210, 38, 48, 0.3);
 }
 
 .btn--white {
@@ -566,19 +561,14 @@ img {
     color: var(--red);
 }
 
-.badge--gold {
-    background: rgba(197, 164, 78, 0.15);
-    color: var(--gold-dark);
+.badge--dark {
+    background: rgba(0, 0, 0, 0.08);
+    color: var(--gray-900);
 }
 
-.badge--navy {
-    background: rgba(27, 42, 74, 0.1);
-    color: var(--navy);
-}
-
-.badge--purple {
-    background: rgba(107, 45, 139, 0.1);
-    color: var(--purple);
+.badge--light {
+    background: rgba(0, 0, 0, 0.04);
+    color: var(--gray-600);
 }
 
 /* ========================================
@@ -843,7 +833,7 @@ img {
 .stars {
     display: flex;
     gap: 2px;
-    color: var(--gold);
+    color: var(--red);
     font-size: 0.85rem;
 }
 
