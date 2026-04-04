@@ -85,8 +85,8 @@ export function AcademyElearningPage({ gender }: { gender: Gender }) {
   )
   const overallPct = totalSteps > 0 ? Math.round((completedSteps / totalSteps) * 100) : 0
 
-  const handleLogout = () => {
-    logout()
+  const handleLogout = async () => {
+    await logout()
     navigate("/")
   }
 

@@ -18,3 +18,22 @@
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+# Netlify Identity — route confirmation/recovery/invite tokens to the SPA
+[[redirects]]
+  from = "/confirmation"
+  to = "/login#confirmation_token=:token"
+  status = 302
+  query = { confirmation_token = ":token" }
+
+[[redirects]]
+  from = "/recovery"
+  to = "/login#recovery_token=:token"
+  status = 302
+  query = { token = ":token" }
+
+[[redirects]]
+  from = "/invite"
+  to = "/login#invite_token=:token"
+  status = 302
+  query = { token = ":token" }

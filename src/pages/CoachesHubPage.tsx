@@ -199,8 +199,8 @@ export function CoachesHubPage({ gender }: CoachesHubPageProps) {
     return result
   }, [filmCategory, filmLevel, filmSearch])
 
-  const handleLogout = () => {
-    logout()
+  const handleLogout = async () => {
+    await logout()
     navigate("/login")
   }
 

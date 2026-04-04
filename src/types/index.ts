@@ -48,7 +48,7 @@ export interface TeamInfo {
 }
 
 // Auth types
-export type UserRole = "player" | "coach"
+export type UserRole = "player" | "coach" | "owner"
 
 export interface User {
   id: string

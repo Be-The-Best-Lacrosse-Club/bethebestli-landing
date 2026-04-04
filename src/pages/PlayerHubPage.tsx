@@ -23,8 +23,8 @@ export function PlayerHubPage({ gender }: { gender: Gender }) {
     return getCourses(gender)
   }, [gender, user?.gradYear])
 
-  const handleLogout = () => {
-    logout()
+  const handleLogout = async () => {
+    await logout()
     navigate("/")
   }
 

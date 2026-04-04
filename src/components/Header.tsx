@@ -13,6 +13,12 @@ const programLinks = (gender: "boys" | "girls") => [
   { label: "Coaches Hub", href: `/${gender}/coaches-hub`, gated: true },
 ]
 
+const roleBadgeStyles: Record<string, string> = {
+  owner: "bg-[var(--btb-red)]/20 text-[var(--btb-red)]",
+  coach: "bg-amber-500/15 text-amber-400",
+  player: "bg-emerald-500/15 text-emerald-400",
+}
+
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -53,7 +59,14 @@ export function Header() {
     setMobileOpen(false)
   }
 
+  const handleLogout = async () => {
+    await logout()
+    go("/")
+  }
+
   const isActive = (href: string) => location.pathname === href || location.pathname.startsWith(href + "/")
+
+  const roleLabel = user?.role === "owner" ? "Owner" : user?.role === "coach" ? "Coach" : "Player"
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -77,7 +90,7 @@ export function Header() {
             Academy
           </button>
 
-          {/* Boys Dropdown */}
+          {/* Boys / Girls Dropdowns */}
           {(["boys", "girls"] as const).map((gender) => (
             <div key={gender} className="relative">
               <button
@@ -138,11 +151,14 @@ export function Header() {
           <div className="w-px h-5 bg-white/[0.08] mx-2" />
 
           {/* Auth */}
-          {isAuthenticated ? (
+          {isAuthenticated && user ? (
             <div className="flex items-center gap-2">
-              <span className="text-[0.68rem] font-semibold text-white/30 uppercase tracking-[1px]">{user?.name}</span>
+              <span className={`text-[0.6rem] font-bold uppercase tracking-[1px] px-2 py-0.5 rounded ${roleBadgeStyles[user.role] || "bg-white/10 text-white/50"}`}>
+                {roleLabel}
+              </span>
+              <span className="text-[0.68rem] font-semibold text-white/30 uppercase tracking-[1px]">{user.name}</span>
               <button
-                onClick={() => { logout(); go("/") }}
+                onClick={handleLogout}
                 className="p-2 text-white/30 hover:text-white transition-colors"
                 title="Logout"
               >
@@ -235,13 +251,21 @@ export function Header() {
 
             <div className="h-px bg-white/[0.07] my-4" />
 
-            {isAuthenticated ? (
-              <button
-                onClick={() => { logout(); go("/") }}
-                className="flex items-center gap-2 text-[0.88rem] font-semibold uppercase tracking-[1.5px] text-white/40 hover:text-white py-2"
-              >
-                <LogOut size={14} /> Logout ({user?.name})
-              </button>
+            {isAuthenticated && user ? (
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <span className={`text-[0.6rem] font-bold uppercase tracking-[1px] px-2 py-0.5 rounded ${roleBadgeStyles[user.role] || "bg-white/10 text-white/50"}`}>
+                    {roleLabel}
+                  </span>
+                  <span className="text-[0.78rem] font-semibold text-white/40">{user.name}</span>
+                </div>
+                <button
+                  onClick={handleLogout}
+                  className="flex items-center gap-2 text-[0.88rem] font-semibold uppercase tracking-[1.5px] text-white/40 hover:text-white py-2"
+                >
+                  <LogOut size={14} /> Logout
+                </button>
+              </div>
             ) : (
               <button
                 onClick={() => go("/login")}
