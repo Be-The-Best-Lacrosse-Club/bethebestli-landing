@@ -1,32 +1,30 @@
 import { useState, useEffect, type FormEvent, type ReactNode } from "react"
+import { useLocation } from "react-router-dom"
 import { Lock } from "lucide-react"
 
 // CHANGE THIS to whatever passcode you want
 const SITE_PASSCODE = "BTB2026"
-const STORAGE_KEY = "btb-site-gate-unlocked"
 
 interface SiteGateProps {
   children: ReactNode
 }
 
 export function SiteGate({ children }: SiteGateProps) {
+  const location = useLocation()
   const [unlocked, setUnlocked] = useState(false)
   const [input, setInput] = useState("")
   const [error, setError] = useState(false)
-  const [checked, setChecked] = useState(false)
 
+  // Re-lock on every route change
   useEffect(() => {
-    const stored = sessionStorage.getItem(STORAGE_KEY) || localStorage.getItem(STORAGE_KEY)
-    if (stored === SITE_PASSCODE) {
-      setUnlocked(true)
-    }
-    setChecked(true)
-  }, [])
+    setUnlocked(false)
+    setInput("")
+    setError(false)
+  }, [location.pathname])
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     if (input.trim() === SITE_PASSCODE) {
-      localStorage.setItem(STORAGE_KEY, SITE_PASSCODE)
       setUnlocked(true)
       setError(false)
     } else {
@@ -35,7 +33,6 @@ export function SiteGate({ children }: SiteGateProps) {
     }
   }
 
-  if (!checked) return null
   if (unlocked) return <>{children}</>
 
   return (
