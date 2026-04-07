@@ -7,12 +7,38 @@ import type { Gender } from "@/types"
 
 type View = "login" | "signup" | "signup-sent" | "forgot" | "forgot-sent"
 
+// Bot protection — honeypot field name and client-side rate limit
+const HONEYPOT_FIELD = "website_url" // Invisible field bots fill, humans don't see
+const RATE_LIMIT_KEY = "btb-signup-attempts"
+const MAX_ATTEMPTS = 5
+const RATE_WINDOW_MS = 60_000 // 1 minute
+
+function checkRateLimit(): { allowed: boolean; resetIn: number } {
+  try {
+    const raw = localStorage.getItem(RATE_LIMIT_KEY)
+    const now = Date.now()
+    const attempts: number[] = raw ? JSON.parse(raw) : []
+    // Keep only attempts from within the rate window
+    const recent = attempts.filter((t) => now - t < RATE_WINDOW_MS)
+    if (recent.length >= MAX_ATTEMPTS) {
+      const oldest = Math.min(...recent)
+      return { allowed: false, resetIn: Math.ceil((RATE_WINDOW_MS - (now - oldest)) / 1000) }
+    }
+    recent.push(now)
+    localStorage.setItem(RATE_LIMIT_KEY, JSON.stringify(recent))
+    return { allowed: true, resetIn: 0 }
+  } catch {
+    return { allowed: true, resetIn: 0 }
+  }
+}
+
 export function LoginPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [fullName, setFullName] = useState("")
   const [program, setProgram] = useState<Gender>("boys")
   const [gradYear, setGradYear] = useState("")
+  const [honeypot, setHoneypot] = useState("") // Bot trap
   const [error, setError] = useState("")
   const [view, setView] = useState<View>("login")
   const [submitting, setSubmitting] = useState(false)
@@ -73,6 +99,21 @@ export function LoginPage() {
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault()
     setError("")
+
+    // Honeypot check — if filled, silently reject (bot trap)
+    if (honeypot.trim() !== "") {
+      // Pretend it succeeded so bots don't know they were caught
+      setView("signup-sent")
+      return
+    }
+
+    // Rate limit check
+    const rate = checkRateLimit()
+    if (!rate.allowed) {
+      setError(`Too many attempts. Please wait ${rate.resetIn} seconds and try again.`)
+      return
+    }
+
     setSubmitting(true)
 
     if (password.length < 8) {
@@ -226,6 +267,20 @@ export function LoginPage() {
             </p>
 
             <form onSubmit={handleSignup} className="space-y-4">
+              {/* Honeypot — invisible to humans, bots fill it in and get blocked */}
+              <div style={{ position: "absolute", left: "-9999px", width: "1px", height: "1px", overflow: "hidden" }} aria-hidden="true">
+                <label htmlFor={HONEYPOT_FIELD}>Website (leave blank)</label>
+                <input
+                  type="text"
+                  id={HONEYPOT_FIELD}
+                  name={HONEYPOT_FIELD}
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
+
               <div>
                 <label className="block text-[0.65rem] font-bold uppercase tracking-[2px] text-white/30 mb-2">Full Name</label>
                 <input
