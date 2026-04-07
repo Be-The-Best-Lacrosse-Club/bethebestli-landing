@@ -88,7 +88,7 @@ export function AcademyPage({ onBack }: { onBack?: () => void }) {
             ))}
           </div>
           <div className="mt-8 text-center">
-            <a href="/programs" className="inline-flex items-center gap-2 text-[0.72rem] font-bold uppercase tracking-[2px] text-white/30 hover:text-[var(--btb-red)] transition-colors">
+            <a href="/boys" className="inline-flex items-center gap-2 text-[0.72rem] font-bold uppercase tracking-[2px] text-white/30 hover:text-[var(--btb-red)] transition-colors">
               View Full Program Details <ArrowRight size={12} />
             </a>
           </div>
@@ -130,7 +130,7 @@ export function AcademyPage({ onBack }: { onBack?: () => void }) {
                 It's for athletes who want to be the best version of themselves — and families who understand what that commitment actually requires.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#" className="inline-flex items-center justify-center gap-2 px-9 py-4 bg-[var(--btb-red)] text-white text-[0.72rem] font-bold uppercase tracking-[2px] rounded hover:bg-[var(--btb-red-dark)] transition-all duration-200">
+                <a href="/contact" className="inline-flex items-center justify-center gap-2 px-9 py-4 bg-[var(--btb-red)] text-white text-[0.72rem] font-bold uppercase tracking-[2px] rounded hover:bg-[var(--btb-red-dark)] transition-all duration-200">
                   Apply for 2026 <ArrowRight size={13} />
                 </a>
                 <a href="mailto:info@bethebestli.com" className="inline-flex items-center justify-center gap-2 px-9 py-4 border border-white/15 text-white/50 text-[0.72rem] font-bold uppercase tracking-[2px] rounded hover:border-white/30 hover:text-white transition-all duration-200">

@@ -59,10 +59,7 @@ export function Footer() {
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-3 pt-8 border-t border-white/[0.05] text-[0.7rem] text-white/20">
           <span>&copy; 2026 Be The Best Lacrosse. All rights reserved.</span>
-          <div className="flex gap-5">
-            <a href="#" className="hover:text-white/40 transition-colors">Privacy</a>
-            <a href="#" className="hover:text-white/40 transition-colors">Terms</a>
-          </div>
+          <a href="/contact" className="hover:text-white/40 transition-colors">Contact</a>
         </div>
       </div>
     </footer>

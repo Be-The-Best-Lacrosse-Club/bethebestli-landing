@@ -175,7 +175,7 @@ export function Header() {
           )}
 
           <a
-            href="#apply"
+            href="/contact"
             className="ml-2 px-5 py-2 bg-[var(--btb-red)] text-white text-[0.72rem] font-bold uppercase tracking-[1.5px] rounded hover:bg-[var(--btb-red-dark)] transition-colors"
           >
             Apply Now
@@ -276,7 +276,7 @@ export function Header() {
             )}
 
             <a
-              href="#apply"
+              href="/contact"
               onClick={() => setMobileOpen(false)}
               className="mt-4 block text-center px-8 py-3 bg-[var(--btb-red)] text-white font-bold uppercase tracking-[1.5px] rounded text-sm"
             >
