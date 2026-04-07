@@ -3,15 +3,31 @@ import { ArrowRight, ChevronDown } from "lucide-react"
 export function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center text-white overflow-hidden bg-black" id="home">
+      {/* Background video */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        className="absolute inset-0 w-full h-full object-cover z-0 opacity-50"
+      >
+        <source src="/assets/hero/brody.mp4" type="video/mp4" />
+        <source src="/assets/hero/33g_1.mp4" type="video/mp4" />
+      </video>
+
+      {/* Dark gradient overlay for legibility */}
+      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/50 via-black/40 to-black/85" />
+
       {/* Grid */}
-      <div className="absolute inset-0 z-[1]" style={{
+      <div className="absolute inset-0 z-[2]" style={{
         backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(255,255,255,0.03) 80px), repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(255,255,255,0.03) 80px)`
       }} />
       {/* Red glow bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-[50%] z-[2]" style={{
+      <div className="absolute bottom-0 left-0 right-0 h-[50%] z-[3]" style={{
         background: "radial-gradient(ellipse 100% 70% at 50% 100%, rgba(210,38,48,0.3) 0%, transparent 65%)"
       }} />
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--btb-red)]/40 to-transparent z-[3]" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--btb-red)]/40 to-transparent z-[4]" />
 
       <div className="relative z-10 w-full max-w-[920px] px-6 pt-28 pb-16 text-center flex flex-col items-center">
 
@@ -41,7 +57,7 @@ export function Hero() {
 
         {/* CTAs */}
         <div className="animate-fade-up-delay-4 flex gap-3 justify-center flex-wrap">
-          <a href="#apply" className="inline-flex items-center gap-2 px-8 py-4 bg-[var(--btb-red)] text-white text-[0.72rem] font-bold uppercase tracking-[2px] rounded hover:bg-[var(--btb-red-dark)] hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(210,38,48,0.4)] transition-all duration-200">
+          <a href="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-[var(--btb-red)] text-white text-[0.72rem] font-bold uppercase tracking-[2px] rounded hover:bg-[var(--btb-red-dark)] hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(210,38,48,0.4)] transition-all duration-200">
             Apply for 2026 <ArrowRight size={13} />
           </a>
           <a href="#proof" className="inline-flex items-center gap-2 px-8 py-4 border border-white/12 text-white/60 text-[0.72rem] font-bold uppercase tracking-[2px] rounded hover:border-white/30 hover:text-white transition-all duration-200">
