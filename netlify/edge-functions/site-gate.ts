@@ -196,4 +196,5 @@ function getLoginHTML(error: boolean): string {
 
 export const config = {
   path: "/*",
+  excludedPath: ["/.netlify/*"],
 }
