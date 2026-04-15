@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BTB Coach Tools</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', sans-serif; background: #0a0a0a; color: #fff; min-height: 100vh; }
+
+  .header {
+    background: #000; border-bottom: 3px solid #D22630;
+    padding: 24px 20px; text-align: center;
+  }
+  .header h1 {
+    font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem;
+    letter-spacing: 3px; text-transform: uppercase;
+  }
+  .header h1 span { color: #D22630; }
+  .header p { color: #888; font-size: 0.85rem; margin-top: 4px; }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 30px 20px 60px; }
+
+  .section-label {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem;
+    color: #D22630; letter-spacing: 2px; text-transform: uppercase;
+    margin: 30px 0 14px; padding-bottom: 6px;
+    border-bottom: 1px solid #222;
+  }
+  .section-label:first-of-type { margin-top: 10px; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+
+  .card {
+    background: #141414; border: 1px solid #2a2a2a; border-radius: 12px;
+    padding: 22px 20px; text-decoration: none; color: #fff;
+    transition: all 0.2s; display: flex; flex-direction: column; gap: 8px;
+    position: relative; overflow: hidden;
+  }
+  .card:hover { border-color: #D22630; transform: translateY(-2px); }
+  .card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: #D22630; opacity: 0; transition: opacity 0.2s;
+  }
+  .card:hover::before { opacity: 1; }
+
+  .card-icon { font-size: 1.6rem; }
+  .card-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 1px; }
+  .card-desc { font-size: 0.82rem; color: #999; line-height: 1.4; }
+  .card-badge {
+    display: inline-block; padding: 2px 8px; border-radius: 4px;
+    font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+    align-self: flex-start;
+  }
+  .badge-staff { background: #1a2a1a; color: #6bff8a; }
+  .badge-local { background: #2a1a1a; color: #ff6b6b; }
+  .badge-sheet { background: #1a1a2a; color: #5b9aff; }
+  .badge-pass { background: #2a2a1a; color: #ffcc5b; }
+
+  .divider { height: 1px; background: #1a1a1a; margin: 10px 0; }
+
+  .password-note {
+    background: #1a1a1a; border: 1px solid #333; border-radius: 8px;
+    padding: 14px 18px; margin-top: 24px; font-size: 0.8rem; color: #888; line-height: 1.5;
+  }
+  .password-note strong { color: #ccc; }
+  .password-note code { background: #222; padding: 2px 6px; border-radius: 3px; color: #D22630; font-size: 0.8rem; }
+
+  .footer-bar {
+    text-align: center; padding: 20px; color: #333; font-size: 0.75rem;
+    border-top: 1px solid #1a1a1a; margin-top: 40px;
+  }
+
+  @media (max-width: 600px) {
+    .grid { grid-template-columns: 1fr; }
+    .header h1 { font-size: 1.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1><span>BTB</span> Coach Tools</h1>
+  <p>Everything your coaching staff needs — one page.</p>
+</div>
+
+<div class="container">
+
+  <div class="section-label">Film & Analysis</div>
+  <div class="grid">
+    <a class="card" href="/film-breakdown.html">
+      <div class="card-icon">🎬</div>
+      <div class="card-title">Film Breakdown</div>
+      <div class="card-desc">Paste a YouTube link → AI tags every play with timestamps, phases, and coaching points. Results save to Google Sheet.</div>
+      <span class="card-badge badge-staff">Staff Access</span>
+    </a>
+    <a class="card" href="/film-study-lab/">
+      <div class="card-icon">📚</div>
+      <div class="card-title">Film Study Lab</div>
+      <div class="card-desc">Full coaching video library organized by concept. POWLAX, D1 film, and tagged game clips at every level.</div>
+      <span class="card-badge badge-staff">Staff Access</span>
+    </a>
+    <a class="card" href="http://localhost:8765" target="_blank">
+      <div class="card-icon">🖥️</div>
+      <div class="card-title">Local Film Server</div>
+      <div class="card-desc">Hudl video upload + Whisper transcription. For processing game film from your Mac. Dan's machine only.</div>
+      <span class="card-badge badge-local">Dan's Mac Only</span>
+    </a>
+  </div>
+
+  <div class="section-label">Playbooks</div>
+  <div class="grid">
+    <a class="card" href="/btb-boys-offense-playbook.html">
+      <div class="card-icon">⚔️</div>
+      <div class="card-title">Boys Offense</div>
+      <div class="card-desc">Motion offense, fades, follows, cuts, picks, passing, and full systems with D1 film.</div>
+      <span class="card-badge badge-pass">Password</span>
+    </a>
+    <a class="card" href="/btb-boys-defense-playbook.html">
+      <div class="card-icon">🛡️</div>
+      <div class="card-title">Boys Defense</div>
+      <div class="card-desc">Slides, zone schemes, man-down packages, individual defense, and riding systems.</div>
+      <span class="card-badge badge-pass">Password</span>
+    </a>
+    <a class="card" href="/btb-boys-transition-playbook.html">
+      <div class="card-icon">🔄</div>
+      <div class="card-title">Boys Transition</div>
+      <div class="card-desc">Clears, rides, fast breaks, substitutions, and faceoff plays.</div>
+      <span class="card-badge badge-pass">Password</span>
+    </a>
+    <a class="card" href="/btb-girls-offense-playbook.html">
+      <div class="card-icon">⚔️</div>
+      <div class="card-title">Girls Offense</div>
+      <div class="card-desc">Spacing, fades, cuts, picks, passing, and behind-the-cage concepts.</div>
+      <span class="card-badge badge-pass">Password</span>
+    </a>
+    <a class="card" href="/btb-girls-defense-playbook.html">
+      <div class="card-icon">🛡️</div>
+      <div class="card-title">Girls Defense</div>
+      <div class="card-desc">Backer zone, slides, recovery, help defense, and individual positioning.</div>
+      <span class="card-badge badge-pass">Password</span>
+    </a>
+    <a class="card" href="/btb-girls-transition-playbook.html">
+      <div class="card-icon">🔄</div>
+      <div class="card-title">Girls Transition</div>
+      <div class="card-desc">Draw controls, clears, riding, fast breaks, and man-up offense.</div>
+      <span class="card-badge badge-pass">Password</span>
+    </a>
+  </div>
+
+  <div class="section-label">Coaching Resources</div>
+  <div class="grid">
+    <a class="card" href="/btb-boys-coaching-manual.html">
+      <div class="card-icon">📋</div>
+      <div class="card-title">Boys Coaching Manual</div>
+      <div class="card-desc">Complete coaching reference — practice plans, drill library, and program philosophy.</div>
+      <span class="card-badge badge-pass">Password</span>
+    </a>
+    <a class="card" href="/btb-girls-coaching-manual.html">
+      <div class="card-icon">📋</div>
+      <div class="card-title">Girls Coaching Manual</div>
+      <div class="card-desc">Complete coaching reference for the girls program with age-appropriate progressions.</div>
+      <span class="card-badge badge-pass">Password</span>
+    </a>
+    <a class="card" href="/coaches-hub.html">
+      <div class="card-icon">🏠</div>
+      <div class="card-title">Coaches Hub</div>
+      <div class="card-desc">Central dashboard for all coaching resources, downloads, and program tools.</div>
+      <span class="card-badge badge-pass">Password</span>
+    </a>
+    <a class="card" href="/btb-coach-ai.html">
+      <div class="card-icon">🤖</div>
+      <div class="card-title">Coach AI Assistant</div>
+      <div class="card-desc">AI-powered coaching assistant for game planning, drill selection, and film review.</div>
+      <span class="card-badge badge-staff">Staff Access</span>
+    </a>
+  </div>
+
+  <div class="section-label">Data & Analytics</div>
+  <div class="grid">
+    <a class="card" href="https://docs.google.com/spreadsheets/d/1St_fFa2GU67ULc0uhukPa8iGiwEIwxA-FVAZBJtB7y2Tu1iWB_aaopuZ" target="_blank">
+      <div class="card-icon">📊</div>
+      <div class="card-title">Film Analytics Sheet</div>
+      <div class="card-desc">Google Sheet with tagged plays, player analytics, game summaries, teaching trends, and practice priorities.</div>
+      <span class="card-badge badge-sheet">Google Sheet</span>
+    </a>
+    <a class="card" href="https://btb-os.netlify.app" target="_blank">
+      <div class="card-icon">⚙️</div>
+      <div class="card-title">BTB-OS Dashboard</div>
+      <div class="card-desc">Operations dashboard — Airtable, TeamSnap, LeagueApps, staff management.</div>
+      <span class="card-badge badge-staff">Staff Access</span>
+    </a>
+  </div>
+
+  <div class="password-note">
+    <strong>Access Info:</strong><br>
+    Player pages: <code>#BTBLAX26</code> &nbsp;|&nbsp; Coach pages: <code>#BTBCOACH26</code><br>
+    Film Breakdown + Film Study Lab use the coach password. Playbooks are password-gated on first visit.
+  </div>
+
+  <div class="footer-bar">
+    BTB Lacrosse Club — Our Culture Built Us. Our Hard Work Made Us.
+  </div>
+</div>
+
+</body>
+</html>

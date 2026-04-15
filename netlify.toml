@@ -3,6 +3,11 @@
   publish = "dist"
 
 [[redirects]]
+  from = "/coach-tools.html"
+  to = "/coach-tools.html"
+  status = 200
+
+[[redirects]]
   from = "/film-breakdown.html"
   to = "/film-breakdown.html"
   status = 200
