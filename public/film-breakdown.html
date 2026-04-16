@@ -1206,6 +1206,7 @@
             const u = new URL(url);
             if (u.hostname.includes('youtu.be')) return u.pathname.slice(1).split('/')[0];
             if (u.searchParams.has('v')) return u.searchParams.get('v');
+            if (u.pathname.includes('/live/')) return u.pathname.split('/live/')[1].split('/')[0].split('?')[0];
             if (u.pathname.includes('/embed/')) return u.pathname.split('/embed/')[1].split('/')[0];
             if (u.pathname.includes('/shorts/')) return u.pathname.split('/shorts/')[1].split('/')[0];
         } catch(e) {}
