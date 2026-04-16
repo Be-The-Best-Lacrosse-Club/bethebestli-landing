@@ -8,3 +8,8 @@ _archive/
 
 # Local Netlify folder
 .netlify
+
+# Local notes / transcripts (keep out of git)
+Claude*.txt
+*conversation*.txt
+*transcript*.txt

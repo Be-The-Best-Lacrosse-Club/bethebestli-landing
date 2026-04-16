@@ -1140,11 +1140,9 @@
     'use strict';
 
     // ─── CONFIG ───────────────────────────────────────
-    const GEMINI_KEY = 'AIzaSyDHVIQp2MB_G_Z_Ev8-WeRtJmFtFrxXkgU';
-    const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`;
+    const GEMINI_URL = '/.netlify/functions/gemini-analyze';
     const TRANSCRIPT_URL = '/.netlify/functions/youtube-transcript';
-    const SHEETS_WEBHOOK = 'https://script.google.com/macros/s/AKfycbyLz8IzFau00mve4vCxSbtpGAKHmZRHFhXx-Dx6qUGrM9Yz8wqGU3HLiYeGxyvlXnEpCw/exec';
-    const SHEETS_API_KEY = 'BTB_SECRET_123';
+    const SHEETS_URL = '/.netlify/functions/sheets-save';
     const PASSWORD = '#BTBCOACH26';
 
     // ─── ELEMENTS ─────────────────────────────────────
@@ -1571,21 +1569,20 @@ ${transcript}`;
 
         try {
             const payload = {
-                api_key: SHEETS_API_KEY,
                 video_id: currentVideoId,
                 game_context: contextInput.value.trim() || '',
                 analyzed_at: new Date().toISOString(),
                 plays: currentPlays
             };
 
-            const res = await fetch(SHEETS_WEBHOOK, {
+            const res = await fetch(SHEETS_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload),
-                mode: 'no-cors'
+                body: JSON.stringify(payload)
             });
 
-            // no-cors means we can't read the response, but the request was sent
+            if (!res.ok) throw new Error(`Save failed (${res.status})`);
+
             saveBtn.classList.add('saved');
             saveBtn.innerHTML = `
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
