@@ -33,6 +33,11 @@
   to = "/defensive-playbook.html"
   status = 200
 
+[[redirects]]
+  from = "/playbook-studio.html"
+  to = "/playbook-studio.html"
+  status = 200
+
 # Film Study Lab — serve static files directly
 [[redirects]]
   from = "/film-study-lab/*"
