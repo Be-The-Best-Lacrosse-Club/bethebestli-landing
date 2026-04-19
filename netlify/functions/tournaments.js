@@ -1,41 +1,75 @@
 const https = require("https");
 
-const TOKEN = process.env.TEAMSNAP_TOKEN;
-const API_HOST = "api.teamsnap.com";
-const API_PATH_PREFIX = "/v3";
+const CLIENT_ID = process.env.TEAMSNAP_CLIENT_ID;
+const CLIENT_SECRET = process.env.TEAMSNAP_CLIENT_SECRET;
+const REFRESH_TOKEN = process.env.TEAMSNAP_REFRESH_TOKEN;
+const STATIC_TOKEN = process.env.TEAMSNAP_ACCESS_TOKEN;
 
-function request(path) {
+const AUTH_HOST = "auth.teamsnap.com";
+const API_HOST = "api.teamsnap.com";
+const API_PREFIX = "/v3";
+
+function httpsRequest({ hostname, path, method = "GET", headers = {}, body = null }) {
   return new Promise((resolve, reject) => {
-    const opts = {
-      hostname: API_HOST,
-      path: API_PATH_PREFIX + path,
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + TOKEN,
-        Accept: "application/vnd.collection+json",
-      },
-    };
+    const opts = { hostname, path, method, headers };
     const req = https.request(opts, (res) => {
       let data = "";
       res.on("data", (c) => (data += c));
       res.on("end", () => {
-        if (res.statusCode >= 400) {
-          return reject(new Error(`TeamSnap ${res.statusCode}: ${data.slice(0, 200)}`));
-        }
-        try {
-          resolve(JSON.parse(data));
-        } catch (e) {
-          reject(new Error("Invalid JSON from TeamSnap: " + e.message));
-        }
+        resolve({ statusCode: res.statusCode, body: data });
       });
     });
     req.on("error", reject);
     req.setTimeout(15000, () => {
       req.destroy();
-      reject(new Error("TeamSnap request timed out"));
+      reject(new Error("Request timed out"));
     });
+    if (body) req.write(body);
     req.end();
   });
+}
+
+async function exchangeRefreshToken() {
+  const body =
+    `grant_type=refresh_token` +
+    `&refresh_token=${encodeURIComponent(REFRESH_TOKEN)}` +
+    `&client_id=${encodeURIComponent(CLIENT_ID)}` +
+    `&client_secret=${encodeURIComponent(CLIENT_SECRET)}`;
+
+  const res = await httpsRequest({
+    hostname: AUTH_HOST,
+    path: "/oauth/token",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Content-Length": Buffer.byteLength(body),
+    },
+    body,
+  });
+
+  if (res.statusCode >= 400) {
+    throw new Error(`TeamSnap token refresh failed (${res.statusCode}): ${res.body.slice(0, 300)}`);
+  }
+
+  const json = JSON.parse(res.body);
+  if (!json.access_token) throw new Error("No access_token in refresh response");
+  return json.access_token;
+}
+
+async function apiGet(path, accessToken) {
+  const res = await httpsRequest({
+    hostname: API_HOST,
+    path: API_PREFIX + path,
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + accessToken,
+      Accept: "application/vnd.collection+json",
+    },
+  });
+  if (res.statusCode >= 400) {
+    throw new Error(`TeamSnap API ${res.statusCode} on ${path}: ${res.body.slice(0, 200)}`);
+  }
+  return JSON.parse(res.body);
 }
 
 function itemToObj(item) {
@@ -55,46 +89,52 @@ exports.handler = async function (event) {
     "Cache-Control": "public, max-age=900, stale-while-revalidate=3600",
   };
 
-  if (!TOKEN) {
-    return {
-      statusCode: 500,
-      headers,
-      body: JSON.stringify({
-        error: "TEAMSNAP_TOKEN environment variable is not set. Add it in Netlify → Site settings → Environment variables.",
-      }),
-    };
-  }
-
-  const q = event.queryStringParameters || {};
-  const year = parseInt(q.year, 10) || new Date().getFullYear();
-  const fromMonth = parseInt(q.from, 10) || 5;
-  const toMonth = parseInt(q.to, 10) || 7;
-
-  const startedAfter = `${year}-${String(fromMonth).padStart(2, "0")}-01T00:00:00Z`;
-  const lastDay = new Date(year, toMonth, 0).getDate();
-  const startedBefore = `${year}-${String(toMonth).padStart(2, "0")}-${lastDay}T23:59:59Z`;
-
   try {
-    const meRes = await request("/me");
+    let accessToken;
+    if (CLIENT_ID && CLIENT_SECRET && REFRESH_TOKEN) {
+      accessToken = await exchangeRefreshToken();
+    } else if (STATIC_TOKEN) {
+      accessToken = STATIC_TOKEN;
+    } else {
+      return {
+        statusCode: 500,
+        headers,
+        body: JSON.stringify({
+          error:
+            "TeamSnap is not configured. Set TEAMSNAP_CLIENT_ID, TEAMSNAP_CLIENT_SECRET, and TEAMSNAP_REFRESH_TOKEN in Netlify environment variables. Run /teamsnap-setup.html for the one-time authorization flow.",
+        }),
+      };
+    }
+
+    const q = event.queryStringParameters || {};
+    const year = parseInt(q.year, 10) || new Date().getFullYear();
+    const fromMonth = parseInt(q.from, 10) || 5;
+    const toMonth = parseInt(q.to, 10) || 7;
+    const startedAfter = `${year}-${String(fromMonth).padStart(2, "0")}-01T00:00:00Z`;
+    const lastDay = new Date(year, toMonth, 0).getDate();
+    const startedBefore = `${year}-${String(toMonth).padStart(2, "0")}-${lastDay}T23:59:59Z`;
+
+    const meRes = await apiGet("/me", accessToken);
     const meItems = collectionItems(meRes);
     if (!meItems.length) throw new Error("Could not load TeamSnap user profile.");
     const userId = itemToObj(meItems[0]).id;
 
-    const teamsRes = await request(`/teams/search?user_id=${userId}`);
+    const teamsRes = await apiGet(`/teams/search?user_id=${userId}`, accessToken);
     const teams = collectionItems(teamsRes).map(itemToObj);
 
     const eventsByTeam = await Promise.all(
       teams.map(async (team) => {
         try {
-          const res = await request(
+          const res = await apiGet(
             `/events/search?team_id=${team.id}&started_after=${encodeURIComponent(
               startedAfter
-            )}&started_before=${encodeURIComponent(startedBefore)}`
+            )}&started_before=${encodeURIComponent(startedBefore)}`,
+            accessToken
           );
           return collectionItems(res)
             .map(itemToObj)
             .map((ev) => ({ ...ev, _team_name: team.name, _team_id: team.id }));
-        } catch (e) {
+        } catch {
           return [];
         }
       })
@@ -117,7 +157,6 @@ exports.handler = async function (event) {
         is_tbd: !!ev.is_tbd,
       });
     }
-
     for (const k of Object.keys(months)) {
       months[k].sort((a, b) => new Date(a.start) - new Date(b.start));
     }
