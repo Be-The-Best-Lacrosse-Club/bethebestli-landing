@@ -114,13 +114,17 @@ exports.handler = async function (event) {
     const lastDay = new Date(year, toMonth, 0).getDate();
     const startedBefore = `${year}-${String(toMonth).padStart(2, "0")}-${lastDay}T23:59:59Z`;
 
-    const meRes = await apiGet("/me", accessToken);
-    const meItems = collectionItems(meRes);
-    if (!meItems.length) throw new Error("Could not load TeamSnap user profile.");
-    const userId = itemToObj(meItems[0]).id;
+    const BTB_DIVISION_BOYS = 1027769;
+    const BTB_DIVISION_GIRLS = 1027768;
+    const EXCLUDED_TEAM_IDS = new Set([10427986, 10427987, 10427988, 10427984]);
 
-    const teamsRes = await apiGet(`/teams/search?user_id=${userId}`, accessToken);
-    const teams = collectionItems(teamsRes).map(itemToObj);
+    const [boysRes, girlsRes] = await Promise.all([
+      apiGet(`/teams/search?division_id=${BTB_DIVISION_BOYS}`, accessToken),
+      apiGet(`/teams/search?division_id=${BTB_DIVISION_GIRLS}`, accessToken),
+    ]);
+    const teams = [...collectionItems(boysRes), ...collectionItems(girlsRes)]
+      .map(itemToObj)
+      .filter((t) => !EXCLUDED_TEAM_IDS.has(t.id));
 
     const eventsByTeam = await Promise.all(
       teams.map(async (team) => {
