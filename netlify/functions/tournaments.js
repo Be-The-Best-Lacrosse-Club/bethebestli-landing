@@ -145,30 +145,38 @@ exports.handler = async function (event) {
       .flat()
       .filter((ev) => ev.start_date && ev.name && !EXCLUDE_RE.test(ev.name));
 
-    const sorted = [...allEvents].sort(
-      (a, b) => new Date(a.start_date) - new Date(b.start_date)
-    );
+    const byKey = {};
+    for (const ev of allEvents) {
+      const key = `${ev._team_name}|${ev.name}|${ev.location_name || ""}`;
+      if (!byKey[key]) byKey[key] = [];
+      byKey[key].push(ev);
+    }
 
     const grouped = [];
-    for (const ev of sorted) {
-      const last = grouped[grouped.length - 1];
-      const sameTournament =
-        last &&
-        last._team_name === ev._team_name &&
-        last.name === ev.name &&
-        (last.location_name || "") === (ev.location_name || "");
-      if (sameTournament) {
-        const lastEnd = new Date(last._end_date || last.start_date);
+    for (const key of Object.keys(byKey)) {
+      const list = byKey[key].sort(
+        (a, b) => new Date(a.start_date) - new Date(b.start_date)
+      );
+      let current = null;
+      for (const ev of list) {
+        if (!current) {
+          current = { ...ev, _end_date: ev.start_date, _days: 1 };
+          continue;
+        }
+        const lastEnd = new Date(current._end_date);
         const thisStart = new Date(ev.start_date);
         const daysApart = (thisStart - lastEnd) / (1000 * 60 * 60 * 24);
         if (daysApart >= 0 && daysApart <= 7) {
-          last._end_date = ev.start_date;
-          last._days = (last._days || 1) + 1;
-          continue;
+          current._end_date = ev.start_date;
+          current._days++;
+        } else {
+          grouped.push(current);
+          current = { ...ev, _end_date: ev.start_date, _days: 1 };
         }
       }
-      grouped.push({ ...ev, _end_date: ev.start_date, _days: 1 });
+      if (current) grouped.push(current);
     }
+    grouped.sort((a, b) => new Date(a.start_date) - new Date(b.start_date));
 
     const months = {};
     for (const ev of grouped) {
