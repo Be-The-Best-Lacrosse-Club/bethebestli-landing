@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { ArrowRight, Calendar, Target, Users, Trophy, MapPin } from "lucide-react"
+import { ArrowRight, Calendar, Clock, Target, Users, Trophy, MapPin } from "lucide-react"
 import { SEO } from "@/components/shared/SEO"
 
 type Camp = {
@@ -8,6 +8,7 @@ type Camp = {
   tagline: string
   dates: string
   range: string
+  time: string
   location: string
   forWho: string
   description: string
@@ -15,7 +16,7 @@ type Camp = {
   icon: typeof Trophy
 }
 
-// TODO: Confirm pricing, daily times, and exact age/grad ranges per camp.
+// TODO: Confirm pricing and exact age/grad ranges per camp.
 const CAMPS: Camp[] = [
   {
     key: "main",
@@ -23,15 +24,16 @@ const CAMPS: Camp[] = [
     tagline: "The Flagship.",
     dates: "June 30 – July 3",
     range: "4 Days · Any Consecutive",
+    time: "9 AM – 1 PM Daily",
     location: "Plainedge Park",
     forWho: "All eligible BTB athletes",
     description:
       "Four days of full-field development. Stick skills, team concepts, small-sided games, and the BTB Standard. The summer's signature camp.",
     bullets: [
       "Full-field offense and defense",
-      "Daily film session",
       "Small-sided games and tournament play",
       "Pro and college coaching staff",
+      "BTB Standard accountability",
     ],
     icon: Trophy,
   },
@@ -41,6 +43,7 @@ const CAMPS: Camp[] = [
     tagline: "Master Your Spot.",
     dates: "July 28 – July 30",
     range: "3 Days · Any Consecutive",
+    time: "9 – 11 AM Daily",
     location: "Location TBD",
     forWho: "Position-focused players ready to specialize",
     description:
@@ -59,6 +62,7 @@ const CAMPS: Camp[] = [
     tagline: "Build the Foundation.",
     dates: "August 18 – August 20",
     range: "3 Days · Any Consecutive",
+    time: "9 – 11 AM Daily",
     location: "Location TBD",
     forWho: "Classes of 2034–2037",
     description:
@@ -243,6 +247,10 @@ export function CampsPage() {
                       {c.range}
                     </div>
                     <div className="flex md:justify-end items-center gap-1.5 mt-3 text-[0.78rem] text-white/55">
+                      <Clock size={12} className={i === 0 ? "text-[var(--btb-red)]" : "text-white/40"} />
+                      {c.time}
+                    </div>
+                    <div className="flex md:justify-end items-center gap-1.5 mt-1.5 text-[0.78rem] text-white/55">
                       <MapPin size={12} className={i === 0 ? "text-[var(--btb-red)]" : "text-white/40"} />
                       {c.location}
                     </div>
@@ -270,12 +278,6 @@ export function CampsPage() {
                 stat: "Every Day",
                 text: "Coached by the same pros and college players that lead our travel teams. No filler staff.",
                 icon: Users,
-              },
-              {
-                title: "Daily Film",
-                stat: "Built In",
-                text: "Morning sessions are recorded and reviewed before afternoon — corrections applied same day.",
-                icon: Target,
               },
               {
                 title: "Small Groups",
