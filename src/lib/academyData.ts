@@ -41,6 +41,7 @@ export interface WallOfFameEntry {
   name: string
   gender: "boys" | "girls"
   tier: AgeTier
+  courseId: string
   completedAt: string
 }
 
