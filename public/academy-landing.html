@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BTB Digital Academy — Film. IQ. Systems. Execution.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+
+/* ─── RESET + BASE ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --red: #D22630;
+  --red-dark: #a01e26;
+  --black: #000;
+  --graphite: #0a0a0a;
+  --charcoal: #111;
+  --steel: #1a1a1a;
+  --mute: #666;
+  --white: #fff;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --boys: #3B82F6;
+  --girls: #EC4899;
+}
+html { scroll-behavior: auto; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: #000;
+  color: #fff;
+  overflow-x: hidden;
+  cursor: none;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--red); color: white; }
+
+/* ─── CURSOR ─── */
+#cur { position:fixed;top:0;left:0;z-index:9999;width:10px;height:10px;background:var(--red);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);mix-blend-mode:difference;transition:width .3s var(--ease),height .3s var(--ease); }
+#cur-ring { position:fixed;top:0;left:0;z-index:9998;width:36px;height:36px;border:1px solid rgba(255,255,255,.3);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);transition:opacity .3s; }
+body:has(a:hover) #cur,body:has(button:hover) #cur { width:40px;height:40px;background:#fff; }
+body:has(a:hover) #cur-ring,body:has(button:hover) #cur-ring { opacity:0; }
+a,button{cursor:none;}
+
+/* ─── SCROLL PROGRESS ─── */
+#prog { position:fixed;top:0;left:0;height:2px;width:0%;background:var(--red);z-index:9997;transition:width .08s linear; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 48px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Anton', sans-serif; font-size: 18px; letter-spacing: 0.06em;
+}
+.nav-logo-mark {
+  width: 30px; height: 30px; background: var(--red);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; transform: skew(-8deg);
+}
+.nav-right { display: flex; align-items: center; gap: 24px; }
+.nav-link { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.5); transition: color 0.2s; }
+.nav-link:hover { color: #fff; }
+.nav-cta {
+  padding: 10px 24px; background: var(--red);
+  font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+  transition: background 0.2s;
+}
+.nav-cta:hover { background: #fff; color: #000; }
+
+/* ─── HERO ─── */
+#hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 64px 80px;
+  position: relative; overflow: hidden;
+  background: #000;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 25% 60%, rgba(210,38,48,0.2) 0%, transparent 50%),
+    radial-gradient(ellipse at 75% 20%, rgba(210,38,48,0.08) 0%, transparent 45%);
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse at 40% 50%, black 20%, transparent 70%);
+}
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.3em;
+  color: var(--red); text-transform: uppercase; margin-bottom: 28px;
+  position: relative; z-index: 2;
+  opacity: 0; transform: translateY(16px);
+  animation: fadeUp 0.7s var(--ease) 0.3s forwards;
+}
+.hero-eyebrow::before { content: ''; width: 32px; height: 2px; background: var(--red); }
+
+.hero-title {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(72px, 13vw, 180px);
+  line-height: 0.87; letter-spacing: -0.01em;
+  text-transform: uppercase;
+  position: relative; z-index: 2;
+  margin-bottom: 32px;
+}
+.hero-title .line { overflow: hidden; display: block; }
+.hero-title .line span {
+  display: block;
+  transform: translateY(110%);
+  animation: slideUp 0.9s var(--ease) forwards;
+}
+.hero-title .line:nth-child(1) span { animation-delay: 0.15s; }
+.hero-title .line:nth-child(2) span { animation-delay: 0.28s; }
+.hero-title .line:nth-child(3) span { animation-delay: 0.41s; }
+.hero-title .red { color: var(--red); }
+
+.hero-bottom {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  flex-wrap: wrap; gap: 32px;
+  position: relative; z-index: 2;
+  opacity: 0;
+  animation: fadeUp 0.8s var(--ease) 0.7s forwards;
+}
+.hero-desc {
+  max-width: 480px;
+  font-size: 16px; line-height: 1.75; color: rgba(255,255,255,0.45); font-weight: 300;
+}
+.hero-desc strong { color: #fff; font-weight: 600; }
+.hero-ctas { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+
+/* ─── BTN ─── */
+.btn-primary {
+  position: relative; overflow: hidden;
+  padding: 16px 40px;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  background: var(--red); color: #fff;
+  clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+  transition: color 0.3s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary::after {
+  content: ''; position: absolute; inset: 0;
+  background: #fff; transform: translateY(101%);
+  transition: transform 0.35s var(--ease);
+}
+.btn-primary:hover { color: #000; }
+.btn-primary:hover::after { transform: translateY(0); }
+.btn-primary span { position: relative; z-index: 1; }
+
+.btn-ghost {
+  padding: 16px 40px;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  background: transparent; color: rgba(255,255,255,0.5);
+  border: 1px solid rgba(255,255,255,0.15);
+  transition: color 0.2s, border-color 0.2s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-ghost:hover { color: #fff; border-color: rgba(255,255,255,0.5); }
+
+/* ─── PROGRAM BADGE ─── */
+.prog-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 14px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  border-radius: 2px;
+}
+.prog-badge.boys { background: rgba(59,130,246,0.15); color: var(--boys); border: 1px solid rgba(59,130,246,0.25); }
+.prog-badge.girls { background: rgba(236,72,153,0.15); color: var(--girls); border: 1px solid rgba(236,72,153,0.25); }
+.prog-badge.both { background: rgba(210,38,48,0.12); color: var(--red); border: 1px solid rgba(210,38,48,0.25); }
+
+/* ─── STATS MARQUEE ─── */
+#stats-bar {
+  background: var(--steel); border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 0; overflow: hidden;
+}
+.marquee-track {
+  display: flex; gap: 0;
+  animation: marquee 22s linear infinite;
+  white-space: nowrap;
+}
+.marquee-item {
+  display: inline-flex; align-items: center; gap: 20px;
+  padding: 18px 40px;
+  font-family: 'Anton', sans-serif; font-size: 16px; letter-spacing: 0.04em;
+  text-transform: uppercase; color: rgba(255,255,255,0.3);
+}
+.marquee-item.hl { color: rgba(255,255,255,0.7); }
+.marquee-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
+@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ─── SECTION BASE ─── */
+.section { padding: 120px 64px; position: relative; overflow: hidden; }
+.section-inner { max-width: 1200px; margin: 0 auto; }
+.section-eyebrow {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.3em;
+  color: var(--red); text-transform: uppercase; margin-bottom: 16px;
+}
+.section-eyebrow::before { content: ''; width: 28px; height: 2px; background: var(--red); }
+.section-title {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(48px, 7vw, 88px);
+  line-height: 0.9; letter-spacing: 0.01em; text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.section-title .accent { color: var(--red); }
+
+/* ─── WHAT YOU GET — 4 PILLARS ─── */
+#pillars { background: var(--charcoal); }
+.pillars-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0; margin-top: 64px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.pillar {
+  padding: 48px 32px;
+  border-right: 1px solid rgba(255,255,255,0.06);
+  position: relative; overflow: hidden;
+  transition: background 0.3s;
+  opacity: 0; transform: translateY(40px);
+}
+.pillar:last-child { border-right: none; }
+.pillar::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+  background: var(--red); transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s var(--ease);
+}
+.pillar:hover { background: rgba(210,38,48,0.05); }
+.pillar:hover::before { transform: scaleX(1); }
+.pillar.in { opacity: 1; transform: translateY(0); transition: opacity 0.7s ease, transform 0.7s var(--ease); }
+.pillar-num { font-family: 'Anton', sans-serif; font-size: 11px; letter-spacing: 0.3em; color: var(--red); margin-bottom: 20px; }
+.pillar-icon { font-size: 36px; margin-bottom: 16px; }
+.pillar-title { font-family: 'Anton', sans-serif; font-size: 26px; text-transform: uppercase; margin-bottom: 12px; line-height: 1; }
+.pillar-text { font-size: 13px; line-height: 1.7; color: rgba(255,255,255,0.45); }
+
+/* ─── PROGRAM SPLIT ─── */
+#programs { background: #000; }
+.programs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 64px; }
+.program-card {
+  position: relative; overflow: hidden;
+  padding: 64px 48px;
+  border: 1px solid rgba(255,255,255,0.06);
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s var(--ease), border-color 0.3s;
+}
+.program-card.in { opacity: 1; transform: translateY(0); }
+.program-card:hover { border-color: rgba(255,255,255,0.15); }
+.program-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  transition: opacity 0.3s;
+}
+.program-card.boys-card::after { background: var(--boys); }
+.program-card.girls-card::after { background: var(--girls); }
+.program-card-bg {
+  position: absolute; right: -30px; bottom: -40px;
+  font-family: 'Anton', sans-serif; font-size: 15vw;
+  opacity: 0.03; line-height: 1; pointer-events: none; letter-spacing: -0.04em;
+}
+.program-card-bg.boys { color: var(--boys); }
+.program-card-bg.girls { color: var(--girls); }
+.program-num { font-family: 'Anton', sans-serif; font-size: 11px; letter-spacing: 0.3em; color: rgba(255,255,255,0.25); margin-bottom: 20px; }
+.program-title { font-family: 'Anton', sans-serif; font-size: clamp(40px, 5vw, 64px); text-transform: uppercase; line-height: 1; margin-bottom: 8px; }
+.program-title.boys-text { color: var(--boys); }
+.program-title.girls-text { color: var(--girls); }
+.program-sub { font-size: 14px; color: rgba(255,255,255,0.35); margin-bottom: 32px; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 600; }
+.program-features { list-style: none; margin-bottom: 40px; }
+.program-features li {
+  padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 13px; color: rgba(255,255,255,0.6);
+  display: flex; align-items: center; gap: 10px;
+}
+.program-features li::before { content: '▸'; color: var(--red); font-size: 11px; flex-shrink: 0; }
+
+/* ─── COURSES GRID ─── */
+#courses { background: var(--charcoal); }
+.courses-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 64px; background: rgba(255,255,255,0.06); }
+.course-card {
+  background: var(--charcoal); padding: 36px 32px;
+  position: relative; overflow: hidden;
+  cursor: pointer; transition: background 0.3s;
+  opacity: 0; transform: translateY(24px);
+}
+.course-card.in { opacity: 1; transform: translateY(0); transition: opacity 0.6s ease, transform 0.6s var(--ease); }
+.course-card:hover { background: #161616; }
+.course-card::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 0;
+  background: var(--red); transition: width 0.3s var(--ease);
+}
+.course-card:hover::before { width: 3px; }
+.course-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.course-title { font-family: 'Anton', sans-serif; font-size: 22px; text-transform: uppercase; line-height: 1.1; margin-bottom: 8px; }
+.course-desc { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.6; margin-bottom: 16px; }
+.course-meta { display: flex; gap: 12px; font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.25); }
+.course-arrow { position: absolute; top: 36px; right: 32px; font-size: 18px; color: rgba(255,255,255,0.15); transition: color 0.2s, transform 0.2s; }
+.course-card:hover .course-arrow { color: var(--red); transform: translate(3px, -3px); }
+
+/* ─── FILM STATS ─── */
+#film { background: #000; }
+.film-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-top: 64px; }
+.film-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+.film-stat {
+  background: var(--steel); padding: 40px 32px;
+  border: 1px solid rgba(255,255,255,0.05);
+  opacity: 0; transform: translateY(20px);
+}
+.film-stat.in { opacity: 1; transform: translateY(0); transition: opacity 0.6s ease, transform 0.6s var(--ease); }
+.film-stat-val { font-family: 'Anton', sans-serif; font-size: 64px; color: var(--red); line-height: 1; }
+.film-stat-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-top: 6px; }
+.film-clips { display: flex; flex-direction: column; gap: 2px; }
+.film-clip {
+  background: var(--steel); padding: 20px 24px;
+  display: flex; align-items: center; gap: 16px;
+  border: 1px solid rgba(255,255,255,0.05);
+  cursor: pointer; transition: background 0.2s, border-color 0.2s;
+  opacity: 0; transform: translateX(20px);
+}
+.film-clip.in { opacity: 1; transform: translateX(0); transition: opacity 0.6s ease, transform 0.6s var(--ease); }
+.film-clip:hover { background: rgba(210,38,48,0.06); border-color: rgba(210,38,48,0.2); }
+.film-clip-play {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; flex-shrink: 0;
+  transition: background 0.2s, border-color 0.2s;
+}
+.film-clip:hover .film-clip-play { background: var(--red); border-color: var(--red); }
+.film-clip-info { flex: 1; }
+.film-clip-title { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+.film-clip-meta { font-size: 11px; color: rgba(255,255,255,0.35); }
+.film-clip-dur { font-size: 11px; color: rgba(255,255,255,0.25); font-weight: 700; letter-spacing: 0.1em; }
+
+/* ─── PRICING ─── */
+#pricing { background: var(--charcoal); }
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 64px; }
+.price-card {
+  background: var(--steel); padding: 48px 36px;
+  border: 1px solid rgba(255,255,255,0.06);
+  position: relative; overflow: hidden;
+  opacity: 0; transform: translateY(32px);
+}
+.price-card.in { opacity: 1; transform: translateY(0); transition: opacity 0.7s ease, transform 0.7s var(--ease); }
+.price-card.featured { border-color: var(--red); background: linear-gradient(180deg, rgba(210,38,48,0.08), var(--steel)); }
+.price-card.featured::before { content: 'BEST VALUE'; position: absolute; top: 0; right: 24px; background: var(--red); color: #fff; padding: 5px 14px; font-size: 10px; font-weight: 700; letter-spacing: 0.2em; }
+.price-tier { font-size: 10px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--red); margin-bottom: 12px; }
+.price-name { font-family: 'Anton', sans-serif; font-size: 28px; text-transform: uppercase; margin-bottom: 20px; }
+.price-amount { font-family: 'Anton', sans-serif; font-size: 72px; line-height: 1; margin-bottom: 4px; }
+.price-amount .per { font-family: 'Inter', sans-serif; font-size: 15px; color: rgba(255,255,255,0.35); font-weight: 400; }
+.price-list { list-style: none; padding: 24px 0; margin: 24px 0; border-top: 1px solid rgba(255,255,255,0.08); border-bottom: 1px solid rgba(255,255,255,0.08); }
+.price-list li { padding: 8px 0; font-size: 13px; color: rgba(255,255,255,0.6); display: flex; align-items: center; gap: 10px; }
+.price-list li::before { content: '✓'; color: var(--red); font-weight: 700; flex-shrink: 0; }
+
+/* ─── TESTIMONIALS ─── */
+#testimonials { background: #000; }
+.testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 64px; }
+.testimonial {
+  background: var(--steel); padding: 40px 32px;
+  border: 1px solid rgba(255,255,255,0.06);
+  position: relative; overflow: hidden;
+  opacity: 0; transform: translateY(24px);
+}
+.testimonial.in { opacity: 1; transform: translateY(0); transition: opacity 0.7s ease, transform 0.7s var(--ease); }
+.testimonial-quote {
+  font-size: 15px; line-height: 1.75; color: rgba(255,255,255,0.65);
+  margin-bottom: 28px; font-style: italic; font-weight: 300;
+}
+.testimonial-quote::before { content: '"'; font-family: 'Anton', sans-serif; font-size: 64px; color: var(--red); line-height: 0.5; display: block; margin-bottom: 12px; }
+.testimonial-role { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+
+/* ─── MANIFESTO (red section) ─── */
+#manifesto {
+  background: var(--red); padding: 160px 64px;
+  position: relative; overflow: hidden;
+}
+.manifesto-title {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(52px, 9vw, 120px);
+  line-height: 0.9; text-transform: uppercase;
+  max-width: 900px;
+}
+.manifesto-title .dark { color: rgba(0,0,0,0.7); }
+.manifesto-title .white { color: #fff; }
+.manifesto-word { display: inline-block; overflow: hidden; margin-right: 0.15em; }
+.manifesto-word span { display: inline-block; transform: translateY(110%); transition: transform 0.7s var(--ease); }
+.manifesto-word.in span { transform: translateY(0); }
+.manifesto-sep { width: 100%; height: 1px; background: rgba(0,0,0,0.15); margin: 48px 0; }
+.manifesto-sub {
+  font-size: 16px; color: rgba(0,0,0,0.55); max-width: 480px;
+  line-height: 1.75; font-weight: 300;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.8s ease 0.3s, transform 0.8s var(--ease) 0.3s;
+}
+.manifesto-sub.in { opacity: 1; transform: translateY(0); }
+.manifesto-bg {
+  position: absolute; right: -60px; top: 50%; transform: translateY(-50%);
+  font-family: 'Anton', sans-serif; font-size: 30vw;
+  color: rgba(0,0,0,0.06); line-height: 1; pointer-events: none; letter-spacing: -0.04em;
+}
+
+/* ─── FINAL CTA ─── */
+#final-cta {
+  min-height: 100vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; padding: 80px 48px;
+  background: #000; position: relative; overflow: hidden;
+}
+.final-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(210,38,48,0.15) 0%, transparent 60%);
+  animation: breathe 4s ease infinite;
+}
+@keyframes breathe { 0%,100%{opacity:.6;transform:scale(1)} 50%{opacity:1;transform:scale(1.12)} }
+
+.final-eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.4em;
+  color: var(--red); text-transform: uppercase; margin-bottom: 32px;
+  position: relative; z-index: 1;
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s var(--ease);
+}
+.final-eyebrow.in { opacity: 1; transform: translateY(0); }
+
+.final-title {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(56px, 11vw, 140px);
+  text-transform: uppercase; line-height: 0.88;
+  position: relative; z-index: 1; margin-bottom: 48px;
+}
+.final-title .line { display: flex; justify-content: center; overflow: hidden; }
+.final-title .line span { display: block; transform: translateY(110%); transition: transform 0.9s var(--ease); }
+.final-title.in .line:nth-child(1) span { transform: translateY(0); transition-delay: 0s; }
+.final-title.in .line:nth-child(2) span { transform: translateY(0); transition-delay: 0.1s; }
+.final-title.in .line:nth-child(3) span { transform: translateY(0); transition-delay: 0.2s; }
+.final-title .red { color: var(--red); }
+
+.final-btns {
+  display: flex; gap: 14px; position: relative; z-index: 1; flex-wrap: wrap; justify-content: center;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.8s ease 0.4s, transform 0.8s var(--ease) 0.4s;
+}
+.final-btns.in { opacity: 1; transform: translateY(0); }
+.final-tagline {
+  position: absolute; bottom: 40px; left: 0; right: 0; text-align: center;
+  font-size: 10px; letter-spacing: 0.3em; color: rgba(255,255,255,0.12);
+  text-transform: uppercase;
+}
+
+/* ─── KEYFRAMES ─── */
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+@keyframes slideUp { to{transform:translateY(0)} }
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1000px){
+  .pillars-grid{grid-template-columns:1fr 1fr;}
+  .programs-grid{grid-template-columns:1fr;}
+  .courses-grid{grid-template-columns:1fr 1fr;}
+  .film-grid{grid-template-columns:1fr;}
+  .pricing-grid{grid-template-columns:1fr;}
+  .testimonials-grid{grid-template-columns:1fr;}
+}
+@media(max-width:768px){
+  nav{padding:16px 24px;}
+  .section{padding:80px 24px;}
+  #hero{padding:0 24px 64px;}
+  .pillars-grid,.courses-grid{grid-template-columns:1fr;}
+}
+
+</style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div id="cur"></div>
+<div id="cur-ring"></div>
+<div id="prog"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="https://www.bethebestli.com" class="nav-logo">
+    <div class="nav-logo-mark">B</div>
+    BTB
+  </a>
+  <div class="nav-right">
+    <a href="#courses" class="nav-link">Courses</a>
+    <a href="#film" class="nav-link">Film</a>
+    <a href="#pricing" class="nav-link">Pricing</a>
+    <a href="#final-cta" class="nav-cta">Join Free</a>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-eyebrow">BTB Digital Academy</div>
+
+  <h1 class="hero-title">
+    <span class="line"><span>TRAIN</span></span>
+    <span class="line"><span>YOUR <span class="red">MIND</span></span></span>
+    <span class="line"><span>WIN THE FIELD.</span></span>
+  </h1>
+
+  <div class="hero-bottom">
+    <p class="hero-desc">
+      Film study. Player IQ. Systems. Execution.<br>
+      <strong>The on-demand academy that separates Long Island's best from everyone else.</strong>
+      Boys and girls programs — one platform.
+    </p>
+    <div>
+      <div style="display:flex;gap:8px;margin-bottom:20px;">
+        <span class="prog-badge boys">♂ Boys Program</span>
+        <span class="prog-badge girls">♀ Girls Program</span>
+      </div>
+      <div class="hero-ctas">
+        <a href="#final-cta" class="btn-primary"><span>Start Free Trial ▸</span></a>
+        <a href="#courses" class="btn-ghost">Explore Courses</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STATS MARQUEE ═══ -->
+<div id="stats-bar">
+  <div class="marquee-track">
+    <div class="marquee-item hl">488 Players<span class="marquee-dot"></span></div>
+    <div class="marquee-item">125 Hours of Film<span class="marquee-dot"></span></div>
+    <div class="marquee-item hl">48 Modules<span class="marquee-dot"></span></div>
+    <div class="marquee-item">12 D1 Commits<span class="marquee-dot"></span></div>
+    <div class="marquee-item hl">116 Coaches<span class="marquee-dot"></span></div>
+    <div class="marquee-item">25 Elite Teams<span class="marquee-dot"></span></div>
+    <div class="marquee-item hl">Boys + Girls<span class="marquee-dot"></span></div>
+    <div class="marquee-item">Long Island NY<span class="marquee-dot"></span></div>
+    <!-- duplicate for loop -->
+    <div class="marquee-item hl">488 Players<span class="marquee-dot"></span></div>
+    <div class="marquee-item">125 Hours of Film<span class="marquee-dot"></span></div>
+    <div class="marquee-item hl">48 Modules<span class="marquee-dot"></span></div>
+    <div class="marquee-item">12 D1 Commits<span class="marquee-dot"></span></div>
+    <div class="marquee-item hl">116 Coaches<span class="marquee-dot"></span></div>
+    <div class="marquee-item">25 Elite Teams<span class="marquee-dot"></span></div>
+    <div class="marquee-item hl">Boys + Girls<span class="marquee-dot"></span></div>
+    <div class="marquee-item">Long Island NY<span class="marquee-dot"></span></div>
+  </div>
+</div>
+
+<!-- ═══ 4 PILLARS ═══ -->
+<section id="pillars" class="section">
+  <div class="section-inner">
+    <div class="section-eyebrow">Why BTB Academy</div>
+    <h2 class="section-title">PRACTICE MAKES<br><span class="accent">PERMANENT.</span><br>WE MAKE IT RIGHT.</h2>
+
+    <div class="pillars-grid">
+      <div class="pillar">
+        <div class="pillar-num">01 / 04</div>
+        <div class="pillar-icon">🧠</div>
+        <div class="pillar-title">Player IQ</div>
+        <p class="pillar-text">Decision-making frameworks built from 1,000+ live reps. Players learn to read defenses, recognize sets, and execute under pressure before the whistle blows.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">02 / 04</div>
+        <div class="pillar-icon">🎥</div>
+        <div class="pillar-title">Film Study</div>
+        <p class="pillar-text">Curated clips from Notre Dame, Maryland, Hopkins, Duke, and the PLL. Every clip annotated with what to watch and exactly why it works.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">03 / 04</div>
+        <div class="pillar-icon">⚙️</div>
+        <div class="pillar-title">Systems</div>
+        <p class="pillar-text">The exact offensive and defensive playbooks BTB teams run. Position-specific assignments, coaching cues, and quizzes for both boys and girls programs.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">04 / 04</div>
+        <div class="pillar-icon">🏆</div>
+        <div class="pillar-title">Execution</div>
+        <p class="pillar-text">Drillbooks, downloadable workouts, progress tracking, and coach feedback loops. Built for the field, not the classroom. Results you can measure at the next practice.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BOYS / GIRLS SPLIT ═══ -->
+<section id="programs" class="section">
+  <div class="section-inner">
+    <div class="section-eyebrow">Two Programs. One Platform.</div>
+    <h2 class="section-title">BUILT FOR<br><span class="accent">EVERY ATHLETE.</span></h2>
+    <div class="programs-grid">
+
+      <div class="program-card boys-card">
+        <div class="program-card-bg boys">B</div>
+        <div class="program-num">PROGRAM 01</div>
+        <div class="program-title boys-text">Boys</div>
+        <div class="program-sub">Attack · Midfield · Defense · FOGO · Goalie</div>
+        <ul class="program-features">
+          <li>Full Player IQ track (all positions)</li>
+          <li>FOGO mastery: clamp, rake & go</li>
+          <li>2-Man game from X — pick, pop, release</li>
+          <li>Long-pole defense + slide packages</li>
+          <li>College + PLL film library (125 hrs)</li>
+          <li>Recruiting prep: D1 pathway modules</li>
+        </ul>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <a href="#final-cta" class="btn-primary" style="clip-path:none;background:var(--boys);"><span>Join Boys Program ▸</span></a>
+          <span class="prog-badge boys">♂ Boys</span>
+        </div>
+      </div>
+
+      <div class="program-card girls-card">
+        <div class="program-card-bg girls">G</div>
+        <div class="program-num">PROGRAM 02</div>
+        <div class="program-title girls-text">Girls</div>
+        <div class="program-sub">Attack · Midfield · Defense · Draw · Goalie</div>
+        <ul class="program-features">
+          <li>Full Player IQ track (girls game)</li>
+          <li>Draw controls + transition offense</li>
+          <li>8M arc defense: position & help</li>
+          <li>Crease cuts & cage-side finishes</li>
+          <li>College women's film library (48 hrs)</li>
+          <li>Recruiting prep: D1 pathway modules</li>
+        </ul>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <a href="#final-cta" class="btn-primary" style="clip-path:none;background:var(--girls);"><span>Join Girls Program ▸</span></a>
+          <span class="prog-badge girls">♀ Girls</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ COURSES ═══ -->
+<section id="courses" class="section">
+  <div class="section-inner">
+    <div class="section-eyebrow">The Curriculum</div>
+    <h2 class="section-title">48 MODULES.<br><span class="accent">ZERO FILLER.</span></h2>
+    <div class="courses-grid">
+
+      <div class="course-card">
+        <div class="course-tag"><span class="prog-badge both" style="font-size:9px;">BOTH</span> Core</div>
+        <div class="course-title">The 6 Reads Every Player Makes</div>
+        <div class="course-desc">Decision trees built from 1,000+ live reps. Read it before they run it.</div>
+        <div class="course-meta"><span>6 LESSONS</span><span>45 MIN</span><span>✓ MOST POPULAR</span></div>
+        <div class="course-arrow">↗</div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-tag"><span class="prog-badge both" style="font-size:9px;">BOTH</span> Active</div>
+        <div class="course-title">Reading the Slide Package</div>
+        <div class="course-desc">Adjacent vs crease. Beat the slide before it arrives — boys and girls systems.</div>
+        <div class="course-meta"><span>3 LESSONS</span><span>18 MIN</span><span>▸ IN PROGRESS</span></div>
+        <div class="course-arrow">↗</div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-tag"><span class="prog-badge boys" style="font-size:9px;">BOYS</span> Attack</div>
+        <div class="course-title">Attack Footwork: Time & Room</div>
+        <div class="course-desc">Steps, setup, and release mechanics. Right and left hand. Get separation every time.</div>
+        <div class="course-meta"><span>8 LESSONS</span><span>55 MIN</span></div>
+        <div class="course-arrow">↗</div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-tag"><span class="prog-badge girls" style="font-size:9px;">GIRLS</span> Attack</div>
+        <div class="course-title">Crease Cuts & Cage-Side Finishes</div>
+        <div class="course-desc">Reading the 8M arc and finishing under pressure. The girls game, done right.</div>
+        <div class="course-meta"><span>8 LESSONS</span><span>52 MIN</span></div>
+        <div class="course-arrow">↗</div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-tag"><span class="prog-badge boys" style="font-size:9px;">BOYS</span> Systems</div>
+        <div class="course-title">2-Man Game from X</div>
+        <div class="course-desc">The core BTB set. Pick, pop, and release — the offense coaches wish their players understood.</div>
+        <div class="course-meta"><span>7 LESSONS</span><span>52 MIN</span><span>71%</span></div>
+        <div class="course-arrow">↗</div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-tag"><span class="prog-badge both" style="font-size:9px;">BOTH</span> Recruiting</div>
+        <div class="course-title">Elite Prep: College Recruiting</div>
+        <div class="course-desc">What D1 coaches actually watch for, how to build your profile, and the timeline that matters.</div>
+        <div class="course-meta"><span>5 LESSONS</span><span>35 MIN</span></div>
+        <div class="course-arrow">↗</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FILM STATS ═══ -->
+<section id="film" class="section">
+  <div class="section-inner">
+    <div class="section-eyebrow">Film Library</div>
+    <h2 class="section-title">125 HOURS.<br><span class="accent">EVERY WEEK</span> MORE.</h2>
+    <div class="film-grid">
+      <div class="film-stats">
+        <div class="film-stat">
+          <div class="film-stat-val" data-count="125">0</div>
+          <div class="film-stat-label">Total Film Hours</div>
+        </div>
+        <div class="film-stat">
+          <div class="film-stat-val" data-count="340">0</div>
+          <div class="film-stat-label">Annotated Clips</div>
+        </div>
+        <div class="film-stat">
+          <div class="film-stat-val" data-count="8">0</div>
+          <div class="film-stat-label">College Programs</div>
+        </div>
+        <div class="film-stat">
+          <div class="film-stat-val" data-count="52">0</div>
+          <div class="film-stat-label">BTB Game Cuts</div>
+        </div>
+      </div>
+      <div class="film-clips">
+        <div class="film-clip">
+          <div class="film-clip-play">▶</div>
+          <div class="film-clip-info">
+            <div class="film-clip-title">Pat Kavanagh — 2-Man from X (Notre Dame)</div>
+            <div class="film-clip-meta">BOYS · 2-Man Game · Notre Dame</div>
+          </div>
+          <div class="film-clip-dur">4:32</div>
+        </div>
+        <div class="film-clip">
+          <div class="film-clip-play">▶</div>
+          <div class="film-clip-info">
+            <div class="film-clip-title">Northwestern — Draw Control & Fast Break</div>
+            <div class="film-clip-meta">GIRLS · Draw Controls · Northwestern</div>
+          </div>
+          <div class="film-clip-dur">3:42</div>
+        </div>
+        <div class="film-clip">
+          <div class="film-clip-play">▶</div>
+          <div class="film-clip-info">
+            <div class="film-clip-title">Whipsnakes Defensive Slide Package (PLL)</div>
+            <div class="film-clip-meta">BOYS · Slides · PLL</div>
+          </div>
+          <div class="film-clip-dur">5:50</div>
+        </div>
+        <div class="film-clip">
+          <div class="film-clip-play">▶</div>
+          <div class="film-clip-info">
+            <div class="film-clip-title">UNC Women — 8M Arc Set Plays</div>
+            <div class="film-clip-meta">GIRLS · 8M Arc · UNC</div>
+          </div>
+          <div class="film-clip-dur">4:18</div>
+        </div>
+        <div class="film-clip">
+          <div class="film-clip-play">▶</div>
+          <div class="film-clip-info">
+            <div class="film-clip-title">BTB 2031 vs Express North — Coach Cut</div>
+            <div class="film-clip-meta">BOYS · BTB Games · Annotated</div>
+          </div>
+          <div class="film-clip-dur">6:12</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRICING ═══ -->
+<section id="pricing" class="section">
+  <div class="section-inner">
+    <div class="section-eyebrow">Plans</div>
+    <h2 class="section-title">SIMPLE PRICING.<br><span class="accent">ZERO B.S.</span></h2>
+    <div class="pricing-grid">
+
+      <div class="price-card">
+        <div class="price-tier">Individual</div>
+        <div class="price-name">Player Pass</div>
+        <div class="price-amount">$29<span class="per"> /mo</span></div>
+        <ul class="price-list">
+          <li>Full course library (boys or girls)</li>
+          <li>Player IQ + Position School</li>
+          <li>Film study library access</li>
+          <li>Downloadable playbooks</li>
+          <li>Progress tracking + badges</li>
+          <li>Cancel anytime</li>
+        </ul>
+        <a href="#final-cta" class="btn-ghost" style="width:100%;justify-content:center;">Start 7-Day Trial</a>
+      </div>
+
+      <div class="price-card featured">
+        <div class="price-tier">For Teams</div>
+        <div class="price-name">Team Academy</div>
+        <div class="price-amount">$399<span class="per"> /mo</span></div>
+        <ul class="price-list">
+          <li>Up to 25 player accounts</li>
+          <li>Both boys + girls programs</li>
+          <li>Coach dashboard + analytics</li>
+          <li>Custom team film uploads</li>
+          <li>Player progress alerts</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#final-cta" class="btn-primary" style="width:100%;justify-content:center;clip-path:none;"><span>Request Demo ▸</span></a>
+      </div>
+
+      <div class="price-card">
+        <div class="price-tier">Foundation</div>
+        <div class="price-name">Youth Pass</div>
+        <div class="price-amount">$19<span class="per"> /mo</span></div>
+        <ul class="price-list">
+          <li>2nd–4th grade content</li>
+          <li>Stick skills + movement basics</li>
+          <li>Fun-based reps + challenges</li>
+          <li>Daily skill of the day</li>
+          <li>Progress tracking</li>
+          <li>Cancel anytime</li>
+        </ul>
+        <a href="#final-cta" class="btn-ghost" style="width:100%;justify-content:center;">Start 7-Day Trial</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section id="testimonials" class="section">
+  <div class="section-inner">
+    <div class="section-eyebrow">Field Reports</div>
+    <h2 class="section-title">WHAT PLAYERS<br><span class="accent">ARE SAYING.</span></h2>
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <div class="testimonial-quote">The film study changed my whole game. I started seeing defensive rotations before they happened. My high school coaches noticed the difference immediately.</div>
+        <div class="testimonial-role">Player · 2028 BTB Black</div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-quote">I committed to Stony Brook my junior year. I don't think that happens without BTB. The recruiting prep alone was worth every penny.</div>
+        <div class="testimonial-role">Player · Stony Brook Commit</div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-quote">BTB doesn't just develop lacrosse players — it develops confident young female competitors. My daughter is tougher, more coachable, and more self-aware.</div>
+        <div class="testimonial-role">Parent · BTB Storm 2033</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MANIFESTO ═══ -->
+<section id="manifesto">
+  <div class="manifesto-bg">BTB</div>
+  <div style="max-width:1100px;margin:0 auto;position:relative;z-index:1;">
+    <div class="manifesto-title" id="manifestoTitle">
+      <div class="manifesto-word"><span class="dark">PRACTICE</span></div>
+      <div class="manifesto-word"><span class="dark">MAKES</span></div>
+      <br>
+      <div class="manifesto-word"><span class="white">PERMANENT.</span></div>
+    </div>
+    <div class="manifesto-sep"></div>
+    <div class="manifesto-title" id="manifestoTitle2" style="margin-bottom:32px;">
+      <div class="manifesto-word"><span class="dark">WE</span></div>
+      <div class="manifesto-word"><span class="dark">MAKE</span></div>
+      <div class="manifesto-word"><span class="white">IT</span></div>
+      <div class="manifesto-word"><span class="white">RIGHT.</span></div>
+    </div>
+    <p class="manifesto-sub" id="manifestoSub">
+      Every rep. Every film session. Every early morning. This is what separates Long Island lacrosse from everywhere else — and it's what the Academy is built on.
+    </p>
+  </div>
+</section>
+
+<!-- ═══ FINAL CTA ═══ -->
+<section id="final-cta">
+  <div class="final-bg"></div>
+  <div class="final-eyebrow" id="finalEyebrow">Your Season Starts Now</div>
+  <h2 class="final-title" id="finalTitle">
+    <div class="line"><span>YOU'VE GOT</span></div>
+    <div class="line"><span>TWO <span class="red">CHOICES.</span></span></div>
+    <div class="line"><span>LIFT OR GET LIFTED.</span></div>
+  </h2>
+  <div class="final-btns" id="finalBtns">
+    <a href="https://bethebest.leagueapps.com/leagues" class="btn-primary"><span>Join BTB Academy ▸</span></a>
+    <a href="https://btb-os.netlify.app" class="btn-ghost">BTB OS Login</a>
+  </div>
+  <div class="final-tagline">Be The Best Lacrosse Club · Digital Academy · Long Island, NY · Est. 2021</div>
+</section>
+
+<script>
+
+// ─── CURSOR ───────────────────────────────────────────────
+const cur = document.getElementById('cur')
+const ring = document.getElementById('cur-ring')
+let mx=0,my=0,rx=0,ry=0
+document.addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; cur.style.left=mx+'px'; cur.style.top=my+'px'; }, {passive:true})
+;(function raf(){ rx+=(mx-rx)*0.13; ry+=(my-ry)*0.13; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(raf) })()
+
+// ─── SCROLL PROGRESS ──────────────────────────────────────
+const prog = document.getElementById('prog')
+window.addEventListener('scroll', ()=>{
+  const t = document.documentElement.scrollHeight - window.innerHeight
+  prog.style.width = (t>0 ? window.scrollY/t*100 : 0)+'%'
+}, {passive:true})
+
+// ─── INTERSECTION OBSERVER ────────────────────────────────
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting) return
+    const el = e.target
+    // pillar stagger
+    if(el.classList.contains('pillars-grid')){
+      el.querySelectorAll('.pillar').forEach((p,i)=>{
+        setTimeout(()=>p.classList.add('in'), i*100)
+      })
+    }
+    // generic .in
+    else { el.classList.add('in') }
+  })
+},{threshold:0.15})
+
+document.querySelectorAll(
+  '.program-card,.course-card,.film-stat,.film-clip,.price-card,.testimonial,.pillars-grid,.manifesto-sub,.final-eyebrow,.final-title,.final-btns'
+).forEach(el=>obs.observe(el))
+
+// ─── MANIFESTO WORD REVEAL ────────────────────────────────
+const mObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting) return
+    e.target.querySelectorAll('.manifesto-word').forEach((w,i)=>{
+      setTimeout(()=>w.classList.add('in'), i*60)
+    })
+    mObs.unobserve(e.target)
+  })
+},{threshold:0.3})
+document.querySelectorAll('#manifestoTitle,#manifestoTitle2').forEach(el=>mObs.observe(el))
+
+// ─── NUMBER COUNTERS ──────────────────────────────────────
+const cObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting) return
+    const el = e.target
+    const target = +el.dataset.count
+    const dur = 1600
+    const start = performance.now()
+    const run = now=>{
+      const pct = Math.min((now-start)/dur,1)
+      const eased = 1-Math.pow(1-pct,3)
+      el.textContent = Math.floor(eased*target)
+      if(pct<1) requestAnimationFrame(run)
+      else el.textContent = target
+    }
+    requestAnimationFrame(run)
+    cObs.unobserve(el)
+  })
+},{threshold:0.5})
+document.querySelectorAll('[data-count]').forEach(el=>cObs.observe(el))
+
+// ─── MAGNETIC BUTTONS ─────────────────────────────────────
+document.querySelectorAll('.btn-primary,.btn-ghost,.nav-cta').forEach(btn=>{
+  btn.addEventListener('mousemove', e=>{
+    const r = btn.getBoundingClientRect()
+    const dx = (e.clientX - (r.left+r.width/2)) * 0.3
+    const dy = (e.clientY - (r.top+r.height/2)) * 0.3
+    btn.style.transform = `translate(${dx}px,${dy}px)`
+  })
+  btn.addEventListener('mouseleave', ()=>{
+    btn.style.transform = ''
+    btn.style.transition = 'transform 0.5s cubic-bezier(0.16,1,0.3,1)'
+    setTimeout(()=>btn.style.transition='',500)
+  })
+})
+
+// ─── STAGGER COURSE CARDS ────────────────────────────────
+const courseObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting) return
+    e.target.querySelectorAll('.course-card').forEach((c,i)=>{
+      setTimeout(()=>c.classList.add('in'),i*80)
+    })
+    courseObs.unobserve(e.target)
+  })
+},{threshold:0.1})
+const courseGrid = document.querySelector('.courses-grid')
+if(courseGrid) courseObs.observe(courseGrid)
+
+</script>
+</body>
+</html>
