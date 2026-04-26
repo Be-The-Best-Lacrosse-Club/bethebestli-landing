@@ -597,6 +597,7 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
   },
   {
     id: "boys-middle-l2",
+    videoUrl: "https://www.youtube.com/watch?v=ovd8u9ETUBk",
     lessonNumber: 2,
     title: "Dodging Fundamentals",
     topic: "Fundamentals",
@@ -640,6 +641,7 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
   },
   {
     id: "boys-middle-l3",
+    videoUrl: "https://www.youtube.com/watch?v=VxGmfQUvX_k",
     lessonNumber: 3,
     title: "Defensive Footwork and Positioning",
     topic: "Fundamentals",
@@ -918,6 +920,7 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
 const BOYS_HIGH_LESSONS: AcademyLesson[] = [
   {
     id: "boys-high-l1",
+    videoUrl: "https://www.youtube.com/watch?v=GCceU3eGBrc",
     lessonNumber: 1,
     title: "Advanced Offensive Sets",
     topic: "Lacrosse IQ",
@@ -962,6 +965,7 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
   },
   {
     id: "boys-high-l2",
+    videoUrl: "https://www.youtube.com/watch?v=rbL9yXyCXtQ",
     lessonNumber: 2,
     title: "Slide Packages and Team Defense",
     topic: "Lacrosse IQ",
@@ -1295,6 +1299,7 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
 const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
   {
     id: "girls-youth-l1",
+    videoUrl: "https://www.youtube.com/watch?v=QrH4dilJi3c",
     lessonNumber: 1,
     title: "Welcome to Girls Lacrosse",
     topic: "Fundamentals",
@@ -1694,6 +1699,7 @@ const GIRLS_MIDDLE_LESSONS: AcademyLesson[] = [
   },
   {
     id: "girls-middle-l2",
+    videoUrl: "https://www.youtube.com/watch?v=7deaRXF70Q8",
     lessonNumber: 2,
     title: "Dodging in the Girls Game",
     topic: "Fundamentals",
@@ -1732,6 +1738,7 @@ const GIRLS_MIDDLE_LESSONS: AcademyLesson[] = [
   },
   {
     id: "girls-middle-l3",
+    videoUrl: "https://www.youtube.com/watch?v=3f3EEGr6WZk",
     lessonNumber: 3,
     title: "Defensive Footwork",
     topic: "Fundamentals",
@@ -2010,6 +2017,7 @@ const GIRLS_MIDDLE_LESSONS: AcademyLesson[] = [
 const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
   {
     id: "girls-high-l1",
+    videoUrl: "https://www.youtube.com/watch?v=IEt5iXnMtsw",
     lessonNumber: 1,
     title: "Advanced Offensive Concepts",
     topic: "Lacrosse IQ",
@@ -2054,6 +2062,7 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
   },
   {
     id: "girls-high-l2",
+    videoUrl: "https://www.youtube.com/watch?v=2v4vfqctG88",
     lessonNumber: 2,
     title: "Team Defense and Slide Packages",
     topic: "Lacrosse IQ",
@@ -2098,6 +2107,7 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
   },
   {
     id: "girls-high-l3",
+    videoUrl: "https://www.youtube.com/watch?v=dxvAw7zudVg",
     lessonNumber: 3,
     title: "How to Watch Film",
     topic: "Lacrosse IQ",
@@ -2420,6 +2430,7 @@ function getCourseDescription(tier: AgeTier): string {
 export const GOALIE_LESSONS: AcademyLesson[] = [
   {
     id: "pos-goalie-l1",
+    videoUrl: "https://www.youtube.com/watch?v=wORmAJzdBMI",
     lessonNumber: 101,
     title: "The Goalie Mindset",
     topic: "Mental Game",
@@ -2457,6 +2468,7 @@ At BTB, we develop goalies who lead from the crease. That means studying film, k
   },
   {
     id: "pos-goalie-l2",
+    videoUrl: "https://www.youtube.com/watch?v=eI7WKifE8aI",
     lessonNumber: 102,
     title: "Arc Positioning and Angles",
     topic: "Fundamentals",
@@ -2497,6 +2509,7 @@ Every practice session, spend 10 minutes on arc movement with no shots — just 
 export const ATTACK_LESSONS: AcademyLesson[] = [
   {
     id: "pos-attack-l1",
+    videoUrl: "https://www.youtube.com/watch?v=ovd8u9ETUBk",
     lessonNumber: 103,
     title: "Dodging with Purpose",
     topic: "Fundamentals",
@@ -2534,6 +2547,7 @@ The read that matters most: where is the slide coming from? Before you dodge, id
   },
   {
     id: "pos-attack-l2",
+    videoUrl: "https://www.youtube.com/watch?v=4KXp28yNO5Q",
     lessonNumber: 104,
     title: "Feeding and Playing Behind",
     topic: "Lacrosse IQ",
@@ -2574,6 +2588,7 @@ The behind-the-cage dodge: the most valuable is the sweep dodge to GLE (goal lin
 export const DEFENSE_LESSONS: AcademyLesson[] = [
   {
     id: "pos-defense-l1",
+    videoUrl: "https://www.youtube.com/watch?v=VxGmfQUvX_k",
     lessonNumber: 105,
     title: "On-Ball Defense Fundamentals",
     topic: "Fundamentals",
@@ -2611,6 +2626,7 @@ Body positioning on a dodge: when the attacker commits to a split, you need to d
   },
   {
     id: "pos-defense-l2",
+    videoUrl: "https://www.youtube.com/watch?v=rbL9yXyCXtQ",
     lessonNumber: 106,
     title: "Slides, Rotations, and Communication",
     topic: "Lacrosse IQ",
@@ -2651,6 +2667,7 @@ Clearing after a save: the goalie's call starts the clear. "Ball! Ball! Ball!" m
 export const MIDFIELD_LESSONS: AcademyLesson[] = [
   {
     id: "pos-midfield-l1",
+    videoUrl: "https://www.youtube.com/watch?v=BsilXuJ6Hrk",
     lessonNumber: 107,
     title: "The Midfielder's Two-Way Responsibility",
     topic: "Lacrosse IQ",
@@ -2696,6 +2713,7 @@ Physical conditioning is non-negotiable. If you're the kind of midfielder who ne
 const MIDFIELD_LESSONS_EXTRA: AcademyLesson[] = [
   {
     id: "pos-midfield-l2",
+    videoUrl: "https://www.youtube.com/watch?v=mQi0UQz_8ls",
     lessonNumber: 108,
     title: "Reading the Ride and Clear",
     topic: "Lacrosse IQ",
@@ -2750,6 +2768,7 @@ Timing on the clear: when your defenseman has the ball and is being pressured, y
   },
   {
     id: "pos-midfield-l3",
+    videoUrl: "https://www.youtube.com/watch?v=zEtzK0HGeao",
     lessonNumber: 109,
     title: "Wing Play and Transition Offense",
     topic: "Lacrosse IQ",
@@ -2802,6 +2821,7 @@ CHANGING THE POINT OF ATTACK: One of the most valuable things a wing midfielder 
   },
   {
     id: "pos-midfield-l4",
+    videoUrl: "https://www.youtube.com/watch?v=BsilXuJ6Hrk",
     lessonNumber: 110,
     title: "Defensive Responsibilities Off-Ball",
     topic: "Fundamentals",
@@ -2854,6 +2874,7 @@ BALL WATCHING: The most common off-ball defensive mistake is ball watching — y
   },
   {
     id: "pos-midfield-l5",
+    videoUrl: "https://www.youtube.com/watch?v=qtwKIxyOdGk",
     lessonNumber: 111,
     title: "The Complete Midfielder",
     topic: "Mental Game",
@@ -2911,6 +2932,7 @@ SELF-SCOUTING: After every game, ask yourself three questions. Did I get back on
 const FOGO_LESSONS: AcademyLesson[] = [
   {
     id: "pos-fogo-l1",
+    videoUrl: "https://www.youtube.com/watch?v=9N53S_RpBR8",
     lessonNumber: 112,
     title: "What Is FOGO and Why It Matters",
     topic: "Lacrosse IQ",
@@ -2958,6 +2980,7 @@ Your goal: master the faceoff first. Then expand your game outward from there. T
   },
   {
     id: "pos-fogo-l2",
+    videoUrl: "https://www.youtube.com/watch?v=9N53S_RpBR8",
     lessonNumber: 113,
     title: "The Clamp — Foundation of Every Faceoff",
     topic: "Fundamentals",
@@ -3012,6 +3035,7 @@ REPETITION IS EVERYTHING: The clamp feels awkward at first. It becomes automatic
   },
   {
     id: "pos-fogo-l3",
+    videoUrl: "https://www.youtube.com/watch?v=9N53S_RpBR8",
     lessonNumber: 114,
     title: "Counters — The Plunger, Motorcycle, and Jam",
     topic: "Lacrosse IQ",
@@ -3064,6 +3088,7 @@ SCOUTING YOUR OPPONENT: Before every game, watch your opponent's faceoff tendenc
   },
   {
     id: "pos-fogo-l4",
+    videoUrl: "https://www.youtube.com/watch?v=9N53S_RpBR8",
     lessonNumber: 115,
     title: "The FOGO Mindset and Mental Routine",
     topic: "Mental Game",
