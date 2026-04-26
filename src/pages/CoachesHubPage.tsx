@@ -32,6 +32,9 @@ import {
   Tag,
   ArrowRight,
   DollarSign,
+  Users,
+  GraduationCap,
+  TrendingUp,
 } from "lucide-react"
 
 /* ------------------------------------------------------------------ */
@@ -101,6 +104,7 @@ const dashboardCards = [
   { id: "plans", icon: ClipboardList, title: "Practice Plans", description: "Seasonal phase templates with timed segment breakdowns." },
   { id: "certification", icon: Award, title: "Certification", description: "Track your coaching certification requirements and progress." },
   { id: "mypay", icon: DollarSign, title: "My Pay", description: "View your season contract, payment schedule, and payment status." },
+  { id: "playerprogress", icon: GraduationCap, title: "Player Progress", description: "See which players completed academy modules across every age tier." },
 ]
 
 /* ------------------------------------------------------------------ */
@@ -175,6 +179,7 @@ export function CoachesHubPage({ gender }: CoachesHubPageProps) {
       const top = el.getBoundingClientRect().top + window.scrollY - navHeight - 24
       window.scrollTo({ top, behavior: "smooth" })
     }
+    if (id === "playerprogress") loadPlayerProgress()
   }
 
   // Filtered drills
@@ -224,6 +229,26 @@ export function CoachesHubPage({ gender }: CoachesHubPageProps) {
       if (data) setPaymentData(data)
     })
   }, [user?.email])
+
+  // Player Progress state
+  interface PlayerCourse { courseId: string; lessonsCompleted: number; totalLessons: number; pct: number; completedAt: string | null }
+  interface PlayerRow { userId: string; courses: PlayerCourse[]; totalPct: number; lastActive: string | null }
+  const [playerProgress, setPlayerProgress] = useState<PlayerRow[]>([])
+  const [progressLoading, setProgressLoading] = useState(false)
+  const [progressLoaded, setProgressLoaded] = useState(false)
+
+  const loadPlayerProgress = () => {
+    if (progressLoaded) return
+    setProgressLoading(true)
+    fetch(`/.netlify/functions/academy-coach-dashboard?gender=${gender}`)
+      .then(r => r.json())
+      .then(data => {
+        setPlayerProgress(data.players || [])
+        setProgressLoaded(true)
+      })
+      .catch(() => {})
+      .finally(() => setProgressLoading(false))
+  }
 
   const label = gender === "boys" ? "Boys" : "Girls"
 
@@ -276,7 +301,7 @@ export function CoachesHubPage({ gender }: CoachesHubPageProps) {
       {/* ── Dashboard Cards ── */}
       <section className="py-12 px-6 border-b border-white/[0.07]">
         <div className="max-w-[1000px] mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
             {dashboardCards.map((card) => (
               <button
                 key={card.id}
@@ -527,7 +552,7 @@ export function CoachesHubPage({ gender }: CoachesHubPageProps) {
                   <div className="text-[0.65rem] font-bold uppercase tracking-[4px] text-[var(--btb-red)] mb-5">
                     Related Films
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
                     {getRelatedFilms(selectedFilm).map((related) => (
                       <button
                         key={related.id}
@@ -1061,6 +1086,111 @@ export function CoachesHubPage({ gender }: CoachesHubPageProps) {
               <p className="text-[0.85rem] text-white/40 mb-1">No payment record found</p>
               <p className="text-[0.72rem] text-white/20">
                 Contact BTB operations if you believe this is an error.
+              </p>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════ */}
+      {/*  PLAYER PROGRESS DASHBOARD                                    */}
+      {/* ══════════════════════════════════════════════════════════════ */}
+      <section
+        id="playerprogress"
+        ref={(el) => { sectionRefs.current["playerprogress"] = el }}
+        className="py-20 px-6 border-t border-white/[0.07]"
+      >
+        <div className="max-w-[1000px] mx-auto">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+            <div>
+              <div className="text-[0.65rem] font-bold uppercase tracking-[4px] text-[var(--btb-red)] mb-4">
+                Player Progress
+              </div>
+              <h2 className="font-display text-[clamp(2rem,4vw,3rem)] uppercase tracking-wide leading-[0.92] mb-2">
+                Academy<br /><span className="text-white/20">Completion</span>
+              </h2>
+              <p className="text-[0.82rem] text-white/35 max-w-[420px] leading-relaxed">
+                Live view of every player's academy progress — pulled from Airtable in real time.
+              </p>
+            </div>
+            <button
+              onClick={loadPlayerProgress}
+              disabled={progressLoading}
+              className="flex items-center gap-2 px-5 py-2.5 border border-white/[0.1] text-white/50 hover:text-white hover:border-white/30 transition-colors text-[0.72rem] font-bold uppercase tracking-[1.5px] rounded-lg disabled:opacity-40"
+            >
+              <TrendingUp size={14} />
+              {progressLoading ? "Loading..." : progressLoaded ? "Refresh" : "Load Progress"}
+            </button>
+          </div>
+
+          {!progressLoaded && !progressLoading && (
+            <div className="p-12 rounded-xl border border-white/[0.07] bg-white/[0.02] text-center">
+              <GraduationCap size={32} className="mx-auto text-white/10 mb-4" />
+              <p className="text-white/30 text-[0.84rem]">Click "Load Progress" to fetch live player data from Airtable.</p>
+            </div>
+          )}
+
+          {progressLoading && (
+            <div className="p-12 rounded-xl border border-white/[0.07] bg-white/[0.02] text-center">
+              <p className="text-white/30 text-[0.84rem] animate-pulse">Fetching player progress...</p>
+            </div>
+          )}
+
+          {progressLoaded && playerProgress.length === 0 && (
+            <div className="p-12 rounded-xl border border-white/[0.07] bg-white/[0.02] text-center">
+              <Users size={32} className="mx-auto text-white/10 mb-4" />
+              <p className="text-white/30 text-[0.84rem]">No player progress recorded yet for {genderLabel} academy.</p>
+              <p className="text-white/20 text-[0.72rem] mt-1">Progress appears here as players complete lessons.</p>
+            </div>
+          )}
+
+          {progressLoaded && playerProgress.length > 0 && (
+            <div className="space-y-3">
+              {/* Header */}
+              <div className="grid grid-cols-[1fr_120px_80px] gap-4 px-5 py-2 text-[0.6rem] font-bold uppercase tracking-[2px] text-white/25">
+                <span>Player ID</span>
+                <span className="text-center">Courses</span>
+                <span className="text-right">Overall</span>
+              </div>
+
+              {playerProgress.map((player) => (
+                <div key={player.userId} className="bg-white/[0.02] border border-white/[0.07] rounded-xl overflow-hidden">
+                  {/* Player summary row */}
+                  <div className="grid grid-cols-[1fr_120px_80px] gap-4 px-5 py-4 items-center">
+                    <div>
+                      <p className="text-[0.82rem] font-semibold text-white truncate font-mono">{player.userId}</p>
+                      <p className="text-[0.68rem] text-white/25 mt-0.5">
+                        {player.courses.length} course{player.courses.length !== 1 ? "s" : ""} started
+                        {player.lastActive && <span className="ml-2">· Last: {player.lastActive}</span>}
+                      </p>
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      {player.courses.map((c) => (
+                        <div key={c.courseId} className="flex items-center gap-2">
+                          <span className="text-[9px] font-bold uppercase tracking-wider text-white/30 w-16 truncate">{c.courseId.replace(`${gender}-`, "")}</span>
+                          <div className="flex-1 h-1 bg-white/[0.08] rounded-full overflow-hidden">
+                            <div
+                              className={`h-full rounded-full transition-all ${
+                                c.pct === 100 ? "bg-emerald-500" : "bg-[var(--btb-red)]"
+                              }`}
+                              style={{ width: `${c.pct}%` }}
+                            />
+                          </div>
+                          <span className="text-[9px] font-bold text-white/30 w-8 text-right">{c.pct}%</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="text-right">
+                      <span className={`font-display text-xl ${player.totalPct === 100 ? "text-emerald-400" : "text-white"}`}>
+                        {player.totalPct}%
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+
+              <p className="text-[0.68rem] text-white/20 text-center pt-4">
+                {playerProgress.length} player{playerProgress.length !== 1 ? "s" : ""} with recorded progress · Open Airtable for full detail
               </p>
             </div>
           )}

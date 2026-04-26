@@ -12,12 +12,15 @@ export interface QuizQuestion {
   explanation: string
 }
 
+export type Position = "all" | "attack" | "midfield" | "defense" | "goalie"
+
 export interface AcademyLesson {
   id: string
   lessonNumber: number
   title: string
   topic: "Fundamentals" | "Lacrosse IQ" | "Mental Game" | "Character"
   pillar: Pillar
+  position?: Position   // undefined = "all" (applies to every position)
   description: string
   videoUrl?: string
   questions: QuizQuestion[]
@@ -50,6 +53,16 @@ export const PILLAR_CONFIG: Record<Pillar, { label: string; description: string 
 }
 
 export const PILLAR_ORDER: Pillar[] = ["game", "leadership", "team"]
+
+export const POSITION_CONFIG: Record<Position, { label: string; short: string }> = {
+  all:      { label: "All Positions", short: "All" },
+  attack:   { label: "Attack",        short: "ATT" },
+  midfield: { label: "Midfield",      short: "MID" },
+  defense:  { label: "Defense",       short: "DEF" },
+  goalie:   { label: "Goalie",        short: "GK" },
+}
+
+export const POSITION_ORDER: Position[] = ["all", "attack", "midfield", "defense", "goalie"]
 
 // ─── API ENDPOINTS ────────────────────────────────────────────────────
 

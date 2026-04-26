@@ -32,6 +32,9 @@ import {
   type AgeTier,
   type Pillar,
   type AcademyProgress,
+  type Position,
+  POSITION_CONFIG,
+  POSITION_ORDER,
 } from "@/lib/academyData"
 import {
   ArrowLeft,
@@ -115,6 +118,7 @@ export function PlayerHubPage({ gender }: { gender: Gender }) {
   const [academyProgress, setAcademyProgress] = useState<AcademyProgress>(getAcademyProgress())
   const [activePillarCourse, setActivePillarCourse] = useState<AcademyCourse | null>(null)
   const [activePillar, setActivePillar] = useState<Pillar>("game")
+  const [activePosition, setActivePosition] = useState<Position>("all")
   const [activeLesson, setActiveLesson] = useState<AcademyLesson | null>(null)
 
   // ── Quiz state ───────────────────────────────────────────────────────
@@ -465,7 +469,10 @@ export function PlayerHubPage({ gender }: { gender: Gender }) {
   // ─── PILLAR COURSE DETAIL VIEW ───────────────────────────────────────
   if (activePillarCourse && !activeLesson) {
     const courseProgress = getCourseProgress(activePillarCourse)
-    const pillarLessons  = getLessonsByPillar(activePillarCourse, activePillar)
+    const allPillarLessons = getLessonsByPillar(activePillarCourse, activePillar)
+    const pillarLessons = activePosition === "all"
+      ? allPillarLessons
+      : allPillarLessons.filter((l) => !l.position || l.position === "all" || l.position === activePosition)
 
     return (
       <div className="min-h-screen bg-black text-white">
@@ -521,7 +528,7 @@ export function PlayerHubPage({ gender }: { gender: Gender }) {
               return (
                 <button
                   key={pillar}
-                  onClick={() => setActivePillar(pillar)}
+                  onClick={() => { setActivePillar(pillar); setActivePosition("all") }}
                   className={`text-left p-4 rounded-xl border transition-all ${
                     isActive ? `${colors.bg} ${colors.border} border-2` : "bg-white/5 border-white/10 hover:bg-white/10"
                   }`}
@@ -544,7 +551,31 @@ export function PlayerHubPage({ gender }: { gender: Gender }) {
             })}
           </div>
 
-          <p className="text-white/40 text-sm mb-6">{PILLAR_CONFIG[activePillar].description}</p>
+          <p className="text-white/40 text-sm mb-5">{PILLAR_CONFIG[activePillar].description}</p>
+
+          {/* Position filter */}
+          <div className="flex flex-wrap gap-2 mb-6">
+            {POSITION_ORDER.map((pos) => (
+              <button
+                key={pos}
+                onClick={() => setActivePosition(pos)}
+                className={`px-3 py-1.5 rounded-full text-[0.68rem] font-bold uppercase tracking-[1px] transition-all ${
+                  activePosition === pos
+                    ? "bg-[#D22630] text-white"
+                    : "border border-white/10 text-white/40 hover:text-white/70 hover:border-white/25"
+                }`}
+              >
+                {POSITION_CONFIG[pos].label}
+              </button>
+            ))}
+          </div>
+
+          {pillarLessons.length === 0 && (
+            <div className="py-12 text-center border border-white/[0.06] rounded-xl bg-white/[0.02]">
+              <p className="text-white/30 text-sm">No lessons for this position in this pillar yet.</p>
+              <p className="text-white/20 text-xs mt-1">More position-specific content coming soon.</p>
+            </div>
+          )}
 
           {/* Lessons */}
           <div className="space-y-3">
