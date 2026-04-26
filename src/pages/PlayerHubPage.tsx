@@ -18,6 +18,7 @@ import { CourseView } from "@/components/hubs/players/CourseView"
 import { SEO } from "@/components/shared/SEO"
 import {
   getAcademyCourses,
+  getAcademyCoursesWithPositions,
   getAcademyProgress,
   markLessonComplete,
   markCourseComplete,
@@ -114,7 +115,7 @@ export function PlayerHubPage({ gender }: { gender: Gender }) {
   const [activeCourse, setActiveCourse] = useState<Course | null>(null)
 
   // ── Academy (pillar courses) ─────────────────────────────────────────
-  const academyCourses = useMemo(() => getAcademyCourses(gender), [gender])
+  const academyCourses = useMemo(() => getAcademyCoursesWithPositions(gender), [gender])
   const [academyProgress, setAcademyProgress] = useState<AcademyProgress>(getAcademyProgress())
   const [activePillarCourse, setActivePillarCourse] = useState<AcademyCourse | null>(null)
   const [activePillar, setActivePillar] = useState<Pillar>("game")
