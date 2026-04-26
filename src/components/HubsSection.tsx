@@ -10,7 +10,7 @@ const hubs = [
     headline: "What Is BTB Lacrosse?",
     text: "Our mission, all four programs, what makes BTB different, and the history behind the club.",
     href: "/academy",
-    tag: "Est. 2016",
+    tag: "Est. 2021",
   },
   {
     icon: Users,

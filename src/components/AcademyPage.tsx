@@ -6,7 +6,7 @@ const stats = [
   { num: "500+", label: "Players Developed" },
   { num: "85+", label: "College Commits" },
   { num: "8:1", label: "Player-Coach Ratio" },
-  { num: "2016", label: "Year Founded" },
+  { num: "2021", label: "Year Founded" },
 ]
 
 const programs = [

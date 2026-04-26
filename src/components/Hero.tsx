@@ -50,7 +50,7 @@ export function Hero() {
         {/* Eyebrow */}
         <div className="animate-fade-up-delay-1 inline-flex items-center gap-3 mb-10">
           <div className="h-px w-10 bg-[var(--btb-red)]" />
-          <span className="text-[0.65rem] font-bold uppercase tracking-[4px] text-white/40">Long Island · Est. 2016</span>
+          <span className="text-[0.65rem] font-bold uppercase tracking-[4px] text-white/40">Long Island · Est. 2021</span>
           <div className="h-px w-10 bg-[var(--btb-red)]" />
         </div>
 
