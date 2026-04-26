@@ -12,7 +12,7 @@ export interface QuizQuestion {
   explanation: string
 }
 
-export type Position = "all" | "attack" | "midfield" | "defense" | "goalie"
+export type Position = "all" | "attack" | "midfield" | "defense" | "goalie" | "fogo"
 
 export interface AcademyLesson {
   id: string
@@ -60,9 +60,10 @@ export const POSITION_CONFIG: Record<Position, { label: string; short: string }>
   midfield: { label: "Midfield",      short: "MID" },
   defense:  { label: "Defense",       short: "DEF" },
   goalie:   { label: "Goalie",        short: "GK" },
+  fogo:     { label: "FOGO",           short: "FO" },
 }
 
-export const POSITION_ORDER: Position[] = ["all", "attack", "midfield", "defense", "goalie"]
+export const POSITION_ORDER: Position[] = ["all", "attack", "midfield", "defense", "goalie", "fogo"]
 
 // ─── API ENDPOINTS ────────────────────────────────────────────────────
 
@@ -2690,11 +2691,440 @@ Physical conditioning is non-negotiable. If you're the kind of midfielder who ne
 // ─── INJECT POSITION LESSONS INTO COURSES ────────────────────────────
 // Override getAcademyCourses to merge position-specific bonus lessons
 
+// ─── MIDFIELD BONUS LESSONS (appended to MIDFIELD_LESSONS) ───────────
+
+const MIDFIELD_LESSONS_EXTRA: AcademyLesson[] = [
+  {
+    id: "pos-midfield-l2",
+    lessonNumber: 108,
+    title: "Reading the Ride and Clear",
+    topic: "Lacrosse IQ",
+    pillar: "game",
+    position: "midfield",
+    description: `The ride and clear is where midfield IQ separates good players from great ones. Every time possession changes, you're either riding (trying to force a turnover as the defense clears) or clearing (trying to move the ball safely to your offense). You'll be in both roles multiple times every game.
+
+RIDING: The midfielder's job on a ride is to apply pressure on the clearing defenders while not getting beat for an easy outlet. Pick your man — usually the defender who is one pass away from the goalie — and apply controlled pressure. Don't over-commit to the point where you get spun around and they've got a 4v3 going the other way. Ride with your stick active, cutting off the passing lane, and forcing the ball toward the sideline.
+
+The most valuable thing a middie can do on a ride: make the clearing team use their time. Every second you make them burn is a second your offense doesn't have to defend. A well-organized ride that runs out the shot clock — even if you don't cause a turnover — is a win.
+
+CLEARING: When your team has the ball and is clearing, your job is to get open. Get width — run toward your sideline and create a clear passing lane away from the defense. Don't crowd the goalie or your defensemen. The goalie needs options: one defender going up each sideline, one midfielder filling the middle corridor, and one attacker breaking toward midfield to give the longest outlet.
+
+The cardinal mistake midfielders make on clears: running toward the ball instead of away from it. Instinct says go help — instinct is wrong. Running toward the ball brings your defender with you and eliminates the space. Run away, create space, give your teammate a lane.
+
+Timing on the clear: when your defenseman has the ball and is being pressured, your signal to break is when his feet stop moving. A defender standing still is about to make a pass — that's when you sprint to your lane and give a target.`,
+    questions: [
+      {
+        question: "What is a midfielder's primary job when riding?",
+        options: [
+          "Sprint to the goalie and check his stick",
+          "Apply controlled pressure on a clearing defender while cutting off the passing lane",
+          "Wait at midfield for the clear",
+          "Pressure every defender at once",
+        ],
+        correctAnswer: 1,
+        explanation: "Controlled pressure on one clearing lane — forcing the ball toward the sideline without over-committing.",
+      },
+      {
+        question: "On a clear, why should midfielders run AWAY from the ball?",
+        options: [
+          "To rest",
+          "Running toward the ball brings a defender with you and eliminates space",
+          "The coach tells you to",
+          "It's not true — run to the ball",
+        ],
+        correctAnswer: 1,
+        explanation: "Creating space is the job. Running toward the ball collapses lanes. Run away, create the outlet.",
+      },
+      {
+        question: "When is the right moment for a midfielder to sprint to his clearing lane?",
+        options: [
+          "Immediately after the goalie makes a save",
+          "When the defenseman's feet stop moving — he's about to make a pass",
+          "When the coach calls for it",
+          "At the start of the possession",
+        ],
+        correctAnswer: 1,
+        explanation: "A defender standing still is about to pass. That's your signal to break to your lane and give a target.",
+      },
+    ],
+  },
+  {
+    id: "pos-midfield-l3",
+    lessonNumber: 109,
+    title: "Wing Play and Transition Offense",
+    topic: "Lacrosse IQ",
+    pillar: "game",
+    position: "midfield",
+    description: `Wing play is the most undercoached skill in lacrosse. Most players think of the wings as just a spot to run through on transition — but elite midfielders use the wings to control tempo, create angles, and set up the entire offensive system.
+
+THE WING AS AN OUTLET: When your defense has the ball in your defensive end, the wings are the safest clearing outlets. A midfielder running hard at the wing sideline gives the clearing defenseman a passing target that is away from the ride pressure. As soon as you receive the pass on the wing, you have two decisions: push pace if you have a numbers advantage, or hold the ball and let the offense set up if you don't.
+
+TRANSITION READS FROM THE WING: As you carry the ball up the wing in transition, you're reading three things simultaneously. First: is the goalie outlet pass open for a fast break? Second: is your adjacent attacker open for a quick pass inside? Third: are you getting pressure, and do you need to reset? The answer to the first question determines everything that follows. If there's a break — push it. If there isn't — slow down and set up.
+
+THE WING IN SETTLED OFFENSE: Too many middies disappear once the ball reaches the attackmen in settled offense. Don't. As a midfielder in settled offense, you have two jobs: crashing on shots (get to the crease, be there for the rebound) and maintaining defensive balance (if you go to the crease, someone has to be ready to get back if the ball turns over). Every time the ball goes to the wing in settled offense, the closest midfielder should be moving — either cutting or positioning to crash.
+
+CHANGING THE POINT OF ATTACK: One of the most valuable things a wing midfielder can do is skip the ball to the opposite wing. Defenses collapse toward the ball — a skip pass from one wing to the other shifts the entire defense and creates an open look before the defense can recover. If you're on the wing and the far side looks open — don't hesitate.`,
+    questions: [
+      {
+        question: "What are a midfielder's two jobs in settled offense?",
+        options: [
+          "Dodge and shoot",
+          "Crash on shots for rebounds AND maintain defensive balance if the ball turns over",
+          "Stand at the midline and watch",
+          "Feed the attack only",
+        ],
+        correctAnswer: 1,
+        explanation: "Crashing creates second-chance opportunities. Maintaining balance prevents fast breaks the other way.",
+      },
+      {
+        question: "Why is a skip pass from one wing to the other so valuable?",
+        options: [
+          "It's a long pass that impresses scouts",
+          "It shifts the entire defense and creates an open look before the defense can recover",
+          "It avoids the defense entirely",
+          "Only works in man-up situations",
+        ],
+        correctAnswer: 1,
+        explanation: "Defenses collapse toward the ball. A skip pass outpaces the defensive rotation and creates open shots.",
+      },
+      {
+        question: "On transition from the wing, what is the FIRST thing you read?",
+        options: [
+          "Is there a defensive player near you",
+          "Is the goalie outlet or fast break opportunity available",
+          "What the coach wants",
+          "Where the ball is going next",
+        ],
+        correctAnswer: 1,
+        explanation: "The fast break question comes first — if the break is on, push pace immediately. Everything else follows.",
+      },
+    ],
+  },
+  {
+    id: "pos-midfield-l4",
+    lessonNumber: 110,
+    title: "Defensive Responsibilities Off-Ball",
+    topic: "Fundamentals",
+    pillar: "game",
+    position: "midfield",
+    description: `Off-ball defense is where midfield games are won and lost. When you're not on the ball — which is most of the time — your positioning, communication, and anticipation determine whether your team gives up goals or forces turnovers.
+
+POSITIONING OFF-BALL: As a midfielder defending off-ball, you want to be in a position where you can see both your man AND the ball at the same time. This is called "playing the triangle" — you, your man, and the ball form a triangle, and you position yourself inside that triangle, closer to the goal, with your head on a swivel. If you turn your back to the ball to face your man, you lose track of the entire game. If you face only the ball, your man runs free.
+
+SLIDE READINESS: In most defensive systems, the on-ball midfielder is the primary slide for an adjacent dodger. Before the dodge happens, you need to know: "If the ball carrier beats my teammate, am I ready to go?" This means you're actively watching the ball carrier's speed and direction, not standing flat on your heels. You're on the balls of your feet, hips low, ready to crash the moment your teammate calls "Help!"
+
+SWITCHING AND COMMUNICATION: When two offensive players set a pick, midfielders have to communicate immediately. "Switch!" means you trade defensive assignments. "Fight through!" means your teammate is going to push through the pick and stay with his man. These two calls have to happen before the pick is set — if you're calling them after, you're already late. The defender who goes through the pick first makes the call.
+
+BALL WATCHING: The most common off-ball defensive mistake is ball watching — you get so focused on watching the ball that your man runs to an open spot and you don't notice until it's too late. Discipline yourself to split your attention: two glances at the ball for every one check on your man. Watch his hips, not his hands — hips tell you where a player is actually going.`,
+    questions: [
+      {
+        question: "What does 'playing the triangle' mean for off-ball defenders?",
+        options: [
+          "Standing in a triangle formation with teammates",
+          "Positioning between your man and the ball so you can see both simultaneously",
+          "Guarding three players at once",
+          "A zone defense concept",
+        ],
+        correctAnswer: 1,
+        explanation: "The triangle is you, your man, and the ball. Stay inside it so you can see both without turning your back on either.",
+      },
+      {
+        question: "When should a pick-switch or fight-through call be made?",
+        options: [
+          "After the pick is set",
+          "Before the pick is set — if you're calling it after, you're already late",
+          "Only if the coach signals",
+          "Never — figure it out as it happens",
+        ],
+        correctAnswer: 1,
+        explanation: "Communication has to happen before the screen. Post-pick calls are reactive and usually too late.",
+      },
+      {
+        question: "What body part should you watch to know where an offensive player is going?",
+        options: [
+          "Their hands",
+          "Their eyes",
+          "Their hips — hips tell you the true direction",
+          "Their stick head",
+        ],
+        correctAnswer: 2,
+        explanation: "Hips don't lie. Hands and eyes can fake — where the hips go is where the player is going.",
+      },
+    ],
+  },
+  {
+    id: "pos-midfield-l5",
+    lessonNumber: 111,
+    title: "The Complete Midfielder",
+    topic: "Mental Game",
+    pillar: "leadership",
+    position: "midfield",
+    description: `The great midfielders in lacrosse share one characteristic: they don't hide. When their team is tired, they're still running. When there's a 50/50 ground ball at midfield with a minute left, they're going for it. When the offense stalls, they're the ones who make a move to break it open. They don't wait for the game to come to them.
+
+This is the standard for a complete midfielder: every shift counts. You don't ease into a shift. You don't coast when your team has a comfortable lead. Every time you're on the field, you play at the pace that sets the tone for everyone around you. Your energy is contagious — and so is your lack of energy.
+
+GROUND BALLS ARE YOUR GAME. The midfield battle is decided at midfield, and midfield battles are decided on the ground. If you're not winning your share of ground balls, you're not doing your job. This requires more than athleticism — it requires mental commitment. You have to be willing to go to the ground, take contact, and come up with the ball in situations where the outcome is uncertain. Players who hesitate on ground balls lose them. Players who commit — fully, without flinching — win them.
+
+BE THE CONNECTOR. The best middies aren't necessarily the best athletes on the field. They're the ones who make the team work better as a unit. They communicate on every defensive rotation. They release the ball quickly in transition to keep the pace. They crash on shots to give their attack second chances. They get back on defense to protect their goalie. They do the work that doesn't show up in the stat sheet but shows up in the final score.
+
+SELF-SCOUTING: After every game, ask yourself three questions. Did I get back on defense every possession? Did I win my share of ground balls? Did I keep my pace up for the full game? If you can honestly answer yes to all three, you had a good game — regardless of whether you scored.`,
+    questions: [
+      {
+        question: "What sets great midfielders apart from good ones?",
+        options: [
+          "Speed and size",
+          "They don't hide — they compete on every shift, every ground ball, every defensive rep",
+          "They score the most goals",
+          "They have the best dodges",
+        ],
+        correctAnswer: 1,
+        explanation: "Great midfielders are consistent. They compete on every play, set the tone with their energy, and do the unsexy work.",
+      },
+      {
+        question: "Why do players who hesitate on ground balls lose them?",
+        options: [
+          "They're slower",
+          "Full commitment wins ground balls — hesitation creates doubt and the opponent fills the space",
+          "Ground balls are random",
+          "Smaller players can't win ground balls",
+        ],
+        correctAnswer: 1,
+        explanation: "Ground balls go to the player who commits fully. Hesitation costs you the split-second that decides possession.",
+      },
+      {
+        question: "What are the three self-scout questions a midfielder should ask after every game?",
+        options: [
+          "How many goals, assists, and ground balls did I get?",
+          "Did I get back on defense? Did I win ground balls? Did I keep my pace the full game?",
+          "Did I play well? Did the coach notice me? Did we win?",
+          "Did I dodge well? Did I shoot on goal? Did I communicate?",
+        ],
+        correctAnswer: 1,
+        explanation: "These three questions cover the three core responsibilities of a midfielder — they reveal your real contribution regardless of stats.",
+      },
+    ],
+  },
+]
+
+// ─── FOGO LESSONS ─────────────────────────────────────────────────────
+
+const FOGO_LESSONS: AcademyLesson[] = [
+  {
+    id: "pos-fogo-l1",
+    lessonNumber: 112,
+    title: "What Is FOGO and Why It Matters",
+    topic: "Lacrosse IQ",
+    pillar: "game",
+    position: "fogo",
+    description: `FOGO stands for Face-Off, Get Off. It's a specialized role — the player who takes faceoffs and then immediately comes off the field after the faceoff is won or lost. In modern lacrosse, the FOGO has become one of the most strategically important positions on the field. Teams that dominate faceoffs control possession — and the team that controls possession controls the game.
+
+The math is simple. A college team might take 30 faceoffs in a game. If you win 60% of them, that's 6 extra possessions over your opponent. At the high school level where average goals per possession are low, those extra possessions are the difference between winning and losing. A dominant FOGO is worth more than most people realize.
+
+The position requires an unusual combination of skills: explosive athleticism, hand-eye coordination, tactical intelligence, and mental toughness. Faceoffs are one-on-one competitions that happen under full stadium attention at the start of every possession. A FOGO who flinches mentally — who lets a loss carry into the next faceoff — will cost their team games.
+
+The FOGO role is also evolving. Modern teams are using hybrid FOGOs — players who are good enough on faceoffs to start them but skilled enough as midfielders to stay on the field and contribute in transition. If you want to play at the next level, developing your game beyond faceoffs makes you far more valuable.
+
+Your goal: master the faceoff first. Then expand your game outward from there. The technical skills come first. The tactical intelligence develops over time. And the mental toughness — the ability to reset after a loss and compete just as hard on the next one — is what separates the best from the rest.`,
+    questions: [
+      {
+        question: "What does FOGO stand for?",
+        options: ["Face-Off Get Out", "Face-Off, Get Off", "First On, Go Offense", "Faceoff Only Game Option"],
+        correctAnswer: 1,
+        explanation: "Face-Off, Get Off — the player takes the faceoff and rotates off the field after possession is decided.",
+      },
+      {
+        question: "Why is winning faceoffs so valuable?",
+        options: [
+          "It looks impressive",
+          "Extra possessions directly translate to more scoring opportunities — the team with more possessions controls the game",
+          "Only matters in close games",
+          "Faceoffs are worth a point",
+        ],
+        correctAnswer: 1,
+        explanation: "Possession = opportunity. Winning 60% of 30 faceoffs is 6 extra possessions over your opponent — that decides games.",
+      },
+      {
+        question: "What separates the best FOGOs from the rest mentally?",
+        options: [
+          "They never lose a faceoff",
+          "They reset after every loss and compete just as hard on the next one",
+          "They're always the fastest",
+          "They never show emotion",
+        ],
+        correctAnswer: 1,
+        explanation: "Faceoffs are won and lost constantly. The mental reset between them — not letting one loss bleed into the next — is the mark of elite FOGOs.",
+      },
+    ],
+  },
+  {
+    id: "pos-fogo-l2",
+    lessonNumber: 113,
+    title: "The Clamp — Foundation of Every Faceoff",
+    topic: "Fundamentals",
+    pillar: "game",
+    position: "fogo",
+    description: `The clamp is the foundational faceoff technique. Before you learn any counters or specialty moves, you need to master the clamp — because everything in faceoffs is built around this base.
+
+SETUP: Your stick is placed with the head flat on the ground, facing toward the opponent's head. Your top hand grips the throat of the stick (just below the head), your bottom hand is at mid-shaft. Weight is forward on your fingertips and toes — you are coiled like a spring. Hips low. Eyes locked on the ball.
+
+THE CLAMP: On the whistle, your top hand drives the head of your stick down and over the ball, trapping it against the ground. At the same moment, your body drives forward low, using your hip and shoulder to fight for position over the ball. The goal is to trap the ball under your stick and use your body position to control where it goes next.
+
+BODY POSITION WINS: The physical battle in a faceoff happens in the two seconds after the whistle. The player who wins that battle wins the faceoff more than 80% of the time. Low body position — lower than your opponent — gives you leverage. If your hips are higher than his, he's winning the physical battle. Drive your hips down and forward, not up.
+
+THE EXIT: After the clamp, you have a decision. If you have clean possession, rake the ball to your dominant side and exit to that wing. If it's a contested battle, use your body to shield the ball while your teammates arrive to support. The mistake most FOGOs make is rushing the exit before they have control — losing a ball you already won is the most costly mistake in faceoffs.
+
+REPETITION IS EVERYTHING: The clamp feels awkward at first. It becomes automatic only through thousands of reps. Every day: 20 setup reps, 20 whistle-reaction reps, and 20 full clamp-and-exit reps. Track your time from whistle to possession. Over months, this becomes muscle memory.`,
+    questions: [
+      {
+        question: "What determines who wins the physical battle in a faceoff?",
+        options: [
+          "Who is bigger",
+          "Who has lower body position — lower hips win the leverage battle",
+          "Who has the better stick",
+          "Who is faster off the whistle",
+        ],
+        correctAnswer: 1,
+        explanation: "Low body position wins leverage. The player whose hips are lower controls the battle over the ball more than 80% of the time.",
+      },
+      {
+        question: "When should a FOGO attempt the exit after a clamp?",
+        options: [
+          "Immediately after the whistle",
+          "Only when they have clean possession — rushing the exit before control leads to costly turnovers",
+          "After their teammates arrive",
+          "As fast as physically possible",
+        ],
+        correctAnswer: 1,
+        explanation: "A ball you win and then lose is the worst outcome. Don't exit until you have control.",
+      },
+      {
+        question: "How should a FOGO practice the clamp to build it into muscle memory?",
+        options: [
+          "Only in game situations",
+          "Daily reps: 20 setup, 20 whistle-reaction, 20 full clamp-and-exit — track time from whistle to possession",
+          "Watch film only",
+          "Practice once a week at team practice",
+        ],
+        correctAnswer: 1,
+        explanation: "Thousands of reps over months build muscle memory. Daily structured practice with tracking is how you develop a repeatable technique.",
+      },
+    ],
+  },
+  {
+    id: "pos-fogo-l3",
+    lessonNumber: 114,
+    title: "Counters — The Plunger, Motorcycle, and Jam",
+    topic: "Lacrosse IQ",
+    pillar: "game",
+    position: "fogo",
+    description: `Once you've mastered the clamp, you need counters. Every opponent you face will have a tendency — a preferred faceoff move they go to most often. Your job before every game is to know your opponent's go-to move, and have a practiced counter ready.
+
+THE PLUNGER: The plunger is used when your opponent tries to clamp early or has a very heavy top-hand pressure. Instead of fighting his clamp, you drive your hands straight down — plunging the butt end of your stick toward the ground — which causes your head to pop up and over his, getting above his stick before he can trap the ball. From there, you rake or drive through for possession. The plunger works against early, aggressive clampers.
+
+THE MOTORCYCLE: Named for the grip motion that initiates it. On the whistle, your top hand rotates the stick — like revving a motorcycle — which flips the head of your stick face-down, driving the ball toward your dominant side. This is a speed move — it works because of quickness off the whistle before your opponent can react. If you're beating your opponent to the ball consistently, the motorcycle keeps you in control without a physical battle.
+
+THE JAM: The jam is used against opponents who rake quickly to their strong side after the clamp. Instead of fighting the clamp, you drive your stick into the side of their stick — jamming their rake — and use the disruption to come over the top and control the ball. Timing is everything on the jam: you're anticipating their move, not reacting to it.
+
+SCOUTING YOUR OPPONENT: Before every game, watch your opponent's faceoff tendencies on film if you have it. Three questions: What is his setup position? What does he do in the first half-second after the whistle? Where does the ball usually end up? The answers tell you exactly which counter to use. Faceoffs have a chess-match quality — the FOGO who out-thinks his opponent wins more than the one who just out-muscles him.`,
+    questions: [
+      {
+        question: "When is the plunger most effective?",
+        options: [
+          "Against slow opponents",
+          "Against opponents who clamp early or apply heavy top-hand pressure",
+          "In every faceoff situation",
+          "Only in college lacrosse",
+        ],
+        correctAnswer: 1,
+        explanation: "The plunger counters an aggressive early clamp — popping up and over the opponent's stick before they trap the ball.",
+      },
+      {
+        question: "What makes the motorcycle move effective?",
+        options: [
+          "Physical strength",
+          "Speed off the whistle — it gets the ball moving before the opponent can react",
+          "It works against every opponent",
+          "The unusual grip",
+        ],
+        correctAnswer: 1,
+        explanation: "The motorcycle is a speed move. It beats opponents who haven't yet locked in their clamp, using quickness rather than strength.",
+      },
+      {
+        question: "What three things should you look for when scouting an opponent's faceoff tendencies?",
+        options: [
+          "Their height, weight, and experience level",
+          "Their setup position, what they do in the first half-second, and where the ball usually ends up",
+          "Their team's record, their coach's system, and their uniform",
+          "Their dominant hand, stick length, and mesh type",
+        ],
+        correctAnswer: 1,
+        explanation: "Setup, first movement, and typical ball location tell you exactly which counter to prepare for each opponent.",
+      },
+    ],
+  },
+  {
+    id: "pos-fogo-l4",
+    lessonNumber: 115,
+    title: "The FOGO Mindset and Mental Routine",
+    topic: "Mental Game",
+    pillar: "leadership",
+    position: "fogo",
+    description: `The FOGO position is as much mental as physical. You compete one-on-one, in front of both teams, after every goal and at the start of every period. There is nowhere to hide. Every win and every loss is visible to everyone on the field.
+
+This visibility is a gift, not a burden. The FOGOs who last — who develop into truly elite faceoff specialists — are the ones who learn to thrive in that pressure rather than wilt under it.
+
+THE RESET ROUTINE: Every elite FOGO develops a reset routine for after a loss. Not a superstition — a physical reset. For some it's a specific breath. For others it's touching the end of their stick to the ground. For others it's a short phrase they say internally. Whatever the specific action, the function is always the same: it signals to your nervous system that the last faceoff is over and the next one starts clean. Without a routine, your brain carries the last loss into the next competition — and compound losses are how FOGOs fall apart.
+
+THE COMPETITION MINDSET: Every faceoff is a one-on-one competition. You will face opponents who are faster, stronger, or more technically polished than you. The players who win in those matchups are usually the ones who compete harder, not better. Competing harder means: lower body position when it's uncomfortable, fighting for the ball when you don't have clean possession, and refusing to concede the faceoff before it's over. Faceoffs are decided on determination as often as they're decided on technique.
+
+STUDYING YOUR OWN FILM: The best FOGOs in the country watch film of their own faceoffs the same way QBs study game tape. What is your win rate from each body position? What moves work against which type of opponent? Where are you losing faceoffs — in the clamp, in the battle for the ball, or in the exit? Honest self-analysis is the fastest way to identify and fix the specific part of your game that's costing you possessions.
+
+THE ROLE ON THE SIDELINE: Between faceoffs, your job is to study the opponent's FOGO. Watch every faceoff you're not in. What's his tell? What does he do when he wins? What does he do when he loses? The preparation you do on the sideline is often more valuable than anything you do on the field.`,
+    questions: [
+      {
+        question: "What is the purpose of a FOGO's reset routine after a lost faceoff?",
+        options: [
+          "To look calm to teammates",
+          "To signal to your nervous system that the last faceoff is over and the next one starts clean",
+          "To gain extra time between faceoffs",
+          "To distract the opponent",
+        ],
+        correctAnswer: 1,
+        explanation: "A physical reset routine prevents one loss from carrying into the next. Compound losses are how FOGOs fall apart mentally.",
+      },
+      {
+        question: "What do winning FOGOs do differently against physically superior opponents?",
+        options: [
+          "Use only speed moves",
+          "Compete harder — lower body position, fighting for every loose ball, refusing to concede early",
+          "Avoid physical battles",
+          "Ask to switch opponents",
+        ],
+        correctAnswer: 1,
+        explanation: "Determination closes skill gaps. Lower position, fight for the ball, and never concede before the faceoff is actually over.",
+      },
+      {
+        question: "What should a FOGO do while on the sideline between faceoffs?",
+        options: [
+          "Rest and conserve energy",
+          "Study the opponent's FOGO — watch for tendencies, tells, and patterns",
+          "Talk to teammates about other things",
+          "Stretch and warm up",
+        ],
+        correctAnswer: 1,
+        explanation: "Sideline preparation — scouting the opponent in real time — is often more valuable than anything done on the field.",
+      },
+    ],
+  },
+]
+
 const BASE_POSITION_LESSONS: AcademyLesson[] = [
   ...GOALIE_LESSONS,
   ...ATTACK_LESSONS,
   ...DEFENSE_LESSONS,
   ...MIDFIELD_LESSONS,
+  ...MIDFIELD_LESSONS_EXTRA,
+  ...FOGO_LESSONS,
 ]
 
 export function getAcademyCoursesWithPositions(gender: Gender): AcademyCourse[] {
