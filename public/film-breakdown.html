@@ -1142,6 +1142,7 @@
     // ─── CONFIG ───────────────────────────────────────
     const GEMINI_URL = '/.netlify/functions/gemini-analyze';
     const TRANSCRIPT_URL = '/.netlify/functions/youtube-transcript';
+    const VISUAL_URL = '/.netlify/functions/visual-analyze';
     const SHEETS_URL = '/.netlify/functions/sheets-save';
     const PASSWORD = '#BTBCOACH26';
 
@@ -1269,6 +1270,46 @@
             return data.map(seg => `[${fmtTime(seg.start)}] ${seg.text}`).join('\n');
         }
         throw new Error('Unexpected transcript format');
+    }
+
+
+    // ─── VISUAL ANALYSIS (no captions fallback) ───────
+    async function analyzeVisually(youtubeUrl, videoId, focus, context) {
+        const res = await fetch(VISUAL_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                youtube_url: youtubeUrl,
+                video_id: videoId,
+                game_title: context || videoId,
+                level: '',
+                focus: focus,
+            }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || `Visual analyze failed (${res.status})`);
+
+        // Normalize fields to match what renderCards expects
+        return (data.plays || []).map(p => ({
+            timestamp: p.timestamp || '',
+            start: p.start,
+            end: p.end,
+            play: p.play || '',
+            result: p.result || '',
+            team: p.team || 'offense',
+            phase: p.phase || '',
+            category: p.category || '',
+            tags: p.tags || [],
+            teaching_points: p.teaching_points || (p.teaching_point ? [p.teaching_point] : []),
+            summary: p.summary || p.play || '',
+            players: p.players || [],
+            period: p.period || '',
+            clock: p.clock || '',
+            score: p.score || '',
+            confidence: p.confidence || 0.8,
+            youtube_url: p.youtube_url || `https://www.youtube.com/watch?v=${videoId}`,
+            source: 'gemini-visual',
+        }));
     }
 
     // ─── GEMINI ANALYSIS ──────────────────────────────
@@ -1497,24 +1538,48 @@ ${transcript}`;
         emptyState && (emptyState.style.display = 'none');
 
         try {
-            // Step 1: Fetch transcript
-            setStep(1, 'Fetching YouTube transcript...');
-            setProgress(15);
-            const transcript = await fetchTranscript(videoId);
-            setProgress(30);
-
-            if (!transcript || transcript.length < 50) {
-                throw new Error('Transcript too short or empty. This video may not have captions.');
-            }
-
-            // Step 2: Gemini analysis
-            setStep(2, `Analyzing ${Math.round(transcript.length / 1000)}K characters with Gemini AI...`);
-            setProgress(45);
-
             const focus = focusSelect.value;
             const context = contextInput.value;
-            const plays = await analyzeWithGemini(transcript, focus, context);
-            setProgress(80);
+            const youtubeUrl = `https://www.youtube.com/watch?v=${videoId}`;
+            let plays;
+            let usedVisual = false;
+
+            // Step 1: Try transcript path first
+            setStep(1, 'Fetching YouTube transcript...');
+            setProgress(15);
+
+            let transcript = null;
+            let transcriptErr = null;
+            try {
+                transcript = await fetchTranscript(videoId);
+            } catch (err) {
+                transcriptErr = err;
+            }
+
+            const noCaption = !transcript
+                || transcript.length < 50
+                || (transcriptErr && (
+                    transcriptErr.message.toLowerCase().includes('caption') ||
+                    transcriptErr.message.toLowerCase().includes('transcript') ||
+                    transcriptErr.message.includes('404') ||
+                    transcriptErr.message.includes('No captions')
+                ));
+
+            if (noCaption) {
+                // No captions — switch to Gemini visual analysis
+                usedVisual = true;
+                setStep(1, '⚡ No captions found — switching to Gemini visual analysis (watches video directly)...');
+                setProgress(20);
+                plays = await analyzeVisually(youtubeUrl, videoId, focus, context);
+                setProgress(80);
+            } else {
+                // Transcript path
+                setProgress(30);
+                setStep(2, `Analyzing ${Math.round(transcript.length / 1000)}K characters with Gemini AI...`);
+                setProgress(45);
+                plays = await analyzeWithGemini(transcript, focus, context);
+                setProgress(80);
+            }
 
             if (!Array.isArray(plays) || plays.length === 0) {
                 throw new Error('No plays identified. The video may not contain lacrosse game footage.');
@@ -1532,7 +1597,8 @@ ${transcript}`;
 
             const gameContext = context || `YouTube ${videoId}`;
             resultsTitle.textContent = 'ANALYSIS RESULTS';
-            resultsMeta.textContent = `${plays.length} plays identified from "${gameContext}" — ${new Date().toLocaleDateString()}`;
+            const methodBadge = usedVisual ? ' [Gemini Visual — no captions]' : '';
+            resultsMeta.textContent = `${plays.length} plays identified from "${gameContext}" — ${new Date().toLocaleDateString()}${methodBadge}`;
             resultsHeader.classList.add('active');
 
             setProgress(100);
