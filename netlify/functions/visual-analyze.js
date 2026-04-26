@@ -96,19 +96,16 @@ exports.handler = async (event) => {
           contents: [{
             role: 'user',
             parts: [
-              {
-                fileData: {
-                  mimeType: 'video/mp4',
-                  fileUri: videoUrl,
-                },
-              },
-              { text: promptText },
+              // Pass YouTube URL inline as text — Gemini 2.5 Flash reads
+              // the URL and processes the video natively. fileData/fileUri
+              // requires the File API upload flow; this avoids that entirely.
+              { text: `VIDEO URL: ${videoUrl}\n\n${promptText}` },
             ],
           }],
           generationConfig: {
-            responseMimeType: 'application/json',
+            // No responseMimeType — causes issues with some video prompts
             maxOutputTokens: 16384,
-            temperature: 0.1,
+            temperature: 0.2,
           },
         }),
       }
@@ -127,18 +124,59 @@ exports.handler = async (event) => {
     }
 
     const geminiData = await resp.json();
-    const rawText = geminiData.candidates?.[0]?.content?.parts?.[0]?.text ?? '';
-    const cleaned = rawText.replace(/```json|```/g, '').trim();
-
-    let plays;
-    try {
-      plays = JSON.parse(cleaned);
-      if (!Array.isArray(plays)) plays = plays.plays ?? plays.events ?? [];
-    } catch {
+    // Check for blocked/empty response
+    const candidate = geminiData.candidates?.[0];
+    if (!candidate) {
+      const blockReason = geminiData.promptFeedback?.blockReason;
       return {
         statusCode: 502,
         headers: cors,
-        body: JSON.stringify({ error: 'Gemini returned invalid JSON', raw: cleaned.slice(0, 500) }),
+        body: JSON.stringify({
+          error: blockReason
+            ? `Video blocked by Gemini safety filter: ${blockReason}`
+            : 'Gemini returned no candidates. The video may be private, age-restricted, or unsupported.',
+        }),
+      };
+    }
+
+    const rawText = candidate.content?.parts?.[0]?.text ?? '';
+    if (!rawText) {
+      return {
+        statusCode: 502,
+        headers: cors,
+        body: JSON.stringify({ error: 'Gemini returned an empty response for this video.' }),
+      };
+    }
+
+    // Robust JSON extraction — handles markdown fences, leading text, trailing text
+    let plays;
+    try {
+      // 1. Strip markdown code fences
+      let cleaned = rawText
+        .replace(/^```(?:json)?\s*/m, '')
+        .replace(/\s*```\s*$/m, '')
+        .trim();
+
+      // 2. Find the JSON array — skip any leading explanation text
+      const arrStart = cleaned.indexOf('[');
+      const arrEnd = cleaned.lastIndexOf(']');
+      if (arrStart !== -1 && arrEnd !== -1 && arrEnd > arrStart) {
+        cleaned = cleaned.slice(arrStart, arrEnd + 1);
+      }
+
+      plays = JSON.parse(cleaned);
+      if (!Array.isArray(plays)) {
+        plays = plays.plays ?? plays.events ?? plays.data ?? [];
+      }
+    } catch (parseErr) {
+      return {
+        statusCode: 502,
+        headers: cors,
+        body: JSON.stringify({
+          error: 'Gemini returned text that could not be parsed as JSON. The video may not be supported for visual analysis.',
+          hint: 'Try a video with captions enabled, or a shorter clip.',
+          raw: rawText.slice(0, 300),
+        }),
       };
     }
 
