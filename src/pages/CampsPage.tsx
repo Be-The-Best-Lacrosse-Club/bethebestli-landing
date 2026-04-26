@@ -44,7 +44,7 @@ const CAMPS: Camp[] = [
     dates: "July 28 – July 30",
     range: "3 Days · Any Consecutive",
     time: "9 – 11 AM Daily",
-    location: "Location TBD",
+    location: "Plainedge Park",
     forWho: "Position-focused players ready to specialize",
     description:
       "Three days dedicated to your position. Attack, midfield, defense, FOGO, LSM, and goalies each get their own track with position-specialist coaches.",
@@ -63,7 +63,7 @@ const CAMPS: Camp[] = [
     dates: "August 18 – August 20",
     range: "3 Days · Any Consecutive",
     time: "9 – 11 AM Daily",
-    location: "Location TBD",
+    location: "Plainedge Park",
     forWho: "Classes of 2034–2037",
     description:
       "Three days built for the next generation. High-energy, fundamentals-first coaching from the same pros who lead our travel teams. Fun, but serious.",
