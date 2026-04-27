@@ -30,6 +30,7 @@ import { InterestFormPage } from "@/pages/InterestFormPage"
 import { ProgramPage } from "@/pages/ProgramPage"
 import { PlayerHubPage } from "@/pages/PlayerHubPage"
 import { CoachesHubPage } from "@/pages/CoachesHubPage"
+import { AcademyElearningPage } from "@/pages/AcademyElearningPage"
 import { TravelPage } from "@/pages/TravelPage"
 import { CoachingStaffPage } from "@/pages/CoachingStaffPage"
 import { TeamsPage } from "@/pages/TeamsPage"
@@ -160,13 +161,17 @@ function App() {
 
             <Route element={<ProtectedRoute />}>
               <Route element={<HubLayout />}>
-                <Route path="/boys/players" element={<PlayerHubPage gender="boys" />} />
-                <Route path="/boys/academy" element={<Navigate to="/boys/players" replace />} />
-                <Route path="/boys/coaches-hub" element={<CoachesHubPage gender="boys" />} />
-                <Route path="/girls/players" element={<PlayerHubPage gender="girls" />} />
-                <Route path="/girls/academy" element={<Navigate to="/girls/players" replace />} />
-                <Route path="/girls/coaches-hub" element={<CoachesHubPage gender="girls" />} />
                 <Route path="/family-hub" element={<FamilyHubPage />} />
+                
+                <Route path="/boys/players" element={<PlayerHubPage gender="boys" />} />
+                <Route path="/boys/academy" element={<AcademyElearningPage gender="boys" />} />
+                <Route path="/boys/coaches-hub" element={<CoachesHubPage gender="boys" />} />
+                
+                <Route path="/girls/players" element={<PlayerHubPage gender="girls" />} />
+                <Route path="/girls/academy" element={<AcademyElearningPage gender="girls" />} />
+                <Route path="/girls/coaches-hub" element={<CoachesHubPage gender="girls" />} />
+                
+                <Route path="/parent-portal" element={<Navigate to="/family-hub" replace />} />
               </Route>
             </Route>
           </Routes>
