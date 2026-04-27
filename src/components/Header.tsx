@@ -1,16 +1,18 @@
 import { useState, useEffect, useRef } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
-import { Menu, X, ChevronDown, Lock, LogOut, Shield, Activity, Layout } from "lucide-react"
+import { Menu, X, ChevronDown, Lock, LogOut, Shield, Activity, Layout, Users, GraduationCap } from "lucide-react"
 import { useAuth } from "@/context/AuthContext"
 
-const programLinks = (gender: string) => [
-  { label: "Overview", href: `/${gender}` },
+const teamLinks = (gender: string) => [
+  { label: `${gender.charAt(0).toUpperCase() + gender.slice(1)} Overview`, href: `/${gender}` },
   { label: "Travel Teams", href: `/${gender}/travel` },
   { label: "Coaching Staff", href: `/${gender}/coaches` },
-  { label: "Teams", href: `/${gender}/teams` },
-  { label: "divider", href: "" },
-  { label: "Players Hub", href: `/${gender}/players`, gated: true },
-  { label: "Coaches Hub", href: `/${gender}/coaches-hub`, gated: true },
+  { label: "Rosters", href: `/${gender}/teams` },
+]
+
+const programLinks = [
+  { label: "BTB Futures (K-2)", href: "/futures" },
+  { label: "Camps & Clinics", href: "/camps" },
 ]
 
 const roleBadgeStyles: Record<string, string> = {
@@ -62,316 +64,177 @@ export function Header() {
     go("/")
   }
 
-  const isActive = (href: string) => location.pathname === href || location.pathname.startsWith(href + "/")
+  const isActive = (href: string) => location.pathname === href || (href !== "/" && location.pathname.startsWith(href))
 
   const roleLabel = user?.role === "owner" ? "Owner" : user?.role === "coach" ? "Coach" : "Player"
 
+  const navItemClass = (href: string) => `px-3 py-2 text-[0.72rem] font-bold uppercase tracking-[1.5px] transition-colors rounded ${
+    isActive(href) 
+      ? (scrolled ? "text-[var(--btb-red)] bg-[var(--btb-red)]/5" : "text-[var(--btb-red)] bg-white/10") 
+      : (scrolled ? "text-black/60 hover:text-black hover:bg-black/5" : "text-white/60 hover:text-white hover:bg-white/5")
+  }`
+
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      scrolled ? "bg-white/95 backdrop-blur-md shadow-[0_1px_0_rgba(0,0,0,0.05)]" : "bg-transparent"
+      scrolled ? "bg-white/95 backdrop-blur-md shadow-lg" : "bg-transparent"
     }`}>
-      <div className="max-w-[1100px] mx-auto px-6 h-16 flex items-center justify-between">
+      <div className="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between">
+        
         {/* Logo */}
-        <button onClick={() => go("/")} className={`font-display text-2xl tracking-tight uppercase transition-colors ${scrolled ? "text-black" : "text-white"}`}>
-          BTB <span className="text-[var(--btb-red)]">Lacrosse</span>
+        <button onClick={() => go("/")} className="flex items-center gap-3 group">
+          <div className="w-9 h-9 bg-[var(--btb-red)] flex items-center justify-center font-display text-xl text-white -skew-x-6 group-hover:scale-105 transition-transform">B</div>
+          <div className={`font-display text-2xl tracking-tight uppercase transition-colors ${scrolled ? "text-black" : "text-white"}`}>
+            BTB <span className={scrolled ? "text-black/40" : "text-white/40"}>OS</span>
+          </div>
         </button>
 
         {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-1" ref={dropdownRef}>
-          <button
-            onClick={() => go("/academy")}
-            className={`px-3 py-2 text-[0.75rem] font-semibold uppercase tracking-[1.5px] transition-colors rounded ${
-              isActive("/academy") 
-                ? (scrolled ? "text-black" : "text-white") 
-                : (scrolled ? "text-black/50 hover:text-black" : "text-white/50 hover:text-white")
-            }`}
-          >
-            Academy
-          </button>
+          
+          <button onClick={() => go("/academy")} className={navItemClass("/academy")}>Academy</button>
+          
+          <div className="relative group">
+            <button 
+              onClick={() => setDropdown(dropdown === "programs" ? null : "programs")}
+              className={navItemClass("/programs")}
+            >
+              Programs <ChevronDown size={10} className={`inline ml-1 transition-transform ${dropdown === "programs" ? "rotate-180" : ""}`} />
+            </button>
+            {dropdown === "programs" && (
+              <div className="absolute top-full left-0 mt-2 w-48 bg-white border border-black/5 rounded-xl shadow-2xl py-2 animate-in fade-in slide-in-from-top-2">
+                {programLinks.map(link => (
+                  <button key={link.href} onClick={() => go(link.href)} className="w-full text-left px-4 py-2.5 text-[0.7rem] font-bold uppercase tracking-[1px] text-black/60 hover:text-[var(--btb-red)] hover:bg-[var(--btb-red)]/5 transition-all">
+                    {link.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="relative group">
+            <button 
+              onClick={() => setDropdown(dropdown === "teams" ? null : "teams")}
+              className={navItemClass("/teams")}
+            >
+              Teams <ChevronDown size={10} className={`inline ml-1 transition-transform ${dropdown === "teams" ? "rotate-180" : ""}`} />
+            </button>
+            {dropdown === "teams" && (
+              <div className="absolute top-full left-0 mt-2 w-64 bg-white border border-black/5 rounded-xl shadow-2xl py-3 grid grid-cols-2 animate-in fade-in slide-in-from-top-2">
+                <div className="px-4 pb-2 col-span-2 text-[0.6rem] font-black text-black/20 uppercase tracking-[2px]">Boys Program</div>
+                {teamLinks("boys").map(link => (
+                  <button key={link.href} onClick={() => go(link.href)} className="w-full text-left px-4 py-2 text-[0.65rem] font-bold uppercase tracking-[1px] text-black/60 hover:text-[var(--btb-red)] transition-all">
+                    {link.label}
+                  </button>
+                ))}
+                <div className="px-4 py-2 col-span-2 border-t border-black/5 mt-2 text-[0.6rem] font-black text-black/20 uppercase tracking-[2px]">Girls Program</div>
+                {teamLinks("girls").map(link => (
+                  <button key={link.href} onClick={() => go(link.href)} className="w-full text-left px-4 py-2 text-[0.65rem] font-bold uppercase tracking-[1px] text-black/60 hover:text-[var(--btb-red)] transition-all">
+                    {link.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
 
           <button
             onClick={() => go("/tryouts")}
-            className={`px-3 py-2 text-[0.75rem] font-bold uppercase tracking-[1.5px] transition-all rounded bg-[var(--btb-red)] text-white hover:bg-[var(--btb-red-dark)] hover:-translate-y-0.5 shadow-lg shadow-red-500/20`}
+            className={`ml-2 px-4 py-2 text-[0.72rem] font-black uppercase tracking-[2px] transition-all rounded-lg bg-[var(--btb-red)] text-white hover:bg-[var(--btb-red-dark)] shadow-lg shadow-red-500/20`}
           >
-            Tryouts
+            Tryouts 2026
           </button>
 
-          <button
-            onClick={() => go("/interest")}
-            className={`px-3 py-2 text-[0.75rem] font-semibold uppercase tracking-[1.5px] transition-colors rounded ${
-              isActive("/interest")
-                ? (scrolled ? "text-black" : "text-white")
-                : (scrolled ? "text-black/50 hover:text-black" : "text-white/50 hover:text-white")
-            }`}
-          >
-            Interest
-          </button>
+          <div className={`w-px h-5 mx-3 ${scrolled ? "bg-black/10" : "bg-white/10"}`} />
 
-          <button
-            onClick={() => go("/parent-portal")}
-            className={`px-3 py-2 text-[0.75rem] font-semibold uppercase tracking-[1.5px] transition-colors rounded ${
-              isActive("/parent-portal")
-                ? (scrolled ? "text-black" : "text-white")
-                : (scrolled ? "text-black/50 hover:text-black" : "text-white/50 hover:text-white")
-            }`}
-          >
-            Parent Portal
-          </button>
-
-          <button
-            onClick={() => go("/futures")}
-            className={`px-3 py-2 text-[0.75rem] font-semibold uppercase tracking-[1.5px] transition-colors rounded ${
-              isActive("/futures")
-                ? (scrolled ? "text-black" : "text-white")
-                : (scrolled ? "text-black/50 hover:text-black" : "text-white/50 hover:text-white")
-            }`}
-          >
-            Futures
-          </button>
-
-          <button
-            onClick={() => go("/camps")}
-            className={`px-3 py-2 text-[0.75rem] font-semibold uppercase tracking-[1.5px] transition-colors rounded ${
-              isActive("/camps")
-                ? (scrolled ? "text-black" : "text-white")
-                : (scrolled ? "text-black/50 hover:text-black" : "text-white/50 hover:text-white")
-            }`}
-          >
-            Camps
-          </button>
-
-          {["boys", "girls"].map((gender) => (
-            <div key={gender} className="relative">
-              <button
-                onClick={() => setDropdown(dropdown === gender ? null : gender)}
-                className={`flex items-center gap-1 px-3 py-2 text-[0.75rem] font-semibold uppercase tracking-[1.5px] transition-colors rounded ${
-                  isActive(`/${gender}`)
-                    ? (scrolled ? "text-black" : "text-white")
-                    : (scrolled ? "text-black/50 hover:text-black" : "text-white/50 hover:text-white")
-                }`}
-              >
-                {gender.charAt(0).toUpperCase() + gender.slice(1)}
-                <ChevronDown size={12} className={`transition-transform ${dropdown === gender ? "rotate-180" : ""}`} />
-              </button>
-
-              {dropdown === gender && (
-                <div className="absolute top-full left-0 mt-2 w-52 bg-white border border-black/[0.05] rounded-xl overflow-hidden shadow-2xl py-2">
-                  {programLinks(gender).map((link, i) =>
-                    link.label === "divider" ? (
-                      <div key={i} className="h-px bg-black/[0.05] my-2 mx-3" />
-                    ) : (
-                      <button
-                        key={link.href}
-                        onClick={() => go(link.href)}
-                        className={`w-full text-left px-4 py-2.5 text-[0.75rem] font-semibold uppercase tracking-[1px] transition-colors flex items-center gap-2 ${
-                          location.pathname === link.href
-                            ? "text-[var(--btb-red)] bg-[var(--btb-red)]/5"
-                            : "text-black/50 hover:text-black hover:bg-black/[0.02]"
-                        }`}
-                      >
-                        {link.gated && <Lock size={10} className="text-black/25" />}
-                        {link.label}
-                      </button>
-                    )
-                  )}
-                </div>
-              )}
-            </div>
-          ))}
-
-          <button
-            onClick={() => go("/contact")}
-            className={`px-3 py-2 text-[0.75rem] font-semibold uppercase tracking-[1.5px] transition-colors rounded ${
-              isActive("/contact")
-                ? (scrolled ? "text-black" : "text-white")
-                : (scrolled ? "text-black/50 hover:text-black" : "text-white/50 hover:text-white")
-            }`}
-          >
-            Contact
-          </button>
-
-          <a
-            href="https://btb-os.netlify.app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`flex items-center gap-1.5 px-3 py-2 text-[0.75rem] font-semibold uppercase tracking-[1.5px] transition-colors ${
-              scrolled ? "text-black/50 hover:text-black" : "text-white/50 hover:text-white"
-            }`}
-          >
-            <Shield size={11} /> Staff
-          </a>
-
-          <div className={`w-px h-5 mx-2 ${scrolled ? "bg-black/[0.08]" : "bg-white/[0.08]"}`} />
-
-          {isAuthenticated && user ? (
-            <div className="flex items-center gap-2">
-              <span className={`text-[0.6rem] font-bold uppercase tracking-[1px] px-2 py-0.5 rounded ${roleBadgeStyles[user.role] || "bg-black/5 text-black/40"}`}>
-                {roleLabel}
-              </span>
+          {isAuthenticated ? (
+            <div className="flex items-center gap-3">
               <button
                 onClick={() => go("/family-hub")}
-                className={`text-[0.68rem] font-semibold uppercase tracking-[1px] transition-colors ${scrolled ? "text-black/30 hover:text-black" : "text-white/30 hover:text-white"}`}
-                title="Open Family Hub"
+                className="flex items-center gap-2 px-4 py-2 bg-black text-white text-[0.7rem] font-black uppercase tracking-[2px] rounded-lg hover:bg-[var(--btb-red)] transition-all"
               >
-                {user.name}
+                <Layout size={14} /> Family Hub
               </button>
-              <button
-                onClick={handleLogout}
-                className={`p-2 transition-colors ${scrolled ? "text-black/30 hover:text-black" : "text-white/30 hover:text-white"}`}
-                title="Logout"
-              >
-                <LogOut size={14} />
-              </button>
+              <div className="flex items-center gap-2 group cursor-pointer" onClick={() => go("/family-hub")}>
+                 <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[var(--btb-red)] to-red-700 flex items-center justify-center font-display text-white text-xs border-2 border-white/20">
+                    {user?.name?.[0]}
+                 </div>
+                 <button onClick={handleLogout} className={`p-2 transition-colors ${scrolled ? "text-black/30 hover:text-black" : "text-white/30 hover:text-white"}`}>
+                    <LogOut size={14} />
+                 </button>
+              </div>
             </div>
           ) : (
-            <button
-              onClick={() => go("/login")}
-              className={`flex items-center gap-1.5 px-3 py-2 text-[0.75rem] font-semibold uppercase tracking-[1.5px] transition-colors ${
-                scrolled ? "text-black/50 hover:text-black" : "text-white/50 hover:text-white"
-              }`}
-            >
-              <Lock size={11} /> Login
-            </button>
+            <div className="flex items-center gap-2">
+              <button onClick={() => go("/login")} className={navItemClass("/login")}>
+                <Lock size={11} className="inline mr-1" /> Login
+              </button>
+              <button
+                onClick={() => go("/interest")}
+                className={`px-4 py-2 text-[0.72rem] font-black uppercase tracking-[2px] transition-all rounded-lg border ${scrolled ? "border-black/20 text-black hover:bg-black hover:text-white" : "border-white/20 text-white hover:bg-white hover:text-black"}`}
+              >
+                Register
+              </button>
+            </div>
           )}
-
-          <button
-            onClick={() => go("/contact")}
-            className="ml-2 px-5 py-2 bg-[var(--btb-red)] text-white text-[0.72rem] font-bold uppercase tracking-[1.5px] rounded hover:bg-[var(--btb-red-dark)] transition-colors shadow-lg shadow-red-500/20"
-          >
-            Interested in Coaching
-          </button>
         </nav>
 
         {/* Mobile Toggle */}
         <button className={`lg:hidden z-[60] transition-colors ${scrolled || mobileOpen ? "text-black" : "text-white"}`} onClick={() => setMobileOpen(!mobileOpen)}>
-          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="fixed inset-0 bg-white z-50 overflow-y-auto pt-20 pb-12 px-8">
-          <button onClick={() => setMobileOpen(false)} className="absolute top-5 right-6 text-black">
-            <X size={22} />
-          </button>
-
-          <button onClick={() => go("/")} className="font-display text-3xl text-black uppercase mb-8 block">
-            BTB <span className="text-[var(--btb-red)]">Lacrosse</span>
-          </button>
-
-          <div className="space-y-2">
-            <button onClick={() => go("/academy")} className="block w-full text-left text-lg font-semibold uppercase tracking-[2px] text-black/60 hover:text-black py-2">
-              Academy
-            </button>
-
-            <button onClick={() => go("/tryouts")} className="block w-full text-left text-lg font-bold uppercase tracking-[2px] text-[var(--btb-red)] py-2">
-              Tryouts 2026
-            </button>
-
-            <button onClick={() => go("/interest")} className="block w-full text-left text-lg font-semibold uppercase tracking-[2px] text-black/60 hover:text-black py-2">
-              Interest Form
-            </button>
-
-            <button onClick={() => go("/parent-portal")} className="block w-full text-left text-lg font-semibold uppercase tracking-[2px] text-black/60 hover:text-black py-2">
-              Parent Portal
-            </button>
-
-            <button onClick={() => go("/futures")} className="block w-full text-left text-lg font-semibold uppercase tracking-[2px] text-black/60 hover:text-black py-2">
-              Futures
-            </button>
-
-            <button onClick={() => go("/camps")} className="block w-full text-left text-lg font-semibold uppercase tracking-[2px] text-black/60 hover:text-black py-2">
-              Camps & Clinics
-            </button>
-
-            {["boys", "girls"].map((gender) => (
-              <div key={gender}>
-                <button
-                  onClick={() => setMobileExpanded(mobileExpanded === gender ? null : gender)}
-                  className="flex items-center justify-between w-full text-left text-lg font-semibold uppercase tracking-[2px] text-black/60 hover:text-black py-2"
-                >
-                  {gender.charAt(0).toUpperCase() + gender.slice(1)}
-                  <ChevronDown size={16} className={`transition-transform ${mobileExpanded === gender ? "rotate-180" : ""}`} />
-                </button>
-
-                {mobileExpanded === gender && (
-                  <div className="pl-4 pb-2 space-y-1">
-                    {programLinks(gender).map((link, i) =>
-                      link.label === "divider" ? (
-                        <div key={i} className="h-px bg-black/[0.05] my-2" />
-                      ) : (
-                        <button
-                          key={link.href}
-                          onClick={() => go(link.href)}
-                          className="block w-full text-left py-2 text-[0.88rem] font-semibold uppercase tracking-[1.5px] text-black/40 hover:text-black flex items-center gap-2"
-                        >
-                          {link.gated && <Lock size={10} />}
-                          {link.label}
-                        </button>
-                      )
-                    )}
-                  </div>
-                )}
+        <div className="fixed inset-0 bg-white z-50 overflow-y-auto pt-24 pb-12 px-8 animate-in fade-in slide-in-from-right">
+          <div className="space-y-6">
+            <button onClick={() => go("/academy")} className="block w-full text-left text-2xl font-display uppercase text-black">Academy</button>
+            
+            <div>
+              <div className="text-[0.6rem] font-black text-black/30 uppercase tracking-[3px] mb-4">Our Programs</div>
+              <div className="grid grid-cols-1 gap-3">
+                {programLinks.map(link => (
+                  <button key={link.href} onClick={() => go(link.href)} className="text-left text-lg font-bold uppercase text-black/60">{link.label}</button>
+                ))}
               </div>
-            ))}
+            </div>
 
-            <button onClick={() => go("/contact")} className="block w-full text-left text-lg font-semibold uppercase tracking-[2px] text-black/60 hover:text-black py-2">
-              Contact
-            </button>
-
-            <a
-              href="https://btb-os.netlify.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setMobileOpen(false)}
-              className="flex items-center gap-2 text-lg font-semibold uppercase tracking-[2px] text-black/60 hover:text-black py-2"
-            >
-              <Shield size={16} /> Staff Portal
-            </a>
-
-            <div className="h-px bg-black/[0.05] my-4" />
-
-            {isAuthenticated && user ? (
-              <div>
-                <div className="flex items-center gap-2 mb-3">
-                  <span className={`text-[0.6rem] font-bold uppercase tracking-[1px] px-2 py-0.5 rounded ${roleBadgeStyles[user.role] || "bg-black/5 text-black/40"}`}>
-                    {roleLabel}
-                  </span>
-                  <button
-                    onClick={() => { go("/family-hub"); setMobileOpen(false) }}
-                    className="text-[0.78rem] font-semibold text-black/40 hover:text-black transition-colors"
-                  >
-                    {user.name}
-                  </button>
-                </div>
-                <button
-                  onClick={() => { go("/family-hub"); setMobileOpen(false) }}
-                  className="flex items-center gap-2 text-[0.88rem] font-semibold uppercase tracking-[1.5px] text-black/60 hover:text-black py-2 mb-2"
-                >
-                  <Layout size={14} /> Family Hub
-                </button>
-                <button
-                  onClick={handleLogout}
-                  className="flex items-center gap-2 text-[0.88rem] font-semibold uppercase tracking-[1.5px] text-black/40 hover:text-black py-2"
-                >
-                  <LogOut size={14} /> Logout
-                </button>
+            <div>
+              <div className="text-[0.6rem] font-black text-black/30 uppercase tracking-[3px] mb-4">Boys Teams</div>
+              <div className="grid grid-cols-1 gap-3 pl-4 border-l-2 border-black/5">
+                {teamLinks("boys").map(link => (
+                  <button key={link.href} onClick={() => go(link.href)} className="text-left text-lg font-bold uppercase text-black/60">{link.label}</button>
+                ))}
               </div>
-            ) : (
-              <button
-                onClick={() => go("/login")}
-                className="flex items-center gap-2 text-[0.88rem] font-semibold uppercase tracking-[1.5px] text-black/40 hover:text-black py-2"
-              >
-                <Lock size={12} /> Login
-              </button>
-            )}
+            </div>
 
-            <button
-              onClick={() => go("/contact")}
-              className="mt-4 block w-full text-center px-8 py-3 bg-[var(--btb-red)] text-white font-bold uppercase tracking-[1.5px] rounded text-sm shadow-xl shadow-red-500/20"
-            >
-              Interested in Coaching
-            </button>
+            <div>
+              <div className="text-[0.6rem] font-black text-black/30 uppercase tracking-[3px] mb-4">Girls Teams</div>
+              <div className="grid grid-cols-1 gap-3 pl-4 border-l-2 border-black/5">
+                {teamLinks("girls").map(link => (
+                  <button key={link.href} onClick={() => go(link.href)} className="text-left text-lg font-bold uppercase text-black/60">{link.label}</button>
+                ))}
+              </div>
+            </div>
+
+            <div className="pt-6 border-t border-black/5 space-y-4">
+               {isAuthenticated ? (
+                 <>
+                   <button onClick={() => go("/family-hub")} className="flex items-center gap-3 w-full py-4 bg-black text-white font-black uppercase tracking-[2px] rounded-xl justify-center">
+                     <Layout size={18} /> Family Hub
+                   </button>
+                   <button onClick={handleLogout} className="w-full text-center text-black/40 font-bold uppercase tracking-[2px]">Logout</button>
+                 </>
+               ) : (
+                 <>
+                   <button onClick={() => go("/login")} className="w-full py-4 border-2 border-black/10 text-black font-black uppercase tracking-[2px] rounded-xl flex items-center justify-center gap-2">
+                     <Lock size={16} /> Login
+                   </button>
+                   <button onClick={() => go("/interest")} className="w-full py-4 bg-[var(--btb-red)] text-white font-black uppercase tracking-[2px] rounded-xl shadow-xl shadow-red-500/20">
+                     Register Now
+                   </button>
+                 </>
+               )}
+            </div>
           </div>
         </div>
       )}
