@@ -1,6 +1,4 @@
-import type React from "react"
 import { useReveal } from "@/hooks/useReveal"
-import { useWordSplit } from "@/hooks/useScrollAnimation"
 import { Trophy } from "lucide-react"
 
 // The 14 tournaments BTB actually competes at — verified by Dan 2026-04-27.
@@ -27,7 +25,6 @@ const tournaments = [
 
 export function EliteCircuit() {
   const ref = useReveal({ className: "reveal-stagger" })
-  const titleRef = useWordSplit(50)
 
   return (
     <section className="bg-black py-24 px-6 relative overflow-hidden border-t border-white/5">
@@ -38,7 +35,7 @@ export function EliteCircuit() {
               <Trophy size={12} />
               THE_ELITE_CIRCUIT
             </div>
-            <h2 ref={titleRef as React.RefObject<HTMLHeadingElement>} className="font-display text-[clamp(2rem,5vw,4rem)] uppercase leading-none text-white">
+            <h2 className="font-display text-[clamp(2rem,5vw,4rem)] uppercase leading-none text-white">
               Competing Against <br /> <span className="text-[var(--btb-red)]">The Best.</span>
             </h2>
           </div>
