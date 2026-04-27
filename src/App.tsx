@@ -11,6 +11,7 @@ import { useEffect } from "react"
 import { Hero } from "@/components/Hero"
 import { TheStandard } from "@/components/TheStandard"
 import { CharacterLab } from "@/components/CharacterLab"
+import { ProofSection } from "@/components/ProofSection"
 import { WhatYouGet } from "@/components/WhatYouGet"
 import { DevelopmentModel } from "@/components/DevelopmentModel"
 import { FilmStudy } from "@/components/FilmStudy"
@@ -29,13 +30,11 @@ import { InterestFormPage } from "@/pages/InterestFormPage"
 import { ProgramPage } from "@/pages/ProgramPage"
 import { PlayerHubPage } from "@/pages/PlayerHubPage"
 import { CoachesHubPage } from "@/pages/CoachesHubPage"
-import { AcademyElearningPage } from "@/pages/AcademyElearningPage"
 import { TravelPage } from "@/pages/TravelPage"
 import { CoachingStaffPage } from "@/pages/CoachingStaffPage"
 import { TeamsPage } from "@/pages/TeamsPage"
 import { SmsPolicyPage } from "@/pages/SmsPolicyPage"
 import { AcademyInfoPage } from "@/pages/AcademyInfoPage"
-import { CoachToolsPage } from "@/pages/CoachToolsPage"
 import { FuturesPage } from "@/pages/FuturesPage"
 import { CampsPage } from "@/pages/CampsPage"
 import { FamilyHubPage } from "@/pages/FamilyHubPage"
@@ -51,6 +50,7 @@ function LandingPage() {
       <EliteCircuit />
       <TheStandard />
       <CharacterLab />
+      <ProofSection />
       <WhatYouGet />
       <DevelopmentModel />
       <FilmStudy />
@@ -152,24 +152,19 @@ function App() {
               <Route path="/camps" element={<CampsPage />} />
               <Route path="/sms-policy" element={<SmsPolicyPage />} />
               <Route path="/academy-info" element={<AcademyInfoPage />} />
-              <Route path="/coach-tools" element={<CoachToolsPage />} />
             </Route>
 
             <Route path="/login" element={<LoginPage />} />
 
             <Route element={<ProtectedRoute />}>
               <Route element={<HubLayout />}>
-                <Route path="/family-hub" element={<FamilyHubPage />} />
-                
                 <Route path="/boys/players" element={<PlayerHubPage gender="boys" />} />
-                <Route path="/boys/academy" element={<AcademyElearningPage gender="boys" />} />
+                <Route path="/boys/academy" element={<Navigate to="/boys/players" replace />} />
                 <Route path="/boys/coaches-hub" element={<CoachesHubPage gender="boys" />} />
-                
                 <Route path="/girls/players" element={<PlayerHubPage gender="girls" />} />
-                <Route path="/girls/academy" element={<AcademyElearningPage gender="girls" />} />
+                <Route path="/girls/academy" element={<Navigate to="/girls/players" replace />} />
                 <Route path="/girls/coaches-hub" element={<CoachesHubPage gender="girls" />} />
-                
-                <Route path="/parent-portal" element={<Navigate to="/family-hub" replace />} />
+                <Route path="/family-hub" element={<FamilyHubPage />} />
               </Route>
             </Route>
           </Routes>
