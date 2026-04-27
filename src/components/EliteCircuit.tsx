@@ -12,6 +12,8 @@ const tournaments = [
   { name: "Live Love Lax", location: "Long Island, NY", level: "Showcase" },
   { name: "Excelsior Games", location: "New York", level: "National" },
   { name: "Crabfeast", location: "Maryland", level: "Elite" },
+  { name: "World Series of Lacrosse", location: "Maryland", level: "Championship" },
+  { name: "NGLL", location: "Multi-State", level: "National" },
 ]
 
 export function EliteCircuit() {
