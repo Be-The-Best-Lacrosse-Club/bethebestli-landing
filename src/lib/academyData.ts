@@ -1,15 +1,20 @@
 import type { Gender } from "@/types"
+import type { FieldDiagramSpec } from "@/components/academy/FieldDiagram"
 
 // ─── TYPES ────────────────────────────────────────────────────────────
 
 export type AgeTier = "youth" | "middle" | "high"
 export type Pillar = "game" | "leadership" | "team"
 
+export type QuizQuestionKind = "knowledge" | "scenario"
+
 export interface QuizQuestion {
   question: string
   options: string[]
   correctAnswer: number
   explanation: string
+  kind?: QuizQuestionKind
+  scenario?: string // extra context for scenario questions
 }
 
 export interface AcademyLesson {
@@ -20,6 +25,8 @@ export interface AcademyLesson {
   pillar: Pillar
   description: string
   videoUrl?: string
+  diagrams?: FieldDiagramSpec[]
+  keyTakeaways?: string[]
   questions: QuizQuestion[]
 }
 
