@@ -294,7 +294,7 @@ export function DigitalAcademy() {
                   + {track.total - 3} more lessons locked
                 </span>
                 <a
-                  href="https://academy-btb.netlify.app"
+                  href="/academy-landing.html"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{ display: "flex", alignItems: "center", gap: 6, color: RED, fontSize: 10, fontWeight: 900, letterSpacing: "0.2em", textTransform: "uppercase", textDecoration: "none" }}
@@ -338,9 +338,7 @@ export function DigitalAcademy() {
           </div>
           <div style={{ display: "flex", gap: 10, flexShrink: 0, flexWrap: "wrap" }}>
             <a
-              href="https://academy-btb.netlify.app"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/academy-landing.html"
               style={{
                 display: "inline-flex", alignItems: "center", gap: 10,
                 background: RED, color: "#fff",
@@ -354,9 +352,7 @@ export function DigitalAcademy() {
               Reserve Your Spot ▸
             </a>
             <a
-              href="https://academy-btb.netlify.app"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/academy-landing.html"
               style={{
                 display: "inline-flex", alignItems: "center", gap: 10,
                 border: `1px solid ${STEEL}`, color: "#fff",
