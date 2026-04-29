@@ -18,11 +18,7 @@ const programLinks = [
   { label: "Recruiting", href: "/recruiting" },
 ]
 
-const academyLinks = [
-  { label: "About the Academy", href: "/academy-info" },
-  { label: "Player Academy", href: "/boys/players" },
-  { label: "Coach Tools", href: "/coach-tools" },
-]
+const ACADEMY_URL = "https://academy-btb.netlify.app"
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -96,20 +92,19 @@ export function Header() {
         {/* Desktop Nav — only at xl (1280px+) */}
         <nav className="hidden xl:flex items-center gap-1" ref={dropdownRef}>
 
-          <div className="relative">
-            <button onClick={() => setDropdown(dropdown === "academy" ? null : "academy")} className={navItemClass("/academy")}>
-              Academy <ChevronDown size={10} className={`inline ml-1 transition-transform ${dropdown === "academy" ? "rotate-180" : ""}`} />
-            </button>
-            {dropdown === "academy" && (
-              <div className="absolute top-full left-0 mt-2 w-52 bg-white border border-black/5 rounded-xl shadow-2xl py-2 animate-in fade-in slide-in-from-top-2">
-                {academyLinks.map(link => (
-                  <button key={link.href} onClick={() => go(link.href)} className="w-full text-left px-4 py-2.5 text-[0.7rem] font-bold uppercase tracking-[1px] text-black/60 hover:text-[var(--btb-red)] hover:bg-[var(--btb-red)]/5 transition-all">
-                    {link.label}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
+          <a
+            href={ACADEMY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative ml-1 mr-1 inline-flex items-center gap-2 px-4 py-2 bg-[var(--btb-red)] text-white text-[0.72rem] font-black uppercase tracking-[2px] rounded-lg shadow-lg shadow-red-500/25 hover:bg-[var(--btb-red-dark)] transition-all duration-200 group"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-60"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+            </span>
+            Digital Academy
+            <span className="absolute -top-2 -right-2 bg-white text-[var(--btb-red)] text-[0.5rem] font-black uppercase tracking-[1px] px-1.5 py-0.5 rounded-full leading-none">NEW</span>
+          </a>
 
           <div className="relative">
             <button onClick={() => setDropdown(dropdown === "programs" ? null : "programs")} className={navItemClass("/programs")}>
@@ -227,9 +222,22 @@ export function Header() {
               >
                 Tryouts 2026
               </button>
+              <a
+                href={ACADEMY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative py-4 border-2 border-[var(--btb-red)] text-white font-black text-sm uppercase tracking-[2px] rounded-xl flex items-center justify-center gap-2"
+              >
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--btb-red)] opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--btb-red)]"></span>
+                </span>
+                Digital Academy
+                <span className="absolute -top-2 -right-2 bg-[var(--btb-red)] text-white text-[0.5rem] font-black uppercase tracking-[1px] px-1.5 py-0.5 rounded-full leading-none">NEW</span>
+              </a>
               <button
                 onClick={() => go("/interest")}
-                className="py-4 border-2 border-white/20 text-white font-black text-sm uppercase tracking-[2px] rounded-xl"
+                className="py-4 border-2 border-white/20 text-white font-black text-sm uppercase tracking-[2px] rounded-xl col-span-2"
               >
                 Register
               </button>
@@ -253,14 +261,6 @@ export function Header() {
                   { label: "Boys Rosters", href: "/boys/teams" },
                   { label: "Girls Travel", href: "/girls/travel" },
                   { label: "Girls Rosters", href: "/girls/teams" },
-                ],
-              },
-              {
-                label: "Academy",
-                links: [
-                  { label: "About the Academy", href: "/academy-info" },
-                  { label: "Player Academy", href: "/boys/players" },
-                  { label: "Coach Tools", href: "/coach-tools" },
                 ],
               },
               {

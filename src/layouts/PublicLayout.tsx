@@ -3,6 +3,7 @@ import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
 import { SmoothScroll } from "@/components/SmoothScroll"
 import { ProgressBar } from "@/components/ProgressBar"
+import { CoachB } from "@/components/CoachB"
 
 export function PublicLayout() {
   return (
@@ -11,6 +12,7 @@ export function PublicLayout() {
       <Header />
       <Outlet />
       <Footer />
+      <CoachB surface="player_parent" />
     </SmoothScroll>
   )
 }
