@@ -18,7 +18,7 @@ const programLinks = [
   { label: "Recruiting", href: "/recruiting" },
 ]
 
-const ACADEMY_URL = "https://academy-btb.netlify.app"
+const ACADEMY_URL = "/academy-landing.html"
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -94,8 +94,6 @@ export function Header() {
 
           <a
             href={ACADEMY_URL}
-            target="_blank"
-            rel="noopener noreferrer"
             className="relative ml-1 mr-1 inline-flex items-center gap-2 px-4 py-2 bg-[var(--btb-red)] text-white text-[0.72rem] font-black uppercase tracking-[2px] rounded-lg shadow-lg shadow-red-500/25 hover:bg-[var(--btb-red-dark)] transition-all duration-200 group"
           >
             <span className="relative flex h-2 w-2">
@@ -224,8 +222,6 @@ export function Header() {
               </button>
               <a
                 href={ACADEMY_URL}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="relative py-4 border-2 border-[var(--btb-red)] text-white font-black text-sm uppercase tracking-[2px] rounded-xl flex items-center justify-center gap-2"
               >
                 <span className="relative flex h-2 w-2">
