@@ -142,8 +142,7 @@ export function Hero() {
           ref={subRef}
           className="text-[0.9rem] md:text-[0.95rem] leading-[1.9] text-white/40 max-w-[460px] mx-auto mb-2"
         >
-          BTB is where serious Long Island lacrosse players go to get serious
-          about their game.
+          The Most Complete Player Development Program on Long Island.
         </p>
         <p className="text-[0.85rem] md:text-[0.88rem] text-white/55 font-semibold mb-10 md:mb-12">
           Film study. Small-group training. Real coaching. Real results.
