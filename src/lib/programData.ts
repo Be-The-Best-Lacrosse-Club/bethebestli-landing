@@ -159,7 +159,7 @@ export const MASTER_COACHES: CoachProfile[] = [
     name: "Hunter Isnardi",
     title: "Assistant Coach",
     credentials: ["Mercy Alum"],
-    bio: "Coaches BTB 2031 Cyclones. BTB BOYS",
+    bio: "Coaches BTB 2031 Cyclones. BTB GIRLS",
     initials: "HI"
   },
   {
