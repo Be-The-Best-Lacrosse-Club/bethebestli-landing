@@ -42,6 +42,7 @@ import { RecruitingPage } from "@/pages/RecruitingPage"
 import { FuturesPage } from "@/pages/FuturesPage"
 import { CampsPage } from "@/pages/CampsPage"
 import { FamilyHubPage } from "@/pages/FamilyHubPage"
+import { ScrollDemoPage } from "@/pages/ScrollDemoPage"
 import { ContactPage } from "@/pages/ContactPage"
 
 function LandingPage() {
@@ -164,6 +165,7 @@ function App() {
             </Route>
 
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/scroll-demo" element={<ScrollDemoPage />} />
 
             <Route element={<ProtectedRoute />}>
               <Route element={<HubLayout />}>
