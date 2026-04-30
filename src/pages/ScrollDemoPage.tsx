@@ -18,6 +18,7 @@ const IMG = {
   bearArms: "/images/demo/bear-arms.png",
   logoB: "/images/demo/logo-b.png",
   logoShield: "/images/demo/logo-shield.png",
+  logoShieldWhite: "/images/demo/logo-shield-white.png",
 }
 
 const MARQUEE_IMGS = [IMG.boys, IMG.girls, IMG.team, IMG.defense, IMG.film, IMG.training, IMG.community]
@@ -348,7 +349,7 @@ export function ScrollDemoPage() {
 
       {!loaded && (
         <div id="loader">
-          <img src={IMG.logoShield} alt="" className="loader-logo-img" />
+          <img src={IMG.logoB} alt="" className="loader-logo-img" />
           <div className="loader-bar"><div className="loader-fill" /></div>
           <div className="loader-num">{loadPct}%</div>
         </div>
@@ -359,7 +360,7 @@ export function ScrollDemoPage() {
 
       <nav className="demo-nav">
         <div className="nav-logo">
-          <img src={IMG.logoShield} alt="BTB" className="nav-logo-img" />
+          <img src={IMG.logoB} alt="BTB" className="nav-logo-img" />
           <span>Be The Best</span>
         </div>
         <div className="nav-links">
@@ -427,6 +428,7 @@ export function ScrollDemoPage() {
 
       {/* NUMBERS */}
       <section id="numbers" ref={numbersRef}>
+        <div className="numbers-bg-img" style={{ backgroundImage: `url(${IMG.team})` }} />
         <div ref={paraWordRef} className="para-word">BTB</div>
         <div className="numbers-eyebrow">By The Numbers</div>
         <div className="numbers-grid">
@@ -601,6 +603,7 @@ export function ScrollDemoPage() {
 
       {/* COACHES — real leadership */}
       <section id="coaches" className="coaches-section">
+        <div className="coaches-bg-img" style={{ backgroundImage: `url(${IMG.community})` }} />
         <div className="coaches-eyebrow">▸ Built By Coaches</div>
         <h2 className="coaches-headline">The standard starts<br />with <span style={{ color: BTB_RED }}>them.</span></h2>
         <div className="coaches-grid">
@@ -724,6 +727,44 @@ export function ScrollDemoPage() {
         </div>
         <div className="cta-tagline">Be The Best Lacrosse Club · Long Island, NY · Est. 2021</div>
       </section>
+
+      {/* FOOTER — transparent shield + brand close */}
+      <footer className="demo-footer">
+        <div className="footer-shield-wrap">
+          <img src={IMG.logoShieldWhite} alt="Be The Best Lacrosse Club" className="footer-shield" />
+        </div>
+        <div className="footer-grid">
+          <div className="footer-col">
+            <div className="footer-col-title">Programs</div>
+            <a href="#">Boys Travel</a>
+            <a href="#">Girls Travel</a>
+            <a href="#">BTB Academy</a>
+            <a href="#">Futures</a>
+            <a href="#">Camps & Clinics</a>
+          </div>
+          <div className="footer-col">
+            <div className="footer-col-title">Resources</div>
+            <a href="#">BTB OS</a>
+            <a href="#">Coaching Staff</a>
+            <a href="#">Recruiting</a>
+            <a href="#">Film Library</a>
+            <a href="#">Tryouts</a>
+          </div>
+          <div className="footer-col">
+            <div className="footer-col-title">Contact</div>
+            <a href="#">info@bethebestli.com</a>
+            <a href="#">Massapequa, NY</a>
+            <a href="#">Instagram</a>
+            <a href="#">TikTok</a>
+            <a href="#">Facebook</a>
+          </div>
+        </div>
+        <div className="footer-motto">Our Culture Built Us. Our Hard Work Made Us.</div>
+        <div className="footer-bottom">
+          <div>© 2026 Be The Best Lacrosse Club</div>
+          <div>Long Island, NY · Est. 2021</div>
+        </div>
+      </footer>
     </div>
   )
 }
@@ -776,7 +817,10 @@ const styles = `
   display: flex; align-items: center; gap: 12px; color: #fff;
   text-transform: uppercase;
 }
-.nav-logo-img { width: 36px; height: 36px; object-fit: contain; }
+.nav-logo-img {
+  width: 56px; height: auto; object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+}
 .nav-links { display: flex; gap: 28px; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #fff; }
 .nav-links a { opacity: 0.7; transition: opacity 0.2s; }
 .nav-links a:hover { opacity: 1; }
@@ -949,6 +993,15 @@ const styles = `
 
 /* NUMBERS */
 #numbers { padding: 160px 48px; position: relative; background: #050505; overflow: hidden; }
+.numbers-bg-img {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  opacity: 0.18;
+  filter: grayscale(0.4) contrast(1.1);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+          mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  pointer-events: none;
+}
 @media (max-width: 720px) { #numbers { padding: 100px 24px; } }
 .numbers-eyebrow {
   font-size: 11px; font-weight: 700; letter-spacing: 0.3em;
@@ -1149,7 +1202,17 @@ const styles = `
 .bear-body { font-size: 17px; line-height: 1.7; color: rgba(255,255,255,0.55); font-weight: 300; max-width: 480px; }
 
 /* COACHES */
-.coaches-section { padding: 160px 48px; background: #050505; }
+.coaches-section { padding: 160px 48px; background: #050505; position: relative; overflow: hidden; }
+.coaches-bg-img {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center top;
+  opacity: 0.15;
+  filter: grayscale(0.6) contrast(1.05);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 30%, transparent 70%);
+          mask-image: linear-gradient(to bottom, black 0%, black 30%, transparent 70%);
+  pointer-events: none;
+}
+.coaches-section > :not(.coaches-bg-img) { position: relative; z-index: 1; }
 @media (max-width: 720px) { .coaches-section { padding: 100px 24px; } }
 .coaches-eyebrow {
   font-size: 11px; font-weight: 700; letter-spacing: 0.3em;
@@ -1387,4 +1450,66 @@ const styles = `
 .loader-fill { height: 100%; background: ${BTB_RED}; animation: demoFill 1.4s cubic-bezier(0.16,1,0.3,1) forwards; }
 @keyframes demoFill { from { width: 0%; } to { width: 100%; } }
 .loader-num { font-family: 'Bebas Neue', sans-serif; font-size: 13px; color: rgba(255,255,255,0.3); letter-spacing: 0.2em; }
+
+/* FOOTER */
+.demo-footer {
+  background: #000;
+  padding: 120px 48px 48px;
+  position: relative;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+@media (max-width: 720px) { .demo-footer { padding: 80px 24px 32px; } }
+.footer-shield-wrap {
+  display: flex; justify-content: center;
+  margin-bottom: 80px;
+  position: relative;
+}
+.footer-shield-wrap::before {
+  content: ''; position: absolute;
+  top: 50%; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+}
+.footer-shield {
+  width: clamp(160px, 18vw, 220px);
+  height: auto;
+  filter: drop-shadow(0 20px 40px rgba(210,38,48,0.3));
+  position: relative; z-index: 1;
+  background: #000; padding: 16px 32px;
+}
+.footer-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+  max-width: 1200px; margin: 0 auto 80px;
+}
+@media (max-width: 720px) { .footer-grid { grid-template-columns: 1fr; gap: 32px; } }
+.footer-col { display: flex; flex-direction: column; gap: 12px; }
+.footer-col-title {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.3em;
+  color: ${BTB_RED}; text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.footer-col a {
+  font-size: 14px; color: rgba(255,255,255,0.55);
+  transition: color 0.2s ease;
+}
+.footer-col a:hover { color: #fff; }
+.footer-motto {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(20px, 2.5vw, 32px);
+  letter-spacing: 0.05em; text-transform: uppercase;
+  text-align: center;
+  color: rgba(255,255,255,0.6);
+  padding: 32px 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 32px;
+}
+.footer-bottom {
+  display: flex; justify-content: space-between;
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+@media (max-width: 720px) {
+  .footer-bottom { flex-direction: column; gap: 8px; align-items: center; text-align: center; }
+}
 `
