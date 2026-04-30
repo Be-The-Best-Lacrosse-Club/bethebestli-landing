@@ -55,6 +55,7 @@ function LandingPage() {
       <Hero />
       <AudiencePaths />
       <TheStandard />
+      <FeaturedCoaches />
       <WhatYouGet />
       <DevelopmentModel />
       <CharacterLab />
@@ -62,7 +63,6 @@ function LandingPage() {
       <DigitalAcademy />
       <EliteCircuit />
       <SpecTicker />
-      <FeaturedCoaches />
       <Results />
       <CTASection />
     </>
