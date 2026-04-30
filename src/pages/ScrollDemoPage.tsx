@@ -3,29 +3,24 @@ import Lenis from "lenis"
 
 const BTB_RED = "#D22630"
 
-const HERO_IMG = "/images/DSC09949-Enhanced-NR.jpeg"
-const SCALE_IMG = "/images/DSC03081-2.jpeg"
-const PANEL_IMGS = [
-  "/images/DSC02783.jpeg",
-  "/images/IMG_8844.jpg",
-  "/images/kickoff-2024-cover.jpg",
-  "/images/IMG_0556_Original.jpg",
-]
-const STACK_IMGS = [
-  "/images/DSC03081-2.jpeg",
-  "/images/IMG_4697.jpeg",
-  "/images/DSC02783.jpeg",
-  "/images/DSC_0875.jpeg",
-]
-const MARQUEE_IMGS = [
-  "/images/DSC09949-Enhanced-NR.jpeg",
-  "/images/DSC03081-2.jpeg",
-  "/images/IMG_8844.jpg",
-  "/images/kickoff-2024-cover.jpg",
-  "/images/DSC02783.jpeg",
-  "/images/IMG_0556_Original.jpg",
-]
-const MANIFESTO_IMG = "/images/IMG_8844.jpg"
+// Curated demo assets — content-matched to each section
+const IMG = {
+  hero: "/images/demo/hero.jpg",
+  boys: "/images/demo/boys-action.jpg",
+  girls: "/images/demo/girls-action.jpg",
+  defense: "/images/demo/defense.jpg",
+  film: "/images/demo/film.jpg",
+  training: "/images/demo/training.jpg",
+  team: "/images/demo/team.jpg",
+  community: "/images/demo/community.jpg",
+  bearBlack: "/images/demo/bear-black.png",
+  bearFist: "/images/demo/bear-fist.png",
+  bearArms: "/images/demo/bear-arms.png",
+  logoB: "/images/demo/logo-b.png",
+  logoShield: "/images/demo/logo-shield.png",
+}
+
+const MARQUEE_IMGS = [IMG.boys, IMG.girls, IMG.team, IMG.defense, IMG.film, IMG.training, IMG.community]
 
 export function ScrollDemoPage() {
   const [loaded, setLoaded] = useState(false)
@@ -50,13 +45,12 @@ export function ScrollDemoPage() {
   const panelDotsWrapRef = useRef<HTMLDivElement>(null)
   const panelImgRefs = useRef<Array<HTMLDivElement | null>>([])
 
-  const stackSectionRef = useRef<HTMLDivElement>(null)
-  const stackCardRefs = useRef<Array<HTMLDivElement | null>>([])
-
   const hTrackRef = useRef<HTMLDivElement>(null)
 
   const maskSectionRef = useRef<HTMLElement>(null)
   const maskFillRef = useRef<HTMLHeadingElement>(null)
+
+  const bearRef = useRef<HTMLImageElement>(null)
 
   // Loader
   useEffect(() => {
@@ -79,8 +73,7 @@ export function ScrollDemoPage() {
   // Lenis smooth scroll
   useEffect(() => {
     if (!loaded) return
-    const isReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    if (isReducedMotion) return
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -102,12 +95,8 @@ export function ScrollDemoPage() {
   // Custom cursor
   useEffect(() => {
     if (!loaded) return
-    const isTouch = window.matchMedia("(hover: none)").matches
-    if (isTouch) return
-    let mx = 0,
-      my = 0,
-      rx = 0,
-      ry = 0
+    if (window.matchMedia("(hover: none)").matches) return
+    let mx = 0, my = 0, rx = 0, ry = 0
     let raf = 0
     const onMove = (e: MouseEvent) => {
       mx = e.clientX
@@ -147,6 +136,11 @@ export function ScrollDemoPage() {
                 window.setTimeout(() => c.classList.add("in"), i * 100)
               })
             }
+            if (e.target.classList.contains("coaches-grid")) {
+              e.target.querySelectorAll(".coach-card").forEach((c, i) => {
+                window.setTimeout(() => c.classList.add("in"), i * 80)
+              })
+            }
           }
         })
       },
@@ -154,7 +148,7 @@ export function ScrollDemoPage() {
     )
     document
       .querySelectorAll(
-        ".reveal, .numbers-eyebrow, .numbers-grid, .hscroll-label, .hscroll-title, .manifesto-sub, .cta-eyebrow, .cta-title, .cta-btns, .scale-eyebrow, .scale-headline, .scale-body, .stack-eyebrow, .stack-title"
+        ".reveal, .numbers-eyebrow, .numbers-grid, .hscroll-label, .hscroll-title, .manifesto-sub, .cta-eyebrow, .cta-title, .cta-btns, .scale-eyebrow, .scale-headline, .scale-body, .stack-eyebrow, .stack-title, .coaches-eyebrow, .coaches-headline, .coaches-grid"
       )
       .forEach((el) => observer.observe(el))
 
@@ -261,27 +255,6 @@ export function ScrollDemoPage() {
         }
       }
 
-      if (stackSectionRef.current) {
-        const rect = stackSectionRef.current.getBoundingClientRect()
-        const total = stackSectionRef.current.offsetHeight - window.innerHeight
-        const scrolled = -rect.top
-        const pct = Math.max(0, Math.min(1, scrolled / total))
-        stackCardRefs.current.forEach((card, i) => {
-          if (!card) return
-          const cardCount = stackCardRefs.current.length
-          const cardProgress = pct * cardCount
-          const cardLocal = cardProgress - i
-          if (cardLocal > 1) {
-            const out = Math.min(cardLocal - 1, 1)
-            card.style.transform = `translateY(${-out * 60}px) scale(${1 - out * 0.05})`
-            card.style.opacity = `${1 - out * 0.4}`
-          } else {
-            card.style.transform = "translateY(0) scale(1)"
-            card.style.opacity = "1"
-          }
-        })
-      }
-
       if (maskSectionRef.current && maskFillRef.current) {
         const rect = maskSectionRef.current.getBoundingClientRect()
         const vh = window.innerHeight
@@ -290,6 +263,13 @@ export function ScrollDemoPage() {
         const pct = Math.max(0, Math.min(1, enter / total))
         const k = Math.max(0, Math.min(1, (pct - 0.2) / 0.5))
         maskFillRef.current.style.clipPath = `inset(0 ${(1 - k) * 100}% 0 0)`
+      }
+
+      // Bear floats / rotates a touch on scroll
+      if (bearRef.current) {
+        const rect = bearRef.current.getBoundingClientRect()
+        const rel = (rect.top + rect.height / 2 - window.innerHeight / 2) / window.innerHeight
+        bearRef.current.style.transform = `translateY(${rel * -30}px) rotate(${rel * -3}deg)`
       }
     }
     window.addEventListener("scroll", onScroll, { passive: true })
@@ -368,9 +348,7 @@ export function ScrollDemoPage() {
 
       {!loaded && (
         <div id="loader">
-          <div className="loader-logo">
-            BTB<span style={{ color: BTB_RED }}>.</span>
-          </div>
+          <img src={IMG.logoShield} alt="" className="loader-logo-img" />
           <div className="loader-bar"><div className="loader-fill" /></div>
           <div className="loader-num">{loadPct}%</div>
         </div>
@@ -380,19 +358,23 @@ export function ScrollDemoPage() {
       <div ref={cursorRingRef} id="demo-cursor-ring" />
 
       <nav className="demo-nav">
-        <div className="nav-logo"><span className="nav-logo-mark">B</span> BTB DEMO</div>
+        <div className="nav-logo">
+          <img src={IMG.logoShield} alt="BTB" className="nav-logo-img" />
+          <span>Be The Best</span>
+        </div>
         <div className="nav-links">
-          <a href="#hero">Hero</a>
-          <a href="#scale">Scale</a>
+          <a href="#mission">Mission</a>
           <a href="#numbers">Numbers</a>
-          <a href="#panels">Panels</a>
-          <a href="#stack">Stack</a>
-          <a href="#manifesto">Manifesto</a>
+          <a href="#programs">Programs</a>
+          <a href="#stack">How We Build</a>
+          <a href="#coaches">Coaches</a>
+          <a href="#cta">Join</a>
         </div>
       </nav>
 
+      {/* HERO — full-bleed action photo + real story */}
       <section id="hero" className={loaded ? "hero-section in" : "hero-section"}>
-        <div ref={heroImgRef} className="hero-img" style={{ backgroundImage: `url(${HERO_IMG})` }} />
+        <div ref={heroImgRef} className="hero-img" style={{ backgroundImage: `url(${IMG.hero})` }} />
         <div className="hero-vignette" />
         <div className="hero-grid" />
         <div className="hero-content">
@@ -408,10 +390,10 @@ export function ScrollDemoPage() {
             <span className="word"><span>CLUB</span></span>
           </h1>
           <div className="hero-sub">
-            <p>23 Elite Teams · 400+ Players · 40+ Coaches</p>
+            <p>23 Elite Teams · 400+ Players · Boys + Girls · Massapequa</p>
             <div className="hero-cta">
-              <button className="btn-mag"><span>Join The Program ▸</span></button>
-              <button className="btn-outline">Explore Academy</button>
+              <button className="btn-mag"><span>Tryouts ▸</span></button>
+              <button className="btn-outline">The Academy</button>
             </div>
           </div>
         </div>
@@ -420,28 +402,33 @@ export function ScrollDemoPage() {
         </div>
       </section>
 
-      <div id="scale" ref={scaleSectionRef} className="scale-section">
+      {/* MISSION — sticky scaling photo of boys playing + tagline */}
+      <div id="mission" ref={scaleSectionRef} className="scale-section">
         <div className="scale-inner">
           <div className="scale-grid">
             <div ref={scaleTextRef} className="scale-text">
-              <div className="scale-eyebrow">▸ The Standard</div>
+              <div className="scale-eyebrow">▸ Our Mission</div>
               <h2 className="scale-headline">
                 We don't<br /><span style={{ color: BTB_RED }}>chase</span><br />talent.
               </h2>
               <p className="scale-body">
                 We build it. Every player who walks through our doors gets the same thing — a system, a coach, a film room, and a standard. The rest is up to them.
               </p>
+              <p className="scale-body" style={{ marginTop: 16, fontSize: 14, color: "rgba(255,255,255,0.4)" }}>
+                Founded in 2021 by Dan Achatz. Now home to 23 teams, 400+ players, and one of the most respected development pipelines on Long Island.
+              </p>
             </div>
             <div className="scale-img-wrap">
-              <div ref={scaleImgRef} className="scale-img" style={{ backgroundImage: `url(${SCALE_IMG})` }} />
+              <div ref={scaleImgRef} className="scale-img" style={{ backgroundImage: `url(${IMG.boys})` }} />
             </div>
           </div>
         </div>
       </div>
 
+      {/* NUMBERS */}
       <section id="numbers" ref={numbersRef}>
         <div ref={paraWordRef} className="para-word">BTB</div>
-        <div className="numbers-eyebrow">The Numbers</div>
+        <div className="numbers-eyebrow">By The Numbers</div>
         <div className="numbers-grid">
           <div className="num-card">
             <div className="num-val" data-target="400" data-suffix="+">0</div>
@@ -456,22 +443,25 @@ export function ScrollDemoPage() {
           <div className="num-card">
             <div className="num-val" data-target="40" data-suffix="+">0</div>
             <div className="num-label">Coaches</div>
-            <div className="num-sub">Certified & dedicated</div>
+            <div className="num-sub">D1 alums + certified instructors</div>
           </div>
           <div className="num-card">
-            <div className="num-val" data-target="12">0</div>
-            <div className="num-label">D1 Commits</div>
-            <div className="num-sub">This season alone</div>
+            <div className="num-val" data-target="5">0</div>
+            <div className="num-label">Years Strong</div>
+            <div className="num-sub">Founded 2021</div>
           </div>
         </div>
       </section>
 
+      {/* MASK REVEAL — the actual BTB motto */}
       <section ref={maskSectionRef} className="mask-section">
-        <h2 className="mask-base">PRACTICE MAKES PERMANENT.</h2>
-        <h2 ref={maskFillRef} className="mask-fill">PRACTICE MAKES PERMANENT.</h2>
+        <h2 className="mask-base">OUR CULTURE BUILT US.</h2>
+        <h2 ref={maskFillRef} className="mask-fill">OUR CULTURE BUILT US.</h2>
       </section>
 
+      {/* PHOTO MARQUEE */}
       <section className="img-marquee-section">
+        <div className="img-marquee-eyebrow">▸ The Club</div>
         <div className="img-marquee-wrap">
           <div className="img-marquee-track">
             {[...MARQUEE_IMGS, ...MARQUEE_IMGS].map((src, i) => (
@@ -488,15 +478,16 @@ export function ScrollDemoPage() {
         </div>
       </section>
 
-      <div id="panels" ref={panelsSectionRef}>
+      {/* PROGRAMS — sticky horizontal panels with real BTB programs */}
+      <div id="programs" ref={panelsSectionRef}>
         <div className="panels-spacer" />
         <div className="panels-sticky">
           <div ref={panelsTrackRef} className="panels-track">
             {[
-              { num: "01", pill: "Player Development", title: "PLAYER", titleAccent: "IQ", text: "Every elite player has the same edge — they understand the game faster. We build decision-makers, not just athletes.", img: PANEL_IMGS[0] },
-              { num: "02", pill: "Film Study", title: "125 HRS", titleAccent: "FILM", text: "Curated clips from D1 programs and the PLL. Every play annotated with coaching intent.", img: PANEL_IMGS[1] },
-              { num: "03", pill: "Team Systems", title: "BTB", titleAccent: "SYSTEM", text: "The exact offensive and defensive playbooks our teams run. Position assignments, coaching cues, and repetition drills.", img: PANEL_IMGS[2] },
-              { num: "04", pill: "Operations", title: "BTB", titleAccent: "OS", text: "A full operating system — players, parents, coaches, events, tuition, alerts, and analytics. All in one platform.", img: PANEL_IMGS[3] },
+              { num: "01", pill: "Boys Travel", title: "BOYS", titleAccent: "PROGRAM", text: "12 elite travel teams from 2028 → 2036. Lead by Sean Reynolds (SUNY Oneonta alum). Spring + Summer + Fall seasons.", img: IMG.boys, cta: "View Boys Teams" },
+              { num: "02", pill: "Girls Travel", title: "GIRLS", titleAccent: "PROGRAM", text: "11 elite travel teams from 2028 → 2036. Led by Marisa D'Angelo (Manhattanville alum). Same standard, same culture, same path.", img: IMG.girls, cta: "View Girls Teams" },
+              { num: "03", pill: "BTB Academy", title: "PLAYER", titleAccent: "IQ", text: "On-demand training: film study, position-specific drills, decision-making modules. The work that happens when you're not on the field.", img: IMG.film, cta: "Explore Academy" },
+              { num: "04", pill: "BTB OS", title: "BTB", titleAccent: "OS", text: "The operating system for the club — schedules, attendance, tuition, alerts, recruiting. One platform, one source of truth, zero confusion.", img: IMG.team, cta: "Tour BTB OS" },
             ].map((p, i) => (
               <div key={p.num} className="panel-item">
                 <div
@@ -512,6 +503,7 @@ export function ScrollDemoPage() {
                   <div className="panel-pill">{p.pill}</div>
                   <h2 className="panel-title">{p.title}<br /><span style={{ color: BTB_RED }}>{p.titleAccent}</span></h2>
                   <p className="panel-text">{p.text}</p>
+                  <button className="btn-mag panel-cta"><span>{p.cta} ▸</span></button>
                 </div>
               </div>
             ))}
@@ -525,55 +517,129 @@ export function ScrollDemoPage() {
         ))}
       </div>
 
-      <div id="stack" ref={stackSectionRef} className="stack-section">
-        <div className="stack-pin">
-          <div className="stack-head">
-            <div className="stack-eyebrow">▸ Built for Athletes</div>
-            <h2 className="stack-title">FOUR<br /><em>PILLARS.</em></h2>
-          </div>
-          <div className="stack-cards">
-            {[
-              { t: "Player IQ", d: "Read defenses. Beat slides. Execute under pressure.", img: STACK_IMGS[0] },
-              { t: "Film Library", d: "Hours of college and PLL footage. Annotated weekly.", img: STACK_IMGS[1] },
-              { t: "Team Systems", d: "The exact playbooks our 23 teams run on the field.", img: STACK_IMGS[2] },
-              { t: "BTB OS", d: "Roster, schedule, attendance, tuition — all connected.", img: STACK_IMGS[3] },
-            ].map((c, i) => (
-              <div
-                key={c.t}
-                ref={(el) => {
-                  stackCardRefs.current[i] = el
-                }}
-                className="stack-card"
-                style={{
-                  zIndex: 10 + i,
-                  top: `${10 + i * 8}px`,
-                }}
-              >
+      {/* STACKING CARDS — fixed via CSS sticky, real "How We Build" content */}
+      <section id="stack" className="stack-section">
+        <div className="stack-head">
+          <div className="stack-eyebrow">▸ How We Build</div>
+          <h2 className="stack-title">FOUR<br /><em>PILLARS.</em></h2>
+          <p className="stack-sub">
+            Every BTB player gets the same four things — no shortcuts, no exceptions. This is what separates us.
+          </p>
+        </div>
+
+        <div className="stack-cards-wrap">
+          {[
+            {
+              num: "01",
+              title: "Player Development",
+              kicker: "On the field",
+              desc: "23 teams running the same offensive system, same defensive language, same expectations. When a 2028 kid plays up, they already know the calls.",
+              bullets: ["Position-specific coaching", "Weekly skill blocks", "Game-speed reps"],
+              img: IMG.training,
+            },
+            {
+              num: "02",
+              title: "Film Study",
+              kicker: "Off the field",
+              desc: "Curated clips from D1 programs and the PLL. Every play annotated with coaching intent — not just highlights, instruction.",
+              bullets: ["100+ hours archived", "Boys + Girls libraries", "Updated weekly"],
+              img: IMG.film,
+            },
+            {
+              num: "03",
+              title: "Coaching Staff",
+              kicker: "The people",
+              desc: "40+ coaches: D1 alums, varsity head coaches, certified trainers. Same standard from 2nd grade to senior year.",
+              bullets: ["D1 college alums", "Varsity HC pipeline", "Goalie + Draw specialists"],
+              img: IMG.defense,
+            },
+            {
+              num: "04",
+              title: "BTB OS",
+              kicker: "The operations",
+              desc: "Roster, schedule, attendance, tuition, alerts, recruiting — all connected. Parents see what they need. Coaches run their teams. Nothing falls through.",
+              bullets: ["Airtable + LeagueApps", "TeamSnap synced", "Recruiting CRM"],
+              img: IMG.team,
+            },
+          ].map((c, i) => (
+            <div key={c.num} className="stack-card-wrap">
+              <div className="stack-card" style={{ top: `${80 + i * 24}px` }}>
                 <div className="stack-card-img" style={{ backgroundImage: `url(${c.img})` }} />
                 <div className="stack-card-body">
-                  <div className="stack-card-num">0{i + 1}</div>
-                  <h3 className="stack-card-title">{c.t}</h3>
-                  <p className="stack-card-desc">{c.d}</p>
+                  <div className="stack-card-meta">
+                    <div className="stack-card-num">{c.num}</div>
+                    <div className="stack-card-kicker">{c.kicker}</div>
+                  </div>
+                  <h3 className="stack-card-title">{c.title}</h3>
+                  <p className="stack-card-desc">{c.desc}</p>
+                  <ul className="stack-card-bullets">
+                    {c.bullets.map((b) => (
+                      <li key={b}>{b}</li>
+                    ))}
+                  </ul>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
-      </div>
+      </section>
 
+      {/* BEAR INTERLUDE — mascot moment */}
+      <section className="bear-interlude">
+        <img ref={bearRef} src={IMG.bearFist} alt="" className="bear-img" />
+        <div className="bear-text">
+          <div className="bear-eyebrow">▸ The BTB Way</div>
+          <h2 className="bear-headline">
+            We coach hard.<br />
+            <span style={{ color: BTB_RED }}>We love harder.</span>
+          </h2>
+          <p className="bear-body">
+            Every kid that wears a BTB shield gets pushed — and gets backed. That's the deal.
+          </p>
+        </div>
+      </section>
+
+      {/* COACHES — real leadership */}
+      <section id="coaches" className="coaches-section">
+        <div className="coaches-eyebrow">▸ Built By Coaches</div>
+        <h2 className="coaches-headline">The standard starts<br />with <span style={{ color: BTB_RED }}>them.</span></h2>
+        <div className="coaches-grid">
+          {[
+            { name: "Dan Achatz", title: "Founder · Owner", cred: "Rutgers Alum · Plainedge Varsity HC", bg: IMG.community },
+            { name: "Sean Reynolds", title: "Boys Director", cred: "SUNY Oneonta Alum", bg: IMG.boys },
+            { name: "Marisa D'Angelo", title: "Girls Director", cred: "Manhattanville Alum · Long Beach MS HC", bg: IMG.girls },
+            { name: "Brad McLam", title: "Recruiting Coordinator", cred: "Hopkins Alum", bg: IMG.team },
+            { name: "Pete Ferrizz", title: "Operations", cred: "Runs the engine room", bg: IMG.training },
+            { name: "Mike Guercio", title: "Futures Director", cred: "BTB Futures Specialist", bg: IMG.film },
+          ].map((c) => (
+            <div key={c.name} className="coach-card" style={{ backgroundImage: `url(${c.bg})` }}>
+              <div className="coach-card-overlay" />
+              <div className="coach-card-body">
+                <div className="coach-card-title">{c.title}</div>
+                <div className="coach-card-name">{c.name}</div>
+                <div className="coach-card-cred">{c.cred}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* DRAGGABLE OFFERINGS */}
       <section id="hscroll">
         <div className="hscroll-head">
           <div className="hscroll-label">▸ What we offer</div>
-          <h2 className="hscroll-title">BUILT FOR<br /><em>ATHLETES</em></h2>
+          <h2 className="hscroll-title">EVERY ANGLE,<br /><em>COVERED.</em></h2>
         </div>
         <div ref={hTrackRef} className="hscroll-track">
           {[
-            { num: "01", tag: "Boys + Girls", title: "Elite Teams", desc: "23 teams across all age groups.", img: PANEL_IMGS[0] },
-            { num: "02", tag: "Digital", title: "Player IQ", desc: "On-demand modules. Read defenses, beat slides.", img: STACK_IMGS[0] },
-            { num: "03", tag: "Library", title: "Film Study", desc: "College and PLL footage, annotated weekly.", img: PANEL_IMGS[2] },
-            { num: "04", tag: "Staff", title: "Coaching", desc: "40+ coaches. Former D1 players.", img: STACK_IMGS[3] },
-            { num: "05", tag: "Recruiting", title: "D1 Pathway", desc: "Recruiting prep, profiles, exposure.", img: STACK_IMGS[1] },
-            { num: "06", tag: "Platform", title: "BTB OS", desc: "Operating system for the whole club.", img: PANEL_IMGS[3] },
+            { num: "01", tag: "Travel", title: "Elite Teams", desc: "23 teams across all age groups, Boys + Girls.", img: IMG.team },
+            { num: "02", tag: "Digital", title: "Player IQ", desc: "On-demand modules. Read defenses, beat slides.", img: IMG.film },
+            { num: "03", tag: "Film", title: "Film Study", desc: "College + PLL footage, annotated weekly.", img: IMG.defense },
+            { num: "04", tag: "Coaching", title: "Coaching Staff", desc: "40+ coaches. D1 alums + certified trainers.", img: IMG.training },
+            { num: "05", tag: "Recruiting", title: "D1 Pathway", desc: "Recruiting prep, profiles, coach exposure.", img: IMG.boys },
+            { num: "06", tag: "Camps", title: "Camps + Clinics", desc: "Summer camps, holiday clinics, position skills.", img: IMG.community },
+            { num: "07", tag: "Futures", title: "BTB Futures", desc: "Grades K-2. The first step into BTB.", img: IMG.girls },
+            { num: "08", tag: "OS", title: "BTB OS", desc: "Operating system for the whole club.", img: IMG.hero },
           ].map((c) => (
             <div className="hcard" key={c.num} style={{ backgroundImage: `url(${c.img})` }}>
               <div className="hcard-overlay" />
@@ -588,8 +654,9 @@ export function ScrollDemoPage() {
         </div>
       </section>
 
+      {/* MANIFESTO — the actual BTB motto */}
       <section id="manifesto">
-        <div className="manifesto-bg" style={{ backgroundImage: `url(${MANIFESTO_IMG})` }} />
+        <div className="manifesto-bg" style={{ backgroundImage: `url(${IMG.community})` }} />
         <div className="manifesto-overlay" />
         <div className="manifesto-inner">
           <div className="manifesto-line">
@@ -609,12 +676,14 @@ export function ScrollDemoPage() {
             <div className="manifesto-word"><span className="white">MADE US.</span></div>
           </div>
           <p className="manifesto-sub">
-            Every rep. Every film session. Every early morning. This is what separates Long Island lacrosse from everywhere else.
+            That's the BTB motto. Not a slogan — the operating principle. Every practice. Every film session. Every early morning.
           </p>
         </div>
       </section>
 
+      {/* TEAM TEXT MARQUEE */}
       <section id="marquee-section">
+        <div className="marquee-eyebrow">▸ The 2026 Roster</div>
         <div className="marquee-wrap">
           <div className="marquee-track">
             {Array.from({ length: 2 }).flatMap((_, dup) =>
@@ -639,17 +708,19 @@ export function ScrollDemoPage() {
         </div>
       </section>
 
+      {/* FINAL CTA with bear */}
       <section id="cta">
         <div className="cta-bg" />
-        <div className="cta-eyebrow">Your Season Starts Now</div>
+        <img src={IMG.bearArms} alt="" className="cta-bear" />
+        <div className="cta-eyebrow">Tryouts · Camps · Academy</div>
         <h2 className="cta-title">
           <div className="line"><span>YOU'VE GOT</span></div>
           <div className="line"><span>TWO <span style={{ color: BTB_RED }}>CHOICES.</span></span></div>
           <div className="line"><span>LIFT OR GET LIFTED.</span></div>
         </h2>
         <div className="cta-btns">
-          <button className="btn-mag"><span>Join BTB Now ▸</span></button>
-          <button className="btn-outline">Explore BTB OS</button>
+          <button className="btn-mag"><span>Sign Up For Tryouts ▸</span></button>
+          <button className="btn-outline">Tour BTB OS</button>
         </div>
         <div className="cta-tagline">Be The Best Lacrosse Club · Long Island, NY · Est. 2021</div>
       </section>
@@ -695,17 +766,23 @@ const styles = `
 
 .demo-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  padding: 24px 48px;
+  padding: 20px 48px;
   display: flex; align-items: center; justify-content: space-between;
   mix-blend-mode: difference;
 }
-.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.06em; display: flex; align-items: center; gap: 10px; color: #fff; }
-.nav-logo-mark { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: ${BTB_RED}; font-size: 16px; transform: skew(-8deg); }
-.nav-links { display: flex; gap: 32px; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; }
-.nav-links a { opacity: 0.6; transition: opacity 0.2s; }
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px; letter-spacing: 0.1em;
+  display: flex; align-items: center; gap: 12px; color: #fff;
+  text-transform: uppercase;
+}
+.nav-logo-img { width: 36px; height: 36px; object-fit: contain; }
+.nav-links { display: flex; gap: 28px; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #fff; }
+.nav-links a { opacity: 0.7; transition: opacity 0.2s; }
 .nav-links a:hover { opacity: 1; }
-@media (max-width: 720px) { .nav-links { display: none; } .demo-nav { padding: 20px 24px; } }
+@media (max-width: 860px) { .nav-links { display: none; } .demo-nav { padding: 16px 24px; } .nav-logo { font-size: 14px; } }
 
+/* HERO */
 #hero { height: 100vh; min-height: 700px; position: relative; overflow: hidden; background: #000; }
 .hero-img {
   position: absolute; inset: -10%;
@@ -803,7 +880,6 @@ const styles = `
 .btn-mag:hover { color: #000; }
 .btn-mag:hover::after { transform: translateY(0); }
 .btn-mag > span { position: relative; z-index: 1; }
-
 .btn-outline {
   padding: 16px 36px;
   font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
@@ -829,18 +905,10 @@ const styles = `
   100% { transform: scaleY(0); transform-origin: bottom; }
 }
 
+/* SCALE / MISSION */
 .scale-section { position: relative; height: 250vh; background: #050505; }
-.scale-inner {
-  position: sticky; top: 0;
-  height: 100vh; overflow: hidden;
-  display: flex; align-items: center; justify-content: center;
-}
-.scale-grid {
-  position: relative; z-index: 2;
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 80px; align-items: center;
-  padding: 0 80px; width: 100%; max-width: 1400px;
-}
+.scale-inner { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.scale-grid { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; padding: 0 80px; width: 100%; max-width: 1400px; }
 @media (max-width: 960px) { .scale-grid { grid-template-columns: 1fr; gap: 40px; padding: 0 24px; } }
 .scale-text { will-change: transform, opacity; }
 .scale-eyebrow {
@@ -866,18 +934,12 @@ const styles = `
   transition: opacity 0.8s ease 0.3s, transform 0.8s cubic-bezier(0.16,1,0.3,1) 0.3s;
 }
 .scale-body.in { opacity: 1; transform: translateY(0); }
-.scale-img-wrap {
-  position: relative;
-  aspect-ratio: 4/5;
-  overflow: hidden;
-  transform-origin: center;
-}
+.scale-img-wrap { position: relative; aspect-ratio: 4/5; overflow: hidden; transform-origin: center; }
 .scale-img {
   position: absolute; inset: 0;
   background-size: cover; background-position: center;
   filter: brightness(0.85) contrast(1.05);
-  will-change: transform, border-radius;
-  transform-origin: center;
+  will-change: transform, border-radius; transform-origin: center;
 }
 @media (max-width: 960px) {
   .scale-section { height: auto; }
@@ -885,6 +947,7 @@ const styles = `
   .scale-img-wrap { aspect-ratio: 4/3; }
 }
 
+/* NUMBERS */
 #numbers { padding: 160px 48px; position: relative; background: #050505; overflow: hidden; }
 @media (max-width: 720px) { #numbers { padding: 100px 24px; } }
 .numbers-eyebrow {
@@ -924,6 +987,7 @@ const styles = `
   letter-spacing: -0.04em; pointer-events: none; will-change: transform;
 }
 
+/* MASK */
 .mask-section { position: relative; padding: 120px 48px; background: #050505; }
 @media (max-width: 720px) { .mask-section { padding: 80px 24px; } }
 .mask-base, .mask-fill {
@@ -941,12 +1005,15 @@ const styles = `
 }
 @media (max-width: 720px) { .mask-fill { top: 80px; left: 24px; right: 24px; } }
 
+/* IMG MARQUEE */
 .img-marquee-section { padding: 60px 0 120px; background: #050505; overflow: hidden; }
-.img-marquee-wrap { display: flex; overflow: hidden; }
-.img-marquee-track {
-  display: flex; gap: 16px; animation: demoMarquee 32s linear infinite;
-  white-space: nowrap;
+.img-marquee-eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.3em;
+  color: ${BTB_RED}; text-transform: uppercase;
+  padding: 0 48px 40px;
 }
+.img-marquee-wrap { display: flex; overflow: hidden; }
+.img-marquee-track { display: flex; gap: 16px; animation: demoMarquee 32s linear infinite; white-space: nowrap; }
 .img-marquee-track.reverse { animation-direction: reverse; animation-duration: 38s; }
 .img-marquee-item {
   flex-shrink: 0;
@@ -956,35 +1023,22 @@ const styles = `
   transition: filter 0.4s ease, transform 0.4s ease;
 }
 .img-marquee-item:hover { filter: grayscale(0) brightness(1); transform: scale(1.02); }
-@media (max-width: 720px) { .img-marquee-item { width: 240px; height: 180px; } }
+@media (max-width: 720px) { .img-marquee-item { width: 240px; height: 180px; } .img-marquee-eyebrow { padding: 0 24px 24px; } }
 @keyframes demoMarquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
 
-#panels { position: relative; }
+/* PANELS */
+#programs { position: relative; }
 .panels-spacer { height: 400vh; }
 .panels-sticky { position: sticky; top: 0; height: 100vh; overflow: hidden; margin-top: -400vh; display: flex; align-items: center; }
 .panels-track { display: flex; width: 400vw; transition: none; }
-.panel-item {
-  width: 100vw; height: 100vh;
-  display: flex; align-items: center; justify-content: center;
-  flex-direction: column;
-  padding: 48px;
-  flex-shrink: 0;
-  position: relative; overflow: hidden;
-}
-.panel-img {
-  position: absolute; inset: -8%;
-  background-size: cover; background-position: center;
-  will-change: transform;
-}
-.panel-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 50%, rgba(210,38,48,0.3) 100%);
-}
+.panel-item { width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 48px; flex-shrink: 0; position: relative; overflow: hidden; }
+.panel-img { position: absolute; inset: -8%; background-size: cover; background-position: center; will-change: transform; }
+.panel-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 50%, rgba(210,38,48,0.3) 100%); }
 .panel-num { font-family: 'Bebas Neue', sans-serif; font-size: 22vw; color: rgba(255,255,255,0.06); position: absolute; right: -20px; bottom: -40px; line-height: 1; pointer-events: none; z-index: 1; }
-.panel-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; }
+.panel-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; max-width: 700px; }
 .panel-pill {
   font-size: 11px; font-weight: 700; letter-spacing: 0.3em;
   text-transform: uppercase;
@@ -999,8 +1053,8 @@ const styles = `
   text-align: center; margin-bottom: 24px;
   letter-spacing: 0.005em;
 }
-.panel-text { max-width: 600px; text-align: center; font-size: 17px; line-height: 1.7; color: rgba(255,255,255,0.7); font-weight: 300; }
-
+.panel-text { max-width: 600px; text-align: center; font-size: 17px; line-height: 1.7; color: rgba(255,255,255,0.75); font-weight: 300; margin-bottom: 32px; }
+.panel-cta { font-size: 11px; padding: 14px 28px; }
 .panel-progress {
   position: fixed; bottom: 48px; left: 50%; transform: translateX(-50%);
   display: flex; gap: 8px; z-index: 50;
@@ -1009,19 +1063,10 @@ const styles = `
 .pp-dot { width: 24px; height: 3px; background: rgba(255,255,255,0.2); transition: background 0.4s ease, width 0.4s cubic-bezier(0.16,1,0.3,1); }
 .pp-dot.active { background: ${BTB_RED}; width: 48px; }
 
-.stack-section { position: relative; height: 350vh; background: #050505; }
-.stack-pin {
-  position: sticky; top: 0;
-  height: 100vh; overflow: hidden;
-  padding: 80px 48px;
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 80px; align-items: center;
-}
-@media (max-width: 960px) {
-  .stack-section { height: auto; }
-  .stack-pin { position: relative; height: auto; grid-template-columns: 1fr; padding: 80px 24px; gap: 40px; }
-}
-.stack-head { position: relative; z-index: 2; }
+/* STACKING CARDS — pure CSS sticky */
+.stack-section { background: #050505; padding: 120px 48px 0; position: relative; }
+@media (max-width: 720px) { .stack-section { padding: 80px 24px 0; } }
+.stack-head { max-width: 1200px; margin: 0 auto 80px; }
 .stack-eyebrow {
   font-size: 11px; font-weight: 700; letter-spacing: 0.3em;
   color: ${BTB_RED}; text-transform: uppercase; margin-bottom: 24px;
@@ -1035,37 +1080,129 @@ const styles = `
   line-height: 0.9; letter-spacing: 0.005em; text-transform: uppercase;
   opacity: 0; transform: translateY(30px);
   transition: opacity 0.8s ease 0.1s, transform 0.8s cubic-bezier(0.16,1,0.3,1) 0.1s;
+  margin-bottom: 24px;
 }
 .stack-title.in { opacity: 1; transform: translateY(0); }
 .stack-title em { color: ${BTB_RED}; font-style: normal; }
-.stack-cards {
-  position: relative;
-  height: 70vh;
-  min-height: 480px;
-}
-@media (max-width: 960px) { .stack-cards { display: flex; flex-direction: column; gap: 16px; height: auto; min-height: 0; } }
+.stack-sub { font-size: 17px; line-height: 1.7; color: rgba(255,255,255,0.55); font-weight: 300; max-width: 580px; }
+.stack-cards-wrap { max-width: 1200px; margin: 0 auto; padding-bottom: 200px; }
+.stack-card-wrap { height: 80vh; min-height: 560px; }
 .stack-card {
-  position: absolute; left: 0; right: 0;
-  height: 70vh; min-height: 480px;
+  position: sticky;
+  height: 80vh; min-height: 560px;
   background: #0a0a0a;
   border: 1px solid rgba(255,255,255,0.08);
-  display: grid; grid-template-rows: 60% 1fr;
+  display: grid; grid-template-columns: 1fr 1fr;
   overflow: hidden;
-  will-change: transform, opacity;
-  transition: none;
   box-shadow: 0 40px 80px rgba(0,0,0,0.5);
 }
-@media (max-width: 960px) { .stack-card { position: relative; height: auto; min-height: 0; } }
-.stack-card-img {
-  background-size: cover; background-position: center;
-  filter: brightness(0.9);
+@media (max-width: 860px) {
+  .stack-card { grid-template-columns: 1fr; grid-template-rows: 40% 1fr; }
 }
-@media (max-width: 960px) { .stack-card-img { aspect-ratio: 16/9; } }
-.stack-card-body { padding: 32px; display: flex; flex-direction: column; justify-content: flex-end; position: relative; }
-.stack-card-num { position: absolute; top: 24px; right: 32px; font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 0.3em; color: ${BTB_RED}; }
-.stack-card-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(32px, 4vw, 56px); text-transform: uppercase; letter-spacing: 0.005em; line-height: 1; margin-bottom: 12px; }
-.stack-card-desc { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.6; max-width: 460px; }
+.stack-card-img { background-size: cover; background-position: center; filter: brightness(0.9); }
+.stack-card-body {
+  padding: 56px;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative;
+}
+@media (max-width: 720px) { .stack-card-body { padding: 32px; } }
+.stack-card-meta { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+.stack-card-num { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 0.3em; color: ${BTB_RED}; }
+.stack-card-kicker { font-size: 11px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+.stack-card-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 5vw, 72px); text-transform: uppercase; letter-spacing: 0.005em; line-height: 1; margin-bottom: 16px; }
+.stack-card-desc { font-size: 16px; line-height: 1.7; color: rgba(255,255,255,0.6); font-weight: 300; max-width: 460px; margin-bottom: 24px; }
+.stack-card-bullets { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.stack-card-bullets li {
+  font-size: 13px; letter-spacing: 0.05em; color: rgba(255,255,255,0.7);
+  padding-left: 24px; position: relative;
+}
+.stack-card-bullets li::before {
+  content: ''; position: absolute; left: 0; top: 8px;
+  width: 12px; height: 1px; background: ${BTB_RED};
+}
 
+/* BEAR INTERLUDE */
+.bear-interlude {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+  padding: 200px 48px;
+  background: #050505;
+  position: relative; overflow: hidden;
+}
+@media (max-width: 860px) { .bear-interlude { grid-template-columns: 1fr; gap: 40px; padding: 100px 24px; } }
+.bear-img {
+  width: 100%; max-width: 480px; height: auto;
+  filter: drop-shadow(0 30px 60px rgba(210,38,48,0.4));
+  will-change: transform;
+  margin: 0 auto;
+}
+.bear-eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.3em;
+  color: ${BTB_RED}; text-transform: uppercase; margin-bottom: 24px;
+}
+.bear-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 7vw, 120px);
+  line-height: 0.9; letter-spacing: 0.005em; text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.bear-body { font-size: 17px; line-height: 1.7; color: rgba(255,255,255,0.55); font-weight: 300; max-width: 480px; }
+
+/* COACHES */
+.coaches-section { padding: 160px 48px; background: #050505; }
+@media (max-width: 720px) { .coaches-section { padding: 100px 24px; } }
+.coaches-eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.3em;
+  color: ${BTB_RED}; text-transform: uppercase; margin-bottom: 24px;
+  opacity: 0; transform: translateX(-20px);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+.coaches-eyebrow.in { opacity: 1; transform: translateX(0); }
+.coaches-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 8vw, 120px);
+  line-height: 0.9; letter-spacing: 0.005em; text-transform: uppercase;
+  margin-bottom: 80px;
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.8s ease 0.1s, transform 0.8s cubic-bezier(0.16,1,0.3,1) 0.1s;
+}
+.coaches-headline.in { opacity: 1; transform: translateY(0); }
+.coaches-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 960px) { .coaches-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .coaches-grid { grid-template-columns: 1fr; } }
+.coach-card {
+  aspect-ratio: 4/5;
+  background-size: cover; background-position: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1), border-color 0.3s;
+}
+.coach-card.in { opacity: 1; transform: translateY(0); }
+.coach-card:hover { border-color: rgba(210,38,48,0.5); }
+.coach-card-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%);
+  transition: background 0.4s ease;
+}
+.coach-card:hover .coach-card-overlay {
+  background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(210,38,48,0.4) 60%, rgba(0,0,0,0.2) 100%);
+}
+.coach-card-body { position: absolute; bottom: 0; left: 0; right: 0; padding: 32px; z-index: 2; }
+.coach-card-title {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.3em;
+  color: ${BTB_RED}; text-transform: uppercase; margin-bottom: 8px;
+}
+.coach-card-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(28px, 3vw, 40px);
+  text-transform: uppercase; letter-spacing: 0.005em; line-height: 1;
+  margin-bottom: 8px;
+}
+.coach-card-cred { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+
+/* DRAGGABLE OFFERINGS */
 #hscroll { padding: 160px 0 0; position: relative; overflow: hidden; background: #050505; }
 .hscroll-head { padding: 0 48px 80px; }
 @media (max-width: 720px) { .hscroll-head { padding: 0 24px 60px; } #hscroll { padding-top: 100px; } }
@@ -1112,7 +1249,7 @@ const styles = `
 .hcard-overlay {
   position: absolute; inset: 0;
   background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.2) 100%);
-  transition: opacity 0.4s ease;
+  transition: background 0.4s ease;
 }
 .hcard:hover .hcard-overlay { background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(210,38,48,0.4) 50%, rgba(0,0,0,0.2) 100%); }
 .hcard-num { position: absolute; top: 24px; left: 32px; font-family: 'Bebas Neue', sans-serif; font-size: 11px; letter-spacing: 0.3em; color: rgba(255,255,255,0.5); z-index: 2; }
@@ -1127,13 +1264,10 @@ const styles = `
 .hcard-title { font-family: 'Bebas Neue', sans-serif; font-size: 32px; text-transform: uppercase; line-height: 1; margin-bottom: 8px; letter-spacing: 0.005em; }
 .hcard-desc { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.6; }
 
+/* MANIFESTO */
 #manifesto { padding: 200px 48px; position: relative; overflow: hidden; }
 @media (max-width: 720px) { #manifesto { padding: 120px 24px; } }
-.manifesto-bg {
-  position: absolute; inset: 0;
-  background-size: cover; background-position: center;
-  filter: grayscale(0.5) brightness(0.4);
-}
+.manifesto-bg { position: absolute; inset: 0; background-size: cover; background-position: center; filter: grayscale(0.5) brightness(0.4); }
 .manifesto-overlay { position: absolute; inset: 0; background: ${BTB_RED}; mix-blend-mode: multiply; }
 .manifesto-inner { position: relative; z-index: 2; max-width: 1100px; }
 .manifesto-line {
@@ -1155,13 +1289,20 @@ const styles = `
 .manifesto-sep { width: 100%; height: 1px; background: rgba(0,0,0,0.25); margin: 40px 0; }
 .manifesto-sub {
   font-size: 16px; color: rgba(0,0,0,0.7);
-  max-width: 480px; line-height: 1.7; font-weight: 300;
+  max-width: 520px; line-height: 1.7; font-weight: 300;
   opacity: 0; transform: translateY(20px);
   transition: opacity 0.8s ease 0.3s, transform 0.8s cubic-bezier(0.16,1,0.3,1) 0.3s;
 }
 .manifesto-sub.in { opacity: 1; transform: translateY(0); }
 
+/* TEAM TEXT MARQUEE */
 #marquee-section { padding: 120px 0; background: #050505; overflow: hidden; }
+.marquee-eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.3em;
+  color: ${BTB_RED}; text-transform: uppercase;
+  padding: 0 48px 40px;
+}
+@media (max-width: 720px) { .marquee-eyebrow { padding: 0 24px 24px; } }
 .marquee-wrap { position: relative; display: flex; overflow: hidden; }
 .marquee-track {
   display: flex; gap: 0;
@@ -1180,6 +1321,7 @@ const styles = `
 .marquee-item.highlight { color: rgba(255,255,255,0.7); }
 .marquee-dot { width: 8px; height: 8px; border-radius: 50%; background: ${BTB_RED}; flex-shrink: 0; }
 
+/* CTA */
 #cta {
   min-height: 100vh;
   display: flex; align-items: center; justify-content: center;
@@ -1191,6 +1333,15 @@ const styles = `
   background: radial-gradient(ellipse at center, rgba(210,38,48,0.18) 0%, transparent 65%);
   animation: demoBreathe 4s ease infinite;
 }
+.cta-bear {
+  position: absolute;
+  top: 60px; right: 5%;
+  width: clamp(180px, 22vw, 320px);
+  opacity: 0.85;
+  filter: drop-shadow(0 20px 40px rgba(210,38,48,0.5));
+  z-index: 1;
+}
+@media (max-width: 720px) { .cta-bear { top: 80px; right: -40px; width: 180px; opacity: 0.4; } }
 @keyframes demoBreathe {
   0%, 100% { opacity: 0.6; transform: scale(1); }
   50% { opacity: 1; transform: scale(1.18); }
@@ -1198,7 +1349,7 @@ const styles = `
 .cta-eyebrow {
   font-size: 11px; font-weight: 700; letter-spacing: 0.4em;
   color: ${BTB_RED}; text-transform: uppercase; margin-bottom: 32px;
-  position: relative; z-index: 1;
+  position: relative; z-index: 2;
   opacity: 0; transform: translateY(20px);
   transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16,1,0.3,1);
 }
@@ -1207,7 +1358,7 @@ const styles = `
   font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(64px, 13vw, 200px);
   text-transform: uppercase; line-height: 0.87;
-  position: relative; z-index: 1; margin-bottom: 48px;
+  position: relative; z-index: 2; margin-bottom: 48px;
   letter-spacing: 0.005em;
 }
 .cta-title .line { display: flex; justify-content: center; overflow: hidden; }
@@ -1216,13 +1367,13 @@ const styles = `
 .cta-title.in .line:nth-child(2) > span { transform: translateY(0); transition-delay: 0.1s; }
 .cta-title.in .line:nth-child(3) > span { transform: translateY(0); transition-delay: 0.2s; }
 .cta-btns {
-  display: flex; gap: 16px; position: relative; z-index: 1;
+  display: flex; gap: 16px; position: relative; z-index: 2;
   opacity: 0; transform: translateY(20px);
   transition: opacity 0.8s ease 0.4s, transform 0.8s cubic-bezier(0.16,1,0.3,1) 0.4s;
   flex-wrap: wrap; justify-content: center;
 }
 .cta-btns.in { opacity: 1; transform: translateY(0); }
-.cta-tagline { position: absolute; bottom: 48px; left: 0; right: 0; text-align: center; font-size: 11px; letter-spacing: 0.3em; color: rgba(255,255,255,0.15); text-transform: uppercase; }
+.cta-tagline { position: absolute; bottom: 48px; left: 0; right: 0; text-align: center; font-size: 11px; letter-spacing: 0.3em; color: rgba(255,255,255,0.15); text-transform: uppercase; z-index: 2; }
 
 #loader {
   position: fixed; inset: 0; background: #000; z-index: 9997;
@@ -1231,7 +1382,7 @@ const styles = `
   animation: demoLoaderOut 0.6s cubic-bezier(0.16,1,0.3,1) 1.6s forwards;
 }
 @keyframes demoLoaderOut { to { opacity: 0; pointer-events: none; visibility: hidden; } }
-.loader-logo { font-family: 'Bebas Neue', sans-serif; font-size: 72px; color: #fff; letter-spacing: 0.04em; }
+.loader-logo-img { width: 120px; height: auto; filter: drop-shadow(0 10px 30px rgba(210,38,48,0.5)); }
 .loader-bar { width: 200px; height: 2px; background: rgba(255,255,255,0.1); overflow: hidden; }
 .loader-fill { height: 100%; background: ${BTB_RED}; animation: demoFill 1.4s cubic-bezier(0.16,1,0.3,1) forwards; }
 @keyframes demoFill { from { width: 0%; } to { width: 100%; } }
