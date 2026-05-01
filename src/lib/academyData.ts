@@ -3100,32 +3100,170 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
     description: `Girls lacrosse is one of the fastest-growing sports in the world. It's a beautiful, fast-paced game that combines speed, skill, and smart decision-making. While it shares roots with boys lacrosse, the girls game has its own rules, style, and feel.\n\nGirls lacrosse is a non-contact sport (compared to boys). You don't wear pads or a helmet — just goggles, a mouthguard, and your stick. Stick checking is allowed but it's controlled and limited. The emphasis is on skill, footwork, positioning, and clean play. Players who try to play physically usually get fouls called against them.\n\nThe field is bigger than boys lacrosse, and there are 12 players per team — 11 field players plus a goalie. Positions are attack, midfield, defense, and goalie. The ball is the same size and shape as boys lacrosse, and the goal is the same — score by getting the ball into the opposing net.\n\nThe game is played in two halves with a clock. Goals can be scored from anywhere on the field, but most happen close to the net.\n\nWhat makes girls lacrosse special is the speed of the decisions. Because you can't bash people around, the game is about reading the field, timing your cuts, and using smart footwork to get open. The best players are the ones who think the fastest — not necessarily the strongest.\n\nWelcome to the game. There's no better sport to learn how to compete, communicate, and grow as both an athlete and a person.`,
     questions: [
       {
-        question: "How many players are on the field per team in girls lacrosse?",
-        options: ["10", "11", "12", "13"],
-        correctAnswer: 2,
-        explanation: "12 players per team — 11 field players plus a goalie.",
-      },
+      question: "How many players are on the field per team in girls lacrosse?",
+      options: [
+        "10",
+        "11",
+        "12",
+        "13"
+      ],
+      correctAnswer: 2,
+      explanation: "Girls field 12 players, including the goalie.",
+    },
       {
-        question: "What protective equipment do girls lacrosse players wear?",
-        options: [
-          "Helmets and pads like boys",
-          "Goggles, mouthguard, and a stick — that's it for field players",
-          "Just gloves",
-          "Full body armor",
-        ],
-        correctAnswer: 1,
-        explanation: "Girls lacrosse is non-contact — goggles and a mouthguard are the main protection.",
-      },
+      question: "How does a girls game start (and restart after goals)?",
+      options: [
+        "Faceoff at midfield",
+        "Draw at the center circle",
+        "Throw-in by the ref",
+        "Goalie pass"
+      ],
+      correctAnswer: 1,
+      explanation: "Draws are unique to girls lacrosse — sticks pinch ball, ref releases, players fight for it.",
+    },
       {
-        question: "What's the most important quality in girls lacrosse players?",
-        options: [
-          "Being the strongest",
-          "Being the tallest",
-          "Thinking and reacting fast — smart decision-making",
-          "Having the newest stick",
+      question: "Body checking in girls lacrosse is...",
+      options: [
+        "Allowed for high schoolers only",
+        "Not allowed at any level",
+        "Allowed in playoffs only",
+        "Allowed once per quarter"
+      ],
+      correctAnswer: 1,
+      explanation: "No body checking. Game emphasizes skill, speed, and positioning.",
+    },
+      {
+      question: "What does the 8m arc around the goal protect?",
+      options: [
+        "The goalie's space",
+        "The shooter's space — defenders can't block shot path",
+        "Faceoff positioning",
+        "Crease size"
+      ],
+      correctAnswer: 1,
+      explanation: "Inside 8m, defenders must be marking up — no standing in shot lanes.",
+    },
+      {
+      question: "Tryouts. Coach is watching how players move when they DON'T have the ball. What does she likely value most?",
+      options: [
+        "Most goals scored",
+        "Loudest player on the field",
+        "Hustles to every ground ball, supports teammates",
+        "Newest stick gear"
+      ],
+      correctAnswer: 2,
+      explanation: "Hustle, communication, and team support stand out most when skill levels are similar.",
+      kind: "scenario",
+      scenario: "Tryouts. Coach has 28 spots and 40 girls. She's watching off-ball movement, hustle, and communication.",
+    },
+    ],
+    keyTakeaways: [
+      "Girls lacrosse fields 12 players: 4 attackers, 3 midfielders, 4 defenders, 1 goalie.",
+      "No body checking. Stick checks must be controlled — no swinging at the head/body.",
+      "Game starts with a draw at the center circle, not a faceoff like boys.",
+      "The 8m arc and 12m fan around each goal protect the shooter — fouls = free position.",
+    ],
+    diagrams: [
+      {
+        title: "Girls Lacrosse — Where Everyone Plays",
+        view: "women-full",
+        caption: "Twelve players per side: 4 attack, 3 mid, 4 defense, 1 goalie. The arcs around each goal define shooting space — defenders can't stand in the path of a shot.",
+        players: [
+          {
+            x: 25,
+            y: 80,
+            role: "attack",
+            label: "A"
+          },
+          {
+            x: 50,
+            y: 78,
+            role: "attack",
+            label: "A"
+          },
+          {
+            x: 75,
+            y: 80,
+            role: "attack",
+            label: "A"
+          },
+          {
+            x: 50,
+            y: 70,
+            role: "attack",
+            label: "A"
+          },
+          {
+            x: 30,
+            y: 55,
+            role: "midfield",
+            label: "M"
+          },
+          {
+            x: 50,
+            y: 55,
+            role: "midfield",
+            label: "M"
+          },
+          {
+            x: 70,
+            y: 55,
+            role: "midfield",
+            label: "M"
+          },
+          {
+            x: 25,
+            y: 30,
+            role: "defense",
+            label: "D"
+          },
+          {
+            x: 50,
+            y: 32,
+            role: "defense",
+            label: "D"
+          },
+          {
+            x: 75,
+            y: 30,
+            role: "defense",
+            label: "D"
+          },
+          {
+            x: 50,
+            y: 22,
+            role: "defense",
+            label: "D"
+          },
+          {
+            x: 50,
+            y: 15,
+            role: "goalie",
+            label: "G"
+          },
         ],
-        correctAnswer: 2,
-        explanation: "Speed of decision-making is what separates the best players.",
+        legend: [
+          {
+            label: "Attack",
+            color: "#D22630",
+            shape: "circle"
+          },
+          {
+            label: "Midfield",
+            color: "#EAB308",
+            shape: "circle"
+          },
+          {
+            label: "Defense",
+            color: "#2563EB",
+            shape: "square"
+          },
+          {
+            label: "Goalie",
+            color: "#10B981",
+            shape: "square"
+          },
+        ]
       },
     ],
   },
@@ -3139,32 +3277,116 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
     description: `Cradling is how you keep the ball in your stick while you move. In girls lacrosse, the pockets are shallower than the boys game — which means your cradling technique has to be smooth and controlled.\n\nHOW TO CRADLE — STEP BY STEP\n\n1. Grip the Stick Correctly\nYour top hand (closest to the head) grips firmly. Your bottom hand (near the butt end) grips loosely — it's a guide, not a clamp. Think relaxed hands. Tight grip = stiff cradle = dropped ball.\n\n2. Start the Motion\nThe cradle is a small, smooth wrist roll — like turning a key in a lock. Your top hand does most of the work. Don't swing your whole arm. The motion should be small enough that someone watching from far away barely notices it.\n\n3. Stick Protection Position\nAs you run, keep your top hand near your ear. This is called "stick protection position." It keeps the ball away from defenders and makes it much harder to check.\n\n4. Shielding\nWhen a defender is nearby, cradle on the side of your body AWAY from them. Defender on your right? Cradle left. This is called "shielding" — using your body as a wall between the defender and your stick.\n\n5. Switching Hands\nTo switch hands: loosen your bottom hand, move the stick across your body (like a knight sheathing a sword), slide your bottom hand up to meet your top hand, release your top hand and regrip. Your new top hand takes over cradling. Start learning this early — the more comfortable you are with both hands, the better.\n\nCOACHING POINTS\n- Practice cradling everywhere — walking around the house, watching TV, in the backyard\n- Start with your dominant hand, but work on your off-hand every day\n- The best players cradle without thinking about it — that only comes from reps`,
     questions: [
       {
-        question: "What's different about girls lacrosse cradling vs boys?",
-        options: [
-          "It's the same",
-          "Pockets are shallower so cradling has to be smoother",
-          "Girls cradle with one hand",
-          "Girls don't cradle",
-        ],
-        correctAnswer: 1,
-        explanation: "Shallower pockets mean smoother, more controlled cradles to keep the ball in.",
-      },
+      question: "Which hand controls a girls cradle?",
+      options: [
+        "Bottom hand — tighter grip",
+        "Top hand — near the head",
+        "Both equally",
+        "Whichever feels best that day"
+      ],
+      correctAnswer: 1,
+      explanation: "Top hand near the head does the work. Bottom hand is a loose guide.",
+    },
       {
-        question: "Where should your top hand be when running with the ball?",
-        options: ["Near your knee", "Behind your back", "Near your ear — stick protection position", "On the head"],
-        correctAnswer: 2,
-        explanation: "Top hand near the ear protects the stick from defenders.",
-      },
+      question: "Why is the girls cradle tighter than the boys cradle?",
+      options: [
+        "Sticks are shorter",
+        "Pockets are shallower — ball pops out easier",
+        "Field is smaller",
+        "Refs require it"
+      ],
+      correctAnswer: 1,
+      explanation: "Shallow pockets demand tighter, more controlled cradles.",
+    },
       {
-        question: "What is 'shielding'?",
-        options: [
-          "A type of pass",
-          "Using your body to protect the stick from defenders",
-          "Wearing extra pads",
-          "A penalty",
+      question: "Stick protection position?",
+      options: [
+        "Stick low and to the side",
+        "Top hand near ear, body between stick and defender",
+        "Stick parallel to the ground",
+        "Stick across your forehead"
+      ],
+      correctAnswer: 1,
+      explanation: "Top hand near ear with body shielding the stick = hard to check.",
+    },
+      {
+      question: "Where should you practice cradling?",
+      options: [
+        "Only at practice",
+        "Only with a coach watching",
+        "Anywhere — backyard, walking around the house",
+        "Only on a regulation field"
+      ],
+      correctAnswer: 2,
+      explanation: "Reps build muscle memory. Cradle constantly, both hands, until automatic.",
+    },
+      {
+      question: "You're driving toward the 8m. A defender is on your left side, stick up, looking to check. What do you do?",
+      options: [
+        "Drop your stick lower for protection",
+        "Switch hands to keep the stick away from her check",
+        "Hold the stick straight up overhead",
+        "Pass it back without looking"
+      ],
+      correctAnswer: 1,
+      explanation: "Switch hands to keep your body between defender and stick. That's why we practice both hands every day.",
+      kind: "scenario",
+      scenario: "You're driving toward the 8m arc. Your stick is in your right hand. The defender is on your left side, stick up, looking to check.",
+    },
+    ],
+    keyTakeaways: [
+      "Top hand near head, bottom near butt-end. Top hand controls; bottom guides.",
+      "Girls sticks have shallower pockets — cradling has to be tighter and more controlled.",
+      "Stick protection: top hand near ear, body shielding. Defenders can't body check, but they CAN stick check — stay protected.",
+      "Practice cradling everywhere. Reps until it's automatic in both hands.",
+    ],
+    diagrams: [
+      {
+        title: "Stick Protection — Both Hands",
+        view: "women-half-offensive",
+        caption: "Top hand near ear, body between defender and stick. Cradle is tight wrist motion (smaller than boys' because pockets are shallower). Defenders can stick-check, so protect at all times.",
+        players: [
+          {
+            x: 50,
+            y: 55,
+            role: "offense",
+            label: "1",
+            ball: true,
+            highlight: true
+          },
+          {
+            x: 38,
+            y: 60,
+            role: "defender",
+            label: "D"
+          },
         ],
-        correctAnswer: 1,
-        explanation: "Shielding means cradling on the side away from the defender, using your body as protection.",
+        labels: [
+          {
+            x: 60,
+            y: 48,
+            text: "Stick high, near ear",
+            size: "xs"
+          },
+          {
+            x: 50,
+            y: 75,
+            text: "Body shields stick",
+            size: "xs"
+          },
+        ],
+        legend: [
+          {
+            label: "Offense (with ball)",
+            color: "#D22630",
+            shape: "circle"
+          },
+          {
+            label: "Defender",
+            color: "#2563EB",
+            shape: "square"
+          },
+        ]
       },
     ],
   },
@@ -3178,33 +3400,68 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
     description: `Passing and catching — also called "throwing and receiving" — is the most important skill in girls lacrosse. If you can pass and catch, you can play. If you can't, the game gets very hard.\n\nHOW TO THROW — STEP BY STEP\n\n1. Grip and Position\nTop hand near the head of the stick, bottom hand near the butt end. Bring the stick back behind your ear with both hands.\n\n2. Step and Throw\nStep toward your target with your opposite foot (if your top hand is your right, step with your left). Point your top hand toward your target and snap your wrist as you release. Follow through — your stick should finish pointing at your target.\n\n3. Off-Hand Throwing\nOnce you're comfortable throwing with your dominant hand, start practicing with your other hand. Do the same steps. It will feel awkward at first — that's normal. The players who can throw with both hands are twice as dangerous.\n\nHOW TO CATCH — STEP BY STEP\n\n1. Give a Target\nHold your stick out with the pocket facing the passer. This is called "showing your target" or "giving a soft target." Your teammate should be able to see where to throw.\n\n2. Absorb the Ball\nAs the ball arrives, "give" with your stick by pulling it slightly back. This cushions the catch. If you keep your stick stiff, the ball bounces out.\n\n3. Transition to Cradle\nThe second you catch, start cradling immediately. Catch and cradle is one motion, not two.\n\nCOACHING POINTS\n- Wall ball is the #1 way to improve. Throw against a wall, catch it, repeat. Start with 25 per hand per day. Work up to 50.\n- "Soft hands" means absorbing the ball — don't stab at it\n- Always practice both hands — even if one side feels terrible at first`,
     questions: [
       {
-        question: "When throwing, which foot should you step with?",
-        options: ["Same foot as your top hand", "Opposite foot from your top hand", "Either foot", "Both"],
-        correctAnswer: 1,
-        explanation: "Step with your opposite foot — same as throwing a baseball.",
-      },
+      question: "Throwing right-handed, which foot steps forward?",
+      options: [
+        "Right foot",
+        "Left foot",
+        "Either foot",
+        "Both feet jump together"
+      ],
+      correctAnswer: 1,
+      explanation: "Step with the opposite foot — same as throwing a baseball.",
+    },
       {
-        question: "What does 'soft hands' mean in catching?",
-        options: [
-          "Wearing gloves",
-          "Letting the stick give back as the ball arrives, absorbing it",
-          "Catching with one hand",
-          "Closing your eyes",
-        ],
-        correctAnswer: 1,
-        explanation: "Soft hands absorb the ball through 'give' — preventing bounces and drops.",
-      },
+      question: "What does 'absorbing the ball' mean?",
+      options: [
+        "Stab the stick at the ball quickly",
+        "Hold the stick rigid as ball arrives",
+        "Pull stick back slightly to cushion the catch",
+        "Catch with the back of the head"
+      ],
+      correctAnswer: 2,
+      explanation: "Soft hands give as the ball arrives — that's what keeps it in the pocket.",
+    },
       {
-        question: "How can you build stick skills the fastest?",
-        options: [
-          "Only at team practice",
-          "Wall ball — daily reps against a wall",
-          "Stretching",
-          "Watching games on TV",
-        ],
-        correctAnswer: 1,
-        explanation: "Wall ball is the #1 way to build stick skills. Every great player does it.",
-      },
+      question: "What is wall ball?",
+      options: [
+        "A team game with two goalies",
+        "Throwing and catching against a wall solo",
+        "A drill only goalies use",
+        "A faceoff variation"
+      ],
+      correctAnswer: 1,
+      explanation: "Wall ball is the gold-standard solo drill. Both hands. Daily.",
+    },
+      {
+      question: "Best way to start improving stick skills fast?",
+      options: [
+        "10 wall ball reps per week",
+        "25 reps per hand daily, build to 100",
+        "Only at team practice",
+        "Only with a coach"
+      ],
+      correctAnswer: 1,
+      explanation: "25 per hand daily, build to 100. The pros do thousands. Daily reps = fast progress.",
+    },
+      {
+      question: "Teammate is breaking toward goal. You have ball in right hand. She's running to your left side. Pass options?",
+      options: [
+        "Throw across your body righty",
+        "Switch to left hand and throw, OR step left and lead her",
+        "Wait for her to come to your right",
+        "Hand it off — don't pass"
+      ],
+      correctAnswer: 1,
+      explanation: "Switch hands or step toward her side. Cross-body throws are easy interceptions for defenders.",
+      kind: "scenario",
+      scenario: "Mid-game. Defender is on your right shoulder. Teammate is breaking to your left toward the goal.",
+    },
+    ],
+    keyTakeaways: [
+      "Throw: step opposite foot, snap wrist, follow through pointing at target.",
+      "Catch: soft target, then 'absorb' — pull stick back as ball arrives.",
+      "Wall ball is the best stick-skill drill. Both hands. Daily.",
+      "Stiff hands = drops. Soft hands = clean catches. Cushion every catch.",
     ],
   },
   {
@@ -3217,38 +3474,68 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
     description: `Lacrosse is a team sport, and the best teams aren't built on talent alone — they're built on great teammates. Being a great teammate is a skill, just like cradling or shooting. You can practice it every day.\n\nGreat teammates encourage each other. When a teammate makes a great play, you celebrate with her. When she makes a mistake, you pick her up. You never make fun of anyone for missing a pass or having a bad day. Everyone has bad days — and how you respond to a teammate's mistake says everything about you.\n\nGreat teammates listen to coaches. When the coach is talking, you stop talking. You look at her. You take in what she's saying. You don't roll your eyes. You don't whisper to your friend. You don't argue. You listen, say "got it," and try to apply what she said.\n\nGreat teammates hustle for everyone. Sprinting after a ground ball isn't just for you — it helps the team. Backing up a shot isn't glamorous, but it might save a goal. Running hard in transition makes the next play easier for your teammates. Hustle is the most contagious thing in sports. When one player hustles, others follow.\n\nGreat teammates celebrate each other. When a teammate scores, you sprint to celebrate with her — even if you wish it was you. When a teammate has a great game, you tell her. When a teammate is having a hard time, you pull her aside and check in.\n\nThe best teams BTB has ever had weren't always the most talented. They were the ones where everyone genuinely cared about each other. That bond doesn't happen by accident. It happens because every player chooses to be a great teammate every day.`,
     questions: [
       {
-        question: "What should you do when a teammate makes a mistake?",
-        options: [
-          "Make fun of her",
-          "Get angry",
-          "Pick her up and encourage her — it could be you next time",
-          "Tell the coach",
-        ],
-        correctAnswer: 2,
-        explanation: "Great teammates lift each other up. Everyone has bad days.",
-      },
+      question: "Teammate drops a wide-open pass. What's the best response?",
+      options: [
+        "Get angry at her",
+        "Tell coach she should be benched",
+        "Say 'shake it off, get the next one'",
+        "Refuse to pass to her again"
+      ],
+      correctAnswer: 2,
+      explanation: "Pick teammates up after mistakes. Trust gets built when teammates know you have their back.",
+    },
       {
-        question: "What's the right response when a coach is correcting you?",
-        options: [
-          "Argue with her",
-          "Roll your eyes",
-          "Say 'got it' and try to apply it",
-          "Walk away",
-        ],
-        correctAnswer: 2,
-        explanation: "Coachability is one of the most important traits in any athlete.",
-      },
+      question: "When the coach is giving instructions, what does a great teammate do?",
+      options: [
+        "Keep stretching to stay loose",
+        "Look at the coach, listen, no side talk",
+        "Wait for the part that matters",
+        "Repeat what coach said quietly"
+      ],
+      correctAnswer: 1,
+      explanation: "Eyes up, mouth shut. Side conversations cost info AND respect.",
+    },
       {
-        question: "Why does hustle matter so much?",
-        options: [
-          "It doesn't",
-          "It's contagious — when one player hustles, others follow",
-          "It only matters in the playoffs",
-          "Coaches don't notice",
-        ],
-        correctAnswer: 1,
-        explanation: "Hustle spreads through a team and lifts everyone's effort.",
-      },
+      question: "Why does hustle matter when you don't have the ball?",
+      options: [
+        "It doesn't really — only ball-side counts",
+        "Coaches just like to see you tired",
+        "Off-ball hustle backs up shots and creates extra possessions",
+        "It makes the other team angry"
+      ],
+      correctAnswer: 2,
+      explanation: "Off-ball hustle wins ground balls, backs up shots, creates second chances.",
+    },
+      {
+      question: "What does 'the standard is the standard' mean at BTB?",
+      options: [
+        "The best player sets the bar",
+        "Coaches grade you on a curve",
+        "Everyone is expected to bring their best, every day",
+        "Only games count, practice is optional"
+      ],
+      correctAnswer: 2,
+      explanation: "Standards apply to everyone equally. No one gets a pass.",
+    },
+      {
+      question: "Practice is dragging. It's hot. The drill is repetitive. Half the team is walking between reps. What do you do?",
+      options: [
+        "Walk too — match the energy",
+        "Sprint between reps and pick up balls — set the standard",
+        "Ask coach to end practice early",
+        "Take a knee until coach yells"
+      ],
+      correctAnswer: 1,
+      explanation: "Energy is contagious. One player setting the standard pulls the whole group with her.",
+      kind: "scenario",
+      scenario: "Tuesday practice in late August. 90°. Same shooting drill four times. Coach is on the other side of the field.",
+    },
+    ],
+    keyTakeaways: [
+      "Pick teammates up after mistakes. Everyone has bad days — your reaction matters.",
+      "When the coach talks, you stop talking. Eyes up, mouth shut. That's respect AND learning.",
+      "Hustle helps the team even when you don't have the ball — back up shots, chase ground balls.",
+      "The standard is the standard. Everyone is expected to bring their best every day.",
     ],
   },
   {
@@ -3261,37 +3548,131 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
     description: `The lacrosse field can feel confusing at first, but understanding where to be is what separates players who chase the ball from players who actually help their team.\n\nBASIC FIELD AWARENESS\n\n1. Spread Out on Offense\nWhen your team has the ball, don't all run to the ball carrier. Spread out! Get wide. This forces the defense to cover more ground and gives your teammate with the ball options to pass to. If you're all bunched up, one defender can guard two players.\n\n2. Compress on Defense\nWhen the other team has the ball, get tighter together. Help each other. Communicate — "I've got ball!" "Help right!" "Help left!" Every call gives your teammates information.\n\n3. Understand Shooting Space\nIn girls lacrosse, there's a critical rule: the area in front of the goal is called "shooting space." You cannot run through it or stand in it unless you have the ball or are marking someone. This rule protects the goalie and keeps the area safe. Understanding shooting space is key to not getting whistled for fouls.\n\n4. The Simple Rule\nIf you're not sure where to be: get to where you can help. Teammate has the ball? Get open for a pass. Teammate is being pressured? Move to give her an outlet. Shot goes off? Crash for the rebound. There's always something useful to do.\n\nCOACHING POINTS\n- On offense: spacing is everything. Stay 5+ yards apart from teammates\n- On defense: communicate CONSTANTLY. "Ball!" "Help!" "Crash!"\n- Know the shooting space rule — it's unique to girls lacrosse and gets called a lot`,
     questions: [
       {
-        question: "When your team has the ball, you should...",
-        options: [
-          "All run to the ball",
-          "Spread out to create passing options",
-          "Stand still",
-          "Run to the goalie",
-        ],
-        correctAnswer: 1,
-        explanation: "Spreading out forces defenders to cover more ground and creates space.",
-      },
+      question: "Your team has the ball. Where should off-ball players go?",
+      options: [
+        "All run to the ball carrier",
+        "Stand still and wait for a pass",
+        "Spread out — give passing options",
+        "Run to the goal in a clump"
+      ],
+      correctAnswer: 2,
+      explanation: "Spread out so the defense has to cover the whole field, not just one spot.",
+    },
       {
-        question: "What's the key to playing good defense?",
-        options: [
-          "Being the fastest",
-          "Communication and teamwork",
-          "Hitting hard",
-          "Standing still",
-        ],
-        correctAnswer: 1,
-        explanation: "Defense is a team effort — communication is the foundation.",
-      },
+      question: "The other team has the ball. What does YOUR team do?",
+      options: [
+        "Spread out wide",
+        "Compress and tighten up to help each other",
+        "Stand on the sideline",
+        "Run back to your own goal only"
+      ],
+      correctAnswer: 1,
+      explanation: "On defense, compress — close enough to help, far enough to cover your mark.",
+    },
       {
-        question: "If you're not sure where to be, what should you do?",
-        options: [
-          "Stand still",
-          "Hustle to where you can help your team — back up shots, get open, help on D",
-          "Walk off",
-          "Yell at the coach",
+      question: "What is 'lacrosse IQ'?",
+      options: [
+        "How fast you run",
+        "How hard your shot is",
+        "Knowing where to be and what to do",
+        "How tall and strong you are"
+      ],
+      correctAnswer: 2,
+      explanation: "IQ is awareness — anticipating, finding open space, helping when needed.",
+    },
+      {
+      question: "Don't know where to be — what do you do?",
+      options: [
+        "Stand on the sideline",
+        "Run to the goal regardless of the play",
+        "Find a spot where you can help — backup, slide, get open",
+        "Stay where you started"
+      ],
+      correctAnswer: 2,
+      explanation: "When in doubt, get to where you can help. Movement with purpose beats freezing.",
+    },
+      {
+      question: "Your teammate is dodging from behind the goal. The defense is collapsing on her. You're at the top of the offensive zone with no defender on you. Best move?",
+      options: [
+        "Cut hard to the goal expecting a pass",
+        "Stand still — don't move",
+        "Run back to defense",
+        "Yell for the ball but don't move"
+      ],
+      correctAnswer: 0,
+      explanation: "When the defense collapses, the off-ball player is open. Cut to the goal — your teammate sees you.",
+      kind: "scenario",
+      scenario: "You're on offense at the top of the zone. Your teammate dodges from behind the cage. All defenders collapse on her. You're suddenly unguarded.",
+    },
+    ],
+    keyTakeaways: [
+      "When YOUR team has the ball: spread out so the defense can't cover everyone.",
+      "When the OTHER team has the ball: compress, get tight, communicate.",
+      "If you don't know where to be, find a spot to help — back up a shot, get open, slide.",
+      "Lacrosse IQ = knowing where to be BEFORE the play needs you there.",
+    ],
+    diagrams: [
+      {
+        title: "Spread Out on Offense",
+        view: "women-half-offensive",
+        caption: "Stay 5+ yards apart. If you bunch up, the defense covers everyone with fewer players. Spacing creates passing lanes and dodging room.",
+        zones: [
+          {
+            shape: "rect",
+            x: 12,
+            y: 30,
+            w: 76,
+            h: 35,
+            color: "#FACC15",
+            label: "Stay 5+ yds apart"
+          },
         ],
-        correctAnswer: 1,
-        explanation: "When in doubt, get to a spot where you can help your team.",
+        players: [
+          {
+            x: 18,
+            y: 40,
+            role: "offense",
+            label: "1"
+          },
+          {
+            x: 50,
+            y: 32,
+            role: "offense",
+            label: "2"
+          },
+          {
+            x: 82,
+            y: 40,
+            role: "offense",
+            label: "3"
+          },
+          {
+            x: 35,
+            y: 60,
+            role: "offense",
+            label: "4"
+          },
+          {
+            x: 65,
+            y: 60,
+            role: "offense",
+            label: "5"
+          },
+          {
+            x: 50,
+            y: 88,
+            role: "offense",
+            label: "X",
+            ball: true
+          },
+        ],
+        legend: [
+          {
+            label: "Offense",
+            color: "#D22630",
+            shape: "circle"
+          },
+        ]
       },
     ],
   },
@@ -3305,33 +3686,68 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
     description: `The BTB Standard is what makes our program different. It's not about being the most talented — it's about being the kind of player coaches and teammates want around.\n\nThe Standard has three parts:\n\nEffort — You bring 100% every time you step on the field. Not 80% because you're tired. Not 60% because it's hot. 100%. If you're going to be on the field, you owe it to your teammates to give your best.\n\nAttitude — You show up ready to learn. You don't roll your eyes. You don't argue with coaches. You don't blame teammates. When something goes wrong, you say "my fault, I'll get the next one." When something goes right, you celebrate the teammates who helped you.\n\nPreparation — You take care of your gear. You practice on your own time. You watch lacrosse on TV when you can. You ask questions when you don't understand. You're always trying to learn more.\n\nIf you do these three things, you'll improve faster than the players who don't. That's a guarantee. Skill takes time, but the Standard is something you choose every single day. And the players who choose it become the ones coaches remember forever.\n\nAt BTB, we say "the standard is the standard." That means everyone is held to it equally — best player on the team or last player off the bench. You don't get a pass on effort because you scored three goals last game. The standard doesn't bend.`,
     questions: [
       {
-        question: "What are the three parts of the BTB Standard?",
-        options: [
-          "Speed, strength, skill",
-          "Effort, attitude, preparation",
-          "Goals, assists, ground balls",
-          "Goggles, stick, gloves",
-        ],
-        correctAnswer: 1,
-        explanation: "Effort, attitude, and preparation are the three pieces of the BTB Standard.",
-      },
+      question: "What are the three parts of the BTB Standard?",
+      options: [
+        "Speed, strength, skill",
+        "Effort, attitude, preparation",
+        "Goals, assists, ground balls",
+        "Helmet, gloves, stick"
+      ],
+      correctAnswer: 1,
+      explanation: "Effort + attitude + preparation — three choices anyone can make.",
+    },
       {
-        question: "How much effort should you bring on the field?",
-        options: ["50%", "75%", "Whatever feels right", "100% — you owe it to your teammates"],
-        correctAnswer: 3,
-        explanation: "Always 100%. Effort is the price of admission.",
-      },
+      question: "How much effort does the BTB Standard require?",
+      options: [
+        "80% to save energy for games",
+        "Match what your teammates give",
+        "100% every time — no excuses",
+        "Whatever your coach asks for"
+      ],
+      correctAnswer: 2,
+      explanation: "100% is the deal. Anything less, you owe your teammates an explanation.",
+    },
       {
-        question: "What does it mean that 'the standard is the standard'?",
-        options: [
-          "Different rules for different players",
-          "Everyone is held to it equally — no exceptions for star players",
-          "Standards change based on the day",
-          "The coach decides who follows it",
-        ],
-        correctAnswer: 1,
-        explanation: "The standard applies to everyone equally — that's what makes it fair and powerful.",
-      },
+      question: "You make a bad pass that becomes a goal against. Right response?",
+      options: [
+        "Blame the receiver",
+        "Argue with the ref",
+        "'My fault, I'll get the next one'",
+        "Walk off the field"
+      ],
+      correctAnswer: 2,
+      explanation: "Own it, reset, compete on the next play. That's BTB attitude.",
+    },
+      {
+      question: "What's an example of preparation?",
+      options: [
+        "Buying new cleats every season",
+        "Wall ball on your own time, gear in order, watching games",
+        "Showing up exactly on time",
+        "Doing only what the coach assigns"
+      ],
+      correctAnswer: 1,
+      explanation: "Preparation is the work you do when nobody's making you.",
+    },
+      {
+      question: "Saturday morning. Game at 9. You wake up at 7 — alarm didn't go off as planned. What does a BTB-Standard player do FIRST?",
+      options: [
+        "Check social media to wake up",
+        "Check gear, eat, hydrate, mentally prep — get to game ready",
+        "Text the coach you'll be late",
+        "Skip warmups and go straight to the bench"
+      ],
+      correctAnswer: 1,
+      explanation: "Preparation isn't just the day before. Game-day routine matters: gear check, hydrate, mental prep.",
+      kind: "scenario",
+      scenario: "Game day. You woke up later than planned but still have 90 minutes. The team is meeting at 8:15 for warmups.",
+    },
+    ],
+    keyTakeaways: [
+      "BTB Standard = Effort + Attitude + Preparation.",
+      "Effort: 100% every time. Not 80% because you're tired. 100%.",
+      "Attitude: own mistakes ('my fault, next one'), no eye-rolls, no blame.",
+      "Preparation: care for gear, practice on your own, watch lacrosse, ask questions.",
     ],
   },
   {
@@ -3344,23 +3760,68 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
     description: `You don't have to be the fastest or the most skilled player to be a leader. Leadership at your age is about one thing: doing the right thing when nobody is making you.\n\nLeading by example means being the player who sprints when others jog. You're the one who picks up the cones without being asked. You're the one who keeps working on your off-hand after practice ends. These small things might seem like they don't matter — but everyone notices.\n\nHere's a secret: people pay more attention to what you DO than what you SAY. If you tell your teammates to work harder but then you walk through a drill, nobody listens. If you go full speed on every rep, your teammates start doing the same — even without you saying a word.\n\nLeaders also show up on the tough days. When it's raining and cold and you'd rather be inside — that's when leadership matters most. Anyone can show up when the sun is shining. Real leaders bring the same energy every single day.\n\nAt BTB, we believe leadership isn't about age or talent. It starts right now. Be the player who does more than what's expected. Be the one who lifts others up after a mistake instead of looking away. That's what it means to lead by example.`,
     questions: [
       {
-        question: "Do you have to be the best player to be a leader?",
-        options: ["Yes, always", "No — leadership is about actions, not skill level", "Only if you're the oldest", "Only at games"],
-        correctAnswer: 1,
-        explanation: "Leadership is a choice anyone can make. It's about effort and example.",
-      },
+      question: "Do you have to be the best player on the team to lead?",
+      options: [
+        "Yes, only stars lead",
+        "Only if you're a captain",
+        "No — leadership is action, not skill",
+        "Only the oldest kids can lead"
+      ],
+      correctAnswer: 2,
+      explanation: "Leadership is a choice anyone makes. Action over status.",
+    },
       {
-        question: "What matters more — what you say or what you do?",
-        options: ["What you say", "What you do — people watch your actions", "Neither", "Only what the coach says"],
-        correctAnswer: 1,
-        explanation: "Actions speak louder than words. Lead with your effort.",
-      },
+      question: "What matters more — what you say or what you do?",
+      options: [
+        "What you say — words motivate",
+        "What you do — people watch actions",
+        "Both equal — they're tied together",
+        "Only what the coach says"
+      ],
+      correctAnswer: 1,
+      explanation: "Tell teammates to hustle while you walk and nobody listens. Sprint without a word and they follow.",
+    },
       {
-        question: "When is the most important time to lead by example?",
-        options: ["When everything is going well", "When it's easy", "On the tough days — rain, cold, tired", "Only in big games"],
-        correctAnswer: 2,
-        explanation: "Real leaders bring the same energy every day, especially when it's hard.",
-      },
+      question: "When does leadership matter most?",
+      options: [
+        "When the team is winning",
+        "When practice is easy",
+        "On bad days — rain, cold, tired",
+        "Only at championship games"
+      ],
+      correctAnswer: 2,
+      explanation: "Anyone can lead when things are easy. Real leaders bring it when conditions are bad.",
+    },
+      {
+      question: "What's one specific 'lead by example' action you can do tomorrow?",
+      options: [
+        "Wear team colors off the field",
+        "Sprint between drills and pick up balls",
+        "Tell teammates to hustle",
+        "Show up exactly on time"
+      ],
+      correctAnswer: 1,
+      explanation: "Sprint and pick up balls — visible effort that pulls others up.",
+    },
+      {
+      question: "First practice of the season. Half the team is jogging the warmup. The captain isn't there yet. What do you do?",
+      options: [
+        "Match the team's pace — fit in",
+        "Run faster — others catch up to your example",
+        "Wait for the captain to set the pace",
+        "Ask the coach what speed to go"
+      ],
+      correctAnswer: 1,
+      explanation: "Leadership is showing up first and setting the tempo. You don't need a title to set the standard.",
+      kind: "scenario",
+      scenario: "Day 1 of fall ball. Coach said 'two laps to warm up'. Most kids are jogging. The captain is in the bathroom.",
+    },
+    ],
+    keyTakeaways: [
+      "Leadership doesn't require being the best player or wearing a 'C'.",
+      "Lead by example: sprint when others jog, pick up balls, stay after for extra reps.",
+      "Real leaders show up the same on bad days — rain, cold, tired — as on good days.",
+      "People watch what you DO, not what you SAY. Actions set the standard.",
     ],
   },
   {
@@ -3373,23 +3834,68 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
     description: `Girls lacrosse is one of the fastest-growing sports in the country — and it has a history that goes back hundreds of years. When you step on the field, you're part of something special. That deserves respect.\n\nRespecting the game starts with how you treat your opponents. They're not enemies — they're the competition that pushes you to get better. Shake hands before and after every game. Win with class. Lose with dignity. How you handle yourself says more about your character than the final score.\n\nRespecting the game means accepting refs' calls — even bad ones. Refs are human. They'll miss calls. Arguing doesn't change the call, but it DOES distract you from the next play. The best response to a bad call is to play harder on the next whistle.\n\nRespecting the game means taking care of your equipment. Your stick, your goggles, your cleats — treat them well. They're the tools of your sport.\n\nRespecting the game means being fully present at practice. When you're on the field, be ON the field. No side conversations during drills. No eye-rolling when the coach corrects you. Give the game your full attention because the time you spend playing is short — make every minute count.\n\nPlayers who respect the game earn respect from coaches, teammates, opponents, and families watching. It's one of the most important habits you'll ever build.`,
     questions: [
       {
-        question: "How should you treat your opponents?",
-        options: ["Like enemies", "With respect — they push you to get better", "Ignore them", "Try to intimidate them"],
-        correctAnswer: 1,
-        explanation: "Opponents are competitors who make you better. Respect them.",
-      },
+      question: "How should you treat opponents?",
+      options: [
+        "Like enemies — beat them down",
+        "With respect — they push you to improve",
+        "Ignore them between whistles",
+        "Only if they're nice first"
+      ],
+      correctAnswer: 1,
+      explanation: "Without good opponents, you don't grow. Respect is what real competitors give.",
+    },
       {
-        question: "When a ref makes a bad call, what should you do?",
-        options: ["Argue loudly", "Throw your stick", "Accept it and play harder on the next play", "Tell your parents to complain"],
-        correctAnswer: 2,
-        explanation: "Arguing changes nothing. Competing on the next play changes the game.",
-      },
+      question: "Ref makes a bad call against your team. Best response?",
+      options: [
+        "Yell loud enough that she reverses it",
+        "Argue calmly until she sees it",
+        "Accept it, compete on the next play",
+        "Throw your stick to show frustration"
+      ],
+      correctAnswer: 2,
+      explanation: "Refs miss calls. Arguing hurts your focus. Next-play mentality is what wins.",
+    },
       {
-        question: "What does 'respecting the game' mean?",
-        options: ["Just winning", "Treating opponents, refs, equipment, and practice with respect", "Playing only when it's fun", "Only caring about goals"],
-        correctAnswer: 1,
-        explanation: "Respect covers everything — how you treat the sport and everyone connected to it.",
-      },
+      question: "You leave your stick out in the rain overnight. What does that say?",
+      options: [
+        "Nothing — it's just a stick",
+        "You don't respect your tools or the game",
+        "It's the parents' job to handle that",
+        "Sticks don't get damaged that easily"
+      ],
+      correctAnswer: 1,
+      explanation: "Your gear is the tools of your sport. Respecting it shows you respect the game.",
+    },
+      {
+      question: "What does 'respecting the game' actually cover?",
+      options: [
+        "Just winning with class",
+        "Opponents, refs, gear, and practice time",
+        "Saying the right things to coaches",
+        "Wearing the team uniform proudly"
+      ],
+      correctAnswer: 1,
+      explanation: "Respect is total — for everyone and everything connected to the sport.",
+    },
+      {
+      question: "Final whistle. You lost on a goal you think was offside. Ref didn't call it. The other team is celebrating. What do you do?",
+      options: [
+        "Walk off without shaking hands",
+        "Confront the ref about the call",
+        "Line up and shake hands cleanly",
+        "Stand and stare at the celebration"
+      ],
+      correctAnswer: 2,
+      explanation: "Win or lose, you line up and shake hands. That's how you show the game respect — and the game pays you back over time.",
+      kind: "scenario",
+      scenario: "Tough loss. Final goal looked offside but wasn't called. The handshake line is forming. Your teammates are watching how you react.",
+    },
+    ],
+    keyTakeaways: [
+      "Opponents make you better — shake hands before and after every game.",
+      "Refs miss calls. Arguing wastes energy and hurts your team. Compete on the next play.",
+      "Take care of your gear — sticks, goggles, mouth guards aren't toys.",
+      "Be fully present at practice. Phones away, focus up. Time on the field is short.",
     ],
   },
   {
@@ -3402,23 +3908,68 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
     description: `Here's something important: the team with the most talented players doesn't always win. Sometimes a team with average skills but amazing teamwork beats a team of all-stars who don't play together.\n\nWhy? Because lacrosse is a team sport. You can't win alone. Your attack needs your midfield to bring the ball up. Your midfield needs your defense to stop the other team. Your defense needs your goalie. Your goalie needs everyone. When every player does their job well, the team works.\n\nTeams win because they trust each other. When you trust your teammate to be in the right spot, you pass without hesitating. When you trust your defense to slide, you play your girl tight. Trust makes everyone play faster and smarter.\n\nTeams win because they support each other. When a teammate drops a ball, you don't groan — you say "next one!" When someone misses a shot, you back it up. When someone gets beat, the team responds. Every mistake is a chance for the TEAM to step up together.\n\nTeams win because they care about each other. When you genuinely care about your teammates, you work harder. You don't want to let them down. You sprint back on defense because your goalie is counting on you. You make the extra effort because you know your teammates would do the same.\n\nBe the kind of teammate who makes the team better just by being there. That matters more than any individual skill.`,
     questions: [
       {
-        question: "Does the most talented team always win?",
-        options: ["Yes, always", "No — teams that play together can beat more talented teams", "Only in big games", "Talent is everything"],
-        correctAnswer: 1,
-        explanation: "Teamwork and trust can overcome talent differences.",
-      },
+      question: "Does the most talented team always win?",
+      options: [
+        "Yes — talent wins championships",
+        "Only in the playoffs",
+        "No — teamwork beats talent often",
+        "Only if the talent is older"
+      ],
+      correctAnswer: 2,
+      explanation: "Teams that move the ball, slide on time, and trust each other beat more talented teams regularly.",
+    },
       {
-        question: "What should you do when a teammate makes a mistake?",
-        options: ["Get mad at them", "Ignore it", "Support them — say 'next one!' and help the team respond", "Tell the coach to bench them"],
-        correctAnswer: 2,
-        explanation: "Great teams respond to mistakes together. Every error is a chance to support each other.",
-      },
+      question: "What does 'doing your job' on a team mean?",
+      options: [
+        "Trying to score every play you can",
+        "Playing your position, trusting teammates",
+        "Doing the coach's job better than her",
+        "Switching positions when bored"
+      ],
+      correctAnswer: 1,
+      explanation: "Every position depends on the others. When everyone does their part, it works.",
+    },
       {
-        question: "Why do players who care about their teammates play harder?",
-        options: ["They don't", "They don't want to let their teammates down — effort comes from caring", "Caring doesn't affect playing", "Only coaches motivate effort"],
-        correctAnswer: 1,
-        explanation: "When you care about your teammates, you give more effort because they're counting on you.",
-      },
+      question: "How does trust between teammates get built?",
+      options: [
+        "Through team meetings",
+        "Through hanging out off the field",
+        "Through reps — reliable effort over time",
+        "Through senior leadership only"
+      ],
+      correctAnswer: 2,
+      explanation: "Trust is the residue of repetition. Show up, do your job, build the bank.",
+    },
+      {
+      question: "Teammate misses a wide-open shot. The team's reaction?",
+      options: [
+        "Groan and shake heads",
+        "Yell for the next play",
+        "Clap, say 'next one' — pick her up",
+        "Tell coach to bench her"
+      ],
+      correctAnswer: 2,
+      explanation: "How a team responds to mistakes is its identity. Pick teammates up — always.",
+    },
+      {
+      question: "Down 4-0 in the second quarter. The other team is bigger and faster. Two of your teammates are starting to drop their heads. What's the team-first move?",
+      options: [
+        "Drop your head too — match the energy",
+        "Sprint to the next ground ball harder than ever",
+        "Ask coach to call timeout",
+        "Tell teammates to stop trying so hard"
+      ],
+      correctAnswer: 1,
+      explanation: "Energy is a choice. One player setting the tempo can flip a team. Compete on the next play.",
+      kind: "scenario",
+      scenario: "12 minutes in. You're down 4-0. The other team has bigger, older girls. Two teammates are starting to drag.",
+    },
+    ],
+    keyTakeaways: [
+      "The most talented team doesn't always win — the team that plays together does.",
+      "Doing your job means trusting teammates to do theirs. Don't try to play 3 positions.",
+      "Trust is built rep by rep. Every right pass and on-time slide adds to the bank.",
+      "Pick teammates up after mistakes — it's how teams respond to errors that decides games.",
     ],
   },
   {
@@ -3430,23 +3981,68 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
     description: `Every team faces hard moments. Rain games. Losing streaks. Tough practices. What makes a team special isn't avoiding those moments — it's how you get through them together.\n\nCompeting together means nobody quits. If you're down by a lot, you still play hard on every ground ball. Why? Because your teammates are watching. If you keep fighting, it tells them "we're still in this." If you give up, it tells them it's OK to stop trying. Your effort is contagious — make it positive.\n\nCompeting together means celebrating each other. When a teammate scores, you react like YOU scored. When your goalie makes a save, the whole team gets loud. When your defender causes a turnover, everyone lets her know it mattered. Energy lifts teams — and celebrating together builds that energy.\n\nCompeting together means handling losses as a group. After a tough game, don't point fingers. Don't blame one person. Say "we'll get better" and prove it at the next practice. The best teams don't break when they lose — they learn and come back stronger.\n\nHere's what makes competing together powerful: when you're older, you won't remember the scores. You'll remember your teammates. You'll remember fighting through a cold, windy game and laughing about it on the bus ride home. You'll remember the team that refused to quit. Those memories last forever.`,
     questions: [
       {
-        question: "When your team is losing, what should you do?",
-        options: ["Give up", "Keep competing — your effort tells teammates 'we're still in this'", "Blame someone", "Stop trying"],
-        correctAnswer: 1,
-        explanation: "Effort is contagious. Competing hard even when losing lifts the whole team.",
-      },
+      question: "Down 5-0 in the first half. What's the right mindset?",
+      options: [
+        "Conserve energy for the next game",
+        "Compete on every play — score doesn't change effort",
+        "Blame the goalie for letting them in",
+        "Walk through plays quietly"
+      ],
+      correctAnswer: 1,
+      explanation: "Effort is independent of the scoreboard. Your teammates are watching.",
+    },
       {
-        question: "Why is celebrating teammates important?",
-        options: ["It's not", "It builds energy that makes the whole team play harder", "Only celebrate goals", "It distracts from the game"],
-        correctAnswer: 1,
-        explanation: "Celebrating together builds the energy that fuels great team play.",
-      },
+      question: "Teammate scores a beautiful goal. Best team reaction?",
+      options: [
+        "Standard nod and run back",
+        "Celebrate like YOU scored — energy spreads",
+        "Wait to see if it counts first",
+        "Save celebration for the end of the game"
+      ],
+      correctAnswer: 1,
+      explanation: "Celebrating loudly together feeds momentum. Quiet teams play tight.",
+    },
       {
-        question: "After a loss, the team should...",
-        options: ["Blame the worst player", "Point fingers", "Own it together, learn, and come back stronger", "Stop practicing"],
-        correctAnswer: 2,
-        explanation: "Teams handle losses as a group — no blame, just growth.",
-      },
+      question: "After a tough loss, what does the team do?",
+      options: [
+        "Find someone to blame",
+        "Pretend it didn't happen",
+        "Own it together — 'we'll fix it' — and mean it",
+        "Skip the next practice to recover"
+      ],
+      correctAnswer: 2,
+      explanation: "Tough losses are growth moments — if the team owns them together.",
+    },
+      {
+      question: "What's the difference between competing and winning?",
+      options: [
+        "Same thing",
+        "Competing means giving full effort regardless of score",
+        "Competing only matters in the playoffs",
+        "Competing is what coaches say when you lose"
+      ],
+      correctAnswer: 1,
+      explanation: "You can compete and lose. You can't grow without competing. Competing is the choice — winning is the byproduct.",
+    },
+      {
+      question: "It's pouring rain, you're tied, 30 seconds left. Your team has to clear the ball under heavy ride pressure. The crowd is loud. What do you focus on?",
+      options: [
+        "The scoreboard ticking down",
+        "The crowd noise to get hyped",
+        "Your job: my outlet target, my spacing, my next pass",
+        "Whether the rain is letting up"
+      ],
+      correctAnswer: 2,
+      explanation: "Pressure narrows focus. Big moments demand small thinking — do your job, the next 5 seconds, then the next 5.",
+      kind: "scenario",
+      scenario: "Tied 6-6, 30 seconds left, rain pouring, your team has the ball at your own goal. Goalie just made a save. The other team is riding aggressively.",
+    },
+    ],
+    keyTakeaways: [
+      "Hard moments are inevitable — what matters is how the team responds.",
+      "When down big, don't quit. Your effort affects every teammate watching.",
+      "Celebrate teammates' wins like they're yours. Energy is contagious.",
+      "After tough losses: 'we'll get better' — and mean it. No finger-pointing.",
     ],
   },
 ]
