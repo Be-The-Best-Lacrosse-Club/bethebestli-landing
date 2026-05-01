@@ -156,43 +156,43 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "How many players from each team are on the field?",
       options: [
-        "8",
-        "9",
         "10",
-        "11"
+        "9",
+        "8",
+        "11",
       ],
-      correctAnswer: 2,
+      correctAnswer: 0,
       explanation: "10 players: 3 attack, 3 midfield, 3 defense, 1 goalie.",
     },
       {
       question: "What is the lacrosse stick called?",
       options: [
-        "A shaft",
-        "A racket",
+        "A pole",
         "A crosse",
-        "A pole"
+        "A racket",
+        "A shaft",
       ],
-      correctAnswer: 2,
+      correctAnswer: 1,
       explanation: "The stick is a 'crosse' — that's where the sport gets its name.",
     },
       {
       question: "Which group of players run both offense and defense?",
       options: [
+        "Goalies",
         "Attackmen",
         "Midfielders",
         "Defensemen",
-        "Goalies"
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Midfielders cover the whole field. Attack stays low, defense stays back.",
     },
       {
       question: "How long does a typical youth lacrosse game last?",
       options: [
         "1 quarter",
-        "2 quarters",
         "3 quarters",
-        "4 quarters"
+        "2 quarters",
+        "4 quarters",
       ],
       correctAnswer: 3,
       explanation: "Lacrosse is played in 4 quarters. Highest score at the end wins.",
@@ -200,12 +200,12 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "It's tryouts. Coach is watching from the sideline. Two players are equally skilled. What separates one from the other in the coach's notebook?",
       options: [
-        "Newer stick and gear",
         "Hustles to every ground ball",
+        "Talks the most",
         "Shoots the hardest",
-        "Talks the most"
+        "Newer stick and gear",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Effort is a choice anyone can make — and it's what coaches notice first when skill is tied.",
       kind: "scenario",
       scenario: "Tryout day. Coach has 30 spots and 45 kids. He's watching how players move when they don't have the ball as much as when they do.",
@@ -321,10 +321,10 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "Which hand controls the cradle?",
       options: [
-        "Bottom hand — it grips harder",
+        "Neither — it's all elbow",
         "Top hand — near the head of the stick",
+        "Bottom hand — it grips harder",
         "Both hands work equally",
-        "Neither — it's all elbow"
       ],
       correctAnswer: 1,
       explanation: "Top hand near the head does the cradling. Bottom hand is a loose guide.",
@@ -333,44 +333,44 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
       question: "What kind of motion is a cradle?",
       options: [
         "A full arm swing forward",
-        "A wrist roll like turning a doorknob",
         "A snapping shoulder rotation",
-        "A bouncing stick movement"
+        "A wrist roll like turning a doorknob",
+        "A bouncing stick movement",
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Cradling is small wrist motion. Big arm motion drops the ball.",
     },
       {
       question: "What is 'stick protection position'?",
       options: [
-        "Stick low and away from your body",
+        "Stick parallel to the ground sideways",
         "Stick across your chest, head down",
+        "Stick low and away from your body",
         "Top hand near ear, stick close to body",
-        "Stick parallel to the ground sideways"
       ],
-      correctAnswer: 2,
+      correctAnswer: 3,
       explanation: "Top hand near your ear with the stick tight to your body makes it hard to check.",
     },
       {
       question: "Where should you practice cradling?",
       options: [
-        "Only on a lacrosse field",
-        "Only with a coach watching",
         "Anywhere — backyard, driveway, around the house",
-        "Only at scheduled practices"
+        "Only on a lacrosse field",
+        "Only at scheduled practices",
+        "Only with a coach watching",
       ],
-      correctAnswer: 2,
+      correctAnswer: 0,
       explanation: "Reps build muscle memory. The best cradlers practice constantly, not just at practice.",
     },
       {
       question: "You're running up the wing on a fast break. A defender closes in from your stick side. What do you do with your stick?",
       options: [
-        "Drop it lower for a quicker shot",
         "Switch to your weak hand mid-stride",
         "Bring top hand to your ear, body between you and the D",
-        "Hold the stick parallel to the ground"
+        "Hold the stick parallel to the ground",
+        "Drop it lower for a quicker shot",
       ],
-      correctAnswer: 2,
+      correctAnswer: 1,
       explanation: "Stick protection — top hand near ear, body shielding — keeps the ball away from the defender's check.",
       kind: "scenario",
       scenario: "3rd quarter, you've got a step on the defender on your right. He's closing fast. The shot is 5 yards away.",
@@ -444,43 +444,43 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "When you throw with your right hand on top, which foot steps forward?",
       options: [
+        "Both feet jump together",
         "Right foot",
         "Left foot",
         "Either foot",
-        "Both feet jump together"
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Step with the opposite foot — same as throwing a baseball.",
     },
       {
       question: "What does 'absorbing the ball' mean when catching?",
       options: [
-        "Stab the stick at the ball quickly",
         "Hold the stick rigid as ball arrives",
+        "Stab the stick at the ball quickly",
+        "Catch with the back of the head",
         "Pull stick back slightly to cushion the catch",
-        "Catch with the back of the head"
       ],
-      correctAnswer: 2,
+      correctAnswer: 3,
       explanation: "Soft hands give as the ball arrives — that's what keeps it in the pocket.",
     },
       {
       question: "What is wall ball?",
       options: [
-        "A team game with two goalies",
         "Throwing and catching against a wall solo",
+        "A shooting drill without a target",
         "A drill only goalies use",
-        "A shooting drill without a target"
+        "A team game with two goalies",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Wall ball is the gold-standard solo drill — throw, catch, repeat. Both hands.",
     },
       {
       question: "What's the minimum daily wall-ball reps to start improving fast?",
       options: [
-        "10 per hand",
-        "25 per hand",
         "Whenever you feel like it",
-        "Only on practice days"
+        "25 per hand",
+        "Only on practice days",
+        "10 per hand",
       ],
       correctAnswer: 1,
       explanation: "Start at 25 per hand and build to 100. The pros do thousands. Daily reps = fast progress.",
@@ -488,12 +488,12 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "Your friend is 8 yards away calling for a pass. You're running. Your stick is in your right hand. They're on your left. What do you do?",
       options: [
+        "Stop and turn before throwing",
         "Throw it across your body righty",
         "Switch to lefty, then throw with both hands",
-        "Stop and turn before throwing",
-        "Yell and keep running yourself"
+        "Yell and keep running yourself",
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Pass with the hand on the same side as your target. Switching hands fast is why we practice both sides every day.",
       kind: "scenario",
       scenario: "Mid-game. Defender is on your right shoulder. Open teammate is breaking toward the goal on your left, 8 yards away.",
@@ -518,43 +518,43 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "A teammate drops an easy pass. What do you do?",
       options: [
-        "Yell at them to focus",
+        "Refuse to pass to them again",
         "Tell the coach to bench them",
+        "Yell at them to focus",
         "Say 'shake it off, get the next one'",
-        "Refuse to pass to them again"
       ],
-      correctAnswer: 2,
+      correctAnswer: 3,
       explanation: "Pick teammates up after mistakes. Trust gets built when teammates know you have their back.",
     },
       {
       question: "When the coach is giving instructions, what does a great teammate do?",
       options: [
-        "Keep stretching to stay loose",
         "Look at the coach, listen, no side talk",
         "Wait for the part that matters most",
-        "Repeat what coach said to a friend"
+        "Keep stretching to stay loose",
+        "Repeat what coach said to a friend",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Eyes up, mouth shut. Side conversations cost you info AND respect.",
     },
       {
       question: "Why does hustle matter when you don't have the ball?",
       options: [
-        "It doesn't really — only ball-side counts",
         "Coaches just like to see you tired",
         "It backs up shots and makes the team better",
-        "It makes the other team angry"
+        "It makes the other team angry",
+        "It doesn't really — only ball-side counts",
       ],
-      correctAnswer: 2,
+      correctAnswer: 1,
       explanation: "Off-ball hustle wins ground balls, backs up shots, and creates second chances.",
     },
       {
       question: "What does 'the standard is the standard' mean at BTB?",
       options: [
         "The best player sets the bar",
-        "Coaches grade you on a curve",
+        "Only games count, practice is optional",
         "Everyone is expected to bring their best, every day",
-        "Only games count, practice is optional"
+        "Coaches grade you on a curve",
       ],
       correctAnswer: 2,
       explanation: "Standards apply to everyone equally. No one gets a pass.",
@@ -562,12 +562,12 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "Practice is dragging. It's hot. The drill is repetitive. Half the kids are walking between reps. What do you do?",
       options: [
+        "Take a knee until coach yells",
         "Walk too — match the energy",
-        "Sprint between reps and pick up balls",
         "Ask coach to end practice early",
-        "Take a knee until coach yells"
+        "Sprint between reps and pick up balls",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Energy is contagious. One player setting the standard pulls the whole group with them.",
       kind: "scenario",
       scenario: "Tuesday practice in late August. 90°. You've done the same shooting drill four times. Coach is on the other side of the field.",
@@ -591,12 +591,12 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "Your team has the ball. Where should off-ball players go?",
       options: [
-        "All run to the ball carrier",
-        "Stand still and wait for a pass",
         "Spread out — give passing options",
-        "Run to the goal in a clump"
+        "Stand still and wait for a pass",
+        "All run to the ball carrier",
+        "Run to the goal in a clump",
       ],
-      correctAnswer: 2,
+      correctAnswer: 0,
       explanation: "Spread out so the defense has to cover the whole field, not just one spot.",
     },
       {
@@ -604,8 +604,8 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
       options: [
         "Spread out wide",
         "Compress and tighten up to help each other",
+        "Run back to your own goal only",
         "Stand on the sideline",
-        "Run back to your own goal only"
       ],
       correctAnswer: 1,
       explanation: "On defense, compress — be close enough to help, far enough to cover your man.",
@@ -613,10 +613,10 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "What is 'lacrosse IQ'?",
       options: [
+        "How tall and strong you are",
         "How fast you run",
-        "How hard your shot is",
         "Knowing where to be and what to do",
-        "How tall and strong you are"
+        "How hard your shot is",
       ],
       correctAnswer: 2,
       explanation: "IQ is awareness — anticipating plays, finding open space, helping when needed.",
@@ -625,20 +625,20 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
       question: "If you genuinely don't know where to be, what's the best move?",
       options: [
         "Stand on the sideline until coach calls",
+        "Stay where you started no matter what",
         "Run to the goal regardless of the play",
         "Find a spot where you can help — backup, slide, get open",
-        "Stay where you started no matter what"
       ],
-      correctAnswer: 2,
+      correctAnswer: 3,
       explanation: "When in doubt, get to where you can help. Movement with purpose beats freezing.",
     },
       {
       question: "Your teammate is dodging from behind the goal. Defense is collapsing on him. You're at the top of the offensive zone with no defender on you. What do you do?",
       options: [
         "Cut hard to the goal expecting a pass",
-        "Stand still — don't move",
+        "Yell for the ball but don't move",
         "Run back to defense",
-        "Yell for the ball but don't move"
+        "Stand still — don't move",
       ],
       correctAnswer: 0,
       explanation: "When the defense collapses, the off-ball man is open. Cut to the goal — your teammate sees you.",
@@ -729,10 +729,10 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "What are the three parts of the BTB Standard?",
       options: [
-        "Speed, strength, skill",
-        "Effort, attitude, preparation",
         "Goals, assists, ground balls",
-        "Helmet, gloves, stick"
+        "Effort, attitude, preparation",
+        "Helmet, gloves, stick",
+        "Speed, strength, skill",
       ],
       correctAnswer: 1,
       explanation: "Effort + attitude + preparation — three choices anyone can make.",
@@ -743,7 +743,7 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
         "80% to save energy for games",
         "Match what your teammates give",
         "100% every time — no excuses",
-        "Whatever your coach asks for"
+        "Whatever your coach asks for",
       ],
       correctAnswer: 2,
       explanation: "100% is the deal. Anything less, you owe your teammates an explanation.",
@@ -751,32 +751,32 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "You make a bad pass that turns into a goal against you. What's the right response?",
       options: [
-        "Blame the receiver",
         "Argue with the ref",
+        "Blame the receiver",
+        "Walk off the field",
         "'My fault, I'll get the next one'",
-        "Walk off the field"
       ],
-      correctAnswer: 2,
+      correctAnswer: 3,
       explanation: "Own it, reset, compete on the next play. That's BTB attitude.",
     },
       {
       question: "What's an example of preparation?",
       options: [
-        "Buying new cleats every season",
         "Wall ball on your own time, gear in order, watching games",
+        "Doing only what the coach assigns",
         "Showing up exactly on time",
-        "Doing only what the coach assigns"
+        "Buying new cleats every season",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Preparation is the work you do when nobody's making you.",
     },
       {
       question: "Saturday morning. Game at 9. You wake up at 7 — alarm didn't go off as planned. What does a BTB-Standard player do FIRST?",
       options: [
-        "Check social media to wake up",
+        "Skip warmups and go straight to the bench",
         "Check gear, eat, hydrate, mentally prep — get to game ready",
+        "Check social media to wake up",
         "Text the coach you'll be late",
-        "Skip warmups and go straight to the bench"
       ],
       correctAnswer: 1,
       explanation: "Preparation isn't just the day before. Game-day routine matters: gear check, hydrate, mental prep.",
@@ -803,10 +803,10 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "Do you have to be the best player on the team to lead?",
       options: [
-        "Yes, only stars lead",
         "Only if you're a captain",
+        "Only the oldest kids can lead",
         "No — leadership is action, not skill",
-        "Only the oldest kids can lead"
+        "Yes, only stars lead",
       ],
       correctAnswer: 2,
       explanation: "Leadership is a choice anyone makes. Action over status.",
@@ -814,23 +814,23 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "What matters more — what you say or what you do?",
       options: [
+        "Only what the coach says",
         "What you say — words motivate",
-        "What you do — people watch actions",
         "Both equal — they're tied together",
-        "Only what the coach says"
+        "What you do — people watch actions",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Tell teammates to hustle while you walk and nobody listens. Sprint without a word and they follow.",
     },
       {
       question: "When does leadership matter most?",
       options: [
-        "When the team is winning",
-        "When practice is easy",
         "On bad days — rain, cold, tired",
-        "Only at championship games"
+        "When practice is easy",
+        "When the team is winning",
+        "Only at championship games",
       ],
-      correctAnswer: 2,
+      correctAnswer: 0,
       explanation: "Anyone can lead when things are easy. Real leaders bring it when conditions are bad.",
     },
       {
@@ -838,8 +838,8 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
       options: [
         "Wear team colors off the field",
         "Sprint between drills and pick up balls",
+        "Show up exactly on time",
         "Tell teammates to hustle",
-        "Show up exactly on time"
       ],
       correctAnswer: 1,
       explanation: "Sprint and pick up balls — visible effort that pulls others up.",
@@ -848,11 +848,11 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
       question: "First practice of the season. Half the team is jogging the warmup laps. The captain isn't there yet. What do you do?",
       options: [
         "Match the team's pace — fit in",
+        "Ask the coach what speed to go",
         "Run faster — the rest will catch up to your example",
         "Wait for the captain to set the pace",
-        "Ask the coach what speed to go"
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Leadership is showing up first and setting the tempo. You don't need a title to set the standard.",
       kind: "scenario",
       scenario: "Day 1 of fall ball. Coach said 'two laps to warm up'. Most kids are jogging. The captain is in the bathroom.",
@@ -878,31 +878,31 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
       question: "How should you treat opponents?",
       options: [
         "Like enemies — beat them down",
-        "With respect — they push you to improve",
+        "Only if they're nice first",
         "Ignore them between whistles",
-        "Only if they're nice first"
+        "With respect — they push you to improve",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Without good opponents, you don't grow. Respect is what real competitors give.",
     },
       {
       question: "Ref makes a bad call against your team. Best response?",
       options: [
-        "Yell loud enough that he reverses it",
-        "Argue calmly until he sees it",
         "Accept it, compete on the next play",
-        "Throw your stick to show frustration"
+        "Argue calmly until he sees it",
+        "Throw your stick to show frustration",
+        "Yell loud enough that he reverses it",
       ],
-      correctAnswer: 2,
+      correctAnswer: 0,
       explanation: "Refs miss calls. Arguing hurts your focus. Next-play mentality is what wins.",
     },
       {
       question: "You leave your stick out in the rain overnight. What does that say about you?",
       options: [
-        "Nothing — it's just a stick",
+        "Sticks don't get damaged that easily",
         "You don't respect your tools or the game",
         "It's the parents' job to handle that",
-        "Sticks don't get damaged that easily"
+        "Nothing — it's just a stick",
       ],
       correctAnswer: 1,
       explanation: "Your gear is the tools of your sport. Respecting it shows you respect the game.",
@@ -911,11 +911,11 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
       question: "What does 'respecting the game' actually cover?",
       options: [
         "Just winning with class",
+        "Wearing the team uniform proudly",
         "Opponents, refs, gear, and practice time",
         "Saying the right things to coaches",
-        "Wearing the team uniform proudly"
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Respect is total — for everyone and everything connected to the sport.",
     },
       {
@@ -923,10 +923,10 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
       options: [
         "Walk off without shaking hands",
         "Confront the ref about the call",
+        "Stand and stare at the celebration",
         "Line up and shake hands cleanly",
-        "Stand and stare at the celebration"
       ],
-      correctAnswer: 2,
+      correctAnswer: 3,
       explanation: "Win or lose, you line up and shake hands. That's how you show the game respect — and the game pays you back over time.",
       kind: "scenario",
       scenario: "Tough loss. Final goal looked offside but wasn't called. The handshake line is forming. Your teammates are watching how you react.",
@@ -951,12 +951,12 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "Does the most talented team always win?",
       options: [
-        "Yes — talent wins championships",
-        "Only in the playoffs",
         "No — teamwork beats talent often",
-        "Only if the talent is older"
+        "Only if the talent is older",
+        "Only in the playoffs",
+        "Yes — talent wins championships",
       ],
-      correctAnswer: 2,
+      correctAnswer: 0,
       explanation: "Teams that move the ball, slide on time, and trust each other beat more talented teams regularly.",
     },
       {
@@ -964,8 +964,8 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
       options: [
         "Trying to score every play you can",
         "Playing your position, trusting teammates",
+        "Switching positions when bored",
         "Doing the coach's job better than him",
-        "Switching positions when bored"
       ],
       correctAnswer: 1,
       explanation: "Every position depends on the others. When everyone does their part, it works.",
@@ -976,7 +976,7 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
         "By talking about it in team meetings",
         "By hanging out off the field",
         "Through reps — reliable effort over time",
-        "Through senior leadership only"
+        "Through senior leadership only",
       ],
       correctAnswer: 2,
       explanation: "Trust is the residue of repetition. Show up, do your job, build the bank.",
@@ -984,23 +984,23 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "Teammate misses a wide-open shot. The team's reaction?",
       options: [
-        "Groan and shake heads at him",
         "Yell for the next play",
+        "Tell coach to bench him",
+        "Groan and shake heads at him",
         "Clap, say 'next one' — pick him up",
-        "Tell coach to bench him"
       ],
-      correctAnswer: 2,
+      correctAnswer: 3,
       explanation: "How a team responds to mistakes is a team's identity. Pick teammates up — always.",
     },
       {
       question: "Down 4-0 in the second quarter. The other team is bigger and faster. Two of your teammates are starting to drop their heads. What's the team-first move?",
       options: [
-        "Drop your head too — match the energy",
         "Sprint to the next ground ball harder than ever",
+        "Tell teammates to stop trying so hard",
         "Ask coach to call timeout to vent",
-        "Tell teammates to stop trying so hard"
+        "Drop your head too — match the energy",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Energy is a choice. One player setting the tempo can flip a team. Compete on the next play, score doesn't matter.",
       kind: "scenario",
       scenario: "12 minutes in. You're down 4-0. The other team has bigger, older kids. Two of your teammates are starting to drag.",
@@ -1024,10 +1024,10 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "Down 5-0 in the first half. What's the right mindset?",
       options: [
-        "Conserve energy for the next game",
-        "Compete on every play — score doesn't change effort",
         "Blame the goalie for letting them in",
-        "Walk through plays quietly"
+        "Compete on every play — score doesn't change effort",
+        "Walk through plays quietly",
+        "Conserve energy for the next game",
       ],
       correctAnswer: 1,
       explanation: "Effort is independent of the scoreboard. Your teammates are watching your response.",
@@ -1035,45 +1035,45 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "Teammate scores a beautiful goal. Best team reaction?",
       options: [
+        "Save the celebration for the end of the game",
         "Standard nod and run back",
         "Celebrate like YOU scored — energy spreads",
         "Wait to see if it counts first",
-        "Save the celebration for the end of the game"
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Celebrating loudly together feeds momentum. Quiet teams play tight.",
     },
       {
       question: "After a tough loss, what does the team do?",
       options: [
-        "Find someone to blame",
+        "Skip the next practice to recover",
         "Pretend it didn't happen",
+        "Find someone to blame",
         "Own it together — 'we'll fix it' — and mean it",
-        "Skip the next practice to recover"
       ],
-      correctAnswer: 2,
+      correctAnswer: 3,
       explanation: "Tough losses are growth moments — if the team owns them together.",
     },
       {
       question: "What's the difference between competing and winning?",
       options: [
-        "Same thing",
         "Competing means giving full effort regardless of score",
         "Competing only matters in the playoffs",
-        "Competing is what coaches say when you lose"
+        "Competing is what coaches say when you lose",
+        "Same thing",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "You can compete and lose. You can't grow without competing. Competing is the choice — winning is the byproduct.",
     },
       {
       question: "It's pouring rain, you're tied, 30 seconds left. Your team has to clear the ball under heavy ride pressure. The crowd is loud. What do you focus on?",
       options: [
-        "The scoreboard ticking down",
         "The crowd noise to get hyped",
         "Your job: my outlet target, my spacing, my next pass",
-        "Whether the rain is letting up"
+        "Whether the rain is letting up",
+        "The scoreboard ticking down",
       ],
-      correctAnswer: 2,
+      correctAnswer: 1,
       explanation: "Pressure narrows focus. Big moments demand small thinking — do your job, the next 5 seconds, then the next 5.",
       kind: "scenario",
       scenario: "Tied 6-6, 30 seconds left, rain pouring, your team has the ball at your own goal line. Goalie just made a save. The other team is riding aggressively.",
@@ -1101,9 +1101,9 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
       question: "Which position runs both offense and defense?",
       options: [
         "Attackman",
-        "Long-pole defenseman",
+        "Goalie",
         "Midfielder",
-        "Goalie"
+        "Long-pole defenseman",
       ],
       correctAnswer: 2,
       explanation: "Midfielders cover the whole field. They sub off in shifts.",
@@ -1112,31 +1112,31 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
       question: "Where does an attackman primarily play?",
       options: [
         "All over the field",
+        "Wherever there's an open lane",
         "Behind their own goal mostly",
         "Around the opposing goal — rarely cross midfield",
-        "Wherever there's an open lane"
       ],
-      correctAnswer: 2,
+      correctAnswer: 3,
       explanation: "Attackmen stay in the offensive end. They don't usually cross midfield.",
     },
       {
       question: "Why must goalies be loud communicators?",
       options: [
-        "The fans need to hear them",
-        "Refs require it for clears",
         "They direct the defense and call slides",
-        "It intimidates the offense"
+        "Refs require it for clears",
+        "The fans need to hear them",
+        "It intimidates the offense",
       ],
-      correctAnswer: 2,
+      correctAnswer: 0,
       explanation: "Goalies see the whole field. They run defensive communication.",
     },
       {
       question: "What is an LSM (long-stick midfielder)?",
       options: [
-        "A goalie's backup",
-        "A midfielder using a long defensive stick",
         "An attackman with a longer stick",
-        "A faceoff specialist"
+        "A midfielder using a long defensive stick",
+        "A goalie's backup",
+        "A faceoff specialist",
       ],
       correctAnswer: 1,
       explanation: "LSMs play midfield with a long pole — disruption + clearing.",
@@ -1145,11 +1145,11 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
       question: "Coach moves you from middie to attack mid-season. You've never played attack. What's your first move?",
       options: [
         "Argue — you're better at midfield",
+        "Quit the team",
         "Watch attackmen on film, learn the spots and dodges",
         "Refuse to dodge in games until comfortable",
-        "Quit the team"
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Position changes are growth opportunities. Film + reps. The kids who adapt earn more roles.",
       kind: "scenario",
       scenario: "Mid-season your coach pulls you aside: he needs an attackman. You've played midfield your whole life.",
@@ -1265,23 +1265,23 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
       {
       question: "What's the most important element of any dodge?",
       options: [
+        "Switching hands as fast as possible",
+        "How loud you yell during it",
         "How fancy the move looks",
         "Change of speed — slow to fast in one step",
-        "How loud you yell during it",
-        "Switching hands as fast as possible"
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Change of pace creates separation. A flashy dodge at one speed doesn't work.",
     },
       {
       question: "In a split dodge you switch hands. In a face dodge you...",
       options: [
-        "Switch hands twice",
         "Keep the same hand but fake the switch",
+        "Spin all the way around",
+        "Switch hands twice",
         "Drop the stick mid-dodge",
-        "Spin all the way around"
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Face dodge fakes the switch — fastest because you don't lose any speed.",
     },
       {
@@ -1289,8 +1289,8 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
       options: [
         "Wide open field, no defender",
         "Against a defender playing you very tight",
+        "Only against goalies stepping out",
         "When you're tired and slow",
-        "Only against goalies stepping out"
       ],
       correctAnswer: 1,
       explanation: "Roll dodges work when defenders are right on you — protect stick, roll past.",
@@ -1298,23 +1298,23 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
       {
       question: "What's the mistake most middle-schoolers make when dodging?",
       options: [
-        "Switching hands too fast",
-        "Running at one speed the whole time",
+        "Calling for the ball mid-dodge",
         "Bringing the stick too high",
-        "Calling for the ball mid-dodge"
+        "Running at one speed the whole time",
+        "Switching hands too fast",
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "One-speed dodges let the defender recover. Explosive change of pace is the key.",
     },
       {
       question: "Defender is tight on your right hip, mirroring your every step. You can't get separation. What dodge?",
       options: [
-        "Split dodge — switch hands and go opposite",
         "Face dodge — fake the switch and blow by",
+        "Split dodge — switch hands and go opposite",
+        "Slow down and pass it back",
         "Roll dodge — plant, roll backwards, protect stick",
-        "Slow down and pass it back"
       ],
-      correctAnswer: 2,
+      correctAnswer: 3,
       explanation: "Tight, mirroring defender = roll dodge. Plant the inside foot, roll away, stick protected.",
       kind: "scenario",
       scenario: "1v1 from up top. Defender is glued to your right hip. Every move you make, he mirrors. You need to create space NOW.",
@@ -1413,56 +1413,56 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
       {
       question: "What's the cardinal rule of defense?",
       options: [
-        "Always check hard",
         "Stay between your man and the goal",
+        "Stand tall to look bigger",
         "Run to the ball carrier first",
-        "Stand tall to look bigger"
+        "Always check hard",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Body position between man and goal is the foundation.",
     },
       {
       question: "Defensive footwork basic rule:",
       options: [
         "Cross feet for max speed",
-        "Stand flat-footed for balance",
         "Slide-step, never cross feet",
-        "Jump backwards to keep cushion"
+        "Stand flat-footed for balance",
+        "Jump backwards to keep cushion",
       ],
-      correctAnswer: 2,
+      correctAnswer: 1,
       explanation: "Crossing feet = losing balance = getting beat.",
     },
       {
       question: "Goal of a poke check?",
       options: [
-        "Take the ball away every time",
-        "Disrupt and slow the dodger down",
         "Get the ref to throw a flag",
-        "Knock the helmet off"
+        "Knock the helmet off",
+        "Disrupt and slow the dodger down",
+        "Take the ball away every time",
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Poke checks force bad decisions and buy slide time. They rarely win the ball.",
     },
       {
       question: "How should you approach a ball carrier?",
       options: [
         "Run straight at him full speed",
-        "Take an angle that pushes him to the sideline",
         "Stand still and wait for him to come",
-        "Reach with your stick before approaching"
+        "Reach with your stick before approaching",
+        "Take an angle that pushes him to the sideline",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Angle takes away the middle and pushes him into help.",
     },
       {
       question: "Attackman driving from your right wing. He's heading toward the middle of the field. You're guarding him. What do you do?",
       options: [
-        "Reach with your stick to slow him",
         "Slide-step to cut off his middle path, force him sideline",
+        "Reach with your stick to slow him",
         "Run past him to the goalie's position",
-        "Drop your stick down and brace for contact"
+        "Drop your stick down and brace for contact",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Cut off the middle. Force him to the sideline where help is — and where the angle to score gets bad.",
       kind: "scenario",
       scenario: "Right wing dodge from up top. The attackman is faster than you and trying to get to the middle for an inside roll.",
@@ -1554,21 +1554,21 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
       {
       question: "What separates good players from great ones in IQ?",
       options: [
-        "Greats run faster",
-        "Greats are taller and stronger",
+        "Greats have nicer gear",
         "Greats anticipate, not just react",
-        "Greats have nicer gear"
+        "Greats are taller and stronger",
+        "Greats run faster",
       ],
-      correctAnswer: 2,
+      correctAnswer: 1,
       explanation: "Anticipation — seeing the play before it happens — is the IQ marker.",
     },
       {
       question: "Watching film, what should you focus on?",
       options: [
-        "Just the ball at all times",
         "Just the goalie's saves",
+        "The scoreboard and time",
         "Off-ball movement — that's the lesson",
-        "The scoreboard and time"
+        "Just the ball at all times",
       ],
       correctAnswer: 2,
       explanation: "Off-ball movement teaches positioning, anticipation, team play.",
@@ -1576,32 +1576,32 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
       {
       question: "On defense, what tells you where the ball carrier will pass?",
       options: [
+        "How they hold their stick",
         "Their feet and stride",
-        "Their eyes — they look where they're throwing",
         "Their helmet number",
-        "How they hold their stick"
+        "Their eyes — they look where they're throwing",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Eyes telegraph passes. Reading them = interceptions.",
     },
       {
       question: "When you have the ball, what should you do BEFORE you make your move?",
       options: [
-        "Run as fast as possible",
         "Scan: teammates, space, weak defender",
+        "Wait until coach calls a play",
+        "Run as fast as possible",
         "Yell for a pick",
-        "Wait until coach calls a play"
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Great players scan first, commit second. That's how openings are seen.",
     },
       {
       question: "You catch the ball topside. As you turn, you see the crease defender step toward you — clearly preparing to slide. What do you do?",
       options: [
-        "Dodge harder, ignore the slide",
+        "Shoot from where you are",
         "Pass to the crease attackman the slider just left",
         "Pass back to where you got the ball",
-        "Shoot from where you are"
+        "Dodge harder, ignore the slide",
       ],
       correctAnswer: 1,
       explanation: "Slide left a man open. Pass to him — that's a layup. Forcing the dodge into the slide is a turnover.",
@@ -1728,9 +1728,9 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
       question: "After a mistake, what's the tough-player move?",
       options: [
         "Argue with the ref about the play",
-        "Drop your head until the next sub",
+        "Find a teammate to blame",
         "Reset fast — focus on the next play",
-        "Find a teammate to blame"
+        "Drop your head until the next sub",
       ],
       correctAnswer: 2,
       explanation: "Mentally tough players let go of mistakes in seconds.",
@@ -1738,32 +1738,32 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
       {
       question: "When does mental toughness actually get tested?",
       options: [
-        "When you're winning easy",
+        "Only at championship games",
         "When everything is going well",
+        "When you're winning easy",
         "When tired, losing, or frustrated",
-        "Only at championship games"
       ],
-      correctAnswer: 2,
+      correctAnswer: 3,
       explanation: "Toughness is built and shown in adversity.",
     },
       {
       question: "Down 7-1 in the third. What's the right mindset?",
       options: [
-        "Conserve energy for next game",
         "Compete on every play — score doesn't change effort",
         "Try to score 6 yourself to catch up",
-        "Take it easy to avoid injury"
+        "Take it easy to avoid injury",
+        "Conserve energy for next game",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Effort is independent of the scoreboard.",
     },
       {
       question: "Why do tough players get FASTER in the 4th quarter?",
       options: [
-        "They're in better shape than everyone",
+        "The whistle motivates them",
         "Most opponents are slowing down — that's the edge",
+        "They're in better shape than everyone",
         "Coaches force them to sprint",
-        "The whistle motivates them"
       ],
       correctAnswer: 1,
       explanation: "If you're holding pace while opponents slow, you've gained relative speed. That's the gap.",
@@ -1774,7 +1774,7 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
         "Yell at the ref about the bad call",
         "Stand and wait for someone else to get it",
         "Sprint to the ground ball — next play",
-        "Walk over to argue with coach"
+        "Walk over to argue with coach",
       ],
       correctAnswer: 2,
       explanation: "Tough players play through bad calls. Sprint to the ball — that's how you flip momentum.",
@@ -1801,32 +1801,32 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
       {
       question: "Do you need to be a starter to be a leader?",
       options: [
-        "Yes — only starters lead",
         "Only if you wear a captain's C",
+        "Only seniors lead",
+        "Yes — only starters lead",
         "No — leadership is a choice anyone can make",
-        "Only seniors lead"
       ],
-      correctAnswer: 2,
+      correctAnswer: 3,
       explanation: "Effort and example don't require status.",
     },
       {
       question: "Real leaders handle teammate problems by...",
       options: [
-        "Talking behind their backs",
-        "Telling other teammates first",
         "Going directly to the person to fix it",
-        "Letting it stay unresolved"
+        "Telling other teammates first",
+        "Talking behind their backs",
+        "Letting it stay unresolved",
       ],
-      correctAnswer: 2,
+      correctAnswer: 0,
       explanation: "Direct, honest communication builds trust. Gossip destroys it.",
     },
       {
       question: "Biggest leadership tell at practice?",
       options: [
-        "Being the loudest in huddle",
+        "Being friends with the coach",
         "Setting the standard with action — first, focused",
+        "Being the loudest in huddle",
         "Wearing the best gear",
-        "Being friends with the coach"
       ],
       correctAnswer: 1,
       explanation: "Actions are visible. Words alone don't lead.",
@@ -1834,10 +1834,10 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
       {
       question: "Coach gives you tough feedback in front of the team. Best response?",
       options: [
-        "Defend yourself with explanations",
         "Roll your eyes and take it later",
+        "Defend yourself with explanations",
         "'Got it, coach' — apply it on the next rep",
-        "Argue calmly until coach agrees"
+        "Argue calmly until coach agrees",
       ],
       correctAnswer: 2,
       explanation: "Taking coaching well shows the team how to handle it. Big leadership signal.",
@@ -1845,12 +1845,12 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
       {
       question: "You're a sophomore. A senior teammate is loafing through warm-ups. Captain isn't on the field yet. What's the leadership move?",
       options: [
+        "Tell the coach about the senior",
+        "Wait for the captain to handle it",
         "Match the senior's energy — fit in",
         "Sprint and stay ready — your example pulls others",
-        "Tell the coach about the senior",
-        "Wait for the captain to handle it"
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Leadership doesn't wait for permission. Set the standard with your effort — others follow.",
       kind: "scenario",
       scenario: "Saturday warm-ups. Senior teammate is jogging at 50%. Captain is in the bathroom. Coach is at the other end of the field.",
@@ -1874,56 +1874,56 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
       {
       question: "Good on-field communication sounds like:",
       options: [
-        "Random shouting",
         "Specific calls — 'I got ball', 'Slide', 'Cutter'",
         "Whispered to nearest teammate",
-        "Only after coach yells first"
+        "Random shouting",
+        "Only after coach yells first",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Specific, timely info that helps teammates make decisions.",
     },
       {
       question: "On defense, what does 'I'm hot' mean?",
       options: [
-        "I'm shooting next",
-        "I'm covering the ball",
+        "I want a sub",
         "I'm the first slide",
-        "I want a sub"
+        "I'm covering the ball",
+        "I'm shooting next",
       ],
-      correctAnswer: 2,
+      correctAnswer: 1,
       explanation: "'I'm hot' or 'I got two' = I'm the first slide.",
     },
       {
       question: "When should an offensive player yell 'Shot!'",
       options: [
+        "Whenever they touch the ball",
         "After the ball goes in",
         "Before the shot, so teammates crash for rebound",
         "Only on missed shots",
-        "Whenever they touch the ball"
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Calling shot lets teammates crash the crease for the backup.",
     },
       {
       question: "If communicating feels awkward at first, what's the move?",
       options: [
+        "Only talk in games, not practice",
+        "Wait for a captain to start",
         "Skip it — wait until you're older",
         "Pick one call and practice it until it's natural",
-        "Only talk in games, not practice",
-        "Wait for a captain to start"
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Start small. One call at a time builds the habit.",
     },
       {
       question: "Late in the game. You're on D. Your man cuts behind the goal. The defenseman next to you is now responsible — but he's looking the wrong way. What do you yell?",
       options: [
-        "Just stay quiet — let him figure it out",
         "'Switch! Your man, behind!'",
         "'Coach! Sub!'",
-        "'I got him' even though you don't"
+        "Just stay quiet — let him figure it out",
+        "'I got him' even though you don't",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Specific, urgent call. Teammate gets the info he needs RIGHT NOW. Silence = goal.",
       kind: "scenario",
       scenario: "Late 4th quarter. Your man cuts behind the goal — you can't follow because of the slide rules. The next defenseman is responsible but staring at the ball.",
@@ -1948,10 +1948,10 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
       {
       question: "If you're not a starter, what's the right approach?",
       options: [
-        "Complain until you start",
-        "Own your role and maximize it",
         "Ask to switch teams",
-        "Stop trying as hard"
+        "Own your role and maximize it",
+        "Stop trying as hard",
+        "Complain until you start",
       ],
       correctAnswer: 1,
       explanation: "Maximize what you're given. That's how you earn more.",
@@ -1959,10 +1959,10 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
       {
       question: "Best question to ask your coach?",
       options: [
-        "'Why am I not starting?'",
+        "'When can I leave practice?'",
         "'Can I play a different position?'",
         "'What do you need from me?'",
-        "'When can I leave practice?'"
+        "'Why am I not starting?'",
       ],
       correctAnswer: 2,
       explanation: "Asking what the team needs shows maturity and earns trust.",
@@ -1972,21 +1972,21 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
       options: [
         "Only the ones who score",
         "Only the tallest kids",
+        "The ones who complain loudly",
         "The ones who do their job fully without needing credit",
-        "The ones who complain loudly"
       ],
-      correctAnswer: 2,
+      correctAnswer: 3,
       explanation: "Coaches reward players who commit to their role fully.",
     },
       {
       question: "What does a 'best role player' look like in practice?",
       options: [
+        "Goes harder than starters, makes them better",
         "Same speed as starters in every drill",
         "Coasts because their reps don't matter",
-        "Goes harder than starters, makes them better",
-        "Only competes when scouts are there"
+        "Only competes when scouts are there",
       ],
-      correctAnswer: 2,
+      correctAnswer: 0,
       explanation: "Bench players who push starters in practice make the whole team better.",
     },
       {
@@ -1994,8 +1994,8 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
       options: [
         "Sulk on the bench until your shift",
         "Make those 5 minutes the hardest 5 minutes the other team sees",
+        "Stop trying as hard in practice",
         "Ask to play a different position",
-        "Stop trying as hard in practice"
       ],
       correctAnswer: 1,
       explanation: "5 minutes of full-throttle effort earns more minutes. Sulking earns less. Coaches see the difference.",
@@ -2021,10 +2021,10 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
       {
       question: "How is trust between teammates built?",
       options: [
+        "Through the captain's leadership alone",
         "Through team meetings",
-        "Through hanging out off the field",
         "Through reps — reliable effort over time",
-        "Through the captain's leadership alone"
+        "Through hanging out off the field",
       ],
       correctAnswer: 2,
       explanation: "Trust is the residue of repetition.",
@@ -2033,22 +2033,22 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
       question: "Trust on offense looks like:",
       options: [
         "Dodging every time you touch the ball",
-        "Making the extra pass to the open man",
+        "Holding the ball to control tempo",
         "Passing only to the best player",
-        "Holding the ball to control tempo"
+        "Making the extra pass to the open man",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Trusting teammates means sharing the ball — even if you could shoot.",
     },
       {
       question: "What happens when a defense doesn't trust each other?",
       options: [
-        "They become more aggressive",
         "Players hesitate on slides, defense breaks",
+        "It doesn't really affect performance",
+        "They become more aggressive",
         "Goalie has to make more saves",
-        "It doesn't really affect performance"
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Hesitation on slides = open shots = goals against.",
     },
       {
@@ -2057,7 +2057,7 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
         "Loud captain in every huddle",
         "Ball moves fast — extra passes for better shots",
         "Coach yells less in games",
-        "Wearing matching cleats"
+        "Wearing matching cleats",
       ],
       correctAnswer: 1,
       explanation: "Quick ball movement = trust. Players believe the next guy will catch and shoot.",
@@ -2066,11 +2066,11 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
       question: "You're 1 vs 1, top of the zone. You see your crease attackman wide open inside. You also have a tight shot at the cage from where you are. The trust move?",
       options: [
         "Take your shot — you have it",
-        "Skip it inside to the wide-open crease attackman",
         "Pass it back to the midfielder behind you",
-        "Hold the ball and wait for clarity"
+        "Skip it inside to the wide-open crease attackman",
+        "Hold the ball and wait for clarity",
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Wide-open inside > tight outside shot every time. Make the trust pass — your team gets a layup.",
       kind: "scenario",
       scenario: "Top of the zone, 1v1. You're a decent shooter from there. But your crease attackman has slipped his man and is wide open.",
@@ -2095,56 +2095,56 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
       {
       question: "After a tough loss, who should take the blame?",
       options: [
-        "The goalie if shots got in",
         "The kid who missed the last shot",
+        "The coach for not adjusting",
+        "The goalie if shots got in",
         "Nobody alone — the team owns it together",
-        "The coach for not adjusting"
       ],
-      correctAnswer: 2,
+      correctAnswer: 3,
       explanation: "Games are decided by hundreds of plays. Blaming one person destroys trust.",
     },
       {
       question: "Why is blaming one teammate after a loss so harmful?",
       options: [
-        "It's not really that bad",
         "It makes the team afraid to take risks",
+        "Only matters if it happens repeatedly",
         "Coaches don't notice",
-        "Only matters if it happens repeatedly"
+        "It's not really that bad",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Fear of being the scapegoat makes teams play tight and cautious.",
     },
       {
       question: "Best response to a tough loss?",
       options: [
-        "Quit the team",
-        "Pretend it didn't happen",
+        "Argue about which call cost the game",
         "Be honest, stay positive, work harder next practice",
-        "Argue about which call cost the game"
+        "Pretend it didn't happen",
+        "Quit the team",
       ],
-      correctAnswer: 2,
+      correctAnswer: 1,
       explanation: "Own it, learn, fix it. That's how teams grow.",
     },
       {
       question: "After a big win, the ideal team response is:",
       options: [
-        "The top scorer takes the credit",
-        "Spread credit — every goal needed an assist needed a GB",
         "Tell the losing team what they did wrong",
-        "Post highlights immediately"
+        "Post highlights immediately",
+        "Spread credit — every goal needed an assist needed a GB",
+        "The top scorer takes the credit",
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Wins are collective. Make sure everyone feels they contributed — because they did.",
     },
       {
       question: "Right after a tough overtime loss, your starting goalie is in tears. Two teammates are blaming the defense out loud. What do you do?",
       options: [
-        "Go to the goalie — 'we win as a team, lose as a team'",
-        "Agree with the teammates blaming defense",
         "Walk to the parking lot quickly",
-        "Yell at everyone to stop"
+        "Agree with the teammates blaming defense",
+        "Yell at everyone to stop",
+        "Go to the goalie — 'we win as a team, lose as a team'",
       ],
-      correctAnswer: 0,
+      correctAnswer: 3,
       explanation: "Pick up your goalie. Shut down the blame. The team's identity is set in moments like these.",
       kind: "scenario",
       scenario: "Overtime loss, 9-8. Your goalie is in tears — they think the last goal was their fault. Two teammates nearby are blaming the defense out loud.",
@@ -2171,21 +2171,21 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "What's the strength of a 1-4-1 set?",
       options: [
-        "Heavy crease pressure",
         "Stretches the defense horizontally for isolation dodges",
+        "Heavy crease pressure",
         "Best for ride formations",
-        "Allows three dodgers at once"
+        "Allows three dodgers at once",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "1-4-1 spreads the D side-to-side, opening lanes for the point or X attackman.",
     },
       {
       question: "What is 'ball reversal' and why does it work?",
       options: [
-        "Carrying ball back to your own goal — kills clock",
-        "Moving ball side-to-side fast — defense scrambles",
         "Re-dodging same matchup — wears down D",
-        "Throwing back to the goalie to reset"
+        "Moving ball side-to-side fast — defense scrambles",
+        "Throwing back to the goalie to reset",
+        "Carrying ball back to your own goal — kills clock",
       ],
       correctAnswer: 1,
       explanation: "Defenses slide toward the ball. Reverse fast and they're scrambling — that's when openings appear.",
@@ -2193,34 +2193,34 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "What is 'pick-the-picker'?",
       options: [
+        "A faceoff move",
         "Picking the best player on offense",
         "After setting a pick, immediately get a pick set for you",
         "Picking the ball carrier first",
-        "A faceoff move"
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Defense recovers from action 1 just as action 2 hits. Staple of elite offenses.",
     },
       {
       question: "Patient dodging means...",
       options: [
+        "Letting your defender catch up",
         "Dodging slowly",
-        "Reading slide first, attacking second",
         "Waiting for the crease to clear",
-        "Letting your defender catch up"
+        "Reading slide first, attacking second",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "If you see the slide early, pass to the open man. If no slide, finish.",
     },
       {
       question: "You're at the point in a 1-4-1. Coach calls for a 2-man game with the right wing. The defense is playing aggressive — slides come from the crease. What do you do?",
       options: [
-        "Force the dodge — beat your D 1v1",
         "Use the pick, look for the slide, hit the crease attackman the slider left",
         "Reset and call a different play",
-        "Skip the pick, shoot from up top"
+        "Skip the pick, shoot from up top",
+        "Force the dodge — beat your D 1v1",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "If the crease defender slides, the crease attackman is open. The 2-man game's whole purpose is to force that decision.",
       kind: "scenario",
       scenario: "1-4-1 set. You're at the point. Right wing comes up to set you a pick. Their crease defender has been the slide all game.",
@@ -2326,10 +2326,10 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "Adjacent slide comes from:",
       options: [
-        "The crease defender",
-        "The defender on the player next to the dodger",
         "The two-pass-away defender",
-        "The goalie stepping out"
+        "The defender on the player next to the dodger",
+        "The crease defender",
+        "The goalie stepping out",
       ],
       correctAnswer: 1,
       explanation: "Adjacent = next to. The defender adjacent to the dodger slides first.",
@@ -2337,34 +2337,34 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "When is a crease slide ('sandwich') used?",
       options: [
-        "When dodge comes from up top",
+        "When EMO is in effect",
         "When dodge comes from X behind",
+        "When dodge comes from up top",
         "When the crease is empty",
-        "When EMO is in effect"
       ],
-      correctAnswer: 0,
+      correctAnswer: 2,
       explanation: "Up-top dodge → crease defender slides first because he has the shortest path.",
     },
       {
       question: "What's the most important defensive call?",
       options: [
+        "'Sub'",
+        "'Ball'",
         "'Check'",
         "'I'm hot' — I'm the slide",
-        "'Sub'",
-        "'Ball'"
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Without 'I'm hot', the slide is unclear — that's a goal.",
     },
       {
       question: "After a slide, what does the slider do?",
       options: [
-        "Stay on the ball-carrier",
         "Rotate to the player who just got left open",
+        "Stay on the ball-carrier",
+        "Drop into the crease",
         "Run back to original position",
-        "Drop into the crease"
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Slider's old man is covered by rotation. Slider helps the next threat.",
     },
       {
@@ -2373,7 +2373,7 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
         "Adjacent defender slides — crease stays home",
         "Crease defender slides — adjacent fills",
         "Goalie steps out",
-        "Top defender drops"
+        "Top defender drops",
       ],
       correctAnswer: 1,
       explanation: "X dodge through the middle = crease slide. The X dodger gets to the crease before adjacents can rotate.",
@@ -2511,56 +2511,56 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "Best way to learn from film:",
       options: [
+        "Watch with the sound up loud",
         "Watch all the action at full speed",
         "Pick one focus per viewing (slides, cuts, etc.)",
         "Only watch the highlight goals",
-        "Watch with the sound up loud"
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Multi-tasking diffuses learning. One focus = real lessons.",
     },
       {
       question: "What does 'pause and predict' mean?",
       options: [
+        "Stop and start randomly",
         "Stop watching when bored",
-        "Pause clip, guess next move, then check",
         "Pause to text friends about the play",
-        "Stop and start randomly"
+        "Pause clip, guess next move, then check",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Active prediction trains anticipation — the IQ skill that matters most.",
     },
       {
       question: "Watching your own film, what's the value?",
       options: [
-        "See the goals you scored",
         "See what you actually look like vs. what it felt like",
+        "Just to enjoy the experience",
         "Compare to pro highlight reels",
-        "Just to enjoy the experience"
+        "See the goals you scored",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "You always feel different than you look. Tape doesn't lie — that's the value.",
     },
       {
       question: "How often should you watch your own game film?",
       options: [
         "Once a season",
-        "After playoffs only",
         "Weekly during the season",
-        "Only when coach forces it"
+        "After playoffs only",
+        "Only when coach forces it",
       ],
-      correctAnswer: 2,
+      correctAnswer: 1,
       explanation: "Weekly review = weekly improvement. The kids who do this pull away.",
     },
       {
       question: "You watch your last game and notice you drift right after a turnover — every time. You then watch this happen 6 times across 4 games. What do you do at the next practice?",
       options: [
         "Mention it to coach so he knows",
+        "Watch more film instead of practicing",
         "Drill the recovery — practice tracking back left after turnovers",
         "Forget it — bad habits will fix themselves",
-        "Watch more film instead of practicing"
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Film identifies the pattern. Practice fixes it. Without targeted reps, the habit stays.",
       kind: "scenario",
       scenario: "You watched film of your last 4 games. After every turnover, you drift to the right side of the field — leaving your defensive responsibility uncovered.",
@@ -2586,31 +2586,31 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
       question: "What's the #1 piece of recruiting communication coaches want?",
       options: [
         "A long letter about your background",
-        "A short email with a film link, GPA, contact info",
         "A phone call from a parent",
-        "Social media DMs"
+        "Social media DMs",
+        "A short email with a film link, GPA, contact info",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Coaches scan emails fast. Short + film + grades + phone.",
     },
       {
       question: "What matters more for most college rosters?",
       options: [
-        "Most tournament games played",
         "A strong, recent highlight film",
         "Number of camps attended",
-        "Brand of stick used"
+        "Most tournament games played",
+        "Brand of stick used",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Coaches don't see every tournament. They see your film. Make it strong.",
     },
       {
       question: "When should serious recruiting outreach start?",
       options: [
-        "Senior year",
+        "After verbal commits dry up",
         "Sophomore year, ramp through junior",
+        "Senior year",
         "Eighth grade",
-        "After verbal commits dry up"
       ],
       correctAnswer: 1,
       explanation: "Sophomore = build film + reach out. Junior = visits + decisions.",
@@ -2618,23 +2618,23 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "Why do grades matter for athletic recruiting?",
       options: [
-        "They don't — only film matters",
-        "Coaches need your GPA to even make an offer (admissions matter)",
+        "Only Ivy League cares about grades",
         "Grades are tiebreakers only",
-        "Only Ivy League cares about grades"
+        "Coaches need your GPA to even make an offer (admissions matter)",
+        "They don't — only film matters",
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "If admissions won't accept you, the coach can't offer. Grades open doors.",
     },
       {
       question: "It's October of sophomore year. You have a decent film from summer. Coach at a target program emails back: 'thanks, keep us posted.' What's your move?",
       options: [
-        "Wait — they'll reach out when ready",
-        "Send them a new clip every 4-6 weeks with one new skill or game",
         "Call the coach every week to push",
-        "Email them daily until they commit"
+        "Wait — they'll reach out when ready",
+        "Email them daily until they commit",
+        "Send them a new clip every 4-6 weeks with one new skill or game",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "'Keep us posted' = they want updates. Periodic, specific, additive — not spam, not silence.",
       kind: "scenario",
       scenario: "October, sophomore year. You emailed your top program with a film link. Coach replied: 'thanks for sending — keep us posted on your progress.'",
@@ -2658,56 +2658,56 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "Pre-game routine should be:",
       options: [
-        "Different every game for variety",
         "Repeatable — same cues that bring you to game state",
         "Whatever the team captain does",
-        "Skipped — saves energy"
+        "Skipped — saves energy",
+        "Different every game for variety",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Repeatable routines = consistent mental state. Pros all have one.",
     },
       {
       question: "Best in-game self-talk after a mistake?",
       options: [
         "'Why did I do that?'",
-        "'My team is going to be mad'",
         "'Next play — I got the next one'",
-        "'I'm not playing well today'"
+        "'My team is going to be mad'",
+        "'I'm not playing well today'",
       ],
-      correctAnswer: 2,
+      correctAnswer: 1,
       explanation: "Forward-looking self-talk resets focus. Backward-looking traps you.",
     },
       {
       question: "What does sport-psych research say about visualization?",
       options: [
-        "It only works for goalies",
-        "It measurably improves execution under pressure",
+        "It only works in the off-season",
         "It's superstition with no real effect",
-        "It only works in the off-season"
+        "It measurably improves execution under pressure",
+        "It only works for goalies",
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Visualization rehearses the neural pattern. Execution improves measurably.",
     },
       {
       question: "Composure is best understood as:",
       options: [
+        "Something only veterans have",
+        "Luck",
         "A personality trait you're born with",
         "A trainable skill — built through practice",
-        "Something only veterans have",
-        "Luck"
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Composure is a habit. Train it deliberately, like stick skills.",
     },
       {
       question: "State final, 4th quarter, tied. You miss two shots in a row. You're getting tight. What's the single best thing to do RIGHT NOW?",
       options: [
-        "Try to score even harder",
         "Reset routine: deep breath, cue word ('next'), commit to the next play",
+        "Get angry to fire yourself up",
         "Pass off scoring duty completely",
-        "Get angry to fire yourself up"
+        "Try to score even harder",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Pre-built reset routine kicks in under pressure. That's what training is for. Anger and overthinking both narrow performance.",
       kind: "scenario",
       scenario: "State final. 4th quarter. Tied. You missed two shots in a row — both shots you usually make. You feel yourself tightening up.",
@@ -2732,10 +2732,10 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "What's a captain's primary job?",
       options: [
-        "Make game-time strategic calls",
-        "Serve the team — be the bridge to coach",
         "Score the most points",
-        "Run team meetings unilaterally"
+        "Serve the team — be the bridge to coach",
+        "Run team meetings unilaterally",
+        "Make game-time strategic calls",
       ],
       correctAnswer: 1,
       explanation: "Captaincy = service. Bridge between coach and players, not boss.",
@@ -2743,10 +2743,10 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "How does a real captain handle a slacking friend?",
       options: [
-        "Ignore it — friendship comes first",
         "Call them out publicly to embarrass them",
+        "Ignore it — friendship comes first",
         "Talk to them honestly, in private — care more about team than being liked",
-        "Tell on them to coach"
+        "Tell on them to coach",
       ],
       correctAnswer: 2,
       explanation: "Honest, private, direct. Caring more about team than popularity is the captain test.",
@@ -2754,34 +2754,34 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "Senior leadership in tough moments looks like:",
       options: [
+        "Making big speeches",
         "Loudest voice in the huddle",
-        "Steady — calm when teammates are emotional",
         "Yelling to motivate",
-        "Making big speeches"
+        "Steady — calm when teammates are emotional",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "When emotions rise, a captain's job is to lower them. Steadiness wins.",
     },
       {
       question: "First job for a new captain?",
       options: [
-        "Plan team-building events",
         "Set the standard with your own behavior — example before voice",
+        "Plan team-building events",
+        "Speak in every huddle",
         "Pick the team's pre-game music",
-        "Speak in every huddle"
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Lead by example before voice. Words without action don't carry.",
     },
       {
       question: "You're the captain. A senior teammate disagrees publicly with the coach during a film session. The room goes quiet. What do you do?",
       options: [
         "Side with the senior — solidarity",
-        "Stay silent — let the coach handle it",
         "Pull the senior aside privately later: 'I hear you. Not the place. Let me talk to coach.'",
-        "Defend the coach loudly in the room"
+        "Stay silent — let the coach handle it",
+        "Defend the coach loudly in the room",
       ],
-      correctAnswer: 2,
+      correctAnswer: 1,
       explanation: "Captains de-escalate publicly, advocate privately. Public confrontation makes both sides dig in.",
       kind: "scenario",
       scenario: "Film session. A senior teammate publicly pushes back on coach's strategy in front of the team. Room gets quiet. You're the captain.",
@@ -2805,43 +2805,43 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "Leadership without a title comes from:",
       options: [
+        "Being friends with the captain",
         "Demanding respect from teammates",
         "A standard others want to match",
         "Going to the coach about issues",
-        "Being friends with the captain"
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Leadership is gravitational. Your standard pulls others up.",
     },
       {
       question: "How do you influence older teammates without authority?",
       options: [
         "Tell them what to do",
-        "Hold yourself to a higher standard than them",
+        "Complain to coach about them",
         "Wait until you're a captain",
-        "Complain to coach about them"
+        "Hold yourself to a higher standard than them",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Older teammates respond to action, not lecture. Be the bar.",
     },
       {
       question: "Visible leadership behavior?",
       options: [
-        "Wearing the team's gear off the field",
         "First on the field, last to leave — every day",
+        "Speaking up in every team meeting",
         "Posting team content on social",
-        "Speaking up in every team meeting"
+        "Wearing the team's gear off the field",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Show up first, leave last. Visible. Compounds.",
     },
       {
       question: "Influence vs. title — which matters more?",
       options: [
-        "Title — captains get the final word",
+        "Title for games, influence for practice",
         "Influence — built through reps and reliability",
+        "Title — captains get the final word",
         "Both equal",
-        "Title for games, influence for practice"
       ],
       correctAnswer: 1,
       explanation: "Titles are temporary. Influence built through trust is real authority.",
@@ -2849,12 +2849,12 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "You're a junior. The team is captained by two seniors who don't push the standard hard. Practice intensity has dropped. What's your move?",
       options: [
-        "Wait until you're a captain next year",
-        "Set the standard yourself — sprint, push, compete every drill",
         "Tell the coach about the captains",
-        "Match the captains' pace — don't disrupt"
+        "Match the captains' pace — don't disrupt",
+        "Set the standard yourself — sprint, push, compete every drill",
+        "Wait until you're a captain next year",
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Don't wait for permission to lead. Set the bar. Others rise — including the captains, who often need the example.",
       kind: "scenario",
       scenario: "You're a junior. Two senior captains have set a casual practice tone. Intensity is dropping. Coach hasn't said anything yet.",
@@ -2878,32 +2878,32 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "Chemistry is best defined as:",
       options: [
+        "Posting together on social media",
+        "Spending time together off the field",
         "Liking your teammates personally",
         "Predictable trust under pressure",
-        "Spending time together off the field",
-        "Posting together on social media"
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Chemistry shows up in tight games — does the team trust each other? That's the test.",
     },
       {
       question: "How does chemistry actually get built?",
       options: [
-        "Pizza parties and team dinners",
         "Shared hard work — conditioning, drills, film",
+        "Winning a few games together",
         "Captain leadership alone",
-        "Winning a few games together"
+        "Pizza parties and team dinners",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Bonds forge under shared difficulty, not shared comfort.",
     },
       {
       question: "First red flag of bad team chemistry?",
       options: [
-        "Players make jokes during huddles",
-        "Side conversations and cliques during team time",
         "Coaches yell more than usual",
-        "The team isn't winning"
+        "Side conversations and cliques during team time",
+        "The team isn't winning",
+        "Players make jokes during huddles",
       ],
       correctAnswer: 1,
       explanation: "Cliques and side conversations show the team isn't really together. Coaches catch it fast.",
@@ -2911,23 +2911,23 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "How can a regular player help chemistry without being captain?",
       options: [
-        "Stay in your lane — let captains handle it",
-        "Invite, include, share — be the connector for new or quieter teammates",
         "Organize bigger off-field events",
-        "Post team unity content online"
+        "Post team unity content online",
+        "Invite, include, share — be the connector for new or quieter teammates",
+        "Stay in your lane — let captains handle it",
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Connectors build chemistry. Make sure no teammate feels invisible.",
     },
       {
       question: "A new transfer joins the team mid-season. He's quiet at lunch, sits alone in the locker room. The team has tight cliques. What do you do?",
       options: [
-        "Let him find his way — that's how teams work",
-        "Sit with him, introduce him, include him in the warm-up group",
         "Invite him only if the captains say to",
-        "Let coaches handle integration"
+        "Let him find his way — that's how teams work",
+        "Let coaches handle integration",
+        "Sit with him, introduce him, include him in the warm-up group",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "One person can flip a transfer's experience. That's chemistry built — and you remembering it later, when the team needs it.",
       kind: "scenario",
       scenario: "Mid-season transfer. He's a strong player but quiet. Eats lunch alone. Sits separate in the locker room. Cliques are tight.",
@@ -2951,21 +2951,21 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "What does sacrifice mean for a team?",
       options: [
-        "Giving up the season for school",
         "Giving up something you want for what the team needs",
+        "Giving up the season for school",
+        "Letting one player carry the team",
         "Skipping practice when tired",
-        "Letting one player carry the team"
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Sacrifice is putting team need above personal want.",
     },
       {
       question: "Common in-game sacrifices?",
       options: [
-        "Skipping warm-ups",
-        "Skipping the contested shot to make the better pass",
         "Asking for more rest",
-        "Avoiding ground balls to save energy"
+        "Skipping the contested shot to make the better pass",
+        "Avoiding ground balls to save energy",
+        "Skipping warm-ups",
       ],
       correctAnswer: 1,
       explanation: "Pass when teammate has the better shot. That's the daily sacrifice.",
@@ -2973,34 +2973,34 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "Sacrifice works when:",
       options: [
+        "Captains choose who sacrifices what",
         "One person gives the most every time",
         "Everyone gives something — distribution is even",
         "Coaches enforce it strictly",
-        "Captains choose who sacrifices what"
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Even distribution = sustainable. One martyr team isn't sustainable.",
     },
       {
       question: "Why do sacrificing teams beat more talented ones?",
       options: [
+        "Refs reward it",
+        "It's a coincidence",
         "They get lucky",
         "Cumulative effect — every play has more team value",
-        "Refs reward it",
-        "It's a coincidence"
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Better passes, better slides, better backups — small choices compound.",
     },
       {
       question: "You're the leading scorer. New play has the ball going through your hands but you're the screener, not the shooter. Coach asks you to commit to it. What do you do?",
       options: [
-        "Push back — you should be the shooter",
         "Commit fully — set the best screens of your career",
+        "Push back — you should be the shooter",
+        "Ask for a different role",
         "Set screens half-heartedly",
-        "Ask for a different role"
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Top scorers who screen hard make EVERYONE more dangerous. Defenses can't predict who's the threat. That's elite team play.",
       kind: "scenario",
       scenario: "You're the team's leading scorer. New offensive set has you as the screener — not the finisher. Coach pulls you aside to ask if you'll commit to the role.",
@@ -3025,53 +3025,53 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
       question: "What do teammates remember about you 10 years later?",
       options: [
         "Goals scored that season",
-        "Stats from the playoff run",
         "How you treated people, the standard you set",
-        "Which tournaments you played"
+        "Which tournaments you played",
+        "Stats from the playoff run",
       ],
-      correctAnswer: 2,
+      correctAnswer: 1,
       explanation: "Stats fade. Behavior toward teammates and the standard you held — that's legacy.",
     },
       {
       question: "How do you 'build the program' as a senior?",
       options: [
+        "Score the most points to set records",
         "Win the most games possible",
         "Mentor underclassmen — leave it better than you found it",
-        "Score the most points to set records",
-        "Recruit transfers in"
+        "Recruit transfers in",
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Programs are passed down. Your senior year is about what you leave.",
     },
       {
       question: "What's the senior-year mindset shift?",
       options: [
         "Take more shots — last chance to score",
+        "Quiet down and let underclassmen lead",
         "Focus on personal stats for college",
         "From taking to giving — invest in those who follow",
-        "Quiet down and let underclassmen lead"
       ],
-      correctAnswer: 2,
+      correctAnswer: 3,
       explanation: "Final year is about what you give back. Investing in younger players IS the legacy.",
     },
       {
       question: "Best 'legacy' move you can make this season?",
       options: [
-        "Score 50 goals",
         "Adopt one freshman — answer questions, model the standard, include him",
         "Captain the team",
-        "Win MVP"
+        "Win MVP",
+        "Score 50 goals",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "One mentored freshman becomes a senior who mentors more. Multiplier effect — that's program building.",
     },
       {
       question: "Last home game. Pre-game. A freshman is sitting alone, looking nervous. The team is in cliques. You're a senior captain. What do you do?",
       options: [
-        "Ignore him — it's your special day",
-        "Sit next to him: 'first big game? I was you 4 years ago. Here's what helped.'",
         "Send a teammate over to handle it",
-        "Tell him to stop being nervous"
+        "Sit next to him: 'first big game? I was you 4 years ago. Here's what helped.'",
+        "Ignore him — it's your special day",
+        "Tell him to stop being nervous",
       ],
       correctAnswer: 1,
       explanation: "Legacy moments are built in choices like this. He'll remember senior night for the rest of his life — make sure it's because someone showed up.",
@@ -3103,9 +3103,9 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
       question: "How many players are on the field per team in girls lacrosse?",
       options: [
         "10",
-        "11",
+        "13",
         "12",
-        "13"
+        "11",
       ],
       correctAnswer: 2,
       explanation: "Girls field 12 players, including the goalie.",
@@ -3114,22 +3114,22 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
       question: "How does a girls game start (and restart after goals)?",
       options: [
         "Faceoff at midfield",
-        "Draw at the center circle",
         "Throw-in by the ref",
-        "Goalie pass"
+        "Goalie pass",
+        "Draw at the center circle",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Draws are unique to girls lacrosse — sticks pinch ball, ref releases, players fight for it.",
     },
       {
       question: "Body checking in girls lacrosse is...",
       options: [
-        "Allowed for high schoolers only",
         "Not allowed at any level",
         "Allowed in playoffs only",
-        "Allowed once per quarter"
+        "Allowed for high schoolers only",
+        "Allowed once per quarter",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "No body checking. Game emphasizes skill, speed, and positioning.",
     },
       {
@@ -3138,7 +3138,7 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
         "The goalie's space",
         "The shooter's space — defenders can't block shot path",
         "Faceoff positioning",
-        "Crease size"
+        "Crease size",
       ],
       correctAnswer: 1,
       explanation: "Inside 8m, defenders must be marking up — no standing in shot lanes.",
@@ -3146,10 +3146,10 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "Tryouts. Coach is watching how players move when they DON'T have the ball. What does she likely value most?",
       options: [
-        "Most goals scored",
         "Loudest player on the field",
+        "Most goals scored",
         "Hustles to every ground ball, supports teammates",
-        "Newest stick gear"
+        "Newest stick gear",
       ],
       correctAnswer: 2,
       explanation: "Hustle, communication, and team support stand out most when skill levels are similar.",
@@ -3279,23 +3279,23 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "Which hand controls a girls cradle?",
       options: [
-        "Bottom hand — tighter grip",
-        "Top hand — near the head",
         "Both equally",
-        "Whichever feels best that day"
+        "Bottom hand — tighter grip",
+        "Whichever feels best that day",
+        "Top hand — near the head",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Top hand near the head does the work. Bottom hand is a loose guide.",
     },
       {
       question: "Why is the girls cradle tighter than the boys cradle?",
       options: [
-        "Sticks are shorter",
         "Pockets are shallower — ball pops out easier",
+        "Refs require it",
         "Field is smaller",
-        "Refs require it"
+        "Sticks are shorter",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Shallow pockets demand tighter, more controlled cradles.",
     },
       {
@@ -3303,8 +3303,8 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
       options: [
         "Stick low and to the side",
         "Top hand near ear, body between stick and defender",
+        "Stick across your forehead",
         "Stick parallel to the ground",
-        "Stick across your forehead"
       ],
       correctAnswer: 1,
       explanation: "Top hand near ear with body shielding the stick = hard to check.",
@@ -3312,10 +3312,10 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "Where should you practice cradling?",
       options: [
-        "Only at practice",
         "Only with a coach watching",
+        "Only on a regulation field",
         "Anywhere — backyard, walking around the house",
-        "Only on a regulation field"
+        "Only at practice",
       ],
       correctAnswer: 2,
       explanation: "Reps build muscle memory. Cradle constantly, both hands, until automatic.",
@@ -3323,12 +3323,12 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "You're driving toward the 8m. A defender is on your left side, stick up, looking to check. What do you do?",
       options: [
+        "Pass it back without looking",
+        "Hold the stick straight up overhead",
         "Drop your stick lower for protection",
         "Switch hands to keep the stick away from her check",
-        "Hold the stick straight up overhead",
-        "Pass it back without looking"
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Switch hands to keep your body between defender and stick. That's why we practice both hands every day.",
       kind: "scenario",
       scenario: "You're driving toward the 8m arc. Your stick is in your right hand. The defender is on your left side, stick up, looking to check.",
@@ -3402,56 +3402,56 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "Throwing right-handed, which foot steps forward?",
       options: [
-        "Right foot",
         "Left foot",
+        "Right foot",
+        "Both feet jump together",
         "Either foot",
-        "Both feet jump together"
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Step with the opposite foot — same as throwing a baseball.",
     },
       {
       question: "What does 'absorbing the ball' mean?",
       options: [
-        "Stab the stick at the ball quickly",
         "Hold the stick rigid as ball arrives",
         "Pull stick back slightly to cushion the catch",
-        "Catch with the back of the head"
+        "Catch with the back of the head",
+        "Stab the stick at the ball quickly",
       ],
-      correctAnswer: 2,
+      correctAnswer: 1,
       explanation: "Soft hands give as the ball arrives — that's what keeps it in the pocket.",
     },
       {
       question: "What is wall ball?",
       options: [
+        "A faceoff variation",
         "A team game with two goalies",
         "Throwing and catching against a wall solo",
         "A drill only goalies use",
-        "A faceoff variation"
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Wall ball is the gold-standard solo drill. Both hands. Daily.",
     },
       {
       question: "Best way to start improving stick skills fast?",
       options: [
         "10 wall ball reps per week",
-        "25 reps per hand daily, build to 100",
+        "Only with a coach",
         "Only at team practice",
-        "Only with a coach"
+        "25 reps per hand daily, build to 100",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "25 per hand daily, build to 100. The pros do thousands. Daily reps = fast progress.",
     },
       {
       question: "Teammate is breaking toward goal. You have ball in right hand. She's running to your left side. Pass options?",
       options: [
-        "Throw across your body righty",
         "Switch to left hand and throw, OR step left and lead her",
         "Wait for her to come to your right",
-        "Hand it off — don't pass"
+        "Hand it off — don't pass",
+        "Throw across your body righty",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Switch hands or step toward her side. Cross-body throws are easy interceptions for defenders.",
       kind: "scenario",
       scenario: "Mid-game. Defender is on your right shoulder. Teammate is breaking to your left toward the goal.",
@@ -3476,45 +3476,45 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "Teammate drops a wide-open pass. What's the best response?",
       options: [
-        "Get angry at her",
         "Tell coach she should be benched",
         "Say 'shake it off, get the next one'",
-        "Refuse to pass to her again"
+        "Get angry at her",
+        "Refuse to pass to her again",
       ],
-      correctAnswer: 2,
+      correctAnswer: 1,
       explanation: "Pick teammates up after mistakes. Trust gets built when teammates know you have their back.",
     },
       {
       question: "When the coach is giving instructions, what does a great teammate do?",
       options: [
+        "Repeat what coach said quietly",
         "Keep stretching to stay loose",
         "Look at the coach, listen, no side talk",
         "Wait for the part that matters",
-        "Repeat what coach said quietly"
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Eyes up, mouth shut. Side conversations cost info AND respect.",
     },
       {
       question: "Why does hustle matter when you don't have the ball?",
       options: [
-        "It doesn't really — only ball-side counts",
         "Coaches just like to see you tired",
+        "It doesn't really — only ball-side counts",
+        "It makes the other team angry",
         "Off-ball hustle backs up shots and creates extra possessions",
-        "It makes the other team angry"
       ],
-      correctAnswer: 2,
+      correctAnswer: 3,
       explanation: "Off-ball hustle wins ground balls, backs up shots, creates second chances.",
     },
       {
       question: "What does 'the standard is the standard' mean at BTB?",
       options: [
+        "Everyone is expected to bring their best, every day",
+        "Only games count, practice is optional",
         "The best player sets the bar",
         "Coaches grade you on a curve",
-        "Everyone is expected to bring their best, every day",
-        "Only games count, practice is optional"
       ],
-      correctAnswer: 2,
+      correctAnswer: 0,
       explanation: "Standards apply to everyone equally. No one gets a pass.",
     },
       {
@@ -3523,7 +3523,7 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
         "Walk too — match the energy",
         "Sprint between reps and pick up balls — set the standard",
         "Ask coach to end practice early",
-        "Take a knee until coach yells"
+        "Take a knee until coach yells",
       ],
       correctAnswer: 1,
       explanation: "Energy is contagious. One player setting the standard pulls the whole group with her.",
@@ -3550,10 +3550,10 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "Your team has the ball. Where should off-ball players go?",
       options: [
+        "Run to the goal in a clump",
         "All run to the ball carrier",
-        "Stand still and wait for a pass",
         "Spread out — give passing options",
-        "Run to the goal in a clump"
+        "Stand still and wait for a pass",
       ],
       correctAnswer: 2,
       explanation: "Spread out so the defense has to cover the whole field, not just one spot.",
@@ -3561,45 +3561,45 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "The other team has the ball. What does YOUR team do?",
       options: [
+        "Run back to your own goal only",
+        "Stand on the sideline",
         "Spread out wide",
         "Compress and tighten up to help each other",
-        "Stand on the sideline",
-        "Run back to your own goal only"
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "On defense, compress — close enough to help, far enough to cover your mark.",
     },
       {
       question: "What is 'lacrosse IQ'?",
       options: [
+        "Knowing where to be and what to do",
         "How fast you run",
         "How hard your shot is",
-        "Knowing where to be and what to do",
-        "How tall and strong you are"
+        "How tall and strong you are",
       ],
-      correctAnswer: 2,
+      correctAnswer: 0,
       explanation: "IQ is awareness — anticipating, finding open space, helping when needed.",
     },
       {
       question: "Don't know where to be — what do you do?",
       options: [
-        "Stand on the sideline",
-        "Run to the goal regardless of the play",
+        "Stay where you started",
         "Find a spot where you can help — backup, slide, get open",
-        "Stay where you started"
+        "Run to the goal regardless of the play",
+        "Stand on the sideline",
       ],
-      correctAnswer: 2,
+      correctAnswer: 1,
       explanation: "When in doubt, get to where you can help. Movement with purpose beats freezing.",
     },
       {
       question: "Your teammate is dodging from behind the goal. The defense is collapsing on her. You're at the top of the offensive zone with no defender on you. Best move?",
       options: [
+        "Run back to defense",
+        "Yell for the ball but don't move",
         "Cut hard to the goal expecting a pass",
         "Stand still — don't move",
-        "Run back to defense",
-        "Yell for the ball but don't move"
       ],
-      correctAnswer: 0,
+      correctAnswer: 2,
       explanation: "When the defense collapses, the off-ball player is open. Cut to the goal — your teammate sees you.",
       kind: "scenario",
       scenario: "You're on offense at the top of the zone. Your teammate dodges from behind the cage. All defenders collapse on her. You're suddenly unguarded.",
@@ -3688,56 +3688,56 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "What are the three parts of the BTB Standard?",
       options: [
+        "Helmet, gloves, stick",
         "Speed, strength, skill",
-        "Effort, attitude, preparation",
         "Goals, assists, ground balls",
-        "Helmet, gloves, stick"
+        "Effort, attitude, preparation",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Effort + attitude + preparation — three choices anyone can make.",
     },
       {
       question: "How much effort does the BTB Standard require?",
       options: [
+        "100% every time — no excuses",
+        "Whatever your coach asks for",
         "80% to save energy for games",
         "Match what your teammates give",
-        "100% every time — no excuses",
-        "Whatever your coach asks for"
       ],
-      correctAnswer: 2,
+      correctAnswer: 0,
       explanation: "100% is the deal. Anything less, you owe your teammates an explanation.",
     },
       {
       question: "You make a bad pass that becomes a goal against. Right response?",
       options: [
         "Blame the receiver",
-        "Argue with the ref",
         "'My fault, I'll get the next one'",
-        "Walk off the field"
+        "Argue with the ref",
+        "Walk off the field",
       ],
-      correctAnswer: 2,
+      correctAnswer: 1,
       explanation: "Own it, reset, compete on the next play. That's BTB attitude.",
     },
       {
       question: "What's an example of preparation?",
       options: [
+        "Showing up exactly on time",
         "Buying new cleats every season",
         "Wall ball on your own time, gear in order, watching games",
-        "Showing up exactly on time",
-        "Doing only what the coach assigns"
+        "Doing only what the coach assigns",
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Preparation is the work you do when nobody's making you.",
     },
       {
       question: "Saturday morning. Game at 9. You wake up at 7 — alarm didn't go off as planned. What does a BTB-Standard player do FIRST?",
       options: [
+        "Skip warmups and go straight to the bench",
+        "Text the coach you'll be late",
         "Check social media to wake up",
         "Check gear, eat, hydrate, mentally prep — get to game ready",
-        "Text the coach you'll be late",
-        "Skip warmups and go straight to the bench"
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Preparation isn't just the day before. Game-day routine matters: gear check, hydrate, mental prep.",
       kind: "scenario",
       scenario: "Game day. You woke up later than planned but still have 90 minutes. The team is meeting at 8:15 for warmups.",
@@ -3762,12 +3762,12 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "Do you have to be the best player on the team to lead?",
       options: [
-        "Yes, only stars lead",
-        "Only if you're a captain",
         "No — leadership is action, not skill",
-        "Only the oldest kids can lead"
+        "Only if you're a captain",
+        "Only the oldest kids can lead",
+        "Yes, only stars lead",
       ],
-      correctAnswer: 2,
+      correctAnswer: 0,
       explanation: "Leadership is a choice anyone makes. Action over status.",
     },
       {
@@ -3775,8 +3775,8 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
       options: [
         "What you say — words motivate",
         "What you do — people watch actions",
+        "Only what the coach says",
         "Both equal — they're tied together",
-        "Only what the coach says"
       ],
       correctAnswer: 1,
       explanation: "Tell teammates to hustle while you walk and nobody listens. Sprint without a word and they follow.",
@@ -3784,10 +3784,10 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "When does leadership matter most?",
       options: [
-        "When the team is winning",
         "When practice is easy",
+        "Only at championship games",
         "On bad days — rain, cold, tired",
-        "Only at championship games"
+        "When the team is winning",
       ],
       correctAnswer: 2,
       explanation: "Anyone can lead when things are easy. Real leaders bring it when conditions are bad.",
@@ -3795,23 +3795,23 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "What's one specific 'lead by example' action you can do tomorrow?",
       options: [
-        "Wear team colors off the field",
-        "Sprint between drills and pick up balls",
         "Tell teammates to hustle",
-        "Show up exactly on time"
+        "Wear team colors off the field",
+        "Show up exactly on time",
+        "Sprint between drills and pick up balls",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Sprint and pick up balls — visible effort that pulls others up.",
     },
       {
       question: "First practice of the season. Half the team is jogging the warmup. The captain isn't there yet. What do you do?",
       options: [
-        "Match the team's pace — fit in",
         "Run faster — others catch up to your example",
+        "Ask the coach what speed to go",
+        "Match the team's pace — fit in",
         "Wait for the captain to set the pace",
-        "Ask the coach what speed to go"
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Leadership is showing up first and setting the tempo. You don't need a title to set the standard.",
       kind: "scenario",
       scenario: "Day 1 of fall ball. Coach said 'two laps to warm up'. Most kids are jogging. The captain is in the bathroom.",
@@ -3838,8 +3838,8 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
       options: [
         "Like enemies — beat them down",
         "With respect — they push you to improve",
+        "Only if they're nice first",
         "Ignore them between whistles",
-        "Only if they're nice first"
       ],
       correctAnswer: 1,
       explanation: "Without good opponents, you don't grow. Respect is what real competitors give.",
@@ -3847,10 +3847,10 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "Ref makes a bad call against your team. Best response?",
       options: [
-        "Yell loud enough that she reverses it",
         "Argue calmly until she sees it",
+        "Yell loud enough that she reverses it",
         "Accept it, compete on the next play",
-        "Throw your stick to show frustration"
+        "Throw your stick to show frustration",
       ],
       correctAnswer: 2,
       explanation: "Refs miss calls. Arguing hurts your focus. Next-play mentality is what wins.",
@@ -3858,34 +3858,34 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "You leave your stick out in the rain overnight. What does that say?",
       options: [
-        "Nothing — it's just a stick",
-        "You don't respect your tools or the game",
         "It's the parents' job to handle that",
-        "Sticks don't get damaged that easily"
+        "Nothing — it's just a stick",
+        "Sticks don't get damaged that easily",
+        "You don't respect your tools or the game",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Your gear is the tools of your sport. Respecting it shows you respect the game.",
     },
       {
       question: "What does 'respecting the game' actually cover?",
       options: [
-        "Just winning with class",
         "Opponents, refs, gear, and practice time",
         "Saying the right things to coaches",
-        "Wearing the team uniform proudly"
+        "Just winning with class",
+        "Wearing the team uniform proudly",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Respect is total — for everyone and everything connected to the sport.",
     },
       {
       question: "Final whistle. You lost on a goal you think was offside. Ref didn't call it. The other team is celebrating. What do you do?",
       options: [
-        "Walk off without shaking hands",
         "Confront the ref about the call",
         "Line up and shake hands cleanly",
-        "Stand and stare at the celebration"
+        "Stand and stare at the celebration",
+        "Walk off without shaking hands",
       ],
-      correctAnswer: 2,
+      correctAnswer: 1,
       explanation: "Win or lose, you line up and shake hands. That's how you show the game respect — and the game pays you back over time.",
       kind: "scenario",
       scenario: "Tough loss. Final goal looked offside but wasn't called. The handshake line is forming. Your teammates are watching how you react.",
@@ -3910,10 +3910,10 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "Does the most talented team always win?",
       options: [
+        "Only if the talent is older",
         "Yes — talent wins championships",
-        "Only in the playoffs",
         "No — teamwork beats talent often",
-        "Only if the talent is older"
+        "Only in the playoffs",
       ],
       correctAnswer: 2,
       explanation: "Teams that move the ball, slide on time, and trust each other beat more talented teams regularly.",
@@ -3921,45 +3921,45 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
       {
       question: "What does 'doing your job' on a team mean?",
       options: [
-        "Trying to score every play you can",
-        "Playing your position, trusting teammates",
         "Doing the coach's job better than her",
-        "Switching positions when bored"
+        "Trying to score every play you can",
+        "Switching positions when bored",
+        "Playing your position, trusting teammates",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Every position depends on the others. When everyone does their part, it works.",
     },
       {
       question: "How does trust between teammates get built?",
       options: [
-        "Through team meetings",
-        "Through hanging out off the field",
         "Through reps — reliable effort over time",
-        "Through senior leadership only"
+        "Through team meetings",
+        "Through senior leadership only",
+        "Through hanging out off the field",
       ],
-      correctAnswer: 2,
+      correctAnswer: 0,
       explanation: "Trust is the residue of repetition. Show up, do your job, build the bank.",
     },
       {
       question: "Teammate misses a wide-open shot. The team's reaction?",
       options: [
+        "Tell coach to bench her",
+        "Clap, say 'next one' — pick her up",
         "Groan and shake heads",
         "Yell for the next play",
-        "Clap, say 'next one' — pick her up",
-        "Tell coach to bench her"
       ],
-      correctAnswer: 2,
+      correctAnswer: 1,
       explanation: "How a team responds to mistakes is its identity. Pick teammates up — always.",
     },
       {
       question: "Down 4-0 in the second quarter. The other team is bigger and faster. Two of your teammates are starting to drop their heads. What's the team-first move?",
       options: [
         "Drop your head too — match the energy",
-        "Sprint to the next ground ball harder than ever",
         "Ask coach to call timeout",
-        "Tell teammates to stop trying so hard"
+        "Sprint to the next ground ball harder than ever",
+        "Tell teammates to stop trying so hard",
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Energy is a choice. One player setting the tempo can flip a team. Compete on the next play.",
       kind: "scenario",
       scenario: "12 minutes in. You're down 4-0. The other team has bigger, older girls. Two teammates are starting to drag.",
@@ -3984,55 +3984,55 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
       question: "Down 5-0 in the first half. What's the right mindset?",
       options: [
         "Conserve energy for the next game",
-        "Compete on every play — score doesn't change effort",
         "Blame the goalie for letting them in",
-        "Walk through plays quietly"
+        "Walk through plays quietly",
+        "Compete on every play — score doesn't change effort",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Effort is independent of the scoreboard. Your teammates are watching.",
     },
       {
       question: "Teammate scores a beautiful goal. Best team reaction?",
       options: [
-        "Standard nod and run back",
         "Celebrate like YOU scored — energy spreads",
+        "Save celebration for the end of the game",
+        "Standard nod and run back",
         "Wait to see if it counts first",
-        "Save celebration for the end of the game"
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Celebrating loudly together feeds momentum. Quiet teams play tight.",
     },
       {
       question: "After a tough loss, what does the team do?",
       options: [
-        "Find someone to blame",
         "Pretend it didn't happen",
         "Own it together — 'we'll fix it' — and mean it",
-        "Skip the next practice to recover"
+        "Skip the next practice to recover",
+        "Find someone to blame",
       ],
-      correctAnswer: 2,
+      correctAnswer: 1,
       explanation: "Tough losses are growth moments — if the team owns them together.",
     },
       {
       question: "What's the difference between competing and winning?",
       options: [
+        "Competing only matters in the playoffs",
         "Same thing",
         "Competing means giving full effort regardless of score",
-        "Competing only matters in the playoffs",
-        "Competing is what coaches say when you lose"
+        "Competing is what coaches say when you lose",
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "You can compete and lose. You can't grow without competing. Competing is the choice — winning is the byproduct.",
     },
       {
       question: "It's pouring rain, you're tied, 30 seconds left. Your team has to clear the ball under heavy ride pressure. The crowd is loud. What do you focus on?",
       options: [
-        "The scoreboard ticking down",
         "The crowd noise to get hyped",
+        "The scoreboard ticking down",
+        "Whether the rain is letting up",
         "Your job: my outlet target, my spacing, my next pass",
-        "Whether the rain is letting up"
       ],
-      correctAnswer: 2,
+      correctAnswer: 3,
       explanation: "Pressure narrows focus. Big moments demand small thinking — do your job, the next 5 seconds, then the next 5.",
       kind: "scenario",
       scenario: "Tied 6-6, 30 seconds left, rain pouring, your team has the ball at your own goal. Goalie just made a save. The other team is riding aggressively.",
@@ -4059,56 +4059,56 @@ const GIRLS_MIDDLE_LESSONS: AcademyLesson[] = [
       {
       question: "How many attackers does girls lacrosse field?",
       options: [
-        "3",
         "4",
+        "6",
+        "3",
         "5",
-        "6"
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Four attackers: First Home, Second Home, Third Home, two Attack Wings.",
     },
       {
       question: "Which midfielder usually takes the draw?",
       options: [
         "Right wing",
-        "Left wing",
         "Center — strongest draw taker",
-        "Whoever wants to"
+        "Left wing",
+        "Whoever wants to",
       ],
-      correctAnswer: 2,
+      correctAnswer: 1,
       explanation: "Center is the primary draw taker — usually the strongest in that battle.",
     },
       {
       question: "What is 'Cover Point'?",
       options: [
         "A forward who covers the goal",
-        "A defender who marks the opposing 1st Home",
         "A midfielder",
-        "Another name for the goalie"
+        "A defender who marks the opposing 1st Home",
+        "Another name for the goalie",
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Cover Point covers the opposing 1st Home — usually the most dangerous attacker.",
     },
       {
       question: "What's the role of an Attack Wing?",
       options: [
-        "Stay in the goalie's crease",
+        "Take faceoffs",
         "Score from outside the 8m only",
+        "Stay in the goalie's crease",
         "Provide width on offense + transition",
-        "Take faceoffs"
       ],
-      correctAnswer: 2,
+      correctAnswer: 3,
       explanation: "Attack wings stretch the offense wide and run hard in transition both ways.",
     },
       {
       question: "Coach moves you from defense wing to second home (an attacker) for the next game. You've never played offense. First move?",
       options: [
-        "Argue — defense is your spot",
         "Watch second-home film, learn cuts, ask experienced attackers what they need",
+        "Quit the team",
         "Refuse to dodge in the game",
-        "Quit the team"
+        "Argue — defense is your spot",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Position changes are growth opportunities. Film + reps + asking. Adaptable players earn more roles.",
       kind: "scenario",
       scenario: "Coach pulls you aside Friday: she needs you at second home for Saturday's game. You've played defense wing your whole life.",
@@ -4238,8 +4238,8 @@ const GIRLS_MIDDLE_LESSONS: AcademyLesson[] = [
       options: [
         "How fancy the move is",
         "Change of speed — slow to fast in one step",
+        "Switching hands fast",
         "How loud you yell",
-        "Switching hands fast"
       ],
       correctAnswer: 1,
       explanation: "Change of pace creates separation. A flashy dodge at one speed doesn't work.",
@@ -4247,45 +4247,45 @@ const GIRLS_MIDDLE_LESSONS: AcademyLesson[] = [
       {
       question: "Inside the 8m, what should dodgers be aware of?",
       options: [
-        "Shooting space — drawing the D into your shot path = free position",
         "Time and room rules",
+        "Crease violation",
+        "Shooting space — drawing the D into your shot path = free position",
         "Drawing position",
-        "Crease violation"
       ],
-      correctAnswer: 0,
+      correctAnswer: 2,
       explanation: "Inside the 8m, defender in your shooting lane = foul. You can earn free positions by reading this.",
     },
       {
       question: "Roll dodge is best against:",
       options: [
         "A wide-open defender",
-        "A defender right on your hip mirroring you",
+        "Only goalies",
         "An older defender",
-        "Only goalies"
+        "A defender right on your hip mirroring you",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Roll dodges work when defenders are tight on you. Plant, roll, protect stick.",
     },
       {
       question: "Face dodge differs from split dodge how?",
       options: [
-        "Switches hands twice",
         "Fakes the switch but keeps same hand",
+        "Switches hands twice",
+        "Only used at midfield",
         "Doesn't change direction",
-        "Only used at midfield"
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Face dodge fakes the switch — fastest because no speed loss.",
     },
       {
       question: "Tight defender on your right hip, mirroring every move. You can't get separation. What dodge?",
       options: [
         "Split dodge — switch hands and go opposite",
-        "Face dodge — fake switch, blow by",
         "Roll dodge — plant, roll backwards, protect stick",
-        "Slow down and pass it back"
+        "Slow down and pass it back",
+        "Face dodge — fake switch, blow by",
       ],
-      correctAnswer: 2,
+      correctAnswer: 1,
       explanation: "Tight, mirroring defender = roll dodge. Plant inside foot, roll away, stick protected.",
       kind: "scenario",
       scenario: "1v1 at the top of the 8m. Defender is glued to your right hip. Every move you make, she mirrors.",
@@ -4384,43 +4384,43 @@ const GIRLS_MIDDLE_LESSONS: AcademyLesson[] = [
       {
       question: "Cardinal rule of girls defense?",
       options: [
+        "Run to ball first",
         "Always check hard",
         "Stay between attacker and goal",
-        "Run to ball first",
-        "Stand tall to look bigger"
+        "Stand tall to look bigger",
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Body position between attacker and goal is the foundation.",
     },
       {
       question: "Inside the 8m, what's required of defenders?",
       options: [
         "Stick up at all times",
-        "Must be marking up — no standing in shot lanes",
         "Must double-team the ball",
-        "Goalie call only"
+        "Goalie call only",
+        "Must be marking up — no standing in shot lanes",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Standing in a shot lane = shooting space foul = free position for offense.",
     },
       {
       question: "What is shooting space?",
       options: [
-        "Space inside the crease",
         "Path between attacker and goal that defenders can't block",
+        "Space inside the crease",
+        "Where the goalie can stand",
         "Distance from sideline to goal",
-        "Where the goalie can stand"
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Defenders can't stand in the shooter's lane to the goal inside 8m.",
     },
       {
       question: "Stick check rules in girls?",
       options: [
-        "Anything goes — full swings allowed",
+        "Only on the way to the ball",
         "Controlled checks; no checking the head/face/body",
         "Only the goalie can check",
-        "Only on the way to the ball"
+        "Anything goes — full swings allowed",
       ],
       correctAnswer: 1,
       explanation: "Controlled checks. Anything down through the head/body = foul.",
@@ -4429,11 +4429,11 @@ const GIRLS_MIDDLE_LESSONS: AcademyLesson[] = [
       question: "Attacker drives toward the 8m on your right. She's faster than you. How do you defend?",
       options: [
         "Reach in with your stick to slow her",
+        "Stand still and wait",
         "Slide-step, force her wide — bad shot angle",
         "Drop into the crease",
-        "Stand still and wait"
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Force her wide. The wider she goes, the worse the shot angle gets — and the more time your help has to arrive.",
       kind: "scenario",
       scenario: "Right-side dodge. Attacker is faster than you. She's heading toward the 8m looking to drive.",
@@ -4531,31 +4531,31 @@ const GIRLS_MIDDLE_LESSONS: AcademyLesson[] = [
       question: "What's the IQ marker that separates good players from great?",
       options: [
         "Greats run faster",
-        "Greats anticipate, not just react",
+        "Greats are taller",
         "Greats have nicer sticks",
-        "Greats are taller"
+        "Greats anticipate, not just react",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Anticipation — seeing the play before it happens — is the IQ marker.",
     },
       {
       question: "Watching film, what should you focus on?",
       options: [
-        "Just the ball at all times",
-        "Just the goalie's saves",
         "Off-ball movement — that's the lesson",
-        "The scoreboard"
+        "Just the goalie's saves",
+        "Just the ball at all times",
+        "The scoreboard",
       ],
-      correctAnswer: 2,
+      correctAnswer: 0,
       explanation: "Off-ball movement teaches positioning, anticipation, team play.",
     },
       {
       question: "On defense, what tells you where the attacker will pass?",
       options: [
-        "Their feet and stride",
-        "Their eyes — they look where they're throwing",
         "Their hair color",
-        "How they hold their stick"
+        "Their eyes — they look where they're throwing",
+        "How they hold their stick",
+        "Their feet and stride",
       ],
       correctAnswer: 1,
       explanation: "Eyes telegraph passes. Reading them = interceptions.",
@@ -4563,23 +4563,23 @@ const GIRLS_MIDDLE_LESSONS: AcademyLesson[] = [
       {
       question: "When shooting, what should you look at last?",
       options: [
-        "The defender's stick",
-        "The goalie's stick position",
         "The crowd",
-        "Your own stick"
+        "Your own stick",
+        "The goalie's stick position",
+        "The defender's stick",
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Goalie's stick position tells you the open corner. Read before you shoot.",
     },
       {
       question: "You catch a feed at the top of the 8m. As you turn, you see the crease defender step toward you — clearly preparing to slide. What do you do?",
       options: [
+        "Shoot from where you are",
         "Dodge harder, ignore the slide",
-        "Pass to the crease attacker the slider just left",
         "Pass back to where you got the ball",
-        "Shoot from where you are"
+        "Pass to the crease attacker the slider just left",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Slide left a player open. Pass to her — that's a layup. Forcing the dodge into the slide is a turnover.",
       kind: "scenario",
       scenario: "You catch a feed top of the 8m. As you turn to shoot, you see the crease defender's hips turn toward you — she's about to slide.",
@@ -4673,56 +4673,56 @@ const GIRLS_MIDDLE_LESSONS: AcademyLesson[] = [
       {
       question: "After a mistake, what's the tough-player move?",
       options: [
-        "Argue with the ref",
-        "Drop your head until next sub",
         "Reset fast — focus on next play",
-        "Find a teammate to blame"
+        "Argue with the ref",
+        "Find a teammate to blame",
+        "Drop your head until next sub",
       ],
-      correctAnswer: 2,
+      correctAnswer: 0,
       explanation: "Mentally tough players let go of mistakes in seconds.",
     },
       {
       question: "When does mental toughness actually get tested?",
       options: [
         "When you're winning easy",
-        "When everything is going well",
         "When tired, losing, or frustrated",
-        "Only at championship games"
+        "When everything is going well",
+        "Only at championship games",
       ],
-      correctAnswer: 2,
+      correctAnswer: 1,
       explanation: "Toughness is built and shown in adversity.",
     },
       {
       question: "Down 7-1 in the third. Right mindset?",
       options: [
         "Conserve energy for next game",
-        "Compete on every play — score doesn't change effort",
         "Try to score 6 yourself",
-        "Take it easy to avoid injury"
+        "Compete on every play — score doesn't change effort",
+        "Take it easy to avoid injury",
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Effort is independent of the scoreboard.",
     },
       {
       question: "Why do tough players get FASTER in the 4th quarter?",
       options: [
         "Better conditioning than everyone",
-        "Most opponents slow down — that's the edge",
+        "The whistle motivates them",
         "Coaches force them to sprint",
-        "The whistle motivates them"
+        "Most opponents slow down — that's the edge",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Holding pace while opponents slow = relative speed gain. That's the gap.",
     },
       {
       question: "Bad call wipes out your goal. Crowd is yelling. Teammates are arguing. 30 seconds later: ground ball at midfield. What do you do?",
       options: [
-        "Yell at the ref about the bad call",
-        "Stand and wait for someone else to get it",
         "Sprint to the ground ball — next play",
-        "Walk over to argue with coach"
+        "Stand and wait for someone else to get it",
+        "Walk over to argue with coach",
+        "Yell at the ref about the bad call",
       ],
-      correctAnswer: 2,
+      correctAnswer: 0,
       explanation: "Tough players play through bad calls. Sprint to the ball — that's how you flip momentum.",
       kind: "scenario",
       scenario: "Late 3rd. Bad call wiped out your team's goal. Crowd's angry, teammates arguing. Ground ball loose at midfield.",
@@ -4747,12 +4747,12 @@ const GIRLS_MIDDLE_LESSONS: AcademyLesson[] = [
       {
       question: "Do you need to be a starter to be a leader?",
       options: [
-        "Yes — only starters lead",
         "Only if you wear a captain's C",
         "No — leadership is a choice anyone makes",
-        "Only seniors lead"
+        "Only seniors lead",
+        "Yes — only starters lead",
       ],
-      correctAnswer: 2,
+      correctAnswer: 1,
       explanation: "Effort and example don't require status.",
     },
       {
@@ -4761,7 +4761,7 @@ const GIRLS_MIDDLE_LESSONS: AcademyLesson[] = [
         "Talking behind their backs",
         "Telling other teammates first",
         "Going directly to the person to fix it",
-        "Letting it stay unresolved"
+        "Letting it stay unresolved",
       ],
       correctAnswer: 2,
       explanation: "Direct, honest communication builds trust. Gossip destroys it.",
@@ -4769,23 +4769,23 @@ const GIRLS_MIDDLE_LESSONS: AcademyLesson[] = [
       {
       question: "Biggest leadership tell at practice?",
       options: [
+        "Wearing the best gear",
+        "Being friends with the coach",
         "Being loudest in the huddle",
         "Setting the standard with action — first, focused",
-        "Wearing the best gear",
-        "Being friends with the coach"
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Actions are visible. Words alone don't lead.",
     },
       {
       question: "Coach gives you tough feedback in front of the team. Best response?",
       options: [
-        "Defend yourself with explanations",
-        "Roll your eyes and take it later",
         "'Got it, coach' — apply it on the next rep",
-        "Argue calmly until coach agrees"
+        "Argue calmly until coach agrees",
+        "Roll your eyes and take it later",
+        "Defend yourself with explanations",
       ],
-      correctAnswer: 2,
+      correctAnswer: 0,
       explanation: "Taking coaching well shows the team how to handle it. Big leadership signal.",
     },
       {
@@ -4793,8 +4793,8 @@ const GIRLS_MIDDLE_LESSONS: AcademyLesson[] = [
       options: [
         "Match the senior's energy — fit in",
         "Sprint and stay ready — your example pulls others",
+        "Wait for the captain to handle it",
         "Tell coach about the senior",
-        "Wait for the captain to handle it"
       ],
       correctAnswer: 1,
       explanation: "Leadership doesn't wait for permission. Set the standard with effort — others follow.",
@@ -4821,42 +4821,42 @@ const GIRLS_MIDDLE_LESSONS: AcademyLesson[] = [
       question: "Good on-field communication sounds like:",
       options: [
         "Random shouting",
+        "Only after coach yells first",
         "Specific calls — 'I got ball', 'Slide', 'Cutter'",
         "Whispered to nearest teammate",
-        "Only after coach yells first"
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Specific, timely info that helps teammates make decisions.",
     },
       {
       question: "On defense, what does 'I'm hot' mean?",
       options: [
-        "I'm shooting next",
         "I'm covering the ball",
+        "I want a sub",
+        "I'm shooting next",
         "I'm the first slide",
-        "I want a sub"
       ],
-      correctAnswer: 2,
+      correctAnswer: 3,
       explanation: "'I'm hot' = I'm the first slide.",
     },
       {
       question: "When should an offensive player yell 'Shot!'?",
       options: [
-        "After the ball goes in",
         "Before the shot, so teammates crash for rebound",
+        "Whenever they touch the ball",
         "Only on missed shots",
-        "Whenever they touch the ball"
+        "After the ball goes in",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Calling shot lets teammates crash the crease for the backup.",
     },
       {
       question: "If communicating feels awkward at first, what's the move?",
       options: [
-        "Skip it — wait until older",
+        "Wait for a captain to start",
         "Pick one call and practice until natural",
         "Only talk in games",
-        "Wait for a captain to start"
+        "Skip it — wait until older",
       ],
       correctAnswer: 1,
       explanation: "Start small. One call at a time builds the habit.",
@@ -4864,12 +4864,12 @@ const GIRLS_MIDDLE_LESSONS: AcademyLesson[] = [
       {
       question: "Late game. You're on D. Your mark cuts behind the goal. The defender next to you is now responsible — but she's looking the wrong way. What do you yell?",
       options: [
+        "'I got her' even though you don't",
         "Stay quiet — let her figure it out",
         "'Switch! Your mark, behind!'",
         "'Coach! Sub!'",
-        "'I got her' even though you don't"
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Specific, urgent call. Teammate gets info she needs RIGHT NOW. Silence = goal.",
       kind: "scenario",
       scenario: "Late 4th. Your mark cuts behind the goal — out of your zone. The next defender is responsible but staring at the ball.",
@@ -4894,43 +4894,43 @@ const GIRLS_MIDDLE_LESSONS: AcademyLesson[] = [
       {
       question: "If you're not a starter, what's the right approach?",
       options: [
+        "Ask to switch teams",
+        "Stop trying as hard",
         "Complain until you start",
         "Own your role and maximize it",
-        "Ask to switch teams",
-        "Stop trying as hard"
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Maximize what you're given. That's how you earn more.",
     },
       {
       question: "Best question to ask your coach?",
       options: [
-        "'Why am I not starting?'",
-        "'Can I play a different position?'",
         "'What do you need from me?'",
-        "'When can I leave practice?'"
+        "'Why am I not starting?'",
+        "'When can I leave practice?'",
+        "'Can I play a different position?'",
       ],
-      correctAnswer: 2,
+      correctAnswer: 0,
       explanation: "Asking what the team needs shows maturity and earns trust.",
     },
       {
       question: "What do coaches notice about role players?",
       options: [
         "Only the ones who score",
-        "Only the tallest kids",
         "The ones who do their job fully without needing credit",
-        "The ones who complain loudly"
+        "The ones who complain loudly",
+        "Only the tallest kids",
       ],
-      correctAnswer: 2,
+      correctAnswer: 1,
       explanation: "Coaches reward players who commit to their role fully.",
     },
       {
       question: "What does a 'best role player' look like in practice?",
       options: [
         "Same speed as starters in every drill",
-        "Coasts because reps don't matter",
+        "Only competes when scouts are there",
         "Goes harder than starters, makes them better",
-        "Only competes when scouts are there"
+        "Coasts because reps don't matter",
       ],
       correctAnswer: 2,
       explanation: "Bench players who push starters in practice make the whole team better.",
@@ -4938,12 +4938,12 @@ const GIRLS_MIDDLE_LESSONS: AcademyLesson[] = [
       {
       question: "You only play 5 minutes a game. Coach has rotations set. What's the move?",
       options: [
+        "Stop trying as hard in practice",
+        "Ask to play a different position",
         "Sulk on the bench until your shift",
         "Make those 5 minutes the hardest 5 minutes the other team sees",
-        "Ask to play a different position",
-        "Stop trying as hard in practice"
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "5 minutes of full-throttle effort earns more minutes. Sulking earns less. Coaches see the difference.",
       kind: "scenario",
       scenario: "Mid-season. You've gotten 5-6 minutes a game while teammates start. Tonight's matchup is winnable. Coach rotates you in.",
@@ -4967,21 +4967,21 @@ const GIRLS_MIDDLE_LESSONS: AcademyLesson[] = [
       {
       question: "How is trust between teammates built?",
       options: [
-        "Through team meetings",
-        "Through hanging out off the field",
         "Through reps — reliable effort over time",
-        "Through the captain's leadership alone"
+        "Through hanging out off the field",
+        "Through team meetings",
+        "Through the captain's leadership alone",
       ],
-      correctAnswer: 2,
+      correctAnswer: 0,
       explanation: "Trust is the residue of repetition.",
     },
       {
       question: "Trust on offense looks like:",
       options: [
-        "Dodging every time you touch the ball",
-        "Making the extra pass to the open mark",
         "Passing only to the best player",
-        "Holding ball to control tempo"
+        "Making the extra pass to the open mark",
+        "Dodging every time you touch the ball",
+        "Holding ball to control tempo",
       ],
       correctAnswer: 1,
       explanation: "Trusting teammates means sharing the ball — even if you could shoot.",
@@ -4989,34 +4989,34 @@ const GIRLS_MIDDLE_LESSONS: AcademyLesson[] = [
       {
       question: "What happens when a defense doesn't trust each other?",
       options: [
-        "They become more aggressive",
-        "Players hesitate on slides, defense breaks",
+        "It doesn't really affect performance",
         "Goalie has to make more saves",
-        "It doesn't really affect performance"
+        "Players hesitate on slides, defense breaks",
+        "They become more aggressive",
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Hesitation on slides = open shots = goals against.",
     },
       {
       question: "Sign that a team has high trust?",
       options: [
         "Loud captain in every huddle",
-        "Ball moves fast — extra passes for better shots",
         "Coach yells less in games",
-        "Wearing matching cleats"
+        "Wearing matching cleats",
+        "Ball moves fast — extra passes for better shots",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Quick ball movement = trust. Players believe the next teammate will catch and shoot.",
     },
       {
       question: "1v1 at the top of the 8m. You see your second home wide open inside. You also have a tight shot. The trust move?",
       options: [
-        "Take your shot — you have it",
         "Skip pass inside to the wide-open second home",
+        "Hold the ball and wait",
+        "Take your shot — you have it",
         "Pass back to the midfielder behind you",
-        "Hold the ball and wait"
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Wide-open inside > tight outside shot every time. Make the trust pass — your team gets a layup.",
       kind: "scenario",
       scenario: "Top of 8m, 1v1. You're a decent shooter from there. But your second home has slipped her mark and is wide open inside.",
@@ -5041,56 +5041,56 @@ const GIRLS_MIDDLE_LESSONS: AcademyLesson[] = [
       {
       question: "After a tough loss, who should take the blame?",
       options: [
-        "The goalie if shots got in",
         "The kid who missed the last shot",
         "Nobody alone — the team owns it together",
-        "The coach for not adjusting"
+        "The goalie if shots got in",
+        "The coach for not adjusting",
       ],
-      correctAnswer: 2,
+      correctAnswer: 1,
       explanation: "Games are decided by hundreds of plays. Blaming one person destroys trust.",
     },
       {
       question: "Why is blaming one teammate after a loss harmful?",
       options: [
         "It's not really that bad",
+        "Only matters if it happens repeatedly",
         "It makes the team afraid to take risks",
         "Coaches don't notice",
-        "Only matters if it happens repeatedly"
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Fear of being the scapegoat makes teams play tight and cautious.",
     },
       {
       question: "Best response to a tough loss?",
       options: [
+        "Argue about which call cost the game",
         "Quit the team",
         "Pretend it didn't happen",
         "Be honest, stay positive, work harder next practice",
-        "Argue about which call cost the game"
       ],
-      correctAnswer: 2,
+      correctAnswer: 3,
       explanation: "Own it, learn, fix it. That's how teams grow.",
     },
       {
       question: "After a big win, the ideal team response is:",
       options: [
-        "The top scorer takes the credit",
         "Spread credit — every goal needed an assist",
+        "The top scorer takes the credit",
         "Tell the losing team what they did wrong",
-        "Post highlights immediately"
+        "Post highlights immediately",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Wins are collective. Make sure everyone feels they contributed — because they did.",
     },
       {
       question: "Right after an OT loss, your starting goalie is in tears. Two teammates are blaming the defense out loud. What do you do?",
       options: [
-        "Go to the goalie — 'we win as a team, lose as a team'",
         "Agree with the teammates blaming defense",
+        "Go to the goalie — 'we win as a team, lose as a team'",
         "Walk to parking lot quickly",
-        "Yell at everyone to stop"
+        "Yell at everyone to stop",
       ],
-      correctAnswer: 0,
+      correctAnswer: 1,
       explanation: "Pick up your goalie. Shut down the blame. The team's identity is set in moments like these.",
       kind: "scenario",
       scenario: "OT loss, 9-8. Your goalie is in tears — she thinks the last goal was her fault. Teammates nearby are blaming the defense out loud.",
@@ -5117,34 +5117,34 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "What's the strength of a 1-3-2 set?",
       options: [
-        "Heavy crease pressure all game",
-        "Stretches the D, creates cutting lanes from wings/low",
+        "Allows three dodgers at once",
         "Best for ride formations",
-        "Allows three dodgers at once"
+        "Stretches the D, creates cutting lanes from wings/low",
+        "Heavy crease pressure all game",
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "1-3-2 spreads the D and gives wings/low players room to cut.",
     },
       {
       question: "What is 'ball reversal' and why does it work?",
       options: [
         "Carrying ball back to your own goal",
-        "Moving ball side-to-side fast — D scrambles",
+        "Throwing back to the goalie to reset",
         "Re-dodging same matchup",
-        "Throwing back to the goalie to reset"
+        "Moving ball side-to-side fast — D scrambles",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Defenses slide toward the ball. Reverse fast = scrambling = openings.",
     },
       {
       question: "What is 'pick-the-picker'?",
       options: [
-        "Picking the best player",
         "After setting a pick, immediately get a pick set for you",
         "Picking the ball carrier first",
-        "A draw move"
+        "A draw move",
+        "Picking the best player",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Defense recovers from action 1 just as action 2 hits. Staple of elite offenses.",
     },
       {
@@ -5152,8 +5152,8 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
       options: [
         "Dodging slowly",
         "Reading slide first, attacking second",
+        "Letting your defender catch up",
         "Waiting for the crease to clear",
-        "Letting your defender catch up"
       ],
       correctAnswer: 1,
       explanation: "If you see the slide early, pass to the open mark. If no slide, finish.",
@@ -5161,12 +5161,12 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "1-3-2 set, you're at the high point. Coach calls a 2-man with the right wing. The crease defender has been the slide all game. What do you do?",
       options: [
-        "Force the dodge — beat your D 1v1",
-        "Use the pick, look for slide, hit the crease attacker the slider just left",
+        "Skip the pick, shoot from up top",
         "Reset and call a different play",
-        "Skip the pick, shoot from up top"
+        "Use the pick, look for slide, hit the crease attacker the slider just left",
+        "Force the dodge — beat your D 1v1",
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "If the crease defender slides, the crease attacker is open. The 2-man's whole purpose is forcing that decision.",
       kind: "scenario",
       scenario: "1-3-2 set. You're at the high point. Right wing comes up to set you a pick. Their crease defender has been the slide all game.",
@@ -5272,20 +5272,20 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
       question: "Adjacent slide comes from:",
       options: [
         "The crease defender",
-        "The defender on the player next to the dodger",
         "The two-pass-away defender",
-        "The goalie stepping out"
+        "The goalie stepping out",
+        "The defender on the player next to the dodger",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Adjacent = next to. The defender adjacent to the dodger slides first.",
     },
       {
       question: "When is a crease/sandwich slide used?",
       options: [
         "When dodge comes from up top through middle",
-        "When dodge comes from behind cage",
         "When the crease is empty",
-        "Only on free positions"
+        "Only on free positions",
+        "When dodge comes from behind cage",
       ],
       correctAnswer: 0,
       explanation: "Up-top middle dodge → crease defender slides because she has the shortest path.",
@@ -5293,10 +5293,10 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "Most important defensive call?",
       options: [
-        "'Check'",
+        "'Ball'",
         "'I'm hot' — I'm the slide",
+        "'Check'",
         "'Sub'",
-        "'Ball'"
       ],
       correctAnswer: 1,
       explanation: "Without 'I'm hot', the slide is unclear — that's a goal.",
@@ -5305,22 +5305,22 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
       question: "After a slide, what does the slider do?",
       options: [
         "Stay on the ball-carrier",
-        "Rotate to the player who just got left open",
         "Run back to original position",
-        "Drop into the crease"
+        "Rotate to the player who just got left open",
+        "Drop into the crease",
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Slider's old mark gets covered by rotation. Slider helps the next threat.",
     },
       {
       question: "Their offense calls a play: their first home dodges hard up the middle. The crease attacker pops to a wing. Who slides?",
       options: [
         "Adjacent defender — crease stays home",
-        "Crease defender — adjacent fills",
+        "Top defender drops",
         "Goalie steps out",
-        "Top defender drops"
+        "Crease defender — adjacent fills",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Through-the-middle dodge = crease slide. The dodger gets to the crease before adjacents can rotate.",
       kind: "scenario",
       scenario: "First home is dodging hard, splitting two defenders, headed for the middle. Crease attacker pops out to a wing.",
@@ -5456,21 +5456,21 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "Best way to learn from film:",
       options: [
-        "Watch all the action at full speed",
         "Pick one focus per viewing",
+        "Watch all the action at full speed",
         "Only watch the highlight goals",
-        "Watch with the sound up loud"
+        "Watch with the sound up loud",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Multi-tasking diffuses learning. One focus = real lessons.",
     },
       {
       question: "What does 'pause and predict' mean?",
       options: [
-        "Stop watching when bored",
-        "Pause clip, guess next move, then check",
         "Pause to text friends",
-        "Stop and start randomly"
+        "Pause clip, guess next move, then check",
+        "Stop and start randomly",
+        "Stop watching when bored",
       ],
       correctAnswer: 1,
       explanation: "Active prediction trains anticipation — the IQ skill that matters most.",
@@ -5478,34 +5478,34 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "Watching your own film, what's the value?",
       options: [
-        "See your goals",
-        "See what you actually look like vs. what it felt like",
         "Compare to pro highlight reels",
-        "Just to enjoy"
+        "Just to enjoy",
+        "See what you actually look like vs. what it felt like",
+        "See your goals",
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "You always feel different than you look. Tape doesn't lie.",
     },
       {
       question: "How often should you watch your own game film?",
       options: [
-        "Once a season",
+        "Only when coach forces it",
         "After playoffs only",
+        "Once a season",
         "Weekly during the season",
-        "Only when coach forces it"
       ],
-      correctAnswer: 2,
+      correctAnswer: 3,
       explanation: "Weekly review = weekly improvement. Players who do this pull away.",
     },
       {
       question: "You watch your last game and notice you drift right after a turnover — every time. You watch this happen 6 times across 4 games. What do you do at the next practice?",
       options: [
-        "Mention it to coach so she knows",
         "Drill the recovery — practice tracking back left after turnovers",
+        "Watch more film instead of practicing",
+        "Mention it to coach so she knows",
         "Forget it — bad habits will fix themselves",
-        "Watch more film instead of practicing"
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Film identifies the pattern. Practice fixes it. Without targeted reps, the habit stays.",
       kind: "scenario",
       scenario: "You watched film of your last 4 games. After every turnover, you drift to the right side — leaving your defensive responsibility uncovered.",
@@ -5533,7 +5533,7 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
         "A long letter about your background",
         "A short email with a film link, GPA, contact info",
         "A phone call from a parent",
-        "Social media DMs"
+        "Social media DMs",
       ],
       correctAnswer: 1,
       explanation: "Coaches scan emails fast. Short + film + grades + phone.",
@@ -5541,34 +5541,34 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "What matters more for most college rosters?",
       options: [
-        "Most tournament games played",
-        "A strong, recent highlight film",
         "Number of camps attended",
-        "Brand of stick used"
+        "Brand of stick used",
+        "A strong, recent highlight film",
+        "Most tournament games played",
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Coaches don't see every tournament. They see your film. Make it strong.",
     },
       {
       question: "When should serious recruiting outreach start?",
       options: [
+        "After verbal commits dry up",
+        "Eighth grade",
         "Senior year",
         "Sophomore year, ramp through junior",
-        "Eighth grade",
-        "After verbal commits dry up"
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Sophomore = build film + reach out. Junior = visits + decisions.",
     },
       {
       question: "Why do grades matter for athletic recruiting?",
       options: [
-        "They don't — only film matters",
         "Coaches need your GPA to even make an offer (admissions matter)",
         "Grades are tiebreakers only",
-        "Only Ivies care about grades"
+        "They don't — only film matters",
+        "Only Ivies care about grades",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "If admissions won't accept you, the coach can't offer. Grades open doors.",
     },
       {
@@ -5576,8 +5576,8 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
       options: [
         "Wait — they'll reach out when ready",
         "Send them a new clip every 4-6 weeks with one new skill or game",
+        "Email them daily until they commit",
         "Call the coach every week to push",
-        "Email them daily until they commit"
       ],
       correctAnswer: 1,
       explanation: "'Keep us posted' = they want updates. Periodic, specific, additive — not spam, not silence.",
@@ -5603,34 +5603,34 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "Pre-game routine should be:",
       options: [
+        "Whatever the captain does",
         "Different every game for variety",
         "Repeatable — same cues that bring you to game state",
-        "Whatever the captain does",
-        "Skipped — saves energy"
+        "Skipped — saves energy",
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Repeatable routines = consistent mental state. Pros all have one.",
     },
       {
       question: "Best in-game self-talk after a mistake?",
       options: [
-        "'Why did I do that?'",
         "'My team is going to be mad'",
+        "'Why did I do that?'",
+        "'I'm not playing well today'",
         "'Next play — I got the next one'",
-        "'I'm not playing well today'"
       ],
-      correctAnswer: 2,
+      correctAnswer: 3,
       explanation: "Forward-looking self-talk resets focus. Backward-looking traps you.",
     },
       {
       question: "What does sport-psych research say about visualization?",
       options: [
-        "Only works for goalies",
         "It measurably improves execution under pressure",
+        "Only works in the off-season",
         "Superstition with no real effect",
-        "Only works in the off-season"
+        "Only works for goalies",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Visualization rehearses the neural pattern. Execution improves measurably.",
     },
       {
@@ -5638,8 +5638,8 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
       options: [
         "A personality trait you're born with",
         "A trainable skill — built through practice",
+        "Luck",
         "Something only veterans have",
-        "Luck"
       ],
       correctAnswer: 1,
       explanation: "Composure is a habit. Train it deliberately, like stick skills.",
@@ -5647,12 +5647,12 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "State final, 4th quarter, tied. You miss two shots in a row. You're getting tight. What's the single best thing to do RIGHT NOW?",
       options: [
-        "Try to score even harder",
-        "Reset routine: deep breath, cue word ('next'), commit to next play",
         "Pass off scoring duty completely",
-        "Get angry to fire yourself up"
+        "Get angry to fire yourself up",
+        "Reset routine: deep breath, cue word ('next'), commit to next play",
+        "Try to score even harder",
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Pre-built reset routine kicks in under pressure. Anger and overthinking both narrow performance.",
       kind: "scenario",
       scenario: "State final. 4th quarter. Tied. You missed two shots in a row — both shots you usually make. You feel yourself tightening up.",
@@ -5677,32 +5677,32 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "What's a captain's primary job?",
       options: [
+        "Run team meetings unilaterally",
         "Make game-time strategic calls",
-        "Serve the team — be the bridge to coach",
         "Score the most points",
-        "Run team meetings unilaterally"
+        "Serve the team — be the bridge to coach",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Captaincy = service. Bridge between coach and players, not boss.",
     },
       {
       question: "How does a real captain handle a slacking friend?",
       options: [
-        "Ignore it — friendship comes first",
-        "Call her out publicly to embarrass her",
         "Talk privately, honestly — care more about team than being liked",
-        "Tell on her to coach"
+        "Call her out publicly to embarrass her",
+        "Ignore it — friendship comes first",
+        "Tell on her to coach",
       ],
-      correctAnswer: 2,
+      correctAnswer: 0,
       explanation: "Honest, private, direct. Caring more about team than popularity is the captain test.",
     },
       {
       question: "Senior leadership in tough moments looks like:",
       options: [
-        "Loudest voice in the huddle",
-        "Steady — calm when teammates are emotional",
         "Yelling to motivate",
-        "Making big speeches"
+        "Steady — calm when teammates are emotional",
+        "Making big speeches",
+        "Loudest voice in the huddle",
       ],
       correctAnswer: 1,
       explanation: "When emotions rise, a captain's job is to lower them. Steadiness wins.",
@@ -5710,23 +5710,23 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "First job for a new captain?",
       options: [
+        "Speak in every huddle",
         "Plan team-building events",
         "Set the standard with your own behavior — example before voice",
         "Pick the team's pre-game music",
-        "Speak in every huddle"
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Lead by example before voice. Words without action don't carry.",
     },
       {
       question: "You're the captain. A senior teammate disagrees publicly with the coach during a film session. Room goes quiet. What do you do?",
       options: [
         "Side with the senior — solidarity",
+        "Defend the coach loudly in the room",
         "Stay silent — let the coach handle it",
         "Pull the senior aside privately later: 'I hear you. Not the place. Let me talk to coach.'",
-        "Defend the coach loudly in the room"
       ],
-      correctAnswer: 2,
+      correctAnswer: 3,
       explanation: "Captains de-escalate publicly, advocate privately. Public confrontation makes both sides dig in.",
       kind: "scenario",
       scenario: "Film session. A senior teammate publicly pushes back on coach's strategy in front of the team. Room gets quiet. You're the captain.",
@@ -5750,21 +5750,21 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "Leadership without a title comes from:",
       options: [
-        "Demanding respect from teammates",
         "A standard others want to match",
+        "Demanding respect from teammates",
         "Going to the coach about issues",
-        "Being friends with the captain"
+        "Being friends with the captain",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Leadership is gravitational. Your standard pulls others up.",
     },
       {
       question: "How do you influence older teammates without authority?",
       options: [
-        "Tell them what to do",
-        "Hold yourself to a higher standard than them",
         "Wait until you're a captain",
-        "Complain to coach about them"
+        "Hold yourself to a higher standard than them",
+        "Tell them what to do",
+        "Complain to coach about them",
       ],
       correctAnswer: 1,
       explanation: "Older teammates respond to action, not lecture. Be the bar.",
@@ -5772,34 +5772,34 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "Visible leadership behavior?",
       options: [
+        "Posting team content on social",
         "Wearing the team's gear off the field",
         "First on the field, last to leave — every day",
-        "Posting team content on social",
-        "Speaking up in every team meeting"
+        "Speaking up in every team meeting",
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Show up first, leave last. Visible. Compounds.",
     },
       {
       question: "Influence vs. title — which matters more?",
       options: [
-        "Title — captains get the final word",
-        "Influence — built through reps and reliability",
         "Both equal",
-        "Title for games, influence for practice"
+        "Title — captains get the final word",
+        "Title for games, influence for practice",
+        "Influence — built through reps and reliability",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Titles are temporary. Influence built through trust is real authority.",
     },
       {
       question: "You're a junior. The team is captained by two seniors who don't push the standard hard. Practice intensity has dropped. What's your move?",
       options: [
-        "Wait until you're a captain next year",
         "Set the standard yourself — sprint, push, compete every drill",
+        "Match the captains' pace — don't disrupt",
         "Tell coach about the captains",
-        "Match the captains' pace — don't disrupt"
+        "Wait until you're a captain next year",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Don't wait for permission. Set the bar. Others rise — including the captains, who often need the example.",
       kind: "scenario",
       scenario: "You're a junior. Two senior captains have set a casual practice tone. Intensity is dropping. Coach hasn't said anything yet.",
@@ -5823,10 +5823,10 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "Chemistry is best defined as:",
       options: [
-        "Liking your teammates personally",
+        "Posting together on social",
         "Predictable trust under pressure",
         "Spending time together off the field",
-        "Posting together on social"
+        "Liking your teammates personally",
       ],
       correctAnswer: 1,
       explanation: "Chemistry shows up in tight games — does the team trust each other?",
@@ -5835,33 +5835,33 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
       question: "How does chemistry actually get built?",
       options: [
         "Pizza parties and team dinners",
-        "Shared hard work — conditioning, drills, film",
         "Captain leadership alone",
-        "Winning a few games together"
+        "Shared hard work — conditioning, drills, film",
+        "Winning a few games together",
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Bonds forge under shared difficulty, not shared comfort.",
     },
       {
       question: "First red flag of bad team chemistry?",
       options: [
         "Players make jokes during huddles",
-        "Side conversations and cliques during team time",
+        "The team isn't winning",
         "Coaches yell more than usual",
-        "The team isn't winning"
+        "Side conversations and cliques during team time",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Cliques and side conversations show the team isn't really together.",
     },
       {
       question: "How can a regular player help chemistry without being captain?",
       options: [
-        "Stay in your lane — let captains handle it",
         "Invite, include, share — be the connector for new or quieter teammates",
         "Organize bigger off-field events",
-        "Post team unity content online"
+        "Stay in your lane — let captains handle it",
+        "Post team unity content online",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Connectors build chemistry. Make sure no teammate feels invisible.",
     },
       {
@@ -5870,7 +5870,7 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
         "Let her find her way",
         "Sit with her, introduce her, include her in the warm-up group",
         "Invite her only if the captains say to",
-        "Let coaches handle integration"
+        "Let coaches handle integration",
       ],
       correctAnswer: 1,
       explanation: "One person can flip a transfer's experience. That's chemistry built — and you remembering it later, when the team needs it.",
@@ -5896,43 +5896,43 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "What does sacrifice mean for a team?",
       options: [
-        "Giving up the season for school",
-        "Giving up something you want for what the team needs",
+        "Letting one player carry the team",
         "Skipping practice when tired",
-        "Letting one player carry the team"
+        "Giving up something you want for what the team needs",
+        "Giving up the season for school",
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Sacrifice is putting team need above personal want.",
     },
       {
       question: "Common in-game sacrifices?",
       options: [
         "Skipping warm-ups",
-        "Skipping the contested shot to make the better pass",
         "Asking for more rest",
-        "Avoiding ground balls to save energy"
+        "Avoiding ground balls to save energy",
+        "Skipping the contested shot to make the better pass",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Pass when teammate has the better shot. Daily sacrifice.",
     },
       {
       question: "Sacrifice works when:",
       options: [
-        "One person gives the most every time",
         "Everyone gives something — distribution is even",
+        "Captains choose who sacrifices what",
         "Coaches enforce it strictly",
-        "Captains choose who sacrifices what"
+        "One person gives the most every time",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Even distribution = sustainable. One martyr team isn't sustainable.",
     },
       {
       question: "Why do sacrificing teams beat more talented ones?",
       options: [
-        "They get lucky",
-        "Cumulative effect — every play has more team value",
         "Refs reward it",
-        "Coincidence"
+        "Cumulative effect — every play has more team value",
+        "Coincidence",
+        "They get lucky",
       ],
       correctAnswer: 1,
       explanation: "Better passes, slides, backups — small choices compound.",
@@ -5940,12 +5940,12 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "You're the leading scorer. New play has the ball going through your hands but you're the screener, not the shooter. Coach asks you to commit to it. What do you do?",
       options: [
-        "Push back — you should be the shooter",
-        "Commit fully — set the best screens of your career",
         "Set screens half-heartedly",
-        "Ask for a different role"
+        "Ask for a different role",
+        "Commit fully — set the best screens of your career",
+        "Push back — you should be the shooter",
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "Top scorers who screen hard make EVERYONE more dangerous. Defenses can't predict the threat. Elite team play.",
       kind: "scenario",
       scenario: "You're the team's leading scorer. New offensive set has you as the screener — not the finisher. Coach asks you to commit to it.",
@@ -5969,56 +5969,56 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
       {
       question: "What do teammates remember about you 10 years later?",
       options: [
-        "Goals scored that season",
+        "Which tournaments you played",
         "Stats from the playoff run",
+        "Goals scored that season",
         "How you treated people, the standard you set",
-        "Which tournaments you played"
       ],
-      correctAnswer: 2,
+      correctAnswer: 3,
       explanation: "Stats fade. Behavior toward teammates and the standard you held — that's legacy.",
     },
       {
       question: "How do you 'build the program' as a senior?",
       options: [
-        "Win the most games possible",
         "Mentor underclassmen — leave it better than you found it",
+        "Recruit transfers in",
         "Score the most points to set records",
-        "Recruit transfers in"
+        "Win the most games possible",
       ],
-      correctAnswer: 1,
+      correctAnswer: 0,
       explanation: "Programs are passed down. Your senior year is about what you leave.",
     },
       {
       question: "What's the senior-year mindset shift?",
       options: [
-        "Take more shots — last chance to score",
         "Focus on personal stats for college",
         "From taking to giving — invest in those who follow",
-        "Quiet down and let underclassmen lead"
+        "Quiet down and let underclassmen lead",
+        "Take more shots — last chance to score",
       ],
-      correctAnswer: 2,
+      correctAnswer: 1,
       explanation: "Final year is about what you give back. Investing in younger players IS the legacy.",
     },
       {
       question: "Best 'legacy' move you can make this season?",
       options: [
+        "Win MVP",
         "Score 50 goals",
         "Adopt one freshman — answer questions, model the standard, include her",
         "Captain the team",
-        "Win MVP"
       ],
-      correctAnswer: 1,
+      correctAnswer: 2,
       explanation: "One mentored freshman becomes a senior who mentors more. Multiplier effect — that's program building.",
     },
       {
       question: "Last home game. Pre-game. A freshman is sitting alone, looking nervous. The team is in cliques. You're a senior captain. What do you do?",
       options: [
         "Ignore her — it's your special day",
-        "Sit next to her: 'first big game? I was you 4 years ago. Here's what helped.'",
         "Send a teammate over to handle it",
-        "Tell her to stop being nervous"
+        "Tell her to stop being nervous",
+        "Sit next to her: 'first big game? I was you 4 years ago. Here's what helped.'",
       ],
-      correctAnswer: 1,
+      correctAnswer: 3,
       explanation: "Legacy moments are built in choices like this. She'll remember senior night for the rest of her life — make sure it's because someone showed up.",
       kind: "scenario",
       scenario: "Senior night. Pre-game locker room. A freshman who barely plays is sitting alone, clearly nervous. Team's in cliques. You're a senior captain.",
