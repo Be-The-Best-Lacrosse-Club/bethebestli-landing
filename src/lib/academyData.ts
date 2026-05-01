@@ -2169,37 +2169,149 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
     description: `By high school, you need to understand offensive systems — not just how to score on your own, but how your team creates scoring chances together through sets, motion, and ball reversal.\n\nOFFENSIVE SETS\n\n1. 2-2-2 Formation\nTwo attackmen up top, two midfielders on the wings, two attackmen low (one at each side of the crease/GLE). This is a balanced formation that gives you scoring threats from every angle.\n\n2. 1-4-1 Formation\nOne player at the top (called "the point"), four spread across the middle, one behind the goal at X. This set stretches the defense horizontally and creates isolation dodge opportunities.\n\n3. 3-3 Formation\nThree attackmen across the top, three forming the bottom arc. This is the classic look — good for ball movement and off-ball picks.\n\nKEY CONCEPTS\n\nMotion: Off-ball players are constantly moving — cutting, screening, repositioning. Good motion is hard to defend because the defense can never settle. The keys are timing and spacing (5+ yards apart so defenses can't double-team).\n\nBall Reversal: Moving the ball from one side of the field to the other. Defenses are designed to slide toward the ball. When you reverse quickly (topside to X, X to the other wing), the defense has to scramble — that's when openings appear.\n\nPick the Picker: A concept where the player who just set a pick immediately gets a pick set for them. The defense is still recovering from the first action when the second one hits. This is a staple of elite offenses.\n\nReading Slides: Don't dodge into help. Before you commit to a dodge, look for the slide. If you see it coming early, pass to the player the slider left. If you don't see help, dodge hard and finish. Patience creates better shots than forced 1v1 dodges.\n\nCOACHING POINTS\n- Watch film of college offenses running 2-2-2 and 1-4-1 — pause and study the off-ball movement\n- The best offenses don't need highlight-reel dodges — they move the ball and find the open man\n- "Throw it forward, look inside" — move the ball up the field, then find the player cutting to the crease`,
     questions: [
       {
-        question: "What is a 2-2-2 offensive set?",
-        options: [
-          "Two players in three lines",
-          "Two attack up top, two midfielders, two attack low",
-          "A drill name",
-          "A defensive set",
-        ],
-        correctAnswer: 1,
-        explanation: "2-2-2 is two players at each level — top, middle, and behind the goal.",
-      },
+      question: "What's the strength of a 1-4-1 set?",
+      options: [
+        "Heavy crease pressure",
+        "Stretches the defense horizontally for isolation dodges",
+        "Best for ride formations",
+        "Allows three dodgers at once"
+      ],
+      correctAnswer: 1,
+      explanation: "1-4-1 spreads the D side-to-side, opening lanes for the point or X attackman.",
+    },
       {
-        question: "What does 'reversing the ball' do to a defense?",
-        options: [
-          "Confuses the offense",
-          "Makes the defense scramble to slide the other way",
-          "Nothing",
-          "Causes a penalty",
-        ],
-        correctAnswer: 1,
-        explanation: "Quick ball reversal forces the defense to chase, creating openings.",
-      },
+      question: "What is 'ball reversal' and why does it work?",
+      options: [
+        "Carrying ball back to your own goal — kills clock",
+        "Moving ball side-to-side fast — defense scrambles",
+        "Re-dodging same matchup — wears down D",
+        "Throwing back to the goalie to reset"
+      ],
+      correctAnswer: 1,
+      explanation: "Defenses slide toward the ball. Reverse fast and they're scrambling — that's when openings appear.",
+    },
       {
-        question: "When dodging, what should you look for first?",
-        options: [
-          "Empty net",
-          "The slide — if you see it coming, pass to the open player",
-          "The fans",
-          "Your shoes",
+      question: "What is 'pick-the-picker'?",
+      options: [
+        "Picking the best player on offense",
+        "After setting a pick, immediately get a pick set for you",
+        "Picking the ball carrier first",
+        "A faceoff move"
+      ],
+      correctAnswer: 1,
+      explanation: "Defense recovers from action 1 just as action 2 hits. Staple of elite offenses.",
+    },
+      {
+      question: "Patient dodging means...",
+      options: [
+        "Dodging slowly",
+        "Reading slide first, attacking second",
+        "Waiting for the crease to clear",
+        "Letting your defender catch up"
+      ],
+      correctAnswer: 1,
+      explanation: "If you see the slide early, pass to the open man. If no slide, finish.",
+    },
+      {
+      question: "You're at the point in a 1-4-1. Coach calls for a 2-man game with the right wing. The defense is playing aggressive — slides come from the crease. What do you do?",
+      options: [
+        "Force the dodge — beat your D 1v1",
+        "Use the pick, look for the slide, hit the crease attackman the slider left",
+        "Reset and call a different play",
+        "Skip the pick, shoot from up top"
+      ],
+      correctAnswer: 1,
+      explanation: "If the crease defender slides, the crease attackman is open. The 2-man game's whole purpose is to force that decision.",
+      kind: "scenario",
+      scenario: "1-4-1 set. You're at the point. Right wing comes up to set you a pick. Their crease defender has been the slide all game.",
+    },
+    ],
+    videoUrl: "https://www.youtube.com/watch?v=S8k2L9UXriU",
+    keyTakeaways: [
+      "2-2-2: balanced — every spot is a scoring threat. Best for ball reversal + pick-the-picker.",
+      "1-4-1: stretches D horizontally. Point and X dodgers get isolation lanes.",
+      "3-3: classic — heavy on motion and off-ball picks.",
+      "Read the slide BEFORE you commit. Patient dodge > forced dodge into help.",
+    ],
+    diagrams: [
+      {
+        title: "1-4-1 Offensive Set",
+        view: "men-half-offensive",
+        caption: "One up top (point), four spread across the middle, one at X. Stretches the defense horizontally. The point dodge or X dodge creates isolation looks.",
+        players: [
+          {
+            x: 50,
+            y: 25,
+            role: "offense",
+            label: "P"
+          },
+          {
+            x: 18,
+            y: 55,
+            role: "offense",
+            label: "W"
+          },
+          {
+            x: 38,
+            y: 55,
+            role: "offense",
+            label: "C"
+          },
+          {
+            x: 62,
+            y: 55,
+            role: "offense",
+            label: "C"
+          },
+          {
+            x: 82,
+            y: 55,
+            role: "offense",
+            label: "W"
+          },
+          {
+            x: 50,
+            y: 92,
+            role: "offense",
+            label: "X",
+            ball: true,
+            highlight: true
+          },
         ],
-        correctAnswer: 1,
-        explanation: "Reading slides is the difference between a great dodge and a bad turnover.",
+        arrows: [
+          {
+            from: {
+              x: 50,
+              y: 92
+            },
+            to: {
+              x: 50,
+              y: 75
+            },
+            kind: "run",
+            label: "X dodges"
+          },
+          {
+            from: {
+              x: 38,
+              y: 55
+            },
+            to: {
+              x: 48,
+              y: 70
+            },
+            kind: "run",
+            curve: -4,
+            label: "Crease cut"
+          },
+        ],
+        legend: [
+          {
+            label: "Point / Wing / Crease / X",
+            color: "#D22630",
+            shape: "circle"
+          },
+        ]
       },
     ],
   },
@@ -2212,37 +2324,179 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
     description: `Team defense at the high school level requires every player to understand the slide package — the system your team uses to help each other when an offensive player beats his man. If you don't know the slide package, you're a liability.\n\nSLIDE SYSTEMS\n\n1. Adjacent Slide\nWhen the on-ball defender gets beat, the player adjacent (next to him) slides to stop the dodger. The next defender "fills" — rotating to cover the player the slider left. Everyone moves together like a chain reaction. This is the most common system.\n\n2. Crease Slide\nThe slide comes from a defender near the crease — whoever is guarding the offensive player closest to the goal. This slide arrives earlier (the crease defender is closest to the dodger) but leaves the most dangerous area open, requiring perfect rotations.\n\n3. Recovery\nAfter the slide stops the ball, everyone has to recover. The slider gets back to his man, the fill gets back to his man, and the defense resets. The whole sequence — slide, stop, fill, recover — should take 2-3 seconds.\n\nCOMMUNICATION\nSlides don't work without talking. Your goalie is the quarterback:\n- "Fire!" — Slide NOW\n- "Hold!" — Stay on your man, don't slide yet\n- "Two!" — I'm the second slide if we need it\n- "Crank!" — Check sticks, the ball carrier is winding up to shoot\n- "Clear!" — We have the ball, push it out\n\nThe biggest mistake: hesitating. If you're the slider, GO. Don't wait to see if the on-ball defender recovers. Late slides are worse than no slides — the defense is out of position AND the ball carrier has a head of steam.\n\nSSDM DEFENSE\nShort-Stick Defensive Middie — the midfielder who plays lockdown defense on the other team's best offensive middie. This player has to be able to guard in space, communicate slides, and play team defense at an elite level. Some of the best SSDM defenders in college are the smartest players on the field, not the biggest.\n\nCOACHING POINTS\n- Practice slides in 3v2, 4v3, and 5v4 situations\n- Every player — including attackmen — should know the slide package for rides and transition\n- Film study: watch how the defense rotates after the initial slide. That recovery is where most breakdowns happen`,
     questions: [
       {
-        question: "In an adjacent slide package, who slides when the on-ball defender gets beat?",
-        options: [
-          "The goalie",
-          "The defender right next to (adjacent to) the on-ball defender",
-          "The farthest defender",
-          "Nobody — they recover on their own",
-        ],
-        correctAnswer: 1,
-        explanation: "Adjacent slides come from the player right next to the on-ball defender.",
-      },
+      question: "Adjacent slide comes from:",
+      options: [
+        "The crease defender",
+        "The defender on the player next to the dodger",
+        "The two-pass-away defender",
+        "The goalie stepping out"
+      ],
+      correctAnswer: 1,
+      explanation: "Adjacent = next to. The defender adjacent to the dodger slides first.",
+    },
       {
-        question: "Should attackmen learn the team's slide package?",
-        options: [
-          "No, only defensemen",
-          "Yes — they need it for rides and transition",
-          "Only goalies",
-          "Only captains",
-        ],
-        correctAnswer: 1,
-        explanation: "Every position should know team defense — it matters for rides, transition, and team awareness.",
-      },
+      question: "When is a crease slide ('sandwich') used?",
+      options: [
+        "When dodge comes from up top",
+        "When dodge comes from X behind",
+        "When the crease is empty",
+        "When EMO is in effect"
+      ],
+      correctAnswer: 0,
+      explanation: "Up-top dodge → crease defender slides first because he has the shortest path.",
+    },
       {
-        question: "What's worse than no slide?",
-        options: [
-          "A perfect slide",
-          "A late slide — by then it's too late",
-          "An early slide",
-          "No slide at all",
+      question: "What's the most important defensive call?",
+      options: [
+        "'Check'",
+        "'I'm hot' — I'm the slide",
+        "'Sub'",
+        "'Ball'"
+      ],
+      correctAnswer: 1,
+      explanation: "Without 'I'm hot', the slide is unclear — that's a goal.",
+    },
+      {
+      question: "After a slide, what does the slider do?",
+      options: [
+        "Stay on the ball-carrier",
+        "Rotate to the player who just got left open",
+        "Run back to original position",
+        "Drop into the crease"
+      ],
+      correctAnswer: 1,
+      explanation: "Slider's old man is covered by rotation. Slider helps the next threat.",
+    },
+      {
+      question: "Your team runs adjacent slides. Their offense calls a play that has the X attackman dodging hard up the middle. The crease attackman pops to the wing. Who slides?",
+      options: [
+        "Adjacent defender slides — crease stays home",
+        "Crease defender slides — adjacent fills",
+        "Goalie steps out",
+        "Top defender drops"
+      ],
+      correctAnswer: 1,
+      explanation: "X dodge through the middle = crease slide. The X dodger gets to the crease before adjacents can rotate.",
+      kind: "scenario",
+      scenario: "X attackman is dodging hard, splitting two defenders, headed for the middle of the field. The crease attackman pops out to a wing.",
+    },
+    ],
+    videoUrl: "https://www.youtube.com/watch?v=7uDxcG8BXZ8",
+    keyTakeaways: [
+      "Adjacent slide: from the player next to the dodger. Crease defender stays home.",
+      "Crease slide (sandwich): crease defender is first slide; adjacent rotates to fill crease.",
+      "Slides MUST be communicated. 'I'm hot' (1st), 'I'm two' (2nd) — always.",
+      "After a slide, recover and rotate. Standing still = open shot.",
+    ],
+    diagrams: [
+      {
+        title: "Adjacent Slide Package",
+        view: "men-half-defensive",
+        caption: "Slide from the defender next to the dodger. Two-pass-away defender rotates to fill. The crease defender stays home — keeps the inside covered.",
+        players: [
+          {
+            x: 25,
+            y: 55,
+            role: "offense",
+            label: "1",
+            ball: true,
+            highlight: true
+          },
+          {
+            x: 70,
+            y: 55,
+            role: "offense",
+            label: "2"
+          },
+          {
+            x: 50,
+            y: 70,
+            role: "offense",
+            label: "3"
+          },
+          {
+            x: 30,
+            y: 75,
+            role: "offense",
+            label: "4"
+          },
+          {
+            x: 28,
+            y: 60,
+            role: "defender",
+            label: "Da"
+          },
+          {
+            x: 67,
+            y: 60,
+            role: "defender",
+            label: "Db"
+          },
+          {
+            x: 50,
+            y: 75,
+            role: "defender",
+            label: "Dc"
+          },
+          {
+            x: 35,
+            y: 78,
+            role: "defender",
+            label: "Dd"
+          },
         ],
-        correctAnswer: 1,
-        explanation: "Late slides leave the defender out of position and let the offense pass to the open man easily.",
+        arrows: [
+          {
+            from: {
+              x: 25,
+              y: 55
+            },
+            to: {
+              x: 50,
+              y: 78
+            },
+            kind: "run",
+            curve: -10,
+            label: "Dodge"
+          },
+          {
+            from: {
+              x: 50,
+              y: 75
+            },
+            to: {
+              x: 38,
+              y: 70
+            },
+            kind: "run",
+            label: "Slide (Dc)"
+          },
+          {
+            from: {
+              x: 35,
+              y: 78
+            },
+            to: {
+              x: 50,
+              y: 75
+            },
+            kind: "run",
+            curve: 5,
+            label: "Fill (Dd)"
+          },
+        ],
+        legend: [
+          {
+            label: "Offense (with ball)",
+            color: "#D22630",
+            shape: "circle"
+          },
+          {
+            label: "Defender",
+            color: "#2563EB",
+            shape: "square"
+          },
+        ]
       },
     ],
   },
@@ -2255,38 +2509,69 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
     description: `Film study is the biggest separator at the high school level. The players who watch film correctly improve dramatically faster than those who don't. But most players don't know HOW to watch film — they just stare at it.\n\nHere's how to watch film with purpose:\n\nFirst, watch with a question in mind. Don't just watch — watch FOR something. Examples: "How does my defender position himself when I dodge?" "Where are the slides coming from?" "What does my team do well in transition?" Having a question keeps you focused.\n\nSecond, watch off-ball. Most players watch the ball. The ball doesn't teach you anything — you already know what happens with the ball. What teaches you is what happens AWAY from the ball. Watch the slides developing. Watch the cuts. Watch how good players move when they don't have it.\n\nThird, pause and rewind. Don't watch film in real time only. When something happens, pause it. Look at every player on the field. Where was the open space? Why did the defender go where he did? What would you have done differently? Rewind and watch again.\n\nFourth, watch yourself critically. When you're watching your own film, don't look for highlights. Look for mistakes. Where did you turn the ball over? What did you miss? Where could you have cut better? Brutal self-honesty is how you fix problems.\n\nFifth, take notes. Write down 3 things you noticed and 3 things you want to work on. Bring those notes to the next practice. Film study without action is just watching TV.\n\nThe best players in college and the pros watch film daily. If you start now, by the time you're a senior, you'll be miles ahead of every player who relies only on practice.`,
     questions: [
       {
-        question: "What's the best way to watch film?",
-        options: [
-          "In real time without stopping",
-          "With a question in mind, pausing and rewinding to study details",
-          "Only watching highlights",
-          "On mute",
-        ],
-        correctAnswer: 1,
-        explanation: "Active film study with focused questions is what makes you better.",
-      },
+      question: "Best way to learn from film:",
+      options: [
+        "Watch all the action at full speed",
+        "Pick one focus per viewing (slides, cuts, etc.)",
+        "Only watch the highlight goals",
+        "Watch with the sound up loud"
+      ],
+      correctAnswer: 1,
+      explanation: "Multi-tasking diffuses learning. One focus = real lessons.",
+    },
       {
-        question: "When watching your own film, what should you look for?",
-        options: [
-          "Only your highlights",
-          "Mistakes and things to fix",
-          "Your hairstyle",
-          "How loud the crowd was",
-        ],
-        correctAnswer: 1,
-        explanation: "Critical self-review is how film study leads to improvement.",
-      },
+      question: "What does 'pause and predict' mean?",
+      options: [
+        "Stop watching when bored",
+        "Pause clip, guess next move, then check",
+        "Pause to text friends about the play",
+        "Stop and start randomly"
+      ],
+      correctAnswer: 1,
+      explanation: "Active prediction trains anticipation — the IQ skill that matters most.",
+    },
       {
-        question: "Why should you watch off-ball more than the ball?",
-        options: [
-          "It's more exciting",
-          "Off-ball movement teaches you positioning, slides, and team concepts",
-          "Coaches make you",
-          "It's not — watch the ball",
-        ],
-        correctAnswer: 1,
-        explanation: "The ball is obvious. Off-ball is where the lessons are hidden.",
-      },
+      question: "Watching your own film, what's the value?",
+      options: [
+        "See the goals you scored",
+        "See what you actually look like vs. what it felt like",
+        "Compare to pro highlight reels",
+        "Just to enjoy the experience"
+      ],
+      correctAnswer: 1,
+      explanation: "You always feel different than you look. Tape doesn't lie — that's the value.",
+    },
+      {
+      question: "How often should you watch your own game film?",
+      options: [
+        "Once a season",
+        "After playoffs only",
+        "Weekly during the season",
+        "Only when coach forces it"
+      ],
+      correctAnswer: 2,
+      explanation: "Weekly review = weekly improvement. The kids who do this pull away.",
+    },
+      {
+      question: "You watch your last game and notice you drift right after a turnover — every time. You then watch this happen 6 times across 4 games. What do you do at the next practice?",
+      options: [
+        "Mention it to coach so he knows",
+        "Drill the recovery — practice tracking back left after turnovers",
+        "Forget it — bad habits will fix themselves",
+        "Watch more film instead of practicing"
+      ],
+      correctAnswer: 1,
+      explanation: "Film identifies the pattern. Practice fixes it. Without targeted reps, the habit stays.",
+      kind: "scenario",
+      scenario: "You watched film of your last 4 games. After every turnover, you drift to the right side of the field — leaving your defensive responsibility uncovered.",
+    },
+    ],
+    videoUrl: "https://www.youtube.com/watch?v=4LHsrseSKak",
+    keyTakeaways: [
+      "Watch ONE thing per viewing: defensive slides, off-ball cuts, faceoff hand fights — pick.",
+      "Pause and predict: stop the clip, guess the next move, then watch and check.",
+      "Watch your OWN film weekly. See what you actually look like, not what it felt like.",
+      "Take notes. 'I drift left after losing my matchup' is a real coaching note you give yourself.",
     ],
   },
   {
@@ -2298,38 +2583,68 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
     description: `If you want to play college lacrosse, you need to understand the recruiting process. Many players miss out not because they aren't talented — but because they didn't know how the process works. Here's what you need to know.\n\nRecruiting starts EARLY now. Coaches identify prospects in 8th and 9th grade. By 10th grade, top prospects are getting verbal offers. By 11th grade, most Division I rosters are largely set. This means you need to be on coaches' radar by your sophomore year if you're aiming for D1.\n\nGrades matter — A LOT. Most colleges won't even consider a player who can't get in academically. Your GPA and test scores open doors that lacrosse alone can't. Aim for the highest grades you can. The better your grades, the more options you have.\n\nYou have to do your own outreach. Don't wait for coaches to find you. Email college coaches starting freshman year — introduce yourself, share your highlight tape, list your tournaments. Be professional, polite, and brief. Most coaches won't reply but they ARE reading.\n\nGet to college camps and showcase tournaments. This is where coaches actually see you play. Pick events where the schools you want to attend will be coaching or scouting. Camps at colleges are especially valuable because the coach gets to see you up close.\n\nUse a recruiting profile (Sportsforce, NCSA, or BTB's own profile) so coaches can find your stats, video, grades, and contact info in one place.\n\nMost importantly: don't fixate on D1. There are 200+ great college lacrosse programs across D1, D2, D3, and NAIA. Many D3 programs have better player development, smaller class sizes, and just as competitive lacrosse. Find the right FIT, not just the highest division.`,
     questions: [
       {
-        question: "When should you start the recruiting process?",
-        options: [
-          "Senior year",
-          "Junior year",
-          "Freshman/sophomore year — earlier than most realize",
-          "After college",
-        ],
-        correctAnswer: 2,
-        explanation: "Top D1 programs identify prospects in 8th-9th grade — start early.",
-      },
+      question: "What's the #1 piece of recruiting communication coaches want?",
+      options: [
+        "A long letter about your background",
+        "A short email with a film link, GPA, contact info",
+        "A phone call from a parent",
+        "Social media DMs"
+      ],
+      correctAnswer: 1,
+      explanation: "Coaches scan emails fast. Short + film + grades + phone.",
+    },
       {
-        question: "How important are grades in college recruiting?",
-        options: [
-          "Not important",
-          "Slightly important",
-          "Very important — they open or close doors",
-          "Only for D3",
-        ],
-        correctAnswer: 2,
-        explanation: "Grades determine what schools will even consider you, regardless of lacrosse skill.",
-      },
+      question: "What matters more for most college rosters?",
+      options: [
+        "Most tournament games played",
+        "A strong, recent highlight film",
+        "Number of camps attended",
+        "Brand of stick used"
+      ],
+      correctAnswer: 1,
+      explanation: "Coaches don't see every tournament. They see your film. Make it strong.",
+    },
       {
-        question: "What's the right approach to D1 vs D3?",
-        options: [
-          "D1 is always better",
-          "Find the best fit, not just the highest division",
-          "Only consider D1",
-          "Only consider D3",
-        ],
-        correctAnswer: 1,
-        explanation: "Fit matters more than division. Many D3 programs are excellent.",
-      },
+      question: "When should serious recruiting outreach start?",
+      options: [
+        "Senior year",
+        "Sophomore year, ramp through junior",
+        "Eighth grade",
+        "After verbal commits dry up"
+      ],
+      correctAnswer: 1,
+      explanation: "Sophomore = build film + reach out. Junior = visits + decisions.",
+    },
+      {
+      question: "Why do grades matter for athletic recruiting?",
+      options: [
+        "They don't — only film matters",
+        "Coaches need your GPA to even make an offer (admissions matter)",
+        "Grades are tiebreakers only",
+        "Only Ivy League cares about grades"
+      ],
+      correctAnswer: 1,
+      explanation: "If admissions won't accept you, the coach can't offer. Grades open doors.",
+    },
+      {
+      question: "It's October of sophomore year. You have a decent film from summer. Coach at a target program emails back: 'thanks, keep us posted.' What's your move?",
+      options: [
+        "Wait — they'll reach out when ready",
+        "Send them a new clip every 4-6 weeks with one new skill or game",
+        "Call the coach every week to push",
+        "Email them daily until they commit"
+      ],
+      correctAnswer: 1,
+      explanation: "'Keep us posted' = they want updates. Periodic, specific, additive — not spam, not silence.",
+      kind: "scenario",
+      scenario: "October, sophomore year. You emailed your top program with a film link. Coach replied: 'thanks for sending — keep us posted on your progress.'",
+    },
+    ],
+    keyTakeaways: [
+      "Film highlights matter more than tournament 'exposure'. Make a strong reel by sophomore year.",
+      "Email coaches directly — short, specific, with a 2-3 minute reel link, GPA, and contact.",
+      "Show interest BEFORE coaches show interest in you. They have hundreds of options.",
+      "Grades open and close more doors than you think — academic fit > athletic fit at most levels.",
     ],
   },
   {
@@ -2341,38 +2656,69 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
     description: `By high school, mental game becomes one of the biggest differences between good and great players. Physical talent gets you to the team. Mental game determines how far you go.\n\nHere are the mental skills the best high school players develop:\n\nVisualization. Before games, the best players visualize themselves succeeding. They picture making the dodge, hitting the shot, making the play. This isn't woo-woo nonsense — it's a science. Visualization actually programs your nervous system to execute when the moment comes. Spend 5 minutes the night before a game visualizing yourself playing your best.\n\nThe 5-second reset. When something bad happens — a turnover, a missed shot, a bad call — give yourself 5 seconds to feel the frustration. Then physically reset (breath, touch your stick, refocus your eyes) and go play the next play. The 5-second rule works because emotions only last seconds if you don't feed them. Players who hold onto frustration for whole quarters destroy their own performance.\n\nProcess over outcome. Outcome thinking ("I have to score") creates pressure. Process thinking ("I'm going to attack hard and trust my training") creates flow. Focus on what you can control — your effort, your reads, your execution. The score takes care of itself.\n\nGratitude for the opportunity. Sounds soft, but it works. The best players remember that getting to play this game is a privilege. When you appreciate the chance to compete, the pressure goes down and the joy goes up. Tense players play tight. Loose players play free. Gratitude keeps you loose.\n\nMental skills are like physical skills — they have to be practiced. Most players never train them. The ones who do separate themselves quickly.`,
     questions: [
       {
-        question: "What's the '5-second reset'?",
-        options: [
-          "A type of shot",
-          "Giving yourself 5 seconds to feel frustration, then physically resetting and refocusing",
-          "A defensive drill",
-          "A penalty timer",
-        ],
-        correctAnswer: 1,
-        explanation: "The 5-second reset prevents emotions from destroying your next play.",
-      },
+      question: "Pre-game routine should be:",
+      options: [
+        "Different every game for variety",
+        "Repeatable — same cues that bring you to game state",
+        "Whatever the team captain does",
+        "Skipped — saves energy"
+      ],
+      correctAnswer: 1,
+      explanation: "Repeatable routines = consistent mental state. Pros all have one.",
+    },
       {
-        question: "What does 'process over outcome' mean?",
-        options: [
-          "Focusing on the score",
-          "Focusing on what you can control — effort, reads, execution",
-          "Letting the coach decide everything",
-          "Thinking about winning",
-        ],
-        correctAnswer: 1,
-        explanation: "Process focus creates flow. Outcome focus creates pressure.",
-      },
+      question: "Best in-game self-talk after a mistake?",
+      options: [
+        "'Why did I do that?'",
+        "'My team is going to be mad'",
+        "'Next play — I got the next one'",
+        "'I'm not playing well today'"
+      ],
+      correctAnswer: 2,
+      explanation: "Forward-looking self-talk resets focus. Backward-looking traps you.",
+    },
       {
-        question: "Does visualization actually help athletic performance?",
-        options: [
-          "No — it's just woo-woo",
-          "Yes — it programs the nervous system for execution",
-          "Only in basketball",
-          "Only for goalies",
-        ],
-        correctAnswer: 1,
-        explanation: "Visualization is backed by sports science — the brain rehearses what the body will do.",
-      },
+      question: "What does sport-psych research say about visualization?",
+      options: [
+        "It only works for goalies",
+        "It measurably improves execution under pressure",
+        "It's superstition with no real effect",
+        "It only works in the off-season"
+      ],
+      correctAnswer: 1,
+      explanation: "Visualization rehearses the neural pattern. Execution improves measurably.",
+    },
+      {
+      question: "Composure is best understood as:",
+      options: [
+        "A personality trait you're born with",
+        "A trainable skill — built through practice",
+        "Something only veterans have",
+        "Luck"
+      ],
+      correctAnswer: 1,
+      explanation: "Composure is a habit. Train it deliberately, like stick skills.",
+    },
+      {
+      question: "State final, 4th quarter, tied. You miss two shots in a row. You're getting tight. What's the single best thing to do RIGHT NOW?",
+      options: [
+        "Try to score even harder",
+        "Reset routine: deep breath, cue word ('next'), commit to the next play",
+        "Pass off scoring duty completely",
+        "Get angry to fire yourself up"
+      ],
+      correctAnswer: 1,
+      explanation: "Pre-built reset routine kicks in under pressure. That's what training is for. Anger and overthinking both narrow performance.",
+      kind: "scenario",
+      scenario: "State final. 4th quarter. Tied. You missed two shots in a row — both shots you usually make. You feel yourself tightening up.",
+    },
+    ],
+    videoUrl: "https://www.youtube.com/watch?v=l5-EwrhsMzY",
+    keyTakeaways: [
+      "Pre-game routine = repeatable cues that bring you to the right state. Find yours.",
+      "Self-talk: 'next play' beats 'why did I do that' every time.",
+      "Visualization works — 5 minutes pre-game seeing yourself execute.",
+      "Composure is a skill, not a personality trait. It's trainable.",
     ],
   },
   {
@@ -2384,38 +2730,68 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
     description: `Senior leadership is the most important thing on any high school team. The best teams aren't always the most talented — they're the ones with seniors who set the standard for everyone else. If you want to be a captain, here's what real captaincy looks like.\n\nA captain is the bridge between coaches and players. When the coach has a message, the captain reinforces it in the locker room. When players have concerns, the captain brings them to the coach respectfully. You speak both languages.\n\nA captain holds people accountable — even friends. This is the hardest part. When your best friend is going half-speed in practice, you have to say something. Not in a mean way. Not by yelling. But honestly: "Hey, I need you locked in. We need you." Real captains care more about the team than about being liked.\n\nA captain runs the locker room. The energy in your locker room is your responsibility. If players are quiet and tight before games, you change that. If players are too loose and unfocused, you change that too. The captain sets the temperature.\n\nA captain takes losses harder than wins. After a loss, captains don't blame coaches, refs, or teammates. They take responsibility, talk about what went wrong, and lead the response in the next practice. Wins are easy. Losses are when leadership shows.\n\nA captain develops younger players. Every team has freshmen and sophomores looking up to the seniors. Spend time with them. Teach them. Encourage them. Make them feel like they belong. The captains who do this leave the program better than they found it — and that's the highest form of leadership.\n\nNot every senior will be a captain. But every senior should lead. The senior class sets the culture for the whole program. Take that responsibility seriously, and your team will be one nobody forgets.`,
     questions: [
       {
-        question: "What's a captain's role between coaches and players?",
-        options: [
-          "Take sides",
-          "Be a bridge — reinforce coach messages and bring player concerns up respectfully",
-          "Stay silent",
-          "Replace the coach",
-        ],
-        correctAnswer: 1,
-        explanation: "Captains translate between coaches and players, creating trust on both sides.",
-      },
+      question: "What's a captain's primary job?",
+      options: [
+        "Make game-time strategic calls",
+        "Serve the team — be the bridge to coach",
+        "Score the most points",
+        "Run team meetings unilaterally"
+      ],
+      correctAnswer: 1,
+      explanation: "Captaincy = service. Bridge between coach and players, not boss.",
+    },
       {
-        question: "How does a real captain handle a friend who's slacking?",
-        options: [
-          "Ignore it",
-          "Yell at them publicly",
-          "Talk to them directly and honestly — caring more about the team than being liked",
-          "Tell on them",
-        ],
-        correctAnswer: 2,
-        explanation: "Direct, honest accountability is how captains earn respect — even from friends.",
-      },
+      question: "How does a real captain handle a slacking friend?",
+      options: [
+        "Ignore it — friendship comes first",
+        "Call them out publicly to embarrass them",
+        "Talk to them honestly, in private — care more about team than being liked",
+        "Tell on them to coach"
+      ],
+      correctAnswer: 2,
+      explanation: "Honest, private, direct. Caring more about team than popularity is the captain test.",
+    },
       {
-        question: "When do captains' leadership skills matter most?",
-        options: [
-          "When winning easy",
-          "After losses — taking responsibility and leading the response",
-          "Only at practice",
-          "Never",
-        ],
-        correctAnswer: 1,
-        explanation: "Anyone can lead when you're winning. Real leaders show up when things are hard.",
-      },
+      question: "Senior leadership in tough moments looks like:",
+      options: [
+        "Loudest voice in the huddle",
+        "Steady — calm when teammates are emotional",
+        "Yelling to motivate",
+        "Making big speeches"
+      ],
+      correctAnswer: 1,
+      explanation: "When emotions rise, a captain's job is to lower them. Steadiness wins.",
+    },
+      {
+      question: "First job for a new captain?",
+      options: [
+        "Plan team-building events",
+        "Set the standard with your own behavior — example before voice",
+        "Pick the team's pre-game music",
+        "Speak in every huddle"
+      ],
+      correctAnswer: 1,
+      explanation: "Lead by example before voice. Words without action don't carry.",
+    },
+      {
+      question: "You're the captain. A senior teammate disagrees publicly with the coach during a film session. The room goes quiet. What do you do?",
+      options: [
+        "Side with the senior — solidarity",
+        "Stay silent — let the coach handle it",
+        "Pull the senior aside privately later: 'I hear you. Not the place. Let me talk to coach.'",
+        "Defend the coach loudly in the room"
+      ],
+      correctAnswer: 2,
+      explanation: "Captains de-escalate publicly, advocate privately. Public confrontation makes both sides dig in.",
+      kind: "scenario",
+      scenario: "Film session. A senior teammate publicly pushes back on coach's strategy in front of the team. Room gets quiet. You're the captain.",
+    },
+    ],
+    keyTakeaways: [
+      "Captaincy = serving the team, not running it. Captains speak with the coach FOR teammates, not against them.",
+      "Hard conversations with friends: 'I love you, AND your effort is hurting us.' Both true.",
+      "A captain's first job is the standard. Lead by example before you lead by voice.",
+      "Captains stay calm when teammates are emotional. Steady > loud.",
     ],
   },
   {
@@ -2427,23 +2803,68 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
     description: `Most teams have 2-3 captains. But the best teams have leadership throughout the entire roster. You don't need a "C" on your jersey to lead. In fact, some of the most impactful leaders on championship teams were never named captain.\n\nLeading without a title means setting the standard every day — at practice, in the weight room, in the film room. You're the junior who's first to every drill. You're the sophomore who stays after to work on his off-hand. You're the underclassman who knows the plays cold because you studied them on your own.\n\nIt also means holding people accountable when it's uncomfortable. When your friend is going 70% in a drill, leading without a title means pulling him aside and saying "I need more from you." Not loudly. Not in front of everyone. Just directly and honestly. Most people avoid these conversations. Leaders have them.\n\nLeading without a title means doing the unglamorous work. Picking up cones. Setting up the field. Carrying the ball bag. Making sure freshmen feel welcome. These small acts build culture more than any speech. The seniors and captains notice — and they trust you more because of it.\n\nHere's the reality: coaches don't name captains based on one moment. They watch all season. They notice who leads in October, not just in May. If you want to be a captain someday, start leading right now — title or not. By the time the vote happens, everyone will already know you're a leader.`,
     questions: [
       {
-        question: "Do you need to be named captain to lead?",
-        options: ["Yes, you need the title", "No — leadership is about actions, not titles", "Only seniors lead", "Coaches assign leadership"],
-        correctAnswer: 1,
-        explanation: "The best teams have leaders at every level. Titles are earned by leading first.",
-      },
+      question: "Leadership without a title comes from:",
+      options: [
+        "Demanding respect from teammates",
+        "A standard others want to match",
+        "Going to the coach about issues",
+        "Being friends with the captain"
+      ],
+      correctAnswer: 1,
+      explanation: "Leadership is gravitational. Your standard pulls others up.",
+    },
       {
-        question: "How do coaches decide who to name captain?",
-        options: ["Best player gets it", "Random selection", "They watch who leads all season — in October, not just May", "Popularity vote only"],
-        correctAnswer: 2,
-        explanation: "Captaincy is earned through consistent leadership over the whole season.",
-      },
+      question: "How do you influence older teammates without authority?",
+      options: [
+        "Tell them what to do",
+        "Hold yourself to a higher standard than them",
+        "Wait until you're a captain",
+        "Complain to coach about them"
+      ],
+      correctAnswer: 1,
+      explanation: "Older teammates respond to action, not lecture. Be the bar.",
+    },
       {
-        question: "What's the most impactful type of 'leading without a title'?",
-        options: ["Making speeches", "Doing the unglamorous work and holding people accountable", "Scoring the most goals", "Being the loudest"],
-        correctAnswer: 1,
-        explanation: "Culture is built through small acts — picking up cones, welcoming freshmen, having honest conversations.",
-      },
+      question: "Visible leadership behavior?",
+      options: [
+        "Wearing the team's gear off the field",
+        "First on the field, last to leave — every day",
+        "Posting team content on social",
+        "Speaking up in every team meeting"
+      ],
+      correctAnswer: 1,
+      explanation: "Show up first, leave last. Visible. Compounds.",
+    },
+      {
+      question: "Influence vs. title — which matters more?",
+      options: [
+        "Title — captains get the final word",
+        "Influence — built through reps and reliability",
+        "Both equal",
+        "Title for games, influence for practice"
+      ],
+      correctAnswer: 1,
+      explanation: "Titles are temporary. Influence built through trust is real authority.",
+    },
+      {
+      question: "You're a junior. The team is captained by two seniors who don't push the standard hard. Practice intensity has dropped. What's your move?",
+      options: [
+        "Wait until you're a captain next year",
+        "Set the standard yourself — sprint, push, compete every drill",
+        "Tell the coach about the captains",
+        "Match the captains' pace — don't disrupt"
+      ],
+      correctAnswer: 1,
+      explanation: "Don't wait for permission to lead. Set the bar. Others rise — including the captains, who often need the example.",
+      kind: "scenario",
+      scenario: "You're a junior. Two senior captains have set a casual practice tone. Intensity is dropping. Coach hasn't said anything yet.",
+    },
+    ],
+    keyTakeaways: [
+      "You don't need a 'C' to lead — you need a standard others want to match.",
+      "Pull older teammates up by holding YOURSELF to the higher standard, not by lecturing.",
+      "Show up first, leave last. Visible commitment compounds.",
+      "Your influence > your title. Build it through reps, not announcements.",
     ],
   },
   {
@@ -2455,23 +2876,68 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
     description: `Team chemistry is the difference between a group of talented individuals and a championship team. It's the invisible force that makes teammates play harder for each other, communicate without thinking, and refuse to let each other down.\n\nChemistry doesn't happen by accident. It's built intentionally through shared experiences — hard practices where everyone pushes through together, team dinners where guys get to know each other off the field, bus rides to tournaments where inside jokes start, and tough losses where nobody points fingers.\n\nThe best teams have a simple trait: they genuinely like each other. Not just tolerate — actually enjoy being around each other. That doesn't mean everyone is best friends. It means everyone respects each other and wants to compete for each other. When you like your teammates, you sprint harder on defense because you don't want to let them down. You make the extra effort on a ride because you know they'd do the same for you.\n\nBuilding chemistry takes vulnerability. You have to be willing to be honest in the film room. You have to admit when you messed up. You have to accept coaching from a teammate without getting defensive. Teams where everyone protects their ego never develop real chemistry.\n\nAs an upperclassman, you can build chemistry by including everyone. The freshmen sitting alone at lunch? Invite them over. The quiet kid who doesn't say much? Find out what he's about. The more connected your team is as people, the more connected you'll be on the field. Chemistry can't be coached — but it can be cultivated.`,
     questions: [
       {
-        question: "How is team chemistry built?",
-        options: ["It just happens naturally", "Intentionally — through shared hard experiences, honesty, and connection off the field", "Only by winning", "Coaches create it"],
-        correctAnswer: 1,
-        explanation: "Chemistry is built through shared experiences and genuine connection — not luck.",
-      },
+      question: "Chemistry is best defined as:",
+      options: [
+        "Liking your teammates personally",
+        "Predictable trust under pressure",
+        "Spending time together off the field",
+        "Posting together on social media"
+      ],
+      correctAnswer: 1,
+      explanation: "Chemistry shows up in tight games — does the team trust each other? That's the test.",
+    },
       {
-        question: "What role does vulnerability play in team chemistry?",
-        options: ["None — vulnerability is weakness", "It's essential — admitting mistakes and accepting feedback builds trust", "Only coaches need to be vulnerable", "It's overrated"],
-        correctAnswer: 1,
-        explanation: "Ego kills chemistry. Vulnerability — owning mistakes, taking coaching — builds real trust.",
-      },
+      question: "How does chemistry actually get built?",
+      options: [
+        "Pizza parties and team dinners",
+        "Shared hard work — conditioning, drills, film",
+        "Captain leadership alone",
+        "Winning a few games together"
+      ],
+      correctAnswer: 1,
+      explanation: "Bonds forge under shared difficulty, not shared comfort.",
+    },
       {
-        question: "How can upperclassmen help build chemistry?",
-        options: ["Only hang out with other seniors", "Include everyone — freshmen, quiet kids, new players", "Let the coach handle it", "Focus only on the best players"],
-        correctAnswer: 1,
-        explanation: "Connection off the field translates to chemistry on the field. Include everyone.",
-      },
+      question: "First red flag of bad team chemistry?",
+      options: [
+        "Players make jokes during huddles",
+        "Side conversations and cliques during team time",
+        "Coaches yell more than usual",
+        "The team isn't winning"
+      ],
+      correctAnswer: 1,
+      explanation: "Cliques and side conversations show the team isn't really together. Coaches catch it fast.",
+    },
+      {
+      question: "How can a regular player help chemistry without being captain?",
+      options: [
+        "Stay in your lane — let captains handle it",
+        "Invite, include, share — be the connector for new or quieter teammates",
+        "Organize bigger off-field events",
+        "Post team unity content online"
+      ],
+      correctAnswer: 1,
+      explanation: "Connectors build chemistry. Make sure no teammate feels invisible.",
+    },
+      {
+      question: "A new transfer joins the team mid-season. He's quiet at lunch, sits alone in the locker room. The team has tight cliques. What do you do?",
+      options: [
+        "Let him find his way — that's how teams work",
+        "Sit with him, introduce him, include him in the warm-up group",
+        "Invite him only if the captains say to",
+        "Let coaches handle integration"
+      ],
+      correctAnswer: 1,
+      explanation: "One person can flip a transfer's experience. That's chemistry built — and you remembering it later, when the team needs it.",
+      kind: "scenario",
+      scenario: "Mid-season transfer. He's a strong player but quiet. Eats lunch alone. Sits separate in the locker room. Cliques are tight.",
+    },
+    ],
+    keyTakeaways: [
+      "Chemistry isn't friendship. It's predictable trust under pressure.",
+      "Built in shared hard work — preseason conditioning, tough drills, film together.",
+      "The first sign of bad chemistry: side conversations and cliques during team time.",
+      "Coaches build chemistry intentionally. Players can build it too — invite, include, share.",
     ],
   },
   {
@@ -2483,23 +2949,68 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
     description: `At the high school level, the best teams are built on sacrifice. Sacrifice means putting what the team needs ahead of what you want — and doing it without complaining.\n\nSacrifice shows up in real moments:\n\nYou're an attackman who averages 3 goals a game. The coach asks you to play midfield because the team needs your athleticism in transition. You don't argue. You learn the position and give it everything because the team needs you there.\n\nYou're a senior who's earned the starting spot at close defense. The coach wants to rotate a sophomore in during the second half to develop him. You mentor the kid, teach him the slide package, and cheer him on — even though it costs you minutes.\n\nYour legs are dead in the fourth quarter of a playoff game. Your body wants to jog. But the team needs one more stop, one more clear, one more sprint in transition. You push through the pain because your teammates are counting on you.\n\nSacrifice isn't dramatic. It's not a speech. It's the daily choice to put the team above yourself. It's riding the bus to an away game you know you won't play much in, but bringing energy from the sideline. It's doing the extra conditioning rep because the coach said "team" reps, and you won't let your teammates down.\n\nThe greatest players in any sport — the ones people remember — aren't remembered for stats. They're remembered for what they gave up for the team. And the funny thing is: the players who sacrifice the most often end up getting more back. Coaches trust them. Teammates love them. And they win.`,
     questions: [
       {
-        question: "A coach asks you to switch positions for the team's benefit. What's the right response?",
-        options: ["Refuse — you earned your spot", "Complain to your parents", "Accept it and give the new role everything you have", "Quit the team"],
-        correctAnswer: 2,
-        explanation: "Sacrifice for the team is what winners do. The team's needs come first.",
-      },
+      question: "What does sacrifice mean for a team?",
+      options: [
+        "Giving up the season for school",
+        "Giving up something you want for what the team needs",
+        "Skipping practice when tired",
+        "Letting one player carry the team"
+      ],
+      correctAnswer: 1,
+      explanation: "Sacrifice is putting team need above personal want.",
+    },
       {
-        question: "What does daily sacrifice look like on a team?",
-        options: ["Big dramatic moments", "Quiet choices — extra reps, bringing energy from the sideline, mentoring younger players", "It doesn't exist", "Only captains sacrifice"],
-        correctAnswer: 1,
-        explanation: "Sacrifice is daily, unglamorous, and often unnoticed — but it builds championships.",
-      },
+      question: "Common in-game sacrifices?",
+      options: [
+        "Skipping warm-ups",
+        "Skipping the contested shot to make the better pass",
+        "Asking for more rest",
+        "Avoiding ground balls to save energy"
+      ],
+      correctAnswer: 1,
+      explanation: "Pass when teammate has the better shot. That's the daily sacrifice.",
+    },
       {
-        question: "Why do players who sacrifice often end up getting MORE from the sport?",
-        options: ["They don't", "Coaches trust them, teammates love them, and they win more", "They get lucky", "Only in the movies"],
-        correctAnswer: 1,
-        explanation: "Sacrifice earns trust and respect. These players become the heart of winning teams.",
-      },
+      question: "Sacrifice works when:",
+      options: [
+        "One person gives the most every time",
+        "Everyone gives something — distribution is even",
+        "Coaches enforce it strictly",
+        "Captains choose who sacrifices what"
+      ],
+      correctAnswer: 1,
+      explanation: "Even distribution = sustainable. One martyr team isn't sustainable.",
+    },
+      {
+      question: "Why do sacrificing teams beat more talented ones?",
+      options: [
+        "They get lucky",
+        "Cumulative effect — every play has more team value",
+        "Refs reward it",
+        "It's a coincidence"
+      ],
+      correctAnswer: 1,
+      explanation: "Better passes, better slides, better backups — small choices compound.",
+    },
+      {
+      question: "You're the leading scorer. New play has the ball going through your hands but you're the screener, not the shooter. Coach asks you to commit to it. What do you do?",
+      options: [
+        "Push back — you should be the shooter",
+        "Commit fully — set the best screens of your career",
+        "Set screens half-heartedly",
+        "Ask for a different role"
+      ],
+      correctAnswer: 1,
+      explanation: "Top scorers who screen hard make EVERYONE more dangerous. Defenses can't predict who's the threat. That's elite team play.",
+      kind: "scenario",
+      scenario: "You're the team's leading scorer. New offensive set has you as the screener — not the finisher. Coach pulls you aside to ask if you'll commit to the role.",
+    },
+    ],
+    keyTakeaways: [
+      "Sacrifice = giving up something you want for something the team needs.",
+      "Common sacrifices: shots, position, minutes, ego after a bad call.",
+      "If sacrifice feels even, both sides give up something — that's what makes it work.",
+      "The team that out-sacrifices the other team usually wins.",
     ],
   },
   {
@@ -2511,23 +3022,68 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
     description: `Every team eventually becomes a memory. The seniors graduate. The roster turns over. The only thing that survives is the culture you built — and that culture becomes the legacy you leave behind.\n\nLegacy isn't about your stats. Nobody remembers how many goals you scored in 10 years. They remember how you made people feel. They remember whether you were the kind of teammate who lifted others up or tore them down. They remember the culture you created.\n\nThe best legacy you can leave is a team that's better AFTER you leave. That means you didn't just play hard — you taught the younger players how to play hard. You didn't just show up on time — you taught the underclassmen why showing up early matters. You passed down the standard.\n\nThink about the seniors who were on your team when you were a freshman. What did they teach you? How did they make you feel? Did they make you feel welcome or excluded? Did they push you to be better or ignore you? Whatever you answer — that's their legacy. Now ask yourself: what will YOUR freshmen say about you in three years?\n\nEvery practice is a chance to build your legacy. Every interaction with a younger player. Every time you pick someone up after a mistake. Every time you set the tone in conditioning. Every time you hold yourself to the standard when it would be easier to coast.\n\nWhen you're done playing, you won't remember the score of that Tuesday practice. But you'll remember the guys you competed with. You'll remember what it felt like to be part of something bigger than yourself. And the younger players who watched you will carry forward what you showed them. That's legacy — and it's the most important thing you'll build in your entire lacrosse career.`,
     questions: [
       {
-        question: "What is a player's legacy?",
-        options: ["Their stats", "The culture and standard they leave behind for the next group", "Their highlight reel", "How many wins they had"],
-        correctAnswer: 1,
-        explanation: "Legacy is the culture you created and the players you developed — not stats.",
-      },
+      question: "What do teammates remember about you 10 years later?",
+      options: [
+        "Goals scored that season",
+        "Stats from the playoff run",
+        "How you treated people, the standard you set",
+        "Which tournaments you played"
+      ],
+      correctAnswer: 2,
+      explanation: "Stats fade. Behavior toward teammates and the standard you held — that's legacy.",
+    },
       {
-        question: "How do you build a lasting legacy?",
-        options: ["Score the most goals", "Teach younger players the standard, lift others up, build culture every day", "Win a championship", "Get recruited"],
-        correctAnswer: 1,
-        explanation: "Legacy is built daily — through mentorship, effort, and passing down the standard.",
-      },
+      question: "How do you 'build the program' as a senior?",
+      options: [
+        "Win the most games possible",
+        "Mentor underclassmen — leave it better than you found it",
+        "Score the most points to set records",
+        "Recruit transfers in"
+      ],
+      correctAnswer: 1,
+      explanation: "Programs are passed down. Your senior year is about what you leave.",
+    },
       {
-        question: "Why should you care about what freshmen think of you?",
-        options: ["You shouldn't", "Because they will carry forward whatever you showed them — your culture lives through them", "Only if they're talented", "Freshmen don't matter"],
-        correctAnswer: 1,
-        explanation: "The younger players are watching everything. What you model becomes the program's future.",
-      },
+      question: "What's the senior-year mindset shift?",
+      options: [
+        "Take more shots — last chance to score",
+        "Focus on personal stats for college",
+        "From taking to giving — invest in those who follow",
+        "Quiet down and let underclassmen lead"
+      ],
+      correctAnswer: 2,
+      explanation: "Final year is about what you give back. Investing in younger players IS the legacy.",
+    },
+      {
+      question: "Best 'legacy' move you can make this season?",
+      options: [
+        "Score 50 goals",
+        "Adopt one freshman — answer questions, model the standard, include him",
+        "Captain the team",
+        "Win MVP"
+      ],
+      correctAnswer: 1,
+      explanation: "One mentored freshman becomes a senior who mentors more. Multiplier effect — that's program building.",
+    },
+      {
+      question: "Last home game. Pre-game. A freshman is sitting alone, looking nervous. The team is in cliques. You're a senior captain. What do you do?",
+      options: [
+        "Ignore him — it's your special day",
+        "Sit next to him: 'first big game? I was you 4 years ago. Here's what helped.'",
+        "Send a teammate over to handle it",
+        "Tell him to stop being nervous"
+      ],
+      correctAnswer: 1,
+      explanation: "Legacy moments are built in choices like this. He'll remember senior night for the rest of his life — make sure it's because someone showed up.",
+      kind: "scenario",
+      scenario: "Senior night. Pre-game locker room. A freshman who barely plays is sitting alone, clearly nervous. The team's in cliques. You're a senior captain.",
+    },
+    ],
+    keyTakeaways: [
+      "Legacy is what teammates remember about you 10 years from now.",
+      "Stats fade. The kid who picked up freshmen, set the standard, played through pain — they remember.",
+      "Build the program: leave it better than you found it. Mentor the underclassmen.",
+      "Final season is your last chance to give. Spend it generously.",
     ],
   },
 ]
