@@ -262,19 +262,17 @@
     </button>
 
     <div class="footer-note">
-      Secure checkout powered by Stripe. Questions? <a href="mailto:info@bethebestli.com">info@bethebestli.com</a>
+      Secure checkout via QuickBooks. Questions? <a href="mailto:info@bethebestli.com">info@bethebestli.com</a>
     </div>
   </form>
 
 </div>
 
 <script>
-  // ====== STRIPE PAYMENT LINK ======
-  // Stripe Dashboard → Products → "BTB Futures" — $125 → Create Payment Link
-  // After-payment confirmation page: https://bethebestli.com/registration-success.html
-  // Paste link below:
-  const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/REPLACE_WITH_FUTURES_LINK";
-  // =================================
+  // ====== QUICKBOOKS PAYMENT LINK ======
+  // Linked to BTB Futures product in QuickBooks. Funds flow into QB.
+  const PAYMENT_LINK = "https://connect.intuit.com/pay/BTBLacrossecamp/scs-v1-bdb21ea46b6a49439fae22a6d2bc125fff48e7af6d8140b6a35758c738fb7ffceede97548478409bbf3cb540b631c92e?locale=EN_US&cta=paylinkbuybutton";
+  // ====================================
 
   const form = document.getElementById('regForm');
   const submitBtn = document.getElementById('submitBtn');
@@ -305,17 +303,7 @@
         program: 'Futures', player: playerName, email, refId, ts: Date.now()
       }));
 
-      if (STRIPE_PAYMENT_LINK.includes('REPLACE_WITH')) {
-        errorMsg.textContent = 'Stripe payment link not configured yet. Your registration was saved — BTB staff will follow up about payment.';
-        errorMsg.classList.add('show');
-        submitBtn.textContent = 'Registration Saved';
-        return;
-      }
-
-      const url = new URL(STRIPE_PAYMENT_LINK);
-      url.searchParams.set('prefilled_email', email);
-      url.searchParams.set('client_reference_id', refId);
-      window.location.href = url.toString();
+      window.location.href = PAYMENT_LINK;
     } catch (err) {
       errorMsg.textContent = 'Something went wrong saving your registration. Please try again or email info@bethebestli.com.';
       errorMsg.classList.add('show');
