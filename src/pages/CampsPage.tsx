@@ -24,7 +24,7 @@ const CAMPS: Camp[] = [
     tagline: "The Flagship.",
     dates: "June 30 – July 3",
     range: "4 Days · Any Consecutive",
-    time: "9 AM – 1 PM Daily",
+    time: "9 AM – 2 PM Daily",
     location: "Plainedge Park",
     forWho: "All eligible BTB athletes",
     description:
