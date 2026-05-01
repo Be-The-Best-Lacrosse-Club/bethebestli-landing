@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BTB Monthly — Newsletter Archive</title>
+<meta name="description" content="Be The Best Lacrosse Club monthly newsletter. Club updates, tournament results, academy launches, and inside stories from the BTB community.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --red: #D22630;
+    --red-dark: #a81e28;
+    --black: #0a0a0a;
+    --gray: #f4f4f4;
+    --text: #1a1a1a;
+  }
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--black);
+    color: #fff;
+    min-height: 100vh;
+  }
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    padding: 0 24px;
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.35rem;
+    letter-spacing: 2px;
+    color: #fff;
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--red); }
+  .nav-link {
+    font-size: 0.65rem; font-weight: 800; letter-spacing: 2px;
+    text-transform: uppercase; color: rgba(255,255,255,0.5);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .nav-link:hover { color: #fff; }
+  /* HERO */
+  .hero {
+    padding: 140px 24px 80px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(210,38,48,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-label {
+    display: inline-block;
+    font-size: 0.6rem; font-weight: 900; letter-spacing: 5px;
+    text-transform: uppercase; color: var(--red);
+    border: 1px solid rgba(210,38,48,0.3);
+    padding: 6px 18px; border-radius: 100px;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    letter-spacing: 4px; line-height: 0.95;
+    margin-bottom: 20px;
+  }
+  .hero h1 span { color: var(--red); }
+  .hero p {
+    font-size: 0.95rem; color: rgba(255,255,255,0.5);
+    max-width: 480px; margin: 0 auto; line-height: 1.7;
+  }
+  /* GRID */
+  .archive-section {
+    max-width: 1100px; margin: 0 auto;
+    padding: 80px 24px 120px;
+  }
+  .section-header {
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 40px;
+  }
+  .section-header h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem; letter-spacing: 3px;
+    color: rgba(255,255,255,0.25);
+  }
+  .section-header::after {
+    content: ''; flex: 1; height: 1px;
+    background: rgba(255,255,255,0.07);
+  }
+  .issues-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+  }
+  /* ISSUE CARD */
+  .issue-card {
+    position: relative;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    text-decoration: none; color: inherit;
+    display: block;
+  }
+  .issue-card:hover {
+    border-color: rgba(210,38,48,0.4);
+    background: rgba(210,38,48,0.04);
+    transform: translateY(-4px);
+    box-shadow: 0 24px 60px rgba(210,38,48,0.12);
+  }
+  .issue-card-top {
+    background: linear-gradient(135deg, #1a0a0b 0%, #0d0305 100%);
+    padding: 32px 28px 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    position: relative;
+  }
+  .issue-num {
+    font-size: 0.55rem; font-weight: 900; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--red);
+    margin-bottom: 12px;
+  }
+  .issue-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem; letter-spacing: 2px;
+    color: #fff; line-height: 1;
+    margin-bottom: 8px;
+  }
+  .issue-sub {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; color: rgba(255,255,255,0.35);
+  }
+  .issue-badge-new {
+    position: absolute; top: 16px; right: 16px;
+    background: var(--red);
+    font-size: 0.5rem; font-weight: 900; letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px; border-radius: 100px; color: #fff;
+  }
+  .issue-card-body {
+    padding: 20px 28px 24px;
+  }
+  .issue-topics {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 8px;
+    margin-bottom: 20px;
+  }
+  .issue-topics li {
+    font-size: 0.72rem; font-weight: 600;
+    color: rgba(255,255,255,0.5);
+    padding-left: 14px; position: relative;
+  }
+  .issue-topics li::before {
+    content: '—'; position: absolute; left: 0;
+    color: var(--red); font-weight: 900;
+  }
+  .issue-cta {
+    display: inline-flex; align-items: center; gap-8px;
+    gap: 8px;
+    font-size: 0.65rem; font-weight: 900; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--red);
+    transition: gap 0.2s;
+  }
+  .issue-card:hover .issue-cta { gap: 12px; }
+  .issue-cta svg { width: 14px; height: 14px; }
+  /* COMING SOON CARD */
+  .issue-card-placeholder {
+    background: rgba(255,255,255,0.015);
+    border: 1px dashed rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 40px 28px;
+    display: flex; flex-direction: column; align-items: flex-start;
+    justify-content: center;
+    min-height: 200px;
+  }
+  .placeholder-label {
+    font-size: 0.55rem; font-weight: 900; letter-spacing: 4px;
+    text-transform: uppercase; color: rgba(255,255,255,0.15);
+    margin-bottom: 12px;
+  }
+  .placeholder-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem; letter-spacing: 2px;
+    color: rgba(255,255,255,0.12);
+  }
+  /* SUBSCRIBE BANNER */
+  .subscribe-banner {
+    background: linear-gradient(135deg, #1a0304 0%, #0d0305 100%);
+    border: 1px solid rgba(210,38,48,0.2);
+    border-radius: 20px;
+    padding: 48px 40px;
+    text-align: center;
+    margin-top: 80px;
+  }
+  .subscribe-banner h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem; letter-spacing: 3px; margin-bottom: 10px;
+  }
+  .subscribe-banner p {
+    font-size: 0.85rem; color: rgba(255,255,255,0.45);
+    margin-bottom: 24px;
+  }
+  .subscribe-btn {
+    display: inline-block;
+    background: var(--red);
+    color: #fff;
+    font-size: 0.7rem; font-weight: 900; letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 14px 32px; border-radius: 10px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .subscribe-btn:hover { background: var(--red-dark); }
+  /* FOOTER */
+  footer {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 32px 24px;
+    text-align: center;
+  }
+  footer a {
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: rgba(255,255,255,0.25);
+    text-decoration: none; transition: color 0.2s;
+    margin: 0 12px;
+  }
+  footer a:hover { color: rgba(255,255,255,0.6); }
+  .footer-copy {
+    font-size: 0.6rem; color: rgba(255,255,255,0.15);
+    margin-top: 12px; letter-spacing: 1px;
+  }
+  @media (max-width: 600px) {
+    .hero { padding: 110px 20px 60px; }
+    .archive-section { padding: 60px 20px 80px; }
+    .issues-grid { grid-template-columns: 1fr; }
+    .subscribe-banner { padding: 36px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Be The <span>Best</span></a>
+  <a href="/" class="nav-link">← Back to site</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-label">BTB Monthly</div>
+  <h1>The <span>Newsletter</span></h1>
+  <p>Club updates, tournament wins, academy launches, and inside stories from the BTB community — delivered monthly.</p>
+</div>
+
+<section class="archive-section">
+
+  <div class="section-header">
+    <h2>2026 Issues</h2>
+  </div>
+
+  <div class="issues-grid">
+
+    <!-- Issue 01 — LIVE -->
+    <a href="/newsletter/issue-01-the-standard/" class="issue-card">
+      <div class="issue-card-top">
+        <div class="issue-badge-new">New</div>
+        <div class="issue-num">Issue No. 01 · May 2026</div>
+        <div class="issue-title">The Standard</div>
+        <div class="issue-sub">The BTB era starts here</div>
+      </div>
+      <div class="issue-card-body">
+        <ul class="issue-topics">
+          <li>New website + BTB Online Academy launch</li>
+          <li>BTB-OS — the all-in-one coaching platform</li>
+          <li>2034 Snipers &amp; 2032 Riptide tournament wins</li>
+          <li>Message from BTB Founder Dan Achatz</li>
+          <li>BTB East Pilot Program announcement</li>
+        </ul>
+        <span class="issue-cta">
+          Read Issue 01
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M4 10h12M10 4l6 6-6 6"/>
+          </svg>
+        </span>
+      </div>
+    </a>
+
+    <!-- Issue 02 — Coming Soon -->
+    <div class="issue-card-placeholder">
+      <div class="placeholder-label">Issue No. 02 · June 2026</div>
+      <div class="placeholder-title">Coming Next Month</div>
+    </div>
+
+    <!-- Issue 03 — Coming Soon -->
+    <div class="issue-card-placeholder">
+      <div class="placeholder-label">Issue No. 03 · July 2026</div>
+      <div class="placeholder-title">Coming Soon</div>
+    </div>
+
+  </div>
+
+  <div class="subscribe-banner">
+    <h3>Never Miss an Issue</h3>
+    <p>Join thousands of BTB families and coaches. One email per month. No spam, ever.</p>
+    <a href="/#newsletter" class="subscribe-btn">Subscribe Free</a>
+  </div>
+
+</section>
+
+<footer>
+  <a href="/">Home</a>
+  <a href="/boys">Boys Program</a>
+  <a href="/girls">Girls Program</a>
+  <a href="/contact">Contact</a>
+  <div class="footer-copy">© 2026 Be The Best Lacrosse Club · Long Island, NY</div>
+</footer>
+
+</body>
+</html>
