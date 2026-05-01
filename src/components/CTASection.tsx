@@ -67,7 +67,7 @@ export function CTASection() {
           </div>
         </div>
 
-        <p className="text-center text-[0.72rem] text-neutral-400 mt-8">
+        <p className="text-center text-[0.9rem] text-neutral-300 mt-8">
           Questions? <button onClick={() => navigate("/contact")} className="text-[var(--btb-red)] hover:underline">Contact us</button> or email <a href="mailto:info@bethebestli.com" className="text-[var(--btb-red)] hover:underline">info@bethebestli.com</a>
         </p>
       </div>

@@ -382,7 +382,7 @@ export function TryoutsPage() {
                 <ul className="space-y-4">
                   {[
                     "Elite National Schedule",
-                    "8:1 Player-Coach Ratio",
+                    "2+ Coaches Per Team",
                     "Mandatory Film Study",
                     "Recruiting Path Guidance",
                     "Pro-Level Curriculum"

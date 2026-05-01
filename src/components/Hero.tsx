@@ -96,7 +96,7 @@ export function Hero() {
         {/* HUD Data strip */}
         <div
           ref={hud1Ref}
-          className="flex flex-wrap justify-center gap-3 md:gap-6 mb-8 md:mb-10 font-mono text-[0.55rem] md:text-[0.58rem] tracking-[2px] text-white/30 uppercase"
+          className="flex flex-wrap justify-center gap-3 md:gap-6 mb-8 md:mb-10 font-mono text-[0.62rem] md:text-[0.66rem] tracking-[2px] text-white/60 uppercase"
         >
           <div className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--btb-red)] animate-pulse" />
@@ -119,7 +119,7 @@ export function Hero() {
         {/* Eyebrow */}
         <div className="inline-flex items-center gap-3 mb-8 md:mb-10">
           <div className="h-px w-8 bg-[var(--btb-red)]" />
-          <span className="text-[0.6rem] font-bold uppercase tracking-[4px] text-white/40">
+          <span className="text-[0.72rem] font-bold uppercase tracking-[4px] text-white/70">
             Long Island · Est. 2021
           </span>
           <div className="h-px w-8 bg-[var(--btb-red)]" />
@@ -131,20 +131,22 @@ export function Hero() {
           className="font-display uppercase leading-[0.88] tracking-wide mb-6 md:mb-8 w-full"
           style={{ fontSize: "clamp(3rem, 14vw, 8rem)" }}
         >
-          Train Here.{" "}
+          Built By{" "}
+          <span style={{ color: "var(--btb-red)" }}>Culture.</span>
           <br />
-          Get{" "}
-          <span style={{ color: "var(--btb-red)" }}>Recruited.</span>
+          Proven By Work.
         </h1>
 
         {/* Sub lines */}
         <p
           ref={subRef}
-          className="text-[0.9rem] md:text-[0.95rem] leading-[1.9] text-white/40 max-w-[460px] mx-auto mb-2"
+          className="relative font-display uppercase text-[1.55rem] sm:text-[1.9rem] md:text-[2.25rem] leading-[0.95] tracking-[1px] text-white max-w-[720px] mx-auto mb-5 drop-shadow-[0_4px_18px_rgba(0,0,0,0.85)]"
         >
-          The Most Complete Player Development Program on Long Island.
+          The Most Complete Player Development Program
+          <span className="block text-[var(--btb-red)]">on Long Island.</span>
+          <span className="block w-24 h-1 bg-[var(--btb-red)] mx-auto mt-5" />
         </p>
-        <p className="text-[0.85rem] md:text-[0.88rem] text-white/55 font-semibold mb-10 md:mb-12">
+        <p className="text-[0.95rem] md:text-[1rem] text-white/75 font-semibold mb-10 md:mb-12">
           Film study. Small-group training. Real coaching. Real results.
         </p>
 
@@ -181,12 +183,12 @@ export function Hero() {
         <div className="flex flex-wrap justify-center gap-6 md:gap-8 mt-12 md:mt-16 pt-8 md:pt-10 border-t border-white/[0.06] w-full max-w-[700px]">
           {[
             { val: "488", label: "Players" },
-            { val: "25", label: "Teams" },
+            { val: "22", label: "Teams" },
             { val: "45+", label: "Coaches" },
           ].map(({ val, label }) => (
             <div key={label} className="text-center">
               <div className="font-display text-3xl text-[var(--btb-red)] leading-none">{val}</div>
-              <div className="text-[0.6rem] font-bold uppercase tracking-[2px] text-white/30 mt-1">{label}</div>
+              <div className="text-[0.72rem] font-bold uppercase tracking-[2px] text-white/60 mt-1">{label}</div>
             </div>
           ))}
         </div>
@@ -199,7 +201,7 @@ export function Hero() {
         aria-label="Scroll down"
         className="absolute bottom-6 md:bottom-8 left-0 right-0 mx-auto w-fit z-10 flex flex-col items-center gap-2 group"
       >
-        <span className="text-[0.55rem] font-bold uppercase tracking-[3px] text-white/20 group-hover:text-white/40 transition-colors">
+        <span className="text-[0.68rem] font-bold uppercase tracking-[3px] text-white/55 group-hover:text-white/80 transition-colors">
           Scroll
         </span>
         {/* Animated line */}
