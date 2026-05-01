@@ -288,20 +288,17 @@
     </button>
 
     <div class="footer-note">
-      Secure checkout powered by Stripe. Questions? <a href="mailto:info@bethebestli.com">info@bethebestli.com</a>
+      Secure checkout via QuickBooks. Questions? <a href="mailto:info@bethebestli.com">info@bethebestli.com</a>
     </div>
   </form>
 
 </div>
 
 <script>
-  // ====== STRIPE PAYMENT LINK ======
-  // 1. Go to Stripe Dashboard → Products → Add Product → "BTB Summer Camp" — $300
-  // 2. Create a Payment Link for that product
-  // 3. In the Payment Link settings, set "After payment" → Confirmation page → Custom URL: https://bethebestli.com/registration-success.html
-  // 4. Paste the Payment Link URL below (https://buy.stripe.com/...)
-  const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/REPLACE_WITH_CAMP_LINK";
-  // =================================
+  // ====== QUICKBOOKS PAYMENT LINK ======
+  // Linked to BTB Lacrosse Camp product in QuickBooks. Funds flow into QB.
+  const PAYMENT_LINK = "https://connect.intuit.com/pay/BTBLacrossecamp/scs-v1-1435d07c4e4244bca62765520c1a9168d86972f13c7f4e62b183da56e129c5038557bd7ed87d4922b8d1c13598c7c3f8?locale=EN_US&cta=paylinkbuybutton";
+  // ====================================
 
   const form = document.getElementById('regForm');
   const submitBtn = document.getElementById('submitBtn');
@@ -332,17 +329,7 @@
         program: 'Summer Camp', player: playerName, email, refId, ts: Date.now()
       }));
 
-      if (STRIPE_PAYMENT_LINK.includes('REPLACE_WITH')) {
-        errorMsg.textContent = 'Stripe payment link not configured yet. Your registration was saved — BTB staff will follow up about payment.';
-        errorMsg.classList.add('show');
-        submitBtn.textContent = 'Registration Saved';
-        return;
-      }
-
-      const url = new URL(STRIPE_PAYMENT_LINK);
-      url.searchParams.set('prefilled_email', email);
-      url.searchParams.set('client_reference_id', refId);
-      window.location.href = url.toString();
+      window.location.href = PAYMENT_LINK;
     } catch (err) {
       errorMsg.textContent = 'Something went wrong saving your registration. Please try again or email info@bethebestli.com.';
       errorMsg.classList.add('show');
