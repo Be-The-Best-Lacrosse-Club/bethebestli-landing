@@ -44,6 +44,7 @@ import { FuturesPage } from "@/pages/FuturesPage"
 import { CampsPage } from "@/pages/CampsPage"
 import { FamilyHubPage } from "@/pages/FamilyHubPage"
 import { ContactPage } from "@/pages/ContactPage"
+import { CoachToolsPage } from "@/pages/CoachToolsPage"
 import homeContent from "@/content/home.json"
 
 const SITE_URL = "https://bethebestli.com"
@@ -154,7 +155,6 @@ function App() {
               <Route path="/academy" element={<AcademyGatePage />} />
               <Route path="/tryouts" element={<TryoutsPage />} />
               <Route path="/interest" element={<InterestFormPage />} />
-              <Route path="/parent-portal" element={<ParentPortalPage />} />
               <Route path="/boys" element={<ProgramPage programKey="boys" />} />
               <Route path="/boys/travel" element={<TravelPage gender="boys" />} />
               <Route path="/boys/coaches" element={<CoachingStaffPage gender="boys" />} />
@@ -175,6 +175,9 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
 
             <Route element={<ProtectedRoute />}>
+              <Route path="/parent-hub" element={<ParentPortalPage />} />
+              <Route path="/parent-portal" element={<ParentPortalPage />} />
+              <Route path="/coach-tools" element={<CoachToolsPage />} />
               <Route element={<HubLayout />}>
                 <Route path="/boys/players" element={<DigitalAcademyHubPage gender="boys" />} />
                 <Route path="/boys/academy" element={<Navigate to="/boys/players" replace />} />

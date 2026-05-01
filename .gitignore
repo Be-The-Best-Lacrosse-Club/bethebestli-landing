@@ -1,6 +1,7 @@
 .DS_Store
 node_modules/
 dist/
+.superpowers/
 _archive/
 .env
 .env.local

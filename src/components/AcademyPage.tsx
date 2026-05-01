@@ -5,7 +5,7 @@ import { SEO } from "@/components/shared/SEO"
 const stats = [
   { num: "500+", label: "Players Developed" },
   { num: "85+", label: "College Commits" },
-  { num: "8:1", label: "Player-Coach Ratio" },
+  { num: "2+", label: "Coaches Per Team" },
   { num: "2021", label: "Year Founded" },
 ]
 
@@ -18,8 +18,8 @@ const programs = [
 
 const differentiators = [
   { num: "01", title: "Film Study Is Standard", text: "Most clubs run drills and call it development. BTB players study film every single week — and they're coached on what they see. That is how lacrosse IQ is built, and it's the single biggest separator between BTB and every other program on Long Island." },
-  { num: "02", title: "Max 8:1 Player-to-Coach Ratio", text: "We cap every training group at 8 players per coach. Not 15. Not 20. 8. Every player gets real reps, real corrections, and real coaching attention — not a number in a line drill." },
-  { num: "03", title: "Written Practice Plans. Every Session.", text: "Every BTB practice follows a submitted written plan tied to the 16-week development curriculum. Coaches prepare. That preparation shows in what players develop." },
+  { num: "02", title: "2+ Coaches Per Team", text: "Every team gets multiple coaches involved in development. Players get real reps, real corrections, and real coaching attention — not a number in a line drill." },
+  { num: "03", title: "Guaranteed Individual and Team Progress", text: "Every BTB player and team is coached toward measurable improvement. We track development, set standards, and make sure progress is visible." },
   { num: "04", title: "Selective Enrollment", text: "We don't accept every player who applies. BTB is for athletes who are serious about development and families who support that commitment. The right environment only exists when the right players are in it." },
   { num: "05", title: "Recruiting Preparation Included", text: "College prep isn't a separate add-on program. It's built into the senior program — highlight film packages, outreach guidance, school list strategy, and honest profile evaluation." },
 ]
@@ -31,7 +31,7 @@ export function AcademyPage({ onBack }: { onBack?: () => void }) {
     <div className="min-h-screen bg-black text-white">
       <SEO
         title="BTB Academy | Character-Driven Lacrosse Development"
-        description="BTB Academy is Long Island's premier lacrosse development program. 500+ players developed, 85+ college commits, 8:1 player-coach ratio, and weekly film study."
+        description="BTB Academy is Long Island's premier lacrosse development program. 500+ players developed, 85+ college commits, 2+ coaches per team, and weekly film study."
         path="/academy"
       />
 
