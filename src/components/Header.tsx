@@ -79,11 +79,15 @@ export function Header() {
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       scrolled ? "bg-white/95 backdrop-blur-md shadow-lg" : "bg-transparent"
     }`}>
-      <div className="max-w-[1200px] mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
+      <div className="max-w-[1320px] mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
 
         {/* Logo */}
         <button onClick={() => go("/")} className="flex items-center gap-2 md:gap-3 group flex-shrink-0">
-          <div className="w-8 h-8 md:w-9 md:h-9 bg-[var(--btb-red)] flex items-center justify-center font-display text-lg md:text-xl text-white -skew-x-6 group-hover:scale-105 transition-transform">B</div>
+          <img
+            src="/assets/brand/btb-circle-logo.png"
+            alt="BTB Lacrosse Club"
+            className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover group-hover:scale-105 transition-transform"
+          />
           <div className={`font-display text-lg md:text-2xl tracking-tight uppercase transition-colors ${scrolled ? "text-black" : "text-white"}`}>
             Be The <span className="text-[var(--btb-red)]">Best</span>
           </div>
@@ -144,6 +148,10 @@ export function Header() {
           <button onClick={() => go("/tryouts")} className="ml-2 px-4 py-2 text-[0.72rem] font-black uppercase tracking-[2px] transition-all rounded-lg bg-[var(--btb-red)] text-white hover:bg-[var(--btb-red-dark)] shadow-lg shadow-red-500/20">
             Tryouts 2026
           </button>
+
+          <button onClick={() => go("/parent-hub")} className={navItemClass("/parent-hub")}>Parent Hub</button>
+
+          <button onClick={() => go("/coach-tools")} className={navItemClass("/coach-tools")}>Coaches Hub</button>
 
           <button onClick={() => go("/contact")} className={navItemClass("/contact")}>Contact</button>
 
@@ -262,6 +270,8 @@ export function Header() {
               {
                 label: "More",
                 links: [
+                  { label: "Parent Hub", href: "/parent-hub" },
+                  { label: "Coaches Hub", href: "/coach-tools" },
                   { label: "Recruiting", href: "/recruiting" },
                   { label: "Contact", href: "/contact" },
                   { label: "Login", href: "/login" },

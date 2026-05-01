@@ -102,7 +102,7 @@ export function FeaturedCoaches() {
             <div className="border-l-2 border-[var(--btb-red)] pl-6 space-y-5">
               {FOUNDER && FOUNDER.credentials.map((cred) => (
                 <div key={cred} className="flex flex-col">
-                  <span className="text-[0.65rem] font-black text-white/30 uppercase tracking-[3px] mb-1">
+                  <span className="text-[0.75rem] font-black text-white/60 uppercase tracking-[3px] mb-1">
                     Credential
                   </span>
                   <span className="font-display text-xl uppercase tracking-wider text-white leading-tight">
@@ -111,7 +111,7 @@ export function FeaturedCoaches() {
                 </div>
               ))}
               <div className="flex flex-col">
-                <span className="text-[0.65rem] font-black text-white/30 uppercase tracking-[3px] mb-1">
+                <span className="text-[0.75rem] font-black text-white/60 uppercase tracking-[3px] mb-1">
                   Currently Coaches
                 </span>
                 <span className="font-display text-xl uppercase tracking-wider text-white leading-tight">
@@ -139,7 +139,7 @@ export function FeaturedCoaches() {
         <div className="text-center mt-12 md:mt-16">
           <a
             href="/boys/coaches"
-            className="inline-flex items-center gap-4 text-white/40 hover:text-white transition-colors group"
+            className="inline-flex items-center gap-4 text-white/65 hover:text-white transition-colors group"
           >
             <span className="text-[0.65rem] font-black uppercase tracking-[4px]">
               View Full Staff Directory

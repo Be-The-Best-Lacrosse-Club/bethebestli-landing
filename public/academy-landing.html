@@ -312,8 +312,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
       <span class="dot"></span>
       <span id="nav-member-name">BTB Member</span>
     </div>
-    <button class="nav-link" id="nav-login-btn" onclick="openLogin()">Log In</button>
-    <a href="#pricing" class="btn-primary" style="clip-path:none;padding:10px 20px;font-size:11px;text-decoration:none;"><span>Get Access</span></a>
+    <button class="nav-link" id="nav-login-btn" onclick="window.location.href='/interest?category=Digital%20Academy&notes=Interested%20in%20BTB%20Digital%20Academy%20access'">Interest</button>
+    <a href="/interest?category=Digital%20Academy&notes=Interested%20in%20BTB%20Digital%20Academy%20access" class="btn-primary" style="clip-path:none;padding:10px 20px;font-size:11px;text-decoration:none;"><span>Interest List</span></a>
   </div>
 </nav>
 
@@ -337,7 +337,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
       <div style="display:flex;gap:8px;margin-bottom:20px;">
       </div>
       <div class="hero-ctas">
-        <a href="#pricing" class="btn-primary"><span>Get Access ▸</span></a>
+        <a href="#pricing" class="btn-primary"><span>Pricing + Interest ▸</span></a>
         <a href="#courses" class="btn-ghost">Explore Courses</a>
       </div>
     </div>
@@ -463,16 +463,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
   </div>
 </section>
 
-<!-- ═══ PRICING GATE ═══ -->
+<!-- ═══ PRICING + INTEREST ═══ -->
 <section id="pricing" class="section">
   <div class="section-inner">
-    <div class="section-eyebrow">Get Access</div>
-    <h2 class="section-title">ONE ACADEMY.<br><span class="accent">TWO PRICES.</span><br>KNOW WHICH ONE YOU ARE.</h2>
+    <div class="section-eyebrow">Pricing + Interest</div>
+    <h2 class="section-title">DIGITAL ONLINE ACADEMY.<br><span class="accent">FILM. IQ. SYSTEMS.</span><br>BUILT FOR BTB PLAYERS.</h2>
 
     <!-- Savings banner -->
     <div class="savings-banner">
-      <p>Already a BTB player, parent, or coach? <strong>Log in to unlock your member rate and save $45.</strong></p>
-      <button class="savings-cta" onclick="openLogin()">Log In to Save ▸</button>
+      <p>The BTB Digital Academy launches <strong>September 1, 2026.</strong> Fill out the interest form now and we will send access details before launch.</p>
+      <button class="savings-cta" onclick="window.location.href='/interest?category=Digital%20Academy&notes=Interested%20in%20BTB%20Digital%20Academy%20access'">Fill Out Interest Form ▸</button>
     </div>
 
     <!-- Checking spinner -->
@@ -486,9 +486,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
       <!-- BTB MEMBER -->
       <div class="price-card member-card">
-        <div class="price-tier member-tier">✦ BTB Member Price</div>
-        <div class="price-name">Member Season Pass</div>
-        <div class="price-tagline">Exclusive rate for all BTB players, parents, and coaches. Your membership is your discount.</div>
+        <div class="price-tier member-tier">✦ BTB Members</div>
+        <div class="price-name">Club Access</div>
+        <div class="price-tagline">Film study, IQ training, position tracks, and BTB systems for players already inside the club.</div>
 
         <!-- Member status (shown when logged in) -->
         <div class="member-status" id="memberStatus">
@@ -497,12 +497,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
         </div>
 
         <div class="price-amount">
-          <span class="num">$30</span>
-          <span class="per">/ full season</span>
+          <span class="num">$30</span><span class="per">season access</span>
         </div>
-        <div class="price-season-note">
-          Non-member price: <span class="crossed">$75</span> &nbsp;·&nbsp; <span class="saved">You save $45</span>
-        </div>
+        <div class="price-season-note">BTB member price · Launches Sept 1, 2026</div>
 
         <ul class="price-list">
           <li>Full course library — boys + girls</li>
@@ -517,30 +514,26 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
         <!-- Auth gate (shown when NOT logged in) -->
         <div class="auth-gate show" id="authGate">
-          <p><strong>Log in with your BTB account</strong> to unlock your $30 member rate. Don't have one? Sign up free — your membership is verified automatically.</p>
-          <button class="btn-login" onclick="openLogin()">Log In to BTB Account</button>
-          <button class="btn-signup" onclick="openSignup()">New to BTB? Create Account →</button>
+          <p><strong>BTB families will receive access details</strong> before the Digital Online Academy opens on September 1, 2026.</p>
+          <button class="btn-login" onclick="window.location.href='/interest?category=Digital%20Academy&notes=Interested%20in%20BTB%20member%20Digital%20Academy%20access'">Join Interest List</button>
         </div>
 
         <!-- Access button (shown when logged in) -->
-        <button class="btn-access-member" id="btnAccessMember" onclick="handleMemberCheckout()">
-          Get Member Access — $30 ▸
+        <button class="btn-access-member" id="btnAccessMember" onclick="window.location.href='/interest?category=Digital%20Academy&notes=Interested%20in%20BTB%20member%20Digital%20Academy%20access'">
+          Join Interest List ▸
         </button>
       </div>
 
       <!-- PUBLIC -->
       <div class="price-card public-card">
-        <div class="price-tier public-tier">Standard Rate</div>
-        <div class="price-name">Public Season Pass</div>
-        <div class="price-tagline">Open to all athletes and families outside the BTB club. Full access, same curriculum.</div>
+        <div class="price-tier public-tier">Non-BTB Members</div>
+        <div class="price-name">Public Access</div>
+        <div class="price-tagline">The full BTB Digital Academy for athletes outside the club who want the same film, IQ, and systems training.</div>
 
         <div class="price-amount">
-          <span class="num">$75</span>
-          <span class="per">/ full season</span>
+          <span class="num">$75</span><span class="per">season access</span>
         </div>
-        <div class="price-season-note" style="color:rgba(255,255,255,.3);">
-          Not a BTB member? <a href="https://bethebest.leagueapps.com/leagues" style="color:var(--red);text-decoration:none;" target="_blank">Join BTB first</a> and save $45.
-        </div>
+        <div class="price-season-note">Non-member price · Launches Sept 1, 2026</div>
 
         <ul class="price-list">
           <li>Full course library — boys + girls</li>
@@ -553,13 +546,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
           <li>Cancel anytime</li>
         </ul>
 
-        <button class="btn-access-public" onclick="handlePublicCheckout()">
-          Get Access — $75 ▸
+        <button class="btn-access-public" onclick="window.location.href='/interest?category=Digital%20Academy&notes=Interested%20in%20non-member%20BTB%20Digital%20Academy%20access'">
+          Join Interest List ▸
         </button>
-
-        <p style="font-size:11px;color:rgba(255,255,255,.25);margin-top:14px;text-align:center;">
-          Already a BTB member? <a href="#" onclick="openLogin();return false;" style="color:var(--red);">Log in above to save $45.</a>
-        </p>
       </div>
 
     </div>
@@ -610,7 +599,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
     <div class="line"><span>JOIN BTB AND TRAIN IN A WAY NO OTHER PROGRAM DOES.</span></div>
   </h2>
   <div class="final-btns" id="finalBtns">
-    <a href="#pricing" class="btn-primary"><span>Get Access ▸</span></a>
+    <a href="/interest?category=Digital%20Academy&notes=Interested%20in%20BTB%20Digital%20Academy%20access" class="btn-primary"><span>Join Interest List ▸</span></a>
     <a href="https://www.bethebestli.com" class="btn-ghost">Back to BTB</a>
   </div>
   <div class="final-tagline">Be The Best Lacrosse Club · Digital Academy · Long Island, NY · Est. 2021</div>

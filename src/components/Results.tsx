@@ -63,7 +63,7 @@ export function Results() {
               The Parent <br /> <span className="text-[var(--btb-red)]">Perspective.</span>
             </h2>
           </div>
-          <p className="text-white/40 text-[1rem] leading-relaxed max-w-[340px] border-l border-white/10 pl-8">
+          <p className="text-white/65 text-[1.05rem] leading-relaxed max-w-[380px] border-l border-white/10 pl-8">
             Authentic feedback from the families who live the BTB Standard every weekend. Real development. Real results.
           </p>
         </div>
@@ -100,7 +100,7 @@ export function Results() {
                 <div className="font-display text-lg text-white uppercase tracking-wider">
                   {t.role}
                 </div>
-                <div className="text-[0.6rem] font-mono text-white/20 uppercase tracking-[1px] mt-1">
+                <div className="text-[0.72rem] font-mono text-white/55 uppercase tracking-[1px] mt-1">
                   Verified_Feedback
                 </div>
               </div>
