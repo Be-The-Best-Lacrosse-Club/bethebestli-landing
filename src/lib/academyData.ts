@@ -1098,32 +1098,159 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
     description: `By middle school, you should understand what every position on the field does. This knowledge makes you a smarter player no matter where you play, because lacrosse is a team game where every position depends on every other.\n\nAttackmen play in front of the opposing goal and almost never cross midfield. Their job is to score and feed (pass to set up goals). Good attackmen have great stick skills, can dodge from X (behind the goal), and read defenses. They live in the offensive end.\n\nMidfielders play the whole field — offense and defense. They're the most athletic players on the team because they run constantly. A good middie can dodge, shoot, defend, and play transition. There are usually 6 midfielders on a team who rotate in shifts of 3.\n\nDefensemen play in front of their own goal. They use long sticks (called "long poles") to disrupt the offense. They throw checks, force turnovers, and clear the ball up to the offense. Good defensemen are physical, smart, and great communicators.\n\nGoalies are the last line of defense. They wear extra padding and use a stick with a much bigger head. They have to be brave (the ball is hard and comes fast), have great hand-eye coordination, and be loud — they're in charge of the defense and direct the slide packages.\n\nUnderstanding what every position does helps you play yours better. When you know what your defenseman is supposed to do, you can help them. When you know what your goalie sees, you can position yourself correctly.`,
     questions: [
       {
-        question: "Which position plays both offense and defense?",
-        options: ["Attackman", "Midfielder", "Defenseman", "Goalie"],
-        correctAnswer: 1,
-        explanation: "Midfielders run the whole field and play both ends.",
-      },
+      question: "Which position runs both offense and defense?",
+      options: [
+        "Attackman",
+        "Long-pole defenseman",
+        "Midfielder",
+        "Goalie"
+      ],
+      correctAnswer: 2,
+      explanation: "Midfielders cover the whole field. They sub off in shifts.",
+    },
       {
-        question: "Where do attackmen typically play?",
-        options: [
-          "All over the field",
-          "Behind their own goal",
-          "Around the opposing goal — they don't cross midfield much",
-          "Only on defense",
-        ],
-        correctAnswer: 2,
-        explanation: "Attackmen stay in the offensive end and rarely cross midfield.",
-      },
+      question: "Where does an attackman primarily play?",
+      options: [
+        "All over the field",
+        "Behind their own goal mostly",
+        "Around the opposing goal — rarely cross midfield",
+        "Wherever there's an open lane"
+      ],
+      correctAnswer: 2,
+      explanation: "Attackmen stay in the offensive end. They don't usually cross midfield.",
+    },
       {
-        question: "Why is communication especially important for goalies?",
-        options: [
-          "It's not",
-          "They direct the defense and call out slides",
-          "Refs need to hear them",
-          "Fans want to hear them",
+      question: "Why must goalies be loud communicators?",
+      options: [
+        "The fans need to hear them",
+        "Refs require it for clears",
+        "They direct the defense and call slides",
+        "It intimidates the offense"
+      ],
+      correctAnswer: 2,
+      explanation: "Goalies see the whole field. They run defensive communication.",
+    },
+      {
+      question: "What is an LSM (long-stick midfielder)?",
+      options: [
+        "A goalie's backup",
+        "A midfielder using a long defensive stick",
+        "An attackman with a longer stick",
+        "A faceoff specialist"
+      ],
+      correctAnswer: 1,
+      explanation: "LSMs play midfield with a long pole — disruption + clearing.",
+    },
+      {
+      question: "Coach moves you from middie to attack mid-season. You've never played attack. What's your first move?",
+      options: [
+        "Argue — you're better at midfield",
+        "Watch attackmen on film, learn the spots and dodges",
+        "Refuse to dodge in games until comfortable",
+        "Quit the team"
+      ],
+      correctAnswer: 1,
+      explanation: "Position changes are growth opportunities. Film + reps. The kids who adapt earn more roles.",
+      kind: "scenario",
+      scenario: "Mid-season your coach pulls you aside: he needs an attackman. You've played midfield your whole life.",
+    },
+    ],
+    videoUrl: "https://www.youtube.com/watch?v=UGRkkLFv-Vw",
+    keyTakeaways: [
+      "Attack stays on offense (3 players). Midfield runs both ways (3). Defense stays back (3). Goalie (1).",
+      "Long sticks (defensemen + LSM) check, force turnovers, clear ball.",
+      "Midfielders are the most athletic — sub off in shifts to stay fresh.",
+      "Goalies direct the defense — they're the loudest player on the field.",
+    ],
+    diagrams: [
+      {
+        title: "Men's Field — All 10 Positions",
+        view: "men-full",
+        caption: "Three attackmen below midfield. Three midfielders cover the whole field. Three defensemen + goalie stay back. Long-poles can ride into the offensive end on certain plays.",
+        players: [
+          {
+            x: 30,
+            y: 80,
+            role: "attack",
+            label: "A"
+          },
+          {
+            x: 50,
+            y: 88,
+            role: "attack",
+            label: "A"
+          },
+          {
+            x: 70,
+            y: 80,
+            role: "attack",
+            label: "A"
+          },
+          {
+            x: 30,
+            y: 60,
+            role: "midfield",
+            label: "M"
+          },
+          {
+            x: 50,
+            y: 60,
+            role: "midfield",
+            label: "M"
+          },
+          {
+            x: 70,
+            y: 60,
+            role: "midfield",
+            label: "M"
+          },
+          {
+            x: 30,
+            y: 40,
+            role: "defense",
+            label: "D"
+          },
+          {
+            x: 50,
+            y: 40,
+            role: "defense",
+            label: "D"
+          },
+          {
+            x: 70,
+            y: 40,
+            role: "defense",
+            label: "D"
+          },
+          {
+            x: 50,
+            y: 18,
+            role: "goalie",
+            label: "G"
+          },
         ],
-        correctAnswer: 1,
-        explanation: "Goalies see the whole field and direct the defense — they have to be loud.",
+        legend: [
+          {
+            label: "Attack",
+            color: "#D22630",
+            shape: "circle"
+          },
+          {
+            label: "Midfield",
+            color: "#EAB308",
+            shape: "circle"
+          },
+          {
+            label: "Defense (long pole)",
+            color: "#2563EB",
+            shape: "square"
+          },
+          {
+            label: "Goalie",
+            color: "#10B981",
+            shape: "square"
+          },
+        ]
       },
     ],
   },
@@ -1136,37 +1263,142 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
     description: `A dodge is how you beat your defender to create space — for a shot, a pass, or a chance to drive to the goal. Every offensive player needs to dodge. There are three main types you should master.\n\nThe Split Dodge is the most common. You run at your defender hard, plant one foot, and explode the opposite direction while switching your stick from one hand to the other. The key is selling the first direction with your body — your defender has to believe you're going right before you cut left. Speed and a quick hand switch make it work.\n\nThe Roll Dodge is for when a defender plays you tight. You drive into the defender, plant your inside foot, and roll backwards (away from them) protecting your stick. As you roll, you keep your stick high and wrap around your body. When you finish the roll, you should be facing the goal with the defender behind you. This is how you beat aggressive defenders.\n\nThe Face Dodge is a quick fake without changing hands. You bring your stick across your face like you're going to switch hands, but you don't — you keep the same hand. The defender reaches for the fake and you blow by. This is fastest because you don't lose any speed.\n\nThe most important thing about dodging isn't the move itself — it's the change of speed. You have to go from slow to fast in one step. If you dodge at one speed, the defender will recover. If you dodge with an explosive change of pace, you create separation.`,
     questions: [
       {
-        question: "What's the most important element of any dodge?",
-        options: [
-          "How fancy the move is",
-          "Change of speed — going from slow to fast quickly",
-          "Yelling loudly",
-          "Closing your eyes",
-        ],
-        correctAnswer: 1,
-        explanation: "Change of pace creates separation. A flashy dodge at one speed doesn't work.",
-      },
+      question: "What's the most important element of any dodge?",
+      options: [
+        "How fancy the move looks",
+        "Change of speed — slow to fast in one step",
+        "How loud you yell during it",
+        "Switching hands as fast as possible"
+      ],
+      correctAnswer: 1,
+      explanation: "Change of pace creates separation. A flashy dodge at one speed doesn't work.",
+    },
       {
-        question: "In a Split Dodge, you switch hands. In a Face Dodge, you...",
-        options: [
-          "Switch hands twice",
-          "Throw the ball",
-          "Fake the switch but keep the same hand",
-          "Drop your stick",
-        ],
-        correctAnswer: 2,
-        explanation: "The Face Dodge fakes a hand switch — that's why it's fastest.",
-      },
+      question: "In a split dodge you switch hands. In a face dodge you...",
+      options: [
+        "Switch hands twice",
+        "Keep the same hand but fake the switch",
+        "Drop the stick mid-dodge",
+        "Spin all the way around"
+      ],
+      correctAnswer: 1,
+      explanation: "Face dodge fakes the switch — fastest because you don't lose any speed.",
+    },
       {
-        question: "What is a Roll Dodge best used against?",
-        options: [
-          "An empty field",
-          "A defender playing you very tight",
-          "Goalies only",
-          "Your own teammates",
+      question: "When is a roll dodge most useful?",
+      options: [
+        "Wide open field, no defender",
+        "Against a defender playing you very tight",
+        "When you're tired and slow",
+        "Only against goalies stepping out"
+      ],
+      correctAnswer: 1,
+      explanation: "Roll dodges work when defenders are right on you — protect stick, roll past.",
+    },
+      {
+      question: "What's the mistake most middle-schoolers make when dodging?",
+      options: [
+        "Switching hands too fast",
+        "Running at one speed the whole time",
+        "Bringing the stick too high",
+        "Calling for the ball mid-dodge"
+      ],
+      correctAnswer: 1,
+      explanation: "One-speed dodges let the defender recover. Explosive change of pace is the key.",
+    },
+      {
+      question: "Defender is tight on your right hip, mirroring your every step. You can't get separation. What dodge?",
+      options: [
+        "Split dodge — switch hands and go opposite",
+        "Face dodge — fake the switch and blow by",
+        "Roll dodge — plant, roll backwards, protect stick",
+        "Slow down and pass it back"
+      ],
+      correctAnswer: 2,
+      explanation: "Tight, mirroring defender = roll dodge. Plant the inside foot, roll away, stick protected.",
+      kind: "scenario",
+      scenario: "1v1 from up top. Defender is glued to your right hip. Every move you make, he mirrors. You need to create space NOW.",
+    },
+    ],
+    videoUrl: "https://www.youtube.com/watch?v=vQfmOqWZa_o",
+    keyTakeaways: [
+      "Three core dodges: split, roll, face. Each beats a different defender posture.",
+      "Split dodge: switch hands, change direction. The change of pace is what beats them.",
+      "Roll dodge: against tight defenders — plant inside foot, roll backwards, protect stick.",
+      "Face dodge: fake the switch but keep the same hand — fastest because no speed loss.",
+    ],
+    diagrams: [
+      {
+        title: "Split Dodge — Path",
+        view: "men-half-offensive",
+        caption: "Attack right at the defender's chest, plant inside foot, switch hands, explode the opposite direction. The change of pace creates separation.",
+        players: [
+          {
+            x: 50,
+            y: 35,
+            role: "offense",
+            label: "1",
+            ball: true,
+            highlight: true
+          },
+          {
+            x: 50,
+            y: 48,
+            role: "defender",
+            label: "D"
+          },
+          {
+            x: 30,
+            y: 65,
+            role: "offense",
+            label: "2"
+          },
+          {
+            x: 70,
+            y: 65,
+            role: "offense",
+            label: "3"
+          },
         ],
-        correctAnswer: 1,
-        explanation: "Roll dodges work when a defender is right on you — you protect your stick and roll past them.",
+        arrows: [
+          {
+            from: {
+              x: 50,
+              y: 35
+            },
+            to: {
+              x: 50,
+              y: 50
+            },
+            kind: "run",
+            label: "1. Attack"
+          },
+          {
+            from: {
+              x: 50,
+              y: 50
+            },
+            to: {
+              x: 30,
+              y: 70
+            },
+            kind: "run",
+            curve: -8,
+            label: "2. Split & go"
+          },
+        ],
+        legend: [
+          {
+            label: "Offense (with ball)",
+            color: "#D22630",
+            shape: "circle"
+          },
+          {
+            label: "Defender",
+            color: "#2563EB",
+            shape: "square"
+          },
+        ]
       },
     ],
   },
@@ -1179,37 +1411,135 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
     description: `Good defense in lacrosse starts with footwork. Most young defenders try to swing their stick at the ball — that's a mistake. The best defenders move their feet, stay in position, and force the offense into bad spots.\n\nDEFENSIVE FUNDAMENTALS\n\n1. Breakdown Position\nKnees bent, weight on the balls of your feet, hips low, stick out in front. This is your defensive stance. From here you can move in any direction instantly. Standing tall means you're already beat.\n\n2. Footwork: Slide-Step, Never Cross\nWhen the offense moves, you shuffle. Slide left, slide right — always keeping your hips square to the ball carrier. NEVER cross your feet. Crossing = losing balance = getting beat.\n\n3. The Approach\nWhen closing out on a ball carrier, don't run straight at him. Take an angle that forces him to one side. Take away the middle of the field and push him toward the sideline or toward your help.\n\n4. Stick Checks\nUse quick "poke checks" — a short jab toward the hands or stick head. These are more effective than wild, swinging checks. The goal isn't to take the ball away every time. The goal is to disrupt, force a bad decision, and slow the dodger down so your slide can arrive.\n\nDEFENSIVE COMMUNICATION\nDefense is a talking game. Every defender needs these calls:\n- "I got ball!" — I'm on the ball carrier\n- "I got two!" or "I'm hot!" — I'm the first slide\n- "I got three!" — I'm the second slide\n- "Check!" — The ball carrier picked up his stick to pass — tighten up\n- "Fire! Fire!" — Slide NOW\n\nTHE CARDINAL RULE\nStay between your man and the goal. If you're between your man and the goal, you've already won most of the battle. If he gets past you, your team is scrambling.\n\nCOACHING POINTS\n- Defense is 80% footwork, 20% stick work\n- Poke checks > wild swings. Controlled, quick, directed.\n- The player who communicates on defense is worth more than the player who just checks hard`,
     questions: [
       {
-        question: "What's the cardinal rule of defense?",
-        options: [
-          "Always check hard",
-          "Stay between your man and the goal",
-          "Run to the ball",
-          "Stand tall",
-        ],
-        correctAnswer: 1,
-        explanation: "Body position between your man and the goal is the foundation of defense.",
-      },
+      question: "What's the cardinal rule of defense?",
+      options: [
+        "Always check hard",
+        "Stay between your man and the goal",
+        "Run to the ball carrier first",
+        "Stand tall to look bigger"
+      ],
+      correctAnswer: 1,
+      explanation: "Body position between man and goal is the foundation.",
+    },
       {
-        question: "What kind of footwork should defenders use?",
-        options: [
-          "Crossing feet for speed",
-          "Standing flat-footed",
-          "Slide-stepping without crossing feet",
-          "Jumping",
-        ],
-        correctAnswer: 2,
-        explanation: "Slide-step, never cross your feet — crossing leads to losing balance and getting beat.",
-      },
+      question: "Defensive footwork basic rule:",
+      options: [
+        "Cross feet for max speed",
+        "Stand flat-footed for balance",
+        "Slide-step, never cross feet",
+        "Jump backwards to keep cushion"
+      ],
+      correctAnswer: 2,
+      explanation: "Crossing feet = losing balance = getting beat.",
+    },
       {
-        question: "What's the goal of poke checks?",
-        options: [
-          "Hurt the other player",
-          "Make them uncomfortable and force them to slow down",
-          "Take the ball away every time",
-          "Get a flag thrown",
+      question: "Goal of a poke check?",
+      options: [
+        "Take the ball away every time",
+        "Disrupt and slow the dodger down",
+        "Get the ref to throw a flag",
+        "Knock the helmet off"
+      ],
+      correctAnswer: 1,
+      explanation: "Poke checks force bad decisions and buy slide time. They rarely win the ball.",
+    },
+      {
+      question: "How should you approach a ball carrier?",
+      options: [
+        "Run straight at him full speed",
+        "Take an angle that pushes him to the sideline",
+        "Stand still and wait for him to come",
+        "Reach with your stick before approaching"
+      ],
+      correctAnswer: 1,
+      explanation: "Angle takes away the middle and pushes him into help.",
+    },
+      {
+      question: "Attackman driving from your right wing. He's heading toward the middle of the field. You're guarding him. What do you do?",
+      options: [
+        "Reach with your stick to slow him",
+        "Slide-step to cut off his middle path, force him sideline",
+        "Run past him to the goalie's position",
+        "Drop your stick down and brace for contact"
+      ],
+      correctAnswer: 1,
+      explanation: "Cut off the middle. Force him to the sideline where help is — and where the angle to score gets bad.",
+      kind: "scenario",
+      scenario: "Right wing dodge from up top. The attackman is faster than you and trying to get to the middle for an inside roll.",
+    },
+    ],
+    videoUrl: "https://www.youtube.com/watch?v=UGRkkLFv-Vw",
+    keyTakeaways: [
+      "Defense is 80% footwork, 20% stick work. Move feet, not stick.",
+      "Slide-step (never cross feet) — keep hips square to the ball carrier.",
+      "Stay between man and goal — that's the cardinal rule.",
+      "Poke checks > wild swings. Disrupt and force bad decisions, don't always go for the ball.",
+    ],
+    diagrams: [
+      {
+        title: "Defensive Stance + Approach Angle",
+        view: "men-half-defensive",
+        caption: "Stay between man and goal. Force the dodger to the sideline (away from the middle). Slide-step — never cross your feet. Push him into your help.",
+        players: [
+          {
+            x: 60,
+            y: 50,
+            role: "offense",
+            label: "O",
+            ball: true,
+            highlight: true
+          },
+          {
+            x: 60,
+            y: 60,
+            role: "defender",
+            label: "D"
+          },
+          {
+            x: 50,
+            y: 80,
+            role: "goalie",
+            label: "G"
+          },
         ],
-        correctAnswer: 1,
-        explanation: "Poke checks disrupt and slow the offense down — they don't usually take the ball.",
+        zones: [
+          {
+            shape: "rect",
+            x: 35,
+            y: 60,
+            w: 30,
+            h: 22,
+            color: "#D22630",
+            label: "Take away middle"
+          },
+        ],
+        arrows: [
+          {
+            from: {
+              x: 60,
+              y: 50
+            },
+            to: {
+              x: 80,
+              y: 70
+            },
+            kind: "run",
+            curve: 5,
+            label: "Push to sideline"
+          },
+        ],
+        legend: [
+          {
+            label: "Offense",
+            color: "#D22630",
+            shape: "circle"
+          },
+          {
+            label: "Defender",
+            color: "#2563EB",
+            shape: "square"
+          },
+        ]
       },
     ],
   },
@@ -1222,32 +1552,167 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
     description: `Reading the field means understanding what's happening BEFORE it happens. The best lacrosse players don't react — they anticipate. This is what separates good middle schoolers from great ones.\n\nWhen you have the ball, scan the field. Where are your teammates? Where is open space? Where is the defense weakest? You should know all this before you make your move, not after. The best players see the whole field at once.\n\nWhen you don't have the ball, watch the player with the ball and the defenders. Anticipate where the ball is going next. If a teammate is being doubled, get open for an outlet pass. If the defense is sliding to your teammate, expect that you might be left open — be ready to receive.\n\nOn defense, watch the ball carrier's body language. Are they going to dodge? Are they passing? Where are their eyes looking? A player's eyes usually tell you where they're going to throw. If you can read that, you can intercept passes.\n\nLacrosse IQ comes from two things: experience (the more you play, the more patterns you recognize) and film study (watching games and analyzing what good players do). Start watching college and pro lacrosse on YouTube. Pause when something interesting happens and ask: why did they do that? Where was the open space? What did the defense do wrong?\n\nThe best way to improve your IQ at this age is just to watch the game with curiosity. Don't just watch the ball — watch the players without the ball. That's where you learn the most.`,
     questions: [
       {
-        question: "What's the difference between a good player and a great one in terms of IQ?",
-        options: [
-          "Great players are bigger",
-          "Great players anticipate — they don't just react",
-          "Great players run faster",
-          "Great players have newer sticks",
-        ],
-        correctAnswer: 1,
-        explanation: "Anticipation is the hallmark of high IQ. Reacting is too late.",
-      },
+      question: "What separates good players from great ones in IQ?",
+      options: [
+        "Greats run faster",
+        "Greats are taller and stronger",
+        "Greats anticipate, not just react",
+        "Greats have nicer gear"
+      ],
+      correctAnswer: 2,
+      explanation: "Anticipation — seeing the play before it happens — is the IQ marker.",
+    },
       {
-        question: "When watching lacrosse film, what should you focus on?",
-        options: [
-          "Only the ball",
-          "Only the goalie",
-          "Players without the ball — that's where you learn the most",
-          "The fans",
-        ],
-        correctAnswer: 2,
-        explanation: "Watching off-ball movement teaches you positioning, anticipation, and team play.",
-      },
+      question: "Watching film, what should you focus on?",
+      options: [
+        "Just the ball at all times",
+        "Just the goalie's saves",
+        "Off-ball movement — that's the lesson",
+        "The scoreboard and time"
+      ],
+      correctAnswer: 2,
+      explanation: "Off-ball movement teaches positioning, anticipation, team play.",
+    },
       {
-        question: "On defense, what gives away where an offensive player will pass?",
-        options: ["Their feet", "Their eyes", "Their stick color", "Their helmet"],
-        correctAnswer: 1,
-        explanation: "Eyes usually telegraph the pass. Reading eyes is a key defensive skill.",
+      question: "On defense, what tells you where the ball carrier will pass?",
+      options: [
+        "Their feet and stride",
+        "Their eyes — they look where they're throwing",
+        "Their helmet number",
+        "How they hold their stick"
+      ],
+      correctAnswer: 1,
+      explanation: "Eyes telegraph passes. Reading them = interceptions.",
+    },
+      {
+      question: "When you have the ball, what should you do BEFORE you make your move?",
+      options: [
+        "Run as fast as possible",
+        "Scan: teammates, space, weak defender",
+        "Yell for a pick",
+        "Wait until coach calls a play"
+      ],
+      correctAnswer: 1,
+      explanation: "Great players scan first, commit second. That's how openings are seen.",
+    },
+      {
+      question: "You catch the ball topside. As you turn, you see the crease defender step toward you — clearly preparing to slide. What do you do?",
+      options: [
+        "Dodge harder, ignore the slide",
+        "Pass to the crease attackman the slider just left",
+        "Pass back to where you got the ball",
+        "Shoot from where you are"
+      ],
+      correctAnswer: 1,
+      explanation: "Slide left a man open. Pass to him — that's a layup. Forcing the dodge into the slide is a turnover.",
+      kind: "scenario",
+      scenario: "You catch a feed up top. As you load to dodge, you see the crease defender's hips turn toward you — he's about to slide.",
+    },
+    ],
+    videoUrl: "https://www.youtube.com/watch?v=4LHsrseSKak",
+    keyTakeaways: [
+      "Lacrosse IQ = anticipating, not just reacting.",
+      "With ball: scan teammates, open space, weakest defender BEFORE you commit.",
+      "Off-ball: watch ball carrier + defenders, get to where the ball is going next.",
+      "Eyes telegraph passes. Read where the ball carrier is looking.",
+    ],
+    diagrams: [
+      {
+        title: "Reading the Slide",
+        view: "men-half-offensive",
+        caption: "Before committing, find the slide. If the slider leaves their man, pass to that player — they're now open. If no slide comes, dodge hard and finish.",
+        players: [
+          {
+            x: 25,
+            y: 60,
+            role: "offense",
+            label: "1",
+            ball: true,
+            highlight: true
+          },
+          {
+            x: 50,
+            y: 75,
+            role: "offense",
+            label: "2"
+          },
+          {
+            x: 75,
+            y: 60,
+            role: "offense",
+            label: "3"
+          },
+          {
+            x: 28,
+            y: 65,
+            role: "defender",
+            label: "Da"
+          },
+          {
+            x: 52,
+            y: 80,
+            role: "defender",
+            label: "Db"
+          },
+          {
+            x: 73,
+            y: 65,
+            role: "defender",
+            label: "Dc"
+          },
+        ],
+        arrows: [
+          {
+            from: {
+              x: 25,
+              y: 60
+            },
+            to: {
+              x: 35,
+              y: 75
+            },
+            kind: "run",
+            curve: -3,
+            label: "1. Dodge"
+          },
+          {
+            from: {
+              x: 52,
+              y: 80
+            },
+            to: {
+              x: 38,
+              y: 75
+            },
+            kind: "run",
+            label: "2. Slide leaves"
+          },
+          {
+            from: {
+              x: 25,
+              y: 60
+            },
+            to: {
+              x: 50,
+              y: 75
+            },
+            kind: "pass",
+            curve: -3,
+            label: "3. Skip to 2"
+          },
+        ],
+        legend: [
+          {
+            label: "Offense",
+            color: "#D22630",
+            shape: "circle"
+          },
+          {
+            label: "Defender",
+            color: "#2563EB",
+            shape: "square"
+          },
+        ]
       },
     ],
   },
@@ -1260,38 +1725,69 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
     description: `Mental toughness is what keeps you playing your best when things get hard. Every player has good games. The toughest players have good games AND bad games — and they fight just as hard in both.\n\nHere's what mental toughness actually looks like in middle school lacrosse:\n\nWhen you make a mistake, you reset. You don't dwell on it. You don't drop your head. You don't look at the bench like "sorry coach." You take a breath, refocus, and play the next play. The hardest thing in sports is letting go of a mistake fast. Mentally tough players let it go in seconds.\n\nWhen the ref makes a bad call, you don't argue. You don't whine. You play harder on the next play. Refs make mistakes — it's part of the game. Players who complain about refs lose focus and play worse. Players who shake it off and compete are the ones who win.\n\nWhen you're tired, you push through. The fourth quarter is when games are won. Most players slow down when they're tired. The mentally tough player speeds up — because they know everyone else is slowing down. That's your edge.\n\nWhen you're losing, you don't quit. Down 6-0? You compete on every ground ball like it's 0-0. You play defense like every save matters. Mentally tough players don't care about the score — they care about the next play. You can't change the score, but you can change how hard you play right now.\n\nMental toughness is a muscle. The more you practice it in small moments — finishing one extra rep, running one more sprint, staying focused after a bad play — the stronger it gets.`,
     questions: [
       {
-        question: "What should you do when you make a mistake in a game?",
-        options: [
-          "Argue with the ref",
-          "Drop your head and feel sorry for yourself",
-          "Reset quickly and focus on the next play",
-          "Yell at a teammate",
-        ],
-        correctAnswer: 2,
-        explanation: "Mentally tough players let go of mistakes fast and focus on what's next.",
-      },
+      question: "After a mistake, what's the tough-player move?",
+      options: [
+        "Argue with the ref about the play",
+        "Drop your head until the next sub",
+        "Reset fast — focus on the next play",
+        "Find a teammate to blame"
+      ],
+      correctAnswer: 2,
+      explanation: "Mentally tough players let go of mistakes in seconds.",
+    },
       {
-        question: "When does mental toughness matter most?",
-        options: [
-          "When you're winning easy",
-          "When everything is going well",
-          "When things are hard — when tired, losing, or frustrated",
-          "Only at practice",
-        ],
-        correctAnswer: 2,
-        explanation: "Toughness is tested in adversity — that's when it matters.",
-      },
+      question: "When does mental toughness actually get tested?",
+      options: [
+        "When you're winning easy",
+        "When everything is going well",
+        "When tired, losing, or frustrated",
+        "Only at championship games"
+      ],
+      correctAnswer: 2,
+      explanation: "Toughness is built and shown in adversity.",
+    },
       {
-        question: "If you're losing badly, what should your mindset be?",
-        options: [
-          "Give up — the game is over",
-          "Compete on every play — score doesn't change effort",
-          "Blame your teammates",
-          "Take it easy and save energy",
-        ],
-        correctAnswer: 1,
-        explanation: "Tough players focus on the next play, not the scoreboard.",
-      },
+      question: "Down 7-1 in the third. What's the right mindset?",
+      options: [
+        "Conserve energy for next game",
+        "Compete on every play — score doesn't change effort",
+        "Try to score 6 yourself to catch up",
+        "Take it easy to avoid injury"
+      ],
+      correctAnswer: 1,
+      explanation: "Effort is independent of the scoreboard.",
+    },
+      {
+      question: "Why do tough players get FASTER in the 4th quarter?",
+      options: [
+        "They're in better shape than everyone",
+        "Most opponents are slowing down — that's the edge",
+        "Coaches force them to sprint",
+        "The whistle motivates them"
+      ],
+      correctAnswer: 1,
+      explanation: "If you're holding pace while opponents slow, you've gained relative speed. That's the gap.",
+    },
+      {
+      question: "Bad call costs you a goal. Crowd is yelling at the ref. Your teammates are arguing. 30 seconds later, the ball is loose at midfield. What do you do?",
+      options: [
+        "Yell at the ref about the bad call",
+        "Stand and wait for someone else to get it",
+        "Sprint to the ground ball — next play",
+        "Walk over to argue with coach"
+      ],
+      correctAnswer: 2,
+      explanation: "Tough players play through bad calls. Sprint to the ball — that's how you flip momentum.",
+      kind: "scenario",
+      scenario: "Late 3rd quarter. Bad call wiped out your team's goal. The crowd is angry, your teammates are arguing. Then: ground ball at midfield.",
+    },
+    ],
+    videoUrl: "https://www.youtube.com/watch?v=l5-EwrhsMzY",
+    keyTakeaways: [
+      "Mistakes are inevitable. Tough players reset in seconds — don't dwell.",
+      "When tired, push HARDER — everyone else is slowing down. That's your edge.",
+      "Don't argue with refs. It costs focus and rarely changes the call.",
+      "Score doesn't dictate effort. Compete play to play, not based on the scoreboard.",
     ],
   },
   {
@@ -1303,33 +1799,68 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
     description: `Leadership in middle school lacrosse doesn't mean wearing a "C" on your jersey. It doesn't mean being the loudest kid in the huddle. Real leadership is about how you act when nobody is paying attention.\n\nThe biggest myth about leadership is that you have to be the best player. You don't. Some of the best leaders on great teams are bench players who bring incredible energy at practice every day. Leadership is a choice — anyone can do it if they choose to.\n\nHere's what middle school leadership looks like:\n\nYou show up early. You stay late. You're the one who picks up balls without being told. You sprint hard in conditioning even though no one is watching the back of the line. You set the standard with your actions.\n\nYou pick up teammates. When a teammate makes a mistake, you're the first one to say "shake it off, I got you." When a teammate scores, you're the first to celebrate with them. When practice is grinding and everyone is tired, you're the one who picks up the energy.\n\nYou don't talk behind anyone's back. Real leaders don't gossip about teammates, complain about coaches to their friends, or make excuses. If you have a problem, you talk directly to the person and try to fix it. Leaders build trust — and trust is built by being honest and reliable.\n\nYou take coaching well. Leaders don't argue with feedback. They say "got it, coach" and apply it on the next rep. When teammates see you take coaching, they learn to do the same.\n\nIf you do these things, your coaches will notice. Your teammates will notice. And one day, when there's a hard moment in a game and the team needs someone to step up, everyone will look at you — because you've already been leading the whole time.`,
     questions: [
       {
-        question: "Do you have to be the best player to be a leader?",
-        options: ["Yes", "Only if you're a captain", "No — leadership is a choice anyone can make", "Only seniors"],
-        correctAnswer: 2,
-        explanation: "Leadership is about effort and example, not skill level.",
-      },
+      question: "Do you need to be a starter to be a leader?",
+      options: [
+        "Yes — only starters lead",
+        "Only if you wear a captain's C",
+        "No — leadership is a choice anyone can make",
+        "Only seniors lead"
+      ],
+      correctAnswer: 2,
+      explanation: "Effort and example don't require status.",
+    },
       {
-        question: "Real leaders handle problems with teammates by...",
-        options: [
-          "Talking behind their back",
-          "Telling other teammates",
-          "Going directly to the person and trying to fix it",
-          "Quitting the team",
-        ],
-        correctAnswer: 2,
-        explanation: "Direct, honest communication builds trust. Gossip destroys it.",
-      },
+      question: "Real leaders handle teammate problems by...",
+      options: [
+        "Talking behind their backs",
+        "Telling other teammates first",
+        "Going directly to the person to fix it",
+        "Letting it stay unresolved"
+      ],
+      correctAnswer: 2,
+      explanation: "Direct, honest communication builds trust. Gossip destroys it.",
+    },
       {
-        question: "What's the biggest sign of leadership at practice?",
-        options: [
-          "Talking the most",
-          "Setting the standard with your actions — early, focused, hustling",
-          "Wearing the best gear",
-          "Being the coach's favorite",
-        ],
-        correctAnswer: 1,
-        explanation: "Actions speak louder than words. Lead by example every day.",
-      },
+      question: "Biggest leadership tell at practice?",
+      options: [
+        "Being the loudest in huddle",
+        "Setting the standard with action — first, focused",
+        "Wearing the best gear",
+        "Being friends with the coach"
+      ],
+      correctAnswer: 1,
+      explanation: "Actions are visible. Words alone don't lead.",
+    },
+      {
+      question: "Coach gives you tough feedback in front of the team. Best response?",
+      options: [
+        "Defend yourself with explanations",
+        "Roll your eyes and take it later",
+        "'Got it, coach' — apply it on the next rep",
+        "Argue calmly until coach agrees"
+      ],
+      correctAnswer: 2,
+      explanation: "Taking coaching well shows the team how to handle it. Big leadership signal.",
+    },
+      {
+      question: "You're a sophomore. A senior teammate is loafing through warm-ups. Captain isn't on the field yet. What's the leadership move?",
+      options: [
+        "Match the senior's energy — fit in",
+        "Sprint and stay ready — your example pulls others",
+        "Tell the coach about the senior",
+        "Wait for the captain to handle it"
+      ],
+      correctAnswer: 1,
+      explanation: "Leadership doesn't wait for permission. Set the standard with your effort — others follow.",
+      kind: "scenario",
+      scenario: "Saturday warm-ups. Senior teammate is jogging at 50%. Captain is in the bathroom. Coach is at the other end of the field.",
+    },
+    ],
+    keyTakeaways: [
+      "You don't need a 'C' to lead. Leadership is action, not status.",
+      "Show up early, stay late, pick up balls — set the standard with your behavior.",
+      "Pick teammates up after mistakes. Be the first voice they hear.",
+      "Take coaching well. Saying 'got it' and applying feedback fast is contagious.",
     ],
   },
   {
@@ -1341,23 +1872,69 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
     description: `By middle school, lacrosse becomes a talking game. The teams that communicate win. The teams that stay silent lose. Finding your voice on the field is one of the most important things you can do at this age.\n\nWHAT TO SAY AND WHEN\n\nOn Defense:\n- "I got ball!" — You're guarding the ball carrier\n- "I'm hot!" or "I got two!" — You're the first slide\n- "I got three!" — You're the second slide\n- "Help left!" / "Help right!" — You're one pass away and ready to slide from that direction\n- "Fire! Fire!" — Slide NOW, the ball carrier is driving\n- "Check!" — The ball carrier is looking to pass, tighten up\n\nOn Offense:\n- "I'm open!" — You're free for a pass\n- "Switch!" — Trade assignments or positions\n- "Time!" — You have time, don't rush the play\n- "Shot!" — Telling everyone you're about to shoot so they can crash for the rebound\n\nIn Transition:\n- "Break!" — We have a numbers advantage, push it\n- "Slow it down!" — We don't have numbers, settle into offense\n- "Back!" — Get back on defense\n\nThe hardest part about finding your voice is that it feels awkward at first. You might feel weird yelling on the field if you've never done it. Here's the truth: nobody judges you for communicating. Your coaches WANT you to talk. Your teammates NEED you to talk.\n\nStart small. Pick one call per practice — just "Ball!" when you're sliding on defense. Once that feels natural, add another. Then another. Before long, you'll be one of the loudest players on the field.\n\nCOACHING POINTS\n- Talking when you're tired is the real test — if you can communicate tired, you can communicate any time\n- Verbal leadership is just as important as physical leadership\n- The best communicators make everyone around them better`,
     questions: [
       {
-        question: "What does good on-field communication sound like?",
-        options: ["Yelling random things", "Specific calls — 'I got ball!' 'Cutter left!' 'Slide!'", "Staying silent", "Talking to the ref"],
-        correctAnswer: 1,
-        explanation: "Communication is specific, timely info that helps teammates make better decisions.",
-      },
+      question: "Good on-field communication sounds like:",
+      options: [
+        "Random shouting",
+        "Specific calls — 'I got ball', 'Slide', 'Cutter'",
+        "Whispered to nearest teammate",
+        "Only after coach yells first"
+      ],
+      correctAnswer: 1,
+      explanation: "Specific, timely info that helps teammates make decisions.",
+    },
       {
-        question: "If talking on the field feels awkward, what should you do?",
-        options: ["Never talk", "Wait until you're older", "Start small — pick one call and practice it until it's natural", "Only talk in games"],
-        correctAnswer: 2,
-        explanation: "Everyone starts somewhere. Pick one call, practice it, then build from there.",
-      },
+      question: "On defense, what does 'I'm hot' mean?",
+      options: [
+        "I'm shooting next",
+        "I'm covering the ball",
+        "I'm the first slide",
+        "I want a sub"
+      ],
+      correctAnswer: 2,
+      explanation: "'I'm hot' or 'I got two' = I'm the first slide.",
+    },
       {
-        question: "Why does communication help a team win?",
-        options: ["It doesn't", "It gives teammates information to make better decisions", "Only goalies need to talk", "Coaches prefer quiet teams"],
-        correctAnswer: 1,
-        explanation: "Every call helps the team. Defense, offense, transition — communication fuels it all.",
-      },
+      question: "When should an offensive player yell 'Shot!'",
+      options: [
+        "After the ball goes in",
+        "Before the shot, so teammates crash for rebound",
+        "Only on missed shots",
+        "Whenever they touch the ball"
+      ],
+      correctAnswer: 1,
+      explanation: "Calling shot lets teammates crash the crease for the backup.",
+    },
+      {
+      question: "If communicating feels awkward at first, what's the move?",
+      options: [
+        "Skip it — wait until you're older",
+        "Pick one call and practice it until it's natural",
+        "Only talk in games, not practice",
+        "Wait for a captain to start"
+      ],
+      correctAnswer: 1,
+      explanation: "Start small. One call at a time builds the habit.",
+    },
+      {
+      question: "Late in the game. You're on D. Your man cuts behind the goal. The defenseman next to you is now responsible — but he's looking the wrong way. What do you yell?",
+      options: [
+        "Just stay quiet — let him figure it out",
+        "'Switch! Your man, behind!'",
+        "'Coach! Sub!'",
+        "'I got him' even though you don't"
+      ],
+      correctAnswer: 1,
+      explanation: "Specific, urgent call. Teammate gets the info he needs RIGHT NOW. Silence = goal.",
+      kind: "scenario",
+      scenario: "Late 4th quarter. Your man cuts behind the goal — you can't follow because of the slide rules. The next defenseman is responsible but staring at the ball.",
+    },
+    ],
+    videoUrl: "https://www.youtube.com/watch?v=XLpXy_AOCfg",
+    keyTakeaways: [
+      "Lacrosse is a talking game. Quiet teams lose.",
+      "Defense calls: 'I got ball', 'I'm hot' (1st slide), 'I got two' (2nd slide), 'Fire!'",
+      "Offense calls: 'I'm open', 'Switch', 'Time', 'Shot' (so teammates crash for rebound).",
+      "Talking when tired is the real test. If you can talk tired, you can talk anytime.",
     ],
   },
   {
@@ -1369,23 +1946,68 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
     description: `Not every player on a team is the star scorer. Not every player starts. But every player has a role — and the teams that win are the ones where every kid OWNS their role completely.\n\nMaybe you're the defensive midfielder who disrupts the other team's transition. Maybe you're the short-stick defensive middie who takes the faceoffs. Maybe you're the second-line midfielder who brings energy off the bench every time you sub in. Whatever your role is, commit to it fully.\n\nOwning your role means two things. First, understand what your coaches need from you. If you're a defenseman, your job isn't to score — it's to shut down the other team's best attackman. If you're a backup goalie, your job in practice is to make the starters better by competing in every drill. Ask your coach: "What do you need from me?" That question alone shows maturity.\n\nSecond, maximize your role. Don't just accept it — dominate it. If you're a role player, be the BEST role player. If you only get 5 minutes of playing time, make those 5 minutes the hardest 5 minutes the other team sees. If you're on the sideline, be the loudest voice cheering your teammates on.\n\nHere's what coaches notice: the kid who does his job without complaining, without needing credit, without looking at the bench after every play. That kid earns more responsibility over time. The kid who complains about his role, refuses to do the little things, or sulks when he doesn't start? That kid stays where he is.\n\nGreat teams need every player to buy in. Not everyone can score 5 goals. But everyone can do their job at 100%.`,
     questions: [
       {
-        question: "What should you do if you're not a starter?",
-        options: ["Complain", "Own your role and maximize it — bring energy, compete in practice, cheer loud", "Stop trying", "Ask to switch teams"],
-        correctAnswer: 1,
-        explanation: "Every role matters. Maximize what you're given and earn more over time.",
-      },
+      question: "If you're not a starter, what's the right approach?",
+      options: [
+        "Complain until you start",
+        "Own your role and maximize it",
+        "Ask to switch teams",
+        "Stop trying as hard"
+      ],
+      correctAnswer: 1,
+      explanation: "Maximize what you're given. That's how you earn more.",
+    },
       {
-        question: "What's a great question to ask your coach?",
-        options: ["Why am I not starting?", "Can I play attack?", "'What do you need from me?'", "When can I go home?"],
-        correctAnswer: 2,
-        explanation: "Asking what the team needs from you shows maturity and earns trust.",
-      },
+      question: "Best question to ask your coach?",
+      options: [
+        "'Why am I not starting?'",
+        "'Can I play a different position?'",
+        "'What do you need from me?'",
+        "'When can I leave practice?'"
+      ],
+      correctAnswer: 2,
+      explanation: "Asking what the team needs shows maturity and earns trust.",
+    },
       {
-        question: "What do coaches notice about role players?",
-        options: ["Nothing", "The ones who do their job without complaining and give 100%", "Only the scorers", "The tallest kids"],
-        correctAnswer: 1,
-        explanation: "Coaches reward the players who commit to their role fully, without needing credit.",
-      },
+      question: "What do coaches notice about role players?",
+      options: [
+        "Only the ones who score",
+        "Only the tallest kids",
+        "The ones who do their job fully without needing credit",
+        "The ones who complain loudly"
+      ],
+      correctAnswer: 2,
+      explanation: "Coaches reward players who commit to their role fully.",
+    },
+      {
+      question: "What does a 'best role player' look like in practice?",
+      options: [
+        "Same speed as starters in every drill",
+        "Coasts because their reps don't matter",
+        "Goes harder than starters, makes them better",
+        "Only competes when scouts are there"
+      ],
+      correctAnswer: 2,
+      explanation: "Bench players who push starters in practice make the whole team better.",
+    },
+      {
+      question: "You only play 5 minutes a game. Coach has rotations set. What's the move?",
+      options: [
+        "Sulk on the bench until your shift",
+        "Make those 5 minutes the hardest 5 minutes the other team sees",
+        "Ask to play a different position",
+        "Stop trying as hard in practice"
+      ],
+      correctAnswer: 1,
+      explanation: "5 minutes of full-throttle effort earns more minutes. Sulking earns less. Coaches see the difference.",
+      kind: "scenario",
+      scenario: "Mid-season. You've gotten 5-6 minutes a game while teammates start. The matchup tonight is winnable. Coach rotates you in.",
+    },
+    ],
+    keyTakeaways: [
+      "Every player has a role. Owning it fully is what coaches reward.",
+      "Ask coach: 'What do you need from me?' — best question you can ask.",
+      "Maximize your role. Best role player > complaining starter.",
+      "Coaches notice the kid who does his job without complaining. That kid earns more over time.",
     ],
   },
   {
@@ -1397,23 +2019,69 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
     description: `Trust is the foundation of every great team. When you trust your teammates, you play faster, harder, and smarter. When you don't trust them, you hesitate, try to do everything yourself, and the team falls apart.\n\nWhat does trust look like on a lacrosse field?\n\nOn offense, trust means making the extra pass. When you see a teammate cutting to the goal, you throw the ball because you trust them to catch it and finish. If you don't trust them, you hold the ball and try to score yourself. One way makes the team better. The other makes you a ball hog.\n\nOn defense, trust means sliding hard. When you slide to help a teammate who got beat, you're leaving your own man open. You do it because you trust the next defender to rotate and fill your spot. If everyone trusts the system, the slides work perfectly. If one person hesitates because they don't trust the rotation, the whole defense breaks.\n\nTrust is built in practice — not in games. Every rep where you make the right pass and your teammate catches it builds trust. Every rep where the slide comes on time builds trust. Every practice where everyone shows up on time, works hard, and does their job builds trust. Trust is just repetition plus reliability.\n\nThe opposite of trust is trying to do everything yourself. We've all seen the kid who dodges every time he gets the ball because he doesn't trust anyone else to score. That player might score a few goals, but his team will never be great. The best players make everyone around them better — and that starts with trusting your teammates.`,
     questions: [
       {
-        question: "How is trust built on a team?",
-        options: ["It just happens", "Through repetition in practice — showing up, working hard, being reliable", "By talking about it", "Only during games"],
-        correctAnswer: 1,
-        explanation: "Trust is built through consistent effort in practice, day after day.",
-      },
+      question: "How is trust between teammates built?",
+      options: [
+        "Through team meetings",
+        "Through hanging out off the field",
+        "Through reps — reliable effort over time",
+        "Through the captain's leadership alone"
+      ],
+      correctAnswer: 2,
+      explanation: "Trust is the residue of repetition.",
+    },
       {
-        question: "What does trust look like on offense?",
-        options: ["Dodging every time", "Making the extra pass because you trust your teammates to finish", "Never passing", "Only passing to the best player"],
-        correctAnswer: 1,
-        explanation: "Trusting teammates means sharing the ball and making everyone better.",
-      },
+      question: "Trust on offense looks like:",
+      options: [
+        "Dodging every time you touch the ball",
+        "Making the extra pass to the open man",
+        "Passing only to the best player",
+        "Holding the ball to control tempo"
+      ],
+      correctAnswer: 1,
+      explanation: "Trusting teammates means sharing the ball — even if you could shoot.",
+    },
       {
-        question: "What happens when a defense doesn't trust each other?",
-        options: ["They play great", "Players hesitate on slides and the defense breaks down", "It doesn't matter", "They score more goals"],
-        correctAnswer: 1,
-        explanation: "Hesitation kills defense. Trust makes slides fast and rotations clean.",
-      },
+      question: "What happens when a defense doesn't trust each other?",
+      options: [
+        "They become more aggressive",
+        "Players hesitate on slides, defense breaks",
+        "Goalie has to make more saves",
+        "It doesn't really affect performance"
+      ],
+      correctAnswer: 1,
+      explanation: "Hesitation on slides = open shots = goals against.",
+    },
+      {
+      question: "Sign that a team has high trust?",
+      options: [
+        "Loud captain in every huddle",
+        "Ball moves fast — extra passes for better shots",
+        "Coach yells less in games",
+        "Wearing matching cleats"
+      ],
+      correctAnswer: 1,
+      explanation: "Quick ball movement = trust. Players believe the next guy will catch and shoot.",
+    },
+      {
+      question: "You're 1 vs 1, top of the zone. You see your crease attackman wide open inside. You also have a tight shot at the cage from where you are. The trust move?",
+      options: [
+        "Take your shot — you have it",
+        "Skip it inside to the wide-open crease attackman",
+        "Pass it back to the midfielder behind you",
+        "Hold the ball and wait for clarity"
+      ],
+      correctAnswer: 1,
+      explanation: "Wide-open inside > tight outside shot every time. Make the trust pass — your team gets a layup.",
+      kind: "scenario",
+      scenario: "Top of the zone, 1v1. You're a decent shooter from there. But your crease attackman has slipped his man and is wide open.",
+    },
+    ],
+    videoUrl: "https://www.youtube.com/watch?v=7uDxcG8BXZ8",
+    keyTakeaways: [
+      "Trust = playing fast and hard because you believe teammates will do their job.",
+      "On offense: trust = making the extra pass. Without trust, players try to do it all alone.",
+      "On defense: trust = sliding aggressively. Without trust, slides come late and break down.",
+      "Trust is built in practice — every right pass, every on-time slide adds to the bank.",
     ],
   },
   {
@@ -1425,23 +2093,68 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
     description: `Great teams handle wins and losses the same way — as a group. No one player wins a game, and no one player loses one. The sooner you understand this, the better teammate you'll be.\n\nWhen you win, celebrate together. Don't let one kid take all the credit. The goal scorer needed the assist. The assist needed the ground ball. The ground ball needed the ride. Every goal is the result of multiple players doing their jobs. Make sure everyone feels like they contributed — because they did.\n\nWhen you lose, own it together. This is harder. After a tough loss, it's tempting to say "if he didn't miss that shot" or "if the goalie saved that one." Stop. The game was decided by hundreds of plays, not just one. Your team lost together — maybe the defense got beat in transition, maybe the offense turned it over in the 3rd quarter, maybe the rides weren't aggressive enough. Everybody contributed to the loss, so everybody owns it.\n\nThe worst thing a team can do after a loss is blame one person. That destroys trust faster than anything. When one kid becomes the scapegoat, the whole team stops taking risks because nobody wants to be "that guy" next time. Fear of blame makes teams play tight and cautious — the opposite of what you want.\n\nThe best thing a team can do after a loss is be honest, stay positive, and work harder at the next practice. Say "we'll fix it" and then actually fix it. That's how good teams become great teams — they don't run from tough moments, they grow through them.`,
     questions: [
       {
-        question: "After a loss, who should take the blame?",
-        options: ["The goalie", "The kid who missed the last shot", "Nobody individually — the team owns it together", "The coach"],
-        correctAnswer: 2,
-        explanation: "Games are decided by hundreds of plays. Blaming one person destroys trust.",
-      },
+      question: "After a tough loss, who should take the blame?",
+      options: [
+        "The goalie if shots got in",
+        "The kid who missed the last shot",
+        "Nobody alone — the team owns it together",
+        "The coach for not adjusting"
+      ],
+      correctAnswer: 2,
+      explanation: "Games are decided by hundreds of plays. Blaming one person destroys trust.",
+    },
       {
-        question: "Why is blaming one person after a loss so harmful?",
-        options: ["It's not", "It makes the whole team afraid to take risks", "It motivates people", "Only if it happens a lot"],
-        correctAnswer: 1,
-        explanation: "Fear of blame makes teams play tight and cautious. Nobody takes risks.",
-      },
+      question: "Why is blaming one teammate after a loss so harmful?",
+      options: [
+        "It's not really that bad",
+        "It makes the team afraid to take risks",
+        "Coaches don't notice",
+        "Only matters if it happens repeatedly"
+      ],
+      correctAnswer: 1,
+      explanation: "Fear of being the scapegoat makes teams play tight and cautious.",
+    },
       {
-        question: "What's the best response to a tough loss?",
-        options: ["Quit", "Fight with each other", "Be honest about what went wrong, stay positive, and work harder next practice", "Pretend it didn't happen"],
-        correctAnswer: 2,
-        explanation: "Own it, learn from it, fix it at the next practice. That's how teams grow.",
-      },
+      question: "Best response to a tough loss?",
+      options: [
+        "Quit the team",
+        "Pretend it didn't happen",
+        "Be honest, stay positive, work harder next practice",
+        "Argue about which call cost the game"
+      ],
+      correctAnswer: 2,
+      explanation: "Own it, learn, fix it. That's how teams grow.",
+    },
+      {
+      question: "After a big win, the ideal team response is:",
+      options: [
+        "The top scorer takes the credit",
+        "Spread credit — every goal needed an assist needed a GB",
+        "Tell the losing team what they did wrong",
+        "Post highlights immediately"
+      ],
+      correctAnswer: 1,
+      explanation: "Wins are collective. Make sure everyone feels they contributed — because they did.",
+    },
+      {
+      question: "Right after a tough overtime loss, your starting goalie is in tears. Two teammates are blaming the defense out loud. What do you do?",
+      options: [
+        "Go to the goalie — 'we win as a team, lose as a team'",
+        "Agree with the teammates blaming defense",
+        "Walk to the parking lot quickly",
+        "Yell at everyone to stop"
+      ],
+      correctAnswer: 0,
+      explanation: "Pick up your goalie. Shut down the blame. The team's identity is set in moments like these.",
+      kind: "scenario",
+      scenario: "Overtime loss, 9-8. Your goalie is in tears — they think the last goal was their fault. Two teammates nearby are blaming the defense out loud.",
+    },
+    ],
+    keyTakeaways: [
+      "Wins and losses are team outcomes — no individual wins or loses one.",
+      "After wins: spread credit. The shot needed the assist needed the ground ball.",
+      "After losses: own it together. Don't blame one player — that destroys trust.",
+      "Best response to a tough loss: 'we'll fix it' — and actually fix it next practice.",
     ],
   },
 ]
