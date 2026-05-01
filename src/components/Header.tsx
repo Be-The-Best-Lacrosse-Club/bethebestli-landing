@@ -153,6 +153,8 @@ export function Header() {
 
           <button onClick={() => go("/coach-tools")} className={navItemClass("/coach-tools")}>Coaches Hub</button>
 
+          <a href="/newsletter" className={navItemClass("/newsletter")}>Newsletter</a>
+
           <button onClick={() => go("/contact")} className={navItemClass("/contact")}>Contact</button>
 
           <div className={`w-px h-5 mx-3 ${scrolled ? "bg-black/10" : "bg-white/10"}`} />
@@ -272,6 +274,7 @@ export function Header() {
                 links: [
                   { label: "Parent Hub", href: "/parent-hub" },
                   { label: "Coaches Hub", href: "/coach-tools" },
+                  { label: "Newsletter", href: "/newsletter" },
                   { label: "Recruiting", href: "/recruiting" },
                   { label: "Contact", href: "/contact" },
                   { label: "Login", href: "/login" },
