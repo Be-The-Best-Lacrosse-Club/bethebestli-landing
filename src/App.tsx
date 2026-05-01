@@ -36,6 +36,7 @@ import { TravelPage } from "@/pages/TravelPage"
 import { CoachingStaffPage } from "@/pages/CoachingStaffPage"
 import { TeamsPage } from "@/pages/TeamsPage"
 import { SmsPolicyPage } from "@/pages/SmsPolicyPage"
+import { TermsAndConditionsPage } from "@/pages/TermsAndConditionsPage"
 import { AcademyInfoPage } from "@/pages/AcademyInfoPage"
 import { AcademyGatePage } from "@/pages/AcademyGatePage"
 import { RecruitingPage } from "@/pages/RecruitingPage"
@@ -43,6 +44,12 @@ import { FuturesPage } from "@/pages/FuturesPage"
 import { CampsPage } from "@/pages/CampsPage"
 import { FamilyHubPage } from "@/pages/FamilyHubPage"
 import { ContactPage } from "@/pages/ContactPage"
+import homeContent from "@/content/home.json"
+
+const SITE_URL = "https://bethebestli.com"
+const homeOgImage = homeContent.seoImage.startsWith("http")
+  ? homeContent.seoImage
+  : `${SITE_URL}${homeContent.seoImage}`
 
 function LandingPage() {
   return (
@@ -51,6 +58,7 @@ function LandingPage() {
         title="BTB Lacrosse Club | Be The Best"
         description="Be The Best Lacrosse Club — Long Island's premier youth lacrosse development program for boys and girls."
         path="/"
+        ogImage={homeOgImage}
       />
       <Hero />
       <AudiencePaths />
@@ -158,6 +166,7 @@ function App() {
               <Route path="/futures" element={<FuturesPage />} />
               <Route path="/camps" element={<CampsPage />} />
               <Route path="/sms-policy" element={<SmsPolicyPage />} />
+              <Route path="/terms-and-conditions" element={<TermsAndConditionsPage />} />
               <Route path="/academy-info" element={<AcademyInfoPage />} />
               <Route path="/recruiting" element={<RecruitingPage />} />
               <Route path="/contact" element={<ContactPage />} />

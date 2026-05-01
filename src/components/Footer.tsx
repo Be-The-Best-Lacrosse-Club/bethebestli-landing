@@ -67,7 +67,8 @@ export function Footer() {
             <a href="/interest" onClick={link("/interest")} className="block text-[0.78rem] text-white/25 py-1.5 hover:text-white transition-colors">Interest Form</a>
             <a href="/contact" onClick={link("/contact")} className="block text-[0.78rem] text-white/25 py-1.5 hover:text-white transition-colors">Contact</a>
             <a href="/login" onClick={link("/login")} className="block text-[0.78rem] text-white/25 py-1.5 hover:text-white transition-colors">Login</a>
-            <a href="/sms-policy" onClick={link("/sms-policy")} className="block text-[0.78rem] text-white/25 py-1.5 hover:text-white transition-colors">SMS Policy</a>
+            <a href="/sms-policy" onClick={link("/sms-policy")} className="block text-[0.78rem] text-white/25 py-1.5 hover:text-white transition-colors">SMS Policy &amp; Privacy Policy</a>
+            <a href="/terms-and-conditions" onClick={link("/terms-and-conditions")} className="block text-[0.78rem] text-white/25 py-1.5 hover:text-white transition-colors">Terms and Conditions</a>
           </div>
         </div>
 
