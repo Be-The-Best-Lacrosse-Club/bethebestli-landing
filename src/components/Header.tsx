@@ -18,8 +18,6 @@ const programLinks = [
   { label: "Recruiting", href: "/recruiting" },
 ]
 
-const ACADEMY_URL = "/academy-landing.html"
-
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -96,17 +94,6 @@ export function Header() {
         {/* Desktop Nav — only at xl (1280px+) */}
         <nav className="hidden xl:flex items-center gap-1" ref={dropdownRef}>
 
-          <a
-            href={ACADEMY_URL}
-            className="relative ml-1 mr-1 inline-flex items-center gap-2 px-4 py-2 bg-[var(--btb-red)] text-white text-[0.72rem] font-black uppercase tracking-[2px] rounded-lg shadow-lg shadow-red-500/25 hover:bg-[var(--btb-red-dark)] transition-all duration-200 group"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-60"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
-            </span>
-            Digital Academy
-            <span className="absolute -top-2 -right-2 bg-white text-[var(--btb-red)] text-[0.5rem] font-black uppercase tracking-[1px] px-1.5 py-0.5 rounded-full leading-none">NEW</span>
-          </a>
 
           <div className="relative">
             <button onClick={() => setDropdown(dropdown === "programs" ? null : "programs")} className={navItemClass("/programs")}>
@@ -230,17 +217,6 @@ export function Header() {
               >
                 Tryouts 2026
               </button>
-              <a
-                href={ACADEMY_URL}
-                className="relative py-4 border-2 border-[var(--btb-red)] text-white font-black text-sm uppercase tracking-[2px] rounded-xl flex items-center justify-center gap-2"
-              >
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--btb-red)] opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--btb-red)]"></span>
-                </span>
-                Digital Academy
-                <span className="absolute -top-2 -right-2 bg-[var(--btb-red)] text-white text-[0.5rem] font-black uppercase tracking-[1px] px-1.5 py-0.5 rounded-full leading-none">NEW</span>
-              </a>
               <button
                 onClick={() => go("/interest")}
                 className="py-4 border-2 border-white/20 text-white font-black text-sm uppercase tracking-[2px] rounded-xl col-span-2"
