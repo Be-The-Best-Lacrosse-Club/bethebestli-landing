@@ -24,7 +24,7 @@ const paths = [
     headline: "The Right Club Makes the Difference.",
     description: "Guaranteed progress. Film accountability. Certified coaches. We don't just develop players — we give you full transparency into your athlete's growth.",
     links: [
-      { label: "Tryouts 2026 →", href: "/tryouts" },
+      { label: "Register 2026 →", href: "/register-tryouts" },
       { label: "Parent Portal →", href: "/parent-portal" },
     ],
     cta: { label: "Learn About BTB", href: "/interest" },

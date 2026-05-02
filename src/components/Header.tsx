@@ -145,7 +145,7 @@ export function Header() {
             )}
           </div>
 
-          <button onClick={() => go("/tryouts")} className="ml-2 px-4 py-2 text-[0.72rem] font-black uppercase tracking-[2px] transition-all rounded-lg bg-[var(--btb-red)] text-white hover:bg-[var(--btb-red-dark)] shadow-lg shadow-red-500/20">
+          <button onClick={() => go("/register-tryouts")} className="ml-2 px-4 py-2 text-[0.72rem] font-black uppercase tracking-[2px] transition-all rounded-lg bg-[var(--btb-red)] text-white hover:bg-[var(--btb-red-dark)] shadow-lg shadow-red-500/20">
             Tryouts 2026
           </button>
 
@@ -189,7 +189,7 @@ export function Header() {
         <div className="xl:hidden flex items-center gap-3">
           {/* Tryouts pill — always visible on mobile */}
           <button
-            onClick={() => go("/tryouts")}
+            onClick={() => go("/register-tryouts")}
             className="px-3 py-1.5 text-[0.65rem] font-black uppercase tracking-[1.5px] bg-[var(--btb-red)] text-white rounded-md"
           >
             Tryouts
@@ -225,7 +225,7 @@ export function Header() {
             {/* Primary CTAs */}
             <div className="grid grid-cols-2 gap-3 mb-8">
               <button
-                onClick={() => go("/tryouts")}
+                onClick={() => go("/register-tryouts")}
                 className="py-4 bg-[var(--btb-red)] text-white font-black text-sm uppercase tracking-[2px] rounded-xl"
               >
                 Tryouts 2026
