@@ -46,6 +46,7 @@ export function NewsletterPopup() {
   const [open, setOpen] = useState(false)
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
+  const [gender, setGender] = useState("")
   const [botField, setBotField] = useState("")
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
@@ -91,6 +92,7 @@ export function NewsletterPopup() {
           "form-name": "newsletter",
           name,
           email,
+          program_gender: gender,
           source: typeof window !== "undefined" ? window.location.pathname : "",
         }),
       })
@@ -171,6 +173,7 @@ export function NewsletterPopup() {
               className="space-y-4"
             >
               <input type="hidden" name="form-name" value="newsletter" />
+              <input type="hidden" name="program_gender" value={gender} />
               <p className="hidden">
                 <label>
                   Don't fill this out:{" "}
@@ -211,6 +214,25 @@ export function NewsletterPopup() {
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full h-12 px-4 bg-white/[0.04] border border-white/10 rounded-lg text-white text-[0.88rem] placeholder:text-white/25 focus:outline-none focus:border-[var(--btb-red)]/50 transition-all"
                 />
+              </div>
+              <div>
+                <label className="sr-only">Gender</label>
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setGender("Boys")}
+                    className={`flex-1 h-12 rounded-lg text-[0.78rem] font-bold uppercase tracking-[1.5px] transition-all border ${gender === "Boys" ? "bg-[var(--btb-red)] border-[var(--btb-red)] text-white" : "bg-white/[0.04] border-white/10 text-white/40 hover:border-white/30"}`}
+                  >
+                    Male
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setGender("Girls")}
+                    className={`flex-1 h-12 rounded-lg text-[0.78rem] font-bold uppercase tracking-[1.5px] transition-all border ${gender === "Girls" ? "bg-[var(--btb-red)] border-[var(--btb-red)] text-white" : "bg-white/[0.04] border-white/10 text-white/40 hover:border-white/30"}`}
+                  >
+                    Female
+                  </button>
+                </div>
               </div>
               <button
                 type="submit"
