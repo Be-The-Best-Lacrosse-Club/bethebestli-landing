@@ -62,7 +62,6 @@ export function Footer() {
           <div>
             <h4 className="font-display text-white uppercase text-[0.72rem] tracking-[2.5px] mb-5">BTB</h4>
             <a href="/recruiting" onClick={link("/recruiting")} className="block text-[0.88rem] text-white/60 py-1.5 hover:text-white transition-colors">Recruiting</a>
-            <a href="/academy-info" onClick={link("/academy-info")} className="block text-[0.88rem] text-white/60 py-1.5 hover:text-white transition-colors">Academy</a>
             <a href="/coach-tools" onClick={link("/coach-tools")} className="block text-[0.88rem] text-white/60 py-1.5 hover:text-white transition-colors">Coach Tools</a>
             <a href="/interest" onClick={link("/interest")} className="block text-[0.88rem] text-white/60 py-1.5 hover:text-white transition-colors">Interest Form</a>
             <a href="/contact" onClick={link("/contact")} className="block text-[0.88rem] text-white/60 py-1.5 hover:text-white transition-colors">Contact</a>
