@@ -96,7 +96,7 @@ export function Hero() {
         {/* HUD Data strip */}
         <div
           ref={hud1Ref}
-          className="flex flex-wrap justify-center gap-3 md:gap-6 mb-8 md:mb-10 font-mono text-[0.62rem] md:text-[0.66rem] tracking-[2px] text-white/60 uppercase"
+          className="flex flex-wrap justify-center gap-3 md:gap-6 mb-8 md:mb-10 font-mono text-[1.05rem] md:text-[1.05rem] tracking-[2px] text-white/90 uppercase"
         >
           <div className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--btb-red)] animate-pulse" />
@@ -119,7 +119,7 @@ export function Hero() {
         {/* Eyebrow */}
         <div className="inline-flex items-center gap-3 mb-8 md:mb-10">
           <div className="h-px w-8 bg-[var(--btb-red)]" />
-          <span className="text-[0.72rem] font-bold uppercase tracking-[4px] text-white/70">
+          <span className="text-[1.05rem] font-bold uppercase tracking-[4px] text-white/90">
             Long Island · Est. 2021
           </span>
           <div className="h-px w-8 bg-[var(--btb-red)]" />
@@ -146,7 +146,7 @@ export function Hero() {
           <span className="block text-[var(--btb-red)]">on Long Island.</span>
           <span className="block w-24 h-1 bg-[var(--btb-red)] mx-auto mt-5" />
         </p>
-        <p className="text-[0.95rem] md:text-[1rem] text-white/75 font-semibold mb-10 md:mb-12">
+        <p className="text-[1.05rem] md:text-[1rem] text-white/95 font-semibold mb-10 md:mb-12">
           Film study. Small-group training. Real coaching. Real results.
         </p>
 
@@ -157,7 +157,7 @@ export function Hero() {
             href="https://bethebest.leagueapps.com/leagues"
             target="_blank"
             rel="noopener noreferrer"
-            className="relative inline-flex items-center gap-2 px-8 py-4 bg-[var(--btb-red)] text-white text-[0.72rem] font-bold uppercase tracking-[2px] overflow-hidden group"
+            className="relative inline-flex items-center gap-2 px-8 py-4 bg-[var(--btb-red)] text-white text-[1.05rem] font-bold uppercase tracking-[2px] overflow-hidden group"
             style={{ clipPath: "polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%)" }}
           >
             {/* Fill sweep on hover */}
@@ -173,7 +173,7 @@ export function Hero() {
           <a
             ref={secondaryBtnRef as React.RefObject<HTMLButtonElement> & React.RefObject<HTMLAnchorElement>}
             href="/academy-landing.html"
-            className="inline-flex items-center gap-2 px-8 py-4 border border-white/15 bg-white/5 backdrop-blur-sm text-white text-[0.72rem] font-bold uppercase tracking-[2px] hover:border-white/35 hover:bg-white/10 transition-all duration-300"
+            className="inline-flex items-center gap-2 px-8 py-4 border border-white/15 bg-white/5 backdrop-blur-sm text-white text-[1.05rem] font-bold uppercase tracking-[2px] hover:border-white/35 hover:bg-white/10 transition-all duration-300"
           >
             Academy Access
           </a>
@@ -188,7 +188,7 @@ export function Hero() {
           ].map(({ val, label }) => (
             <div key={label} className="text-center">
               <div className="font-display text-3xl text-[var(--btb-red)] leading-none">{val}</div>
-              <div className="text-[0.72rem] font-bold uppercase tracking-[2px] text-white/60 mt-1">{label}</div>
+              <div className="text-[1.05rem] font-bold uppercase tracking-[2px] text-white/90 mt-1">{label}</div>
             </div>
           ))}
         </div>
@@ -201,7 +201,7 @@ export function Hero() {
         aria-label="Scroll down"
         className="absolute bottom-6 md:bottom-8 left-0 right-0 mx-auto w-fit z-10 flex flex-col items-center gap-2 group"
       >
-        <span className="text-[0.68rem] font-bold uppercase tracking-[3px] text-white/55 group-hover:text-white/80 transition-colors">
+        <span className="text-[1.05rem] font-bold uppercase tracking-[3px] text-white/90 group-hover:text-white/95 transition-colors">
           Scroll
         </span>
         {/* Animated line */}
