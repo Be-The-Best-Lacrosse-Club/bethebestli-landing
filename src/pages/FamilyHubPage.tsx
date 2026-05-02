@@ -60,7 +60,7 @@ const familyLinks = [
     title: "Payments",
     icon: FileText,
     desc: "Manage registrations and check payment status.",
-    href: "https://bethebest.leagueapps.com/dashboard",
+    href: "https://go.teamsnap.com",
     external: true,
     tag: "LEAGUEAPPS"
   },
