@@ -170,6 +170,11 @@
   status = 200
 
 [[redirects]]
+  from = "/futures-clinic"
+  to = "/futures-clinic.html"
+  status = 200
+
+[[redirects]]
   from = "/registration-success"
   to = "/registration-success.html"
   status = 200
