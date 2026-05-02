@@ -154,7 +154,7 @@ export function Hero() {
         <div ref={ctaRef} className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center w-full max-w-sm sm:max-w-none">
           <a
             ref={primaryBtnRef as React.RefObject<HTMLButtonElement> & React.RefObject<HTMLAnchorElement>}
-            href="/tryouts"
+            href="/register-tryouts"
             target="_blank"
             rel="noopener noreferrer"
             className="relative inline-flex items-center gap-2 px-8 py-4 bg-[var(--btb-red)] text-white text-[1.05rem] font-bold uppercase tracking-[2px] overflow-hidden group"

@@ -55,7 +55,7 @@ export function ContactPage() {
 
             {/* Register */}
             <a
-              href="/tryouts"
+              href="/register-tryouts"
               target="_blank"
               rel="noopener noreferrer"
               className="group relative p-12 bg-black hover:bg-[var(--btb-red)] transition-all duration-300"
@@ -66,7 +66,7 @@ export function ContactPage() {
                 Ready to join? Register for the 2026 season.
               </p>
               <div className="flex items-center gap-2 text-[0.72rem] font-black uppercase tracking-[2px] text-[var(--btb-red)] group-hover:text-white transition-colors">
-                Register for Tryouts
+                Register for 2026 Tryouts
                 <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
               </div>
             </a>
