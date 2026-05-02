@@ -14,3 +14,16 @@ _archive/
 Claude*.txt
 *conversation*.txt
 *transcript*.txt
+
+# Large media files — served via Netlify CDN, not git
+public/assets/academy/*.mp4
+public/assets/academy/*.m4a
+public/assets/academy/*.aiff
+public/assets/academy/*.wav
+public/assets/academy/*.mov
+
+# Remotion video project (local only)
+remotion/
+
+# Editor docs
+docs/
