@@ -182,7 +182,7 @@ export function Hero() {
         {/* Stats strip */}
         <div className="flex flex-wrap justify-center gap-6 md:gap-8 mt-12 md:mt-16 pt-8 md:pt-10 border-t border-white/[0.06] w-full max-w-[700px]">
           {[
-            { val: "488", label: "Players" },
+            { val: "450+", label: "Players" },
             { val: "22", label: "Teams" },
             { val: "45+", label: "Coaches" },
           ].map(({ val, label }) => (
