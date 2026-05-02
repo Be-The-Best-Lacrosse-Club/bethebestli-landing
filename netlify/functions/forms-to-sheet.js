@@ -53,32 +53,35 @@ function postFollowRedirects(targetUrl, body, maxRedirects = 5) {
   });
 }
 
-exports.handler = async function (event) {
-  const okResponse = {
+function ok(payload) {
+  return {
     statusCode: 200,
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ ok: true }),
+    body: JSON.stringify({ ok: true, ...payload }),
   };
+}
 
+exports.handler = async function (event) {
   if (event.httpMethod !== "POST") {
-    return okResponse;
+    return ok({ method: event.httpMethod });
   }
 
   const apiKey = process.env.SHEETS_FORMS_KEY;
   if (!apiKey) {
     console.error("forms-to-sheet: SHEETS_FORMS_KEY env var not set");
-    return okResponse;
+    return ok({ env_set: false, forwarded: false });
   }
 
   try {
     const url = `${APPS_SCRIPT_URL}?key=${encodeURIComponent(apiKey)}`;
     const result = await postFollowRedirects(url, event.body || "{}");
-    if (result.status >= 400) {
-      console.error("forms-to-sheet: Apps Script returned", result.status);
-    }
+    return ok({
+      env_set: true,
+      forwarded: true,
+      apps_script_status: result.status,
+    });
   } catch (err) {
     console.error("forms-to-sheet error:", err.message);
+    return ok({ env_set: true, forwarded: false, error: err.message });
   }
-
-  return okResponse;
 };
