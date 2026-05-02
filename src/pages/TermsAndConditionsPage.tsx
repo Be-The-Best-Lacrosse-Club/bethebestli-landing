@@ -137,7 +137,7 @@ export function TermsAndConditionsPage() {
 
             <h3 className="font-display text-base uppercase tracking-wide text-slate-900 mt-4 mb-2">1. During Player Registration</h3>
             <p className="mb-2">
-              You may opt in during player registration on our LeagueApps portal. When you provide
+              You may opt in during player registration. When you provide
               your mobile number during registration, the registration form discloses:
             </p>
             <p className="italic text-slate-600 mb-3">

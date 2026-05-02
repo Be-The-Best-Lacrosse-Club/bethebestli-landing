@@ -114,6 +114,12 @@
   to = "/admin/:splat"
   status = 200
 
+# Tryout registration form (QuickBooks $75 evaluation fee)
+[[redirects]]
+  from = "/register-tryouts"
+  to = "/register-tryouts.html"
+  status = 200
+
 # Newsletter static pages — must come BEFORE the SPA catch-all
 [[redirects]]
   from = "/newsletter"
