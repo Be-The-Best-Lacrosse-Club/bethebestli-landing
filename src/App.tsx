@@ -188,6 +188,8 @@ function App() {
                 <Route path="/family-hub" element={<FamilyHubPage />} />
               </Route>
             </Route>
+            {/* Catch-all 404 */}
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
           <Toaster theme="dark" position="top-right" richColors closeButton />
         </div>

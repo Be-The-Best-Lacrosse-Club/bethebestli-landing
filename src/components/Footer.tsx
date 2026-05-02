@@ -18,9 +18,9 @@ export function Footer() {
             </p>
             <div className="flex gap-2.5 mt-6">
               {[
-                { label: "IG", href: "#" },
-                { label: "X", href: "#" },
-                { label: "YT", href: "#" },
+                { label: "IG", href: "https://www.instagram.com/bethebestli" },
+                { label: "X", href: "https://x.com/bethebestli" },
+                { label: "YT", href: "https://www.youtube.com/@bethebestlacrosse" },
               ].map((s) => (
                 <a key={s.label} href={s.href} className="w-8 h-8 rounded border border-white/[0.08] flex items-center justify-center text-[0.75rem] font-bold text-white/65 hover:bg-[var(--btb-red)] hover:border-[var(--btb-red)] hover:text-white transition-all">
                   {s.label}
