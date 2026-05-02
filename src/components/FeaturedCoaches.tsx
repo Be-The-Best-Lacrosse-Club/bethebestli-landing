@@ -84,17 +84,17 @@ export function FeaturedCoaches() {
               THE FOUNDER · DAN ACHATZ
             </div>
             <h3 className="font-display text-[clamp(1.8rem,5vw,3.5rem)] uppercase leading-[0.95] text-white mb-6">
-              I built BTB so my own kids would have <span className="text-[var(--btb-red)]">somewhere they belonged.</span>
+              I'm Dan Achatz — <span className="text-[var(--btb-red)]">founder of Be The Best.</span>
             </h3>
             <div className="space-y-4 text-white/65 text-[1.02rem] leading-relaxed max-w-[640px]">
               <p>
-                I'm Dan Achatz — Rutgers lacrosse alum, Plainedge varsity head coach, and the founder of Be The Best. I started BTB in 2021 with one team and one rule: every kid who walks in gets coached like the work matters, because it does.
+                Rutgers lacrosse alum, Plainedge varsity head coach, and the founder of Be The Best. I started BTB in 2021 with one team and one belief: that every kid who walks in deserves to be coached like the work matters. Because it does.
               </p>
               <p>
-                Five years later we're 23 elite teams, 400+ players, and 47 coaches deep — Boys and Girls, K through senior year. None of that came from luck. It came from a culture we wrote on day one and have never let slide: show up early, own your reps, watch the film, lift each other.
+                Five years later, we're 22 elite teams, 450+ players, and 45+ coaches — Boys and Girls, K through sophomore year. None of that happened because of me. It happened because of the players who kept showing up, the coaches who poured themselves into it, and the families who trusted us with something that matters more than lacrosse.
               </p>
               <p>
-                <span className="text-white">Our culture built us. Our hard work made us.</span> That's not a slogan. It's how I expect every kid wearing a BTB shield to carry themselves — on the field, in school, in life.
+                The culture we built on day one — show up early, own your reps, watch the film, lift each other — that's not something I invented. It's something we earned together. <span className="text-white">I'm proud of what this club has become. More than that, I'm proud of who it's become.</span> That's the thing we protect above everything else.
               </p>
             </div>
           </div>
@@ -126,7 +126,7 @@ export function FeaturedCoaches() {
         <div className="relative">
           <div className="text-[var(--btb-red)] font-display text-xs tracking-[4px] mb-6 flex items-center gap-3 px-1">
             <span className="w-6 h-px bg-[var(--btb-red)]" />
-            THE STAFF · 47 COACHES STRONG
+            THE STAFF · 45+ COACHES STRONG
           </div>
 
           <div className="space-y-3 md:space-y-4 mask-fade-x">
