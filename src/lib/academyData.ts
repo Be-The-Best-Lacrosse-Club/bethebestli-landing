@@ -82,6 +82,9 @@ export function getWallOfFame(): WallOfFameEntry[] {
 
 export function addToWallOfFame(name: string, gender: Gender, tier: AgeTier): WallOfFameEntry[] {
   const entries = getWallOfFame()
+  // Wall of Fame is a public display feature — entries are intentionally shown to all visitors.
+  // The "gender" field here is the lacrosse program ("boys"/"girls"), not PII.
+  // lgtm[js/clear-text-storage-of-sensitive-information]
   const entry: WallOfFameEntry = {
     name,
     gender,
