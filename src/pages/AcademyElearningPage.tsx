@@ -38,6 +38,7 @@ import {
   Play,
 } from "lucide-react"
 import { SEO } from "@/components/shared/SEO"
+import { FieldDiagram } from "@/components/academy/FieldDiagram"
 import type { Gender } from "@/types"
 
 const TOPIC_ICONS: Record<string, typeof BookOpen> = {
@@ -433,13 +434,37 @@ export function AcademyElearningPage({ gender }: { gender: Gender }) {
           })()}
 
           {/* Reading content */}
-          <div className="prose prose-invert max-w-none mb-12">
+          <div className="prose prose-invert max-w-none mb-8">
             {activeLesson.description.split("\n\n").map((paragraph, i) => (
               <p key={i} className="text-white/80 leading-relaxed mb-4 text-base">
                 {paragraph}
               </p>
             ))}
           </div>
+
+          {/* Field diagrams (if present) */}
+          {activeLesson.diagrams && activeLesson.diagrams.length > 0 && (
+            <div className="mb-10">
+              {activeLesson.diagrams.map((d, i) => (
+                <FieldDiagram key={i} spec={d} />
+              ))}
+            </div>
+          )}
+
+          {/* Key takeaways (if present) */}
+          {activeLesson.keyTakeaways && activeLesson.keyTakeaways.length > 0 && (
+            <div className="mb-12 rounded-2xl border border-[#D22630]/30 bg-[#D22630]/5 p-6">
+              <div className="text-[10px] font-bold uppercase tracking-[3px] text-[#D22630] mb-3">Key Takeaways</div>
+              <ul className="space-y-2">
+                {activeLesson.keyTakeaways.map((t, i) => (
+                  <li key={i} className="flex items-start gap-2 text-white/85 text-[15px] leading-relaxed">
+                    <span className="text-[#D22630] font-bold mt-0.5">→</span>
+                    <span>{t}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {/* Quiz section */}
           <div className="border-t border-white/10 pt-10">
@@ -453,6 +478,12 @@ export function AcademyElearningPage({ gender }: { gender: Gender }) {
             </div>
 
             <div className="bg-white/5 border border-white/10 rounded-2xl p-8">
+              {currentQuestion.kind === "scenario" && (
+                <div className="mb-5 rounded-lg border border-amber-500/30 bg-amber-500/5 p-4">
+                  <div className="text-[10px] font-bold uppercase tracking-[2px] text-amber-400 mb-1.5">Scenario</div>
+                  <p className="text-white/80 text-sm leading-relaxed">{currentQuestion.scenario}</p>
+                </div>
+              )}
               <h3 className="text-xl font-semibold mb-6 text-white">{currentQuestion.question}</h3>
 
               <div className="space-y-3">
