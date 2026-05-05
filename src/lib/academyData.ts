@@ -716,6 +716,7 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
         ]
       },
     ],
+    videoUrl: "https://www.youtube.com/watch?v=4LHsrseSKak",
   },
   {
     id: "boys-youth-l6",
@@ -1085,6 +1086,7 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
       "Celebrate teammates' wins like they're yours. Energy is contagious.",
       "After tough losses: 'we'll get better' — and mean it. No finger-pointing.",
     ],
+    videoUrl: "https://www.youtube.com/watch?v=S02D9QzDe4s",
   },
 ]
 
@@ -1862,6 +1864,7 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
       "Pick teammates up after mistakes. Be the first voice they hear.",
       "Take coaching well. Saying 'got it' and applying feedback fast is contagious.",
     ],
+    videoUrl: "https://www.youtube.com/watch?v=l5-EwrhsMzY",
   },
   {
     id: "boys-middle-l7",
@@ -2009,6 +2012,7 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
       "Maximize your role. Best role player > complaining starter.",
       "Coaches notice the kid who does his job without complaining. That kid earns more over time.",
     ],
+    videoUrl: "https://www.youtube.com/watch?v=l-gQLqv9f4o",
   },
   {
     id: "boys-middle-l9",
@@ -2156,6 +2160,7 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
       "After losses: own it together. Don't blame one player — that destroys trust.",
       "Best response to a tough loss: 'we'll fix it' — and actually fix it next practice.",
     ],
+    videoUrl: "https://www.youtube.com/watch?v=S02D9QzDe4s",
   },
 ]
 
@@ -2646,6 +2651,7 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
       "Show interest BEFORE coaches show interest in you. They have hundreds of options.",
       "Grades open and close more doors than you think — academic fit > athletic fit at most levels.",
     ],
+    videoUrl: "https://www.youtube.com/watch?v=dvSS1qWmD1s",
   },
   {
     id: "boys-high-l5",
@@ -2793,6 +2799,7 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
       "A captain's first job is the standard. Lead by example before you lead by voice.",
       "Captains stay calm when teammates are emotional. Steady > loud.",
     ],
+    videoUrl: "https://www.youtube.com/watch?v=l5-EwrhsMzY",
   },
   {
     id: "boys-high-l7",
@@ -2866,6 +2873,7 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
       "Show up first, leave last. Visible commitment compounds.",
       "Your influence > your title. Build it through reps, not announcements.",
     ],
+    videoUrl: "https://www.youtube.com/watch?v=l-gQLqv9f4o",
   },
   {
     id: "boys-high-l8",
@@ -2939,6 +2947,7 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
       "The first sign of bad chemistry: side conversations and cliques during team time.",
       "Coaches build chemistry intentionally. Players can build it too — invite, include, share.",
     ],
+    videoUrl: "https://www.youtube.com/watch?v=UI-ZteQ8JGU",
   },
   {
     id: "boys-high-l9",
@@ -3012,6 +3021,7 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
       "If sacrifice feels even, both sides give up something — that's what makes it work.",
       "The team that out-sacrifices the other team usually wins.",
     ],
+    videoUrl: "https://www.youtube.com/watch?v=S02D9QzDe4s",
   },
   {
     id: "boys-high-l10",
@@ -3085,6 +3095,7 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
       "Build the program: leave it better than you found it. Mentor the underclassmen.",
       "Final season is your last chance to give. Spend it generously.",
     ],
+    videoUrl: "https://www.youtube.com/watch?v=dCVlRFWOjgE",
   },
 ]
 
@@ -3266,6 +3277,7 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
         ]
       },
     ],
+    videoUrl: "https://www.youtube.com/watch?v=qXhkg0wEKDY",
   },
   {
     id: "girls-youth-l2",
@@ -4044,6 +4056,7 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
       "Celebrate teammates' wins like they're yours. Energy is contagious.",
       "After tough losses: 'we'll get better' — and mean it. No finger-pointing.",
     ],
+    videoUrl: "https://www.youtube.com/watch?v=S02D9QzDe4s",
   },
 ]
 
@@ -4808,6 +4821,7 @@ const GIRLS_MIDDLE_LESSONS: AcademyLesson[] = [
       "Pick teammates up after mistakes. Be the first voice they hear.",
       "Take coaching well. Saying 'got it' and applying feedback fast is contagious.",
     ],
+    videoUrl: "https://www.youtube.com/watch?v=l5-EwrhsMzY",
   },
   {
     id: "girls-middle-l7",
@@ -4955,6 +4969,7 @@ const GIRLS_MIDDLE_LESSONS: AcademyLesson[] = [
       "Maximize your role. Best role player > complaining starter.",
       "Coaches notice the kid who does her job without complaining. That kid earns more over time.",
     ],
+    videoUrl: "https://www.youtube.com/watch?v=l-gQLqv9f4o",
   },
   {
     id: "girls-middle-l9",
@@ -5102,6 +5117,7 @@ const GIRLS_MIDDLE_LESSONS: AcademyLesson[] = [
       "After losses: own it together. Don't blame one player — that destroys trust.",
       "Best response to a tough loss: 'we'll fix it' — and actually fix it next practice.",
     ],
+    videoUrl: "https://www.youtube.com/watch?v=S02D9QzDe4s",
   },
 ]
 
@@ -5591,6 +5607,7 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
       "Show interest BEFORE coaches show interest in you. They have hundreds of options.",
       "Grades open and close more doors than you think — academic fit > athletic fit at most levels.",
     ],
+    videoUrl: "https://www.youtube.com/watch?v=dvSS1qWmD1s",
   },
   {
     id: "girls-high-l5",
@@ -5738,6 +5755,7 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
       "A captain's first job is the standard. Lead by example before you lead by voice.",
       "Captains stay calm when teammates are emotional. Steady > loud.",
     ],
+    videoUrl: "https://www.youtube.com/watch?v=l5-EwrhsMzY",
   },
   {
     id: "girls-high-l7",
@@ -5811,6 +5829,7 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
       "Show up first, leave last. Visible commitment compounds.",
       "Your influence > your title. Build it through reps, not announcements.",
     ],
+    videoUrl: "https://www.youtube.com/watch?v=l-gQLqv9f4o",
   },
   {
     id: "girls-high-l8",
@@ -5884,6 +5903,7 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
       "First sign of bad chemistry: side conversations and cliques during team time.",
       "Coaches build chemistry intentionally. Players can build it too — invite, include, share.",
     ],
+    videoUrl: "https://www.youtube.com/watch?v=UI-ZteQ8JGU",
   },
   {
     id: "girls-high-l9",
@@ -5957,6 +5977,7 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
       "If sacrifice feels even, both sides give up something — that's what makes it work.",
       "The team that out-sacrifices the other team usually wins.",
     ],
+    videoUrl: "https://www.youtube.com/watch?v=S02D9QzDe4s",
   },
   {
     id: "girls-high-l10",
@@ -6030,6 +6051,7 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
       "Build the program: leave it better than you found it. Mentor the underclassmen.",
       "Final season is your last chance to give. Spend it generously.",
     ],
+    videoUrl: "https://www.youtube.com/watch?v=dCVlRFWOjgE",
   },
 ]
 
