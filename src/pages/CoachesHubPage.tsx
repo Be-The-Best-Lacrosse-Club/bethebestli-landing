@@ -11,6 +11,12 @@ import {
   filmLevelColors,
   getRelatedFilms,
 } from "@/lib/filmData"
+import {
+  COACH_MODULES,
+  getCoachProgress,
+  markCoachLessonComplete,
+  getModuleCompletionCount,
+} from "@/lib/coachLearningData"
 import { SEO } from "@/components/shared/SEO"
 import type { Drill, Gender, FilmEntry, FilmCategory, FilmLevel } from "@/types"
 import {
@@ -32,6 +38,10 @@ import {
   Tag,
   ArrowRight,
   DollarSign,
+  Users,
+  GraduationCap,
+  TrendingUp,
+  Brain,
 } from "lucide-react"
 
 /* ------------------------------------------------------------------ */
@@ -99,8 +109,10 @@ const dashboardCards = [
   { id: "drills", icon: BookOpen, title: "Drill Library", description: "50+ drills across 8 categories with full coaching breakdowns." },
   { id: "film", icon: Video, title: "Film Resources", description: "Game film, scouting reports, and teaching clips." },
   { id: "plans", icon: ClipboardList, title: "Practice Plans", description: "Seasonal phase templates with timed segment breakdowns." },
+  { id: "learning", icon: Brain, title: "Coach Learning", description: "4 modules covering BTB philosophy, practice design, film study, and player development." },
   { id: "certification", icon: Award, title: "Certification", description: "Track your coaching certification requirements and progress." },
   { id: "mypay", icon: DollarSign, title: "My Pay", description: "View your season contract, payment schedule, and payment status." },
+  { id: "playerprogress", icon: GraduationCap, title: "Player Progress", description: "See which players completed academy modules across every age tier." },
 ]
 
 /* ------------------------------------------------------------------ */
@@ -165,6 +177,17 @@ export function CoachesHubPage({ gender }: CoachesHubPageProps) {
     localStorage.setItem(`btb-cert-${user?.id || "anon"}`, JSON.stringify(certCompleted))
   }, [certCompleted, user?.id])
 
+  // Learning module state
+  const [activeModuleId, setActiveModuleId] = useState<string | null>(null)
+  const [activeLessonId, setActiveLessonId] = useState<string | null>(null)
+  const [lessonView, setLessonView] = useState<"reading" | "quiz">("reading")
+  const [quizAnswers, setQuizAnswers] = useState<Record<number, string>>({})
+  const [quizSubmitted, setQuizSubmitted] = useState(false)
+  const [coachProgressTick, setCoachProgressTick] = useState(0)
+
+  const refreshCoachProgress = () => setCoachProgressTick((t) => t + 1)
+  const coachProgress = getCoachProgress()
+
   // Section refs for smooth scroll
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({})
 
@@ -175,6 +198,8 @@ export function CoachesHubPage({ gender }: CoachesHubPageProps) {
       const top = el.getBoundingClientRect().top + window.scrollY - navHeight - 24
       window.scrollTo({ top, behavior: "smooth" })
     }
+    if (id === "playerprogress") loadPlayerProgress()
+    if (id === "learning") { setActiveModuleId(null); setActiveLessonId(null) }
   }
 
   // Filtered drills
@@ -224,6 +249,26 @@ export function CoachesHubPage({ gender }: CoachesHubPageProps) {
       if (data) setPaymentData(data)
     })
   }, [user?.email])
+
+  // Player Progress state — names come from Airtable directly (stored on first lesson complete)
+  interface PlayerCourse { courseId: string; lessonsCompleted: number; totalLessons: number; pct: number; completedAt: string | null }
+  interface PlayerRow { userId: string; playerName: string | null; playerEmail: string | null; courses: PlayerCourse[]; totalPct: number; lastActive: string | null }
+  const [playerProgress, setPlayerProgress] = useState<PlayerRow[]>([])
+  const [progressLoading, setProgressLoading] = useState(false)
+  const [progressLoaded, setProgressLoaded] = useState(false)
+
+  const loadPlayerProgress = () => {
+    if (progressLoaded) return
+    setProgressLoading(true)
+    fetch(`/.netlify/functions/academy-coach-dashboard?gender=${gender}`)
+      .then(r => r.json())
+      .then(data => {
+        setPlayerProgress(data.players || [])
+        setProgressLoaded(true)
+      })
+      .catch(() => {})
+      .finally(() => setProgressLoading(false))
+  }
 
   const label = gender === "boys" ? "Boys" : "Girls"
 
@@ -276,7 +321,7 @@ export function CoachesHubPage({ gender }: CoachesHubPageProps) {
       {/* ── Dashboard Cards ── */}
       <section className="py-12 px-6 border-b border-white/[0.07]">
         <div className="max-w-[1000px] mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
             {dashboardCards.map((card) => (
               <button
                 key={card.id}
@@ -527,7 +572,7 @@ export function CoachesHubPage({ gender }: CoachesHubPageProps) {
                   <div className="text-[0.65rem] font-bold uppercase tracking-[4px] text-[var(--btb-red)] mb-5">
                     Related Films
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
                     {getRelatedFilms(selectedFilm).map((related) => (
                       <button
                         key={related.id}
@@ -774,6 +819,357 @@ export function CoachesHubPage({ gender }: CoachesHubPageProps) {
               )
             })}
           </div>
+        </div>
+      </section>
+
+
+      {/* ══════════════════════════════════════════════════════════════ */}
+      {/*  COACH LEARNING MODULES                                        */}
+      {/* ══════════════════════════════════════════════════════════════ */}
+      <section
+        id="learning"
+        ref={(el) => { sectionRefs.current["learning"] = el }}
+        className="py-20 px-6 bg-neutral-950 border-b border-white/[0.07]"
+      >
+        <div className="max-w-[1000px] mx-auto">
+
+          {/* ── Lesson Detail View ── */}
+          {activeModuleId && activeLessonId ? (() => {
+            const mod = COACH_MODULES.find(m => m.id === activeModuleId)
+            const lesson = mod?.lessons.find(l => l.id === activeLessonId)
+            if (!mod || !lesson) return null
+            const lessonIdx = mod.lessons.findIndex(l => l.id === activeLessonId)
+            const nextLesson = mod.lessons[lessonIdx + 1] ?? null
+            const isComplete = (coachProgress.completedLessons[mod.id] ?? []).includes(lesson.id)
+            const allCorrect = lesson.questions.every((q, i) => quizAnswers[i] === q.correctAnswer)
+
+            return (
+              <div>
+                {/* Back nav */}
+                <button
+                  onClick={() => { setActiveLessonId(null); setLessonView("reading"); setQuizAnswers({}); setQuizSubmitted(false) }}
+                  className="flex items-center gap-2 text-white/40 hover:text-white transition-colors text-[0.78rem] font-semibold uppercase tracking-[1.5px] mb-8"
+                >
+                  <ArrowLeft size={15} /> Back to {mod.title}
+                </button>
+
+                {/* Lesson header */}
+                <div className="mb-8">
+                  <div className="text-[0.6rem] font-bold uppercase tracking-[4px] text-[var(--btb-red)] mb-3">
+                    {mod.title} · Lesson {lessonIdx + 1} of {mod.lessons.length}
+                  </div>
+                  <h2 className="font-display text-[clamp(1.8rem,4vw,2.8rem)] uppercase tracking-wide leading-[0.92] mb-4">
+                    {lesson.title}
+                  </h2>
+                  {isComplete && (
+                    <span className="inline-flex items-center gap-1.5 text-[0.65rem] font-bold uppercase tracking-[2px] text-emerald-400/70 border border-emerald-400/20 bg-emerald-400/5 px-3 py-1 rounded-full">
+                      <CheckCircle2 size={12} /> Complete
+                    </span>
+                  )}
+                </div>
+
+                {/* Tab switcher */}
+                <div className="flex gap-1 mb-8 bg-white/[0.03] p-1 rounded-xl border border-white/[0.07] w-fit">
+                  <button
+                    onClick={() => setLessonView("reading")}
+                    className={`px-5 py-2 rounded-lg text-[0.75rem] font-bold uppercase tracking-[1.5px] transition-all ${
+                      lessonView === "reading" ? "bg-white text-black" : "text-white/40 hover:text-white/70"
+                    }`}
+                  >
+                    Reading
+                  </button>
+                  <button
+                    onClick={() => setLessonView("quiz")}
+                    className={`px-5 py-2 rounded-lg text-[0.75rem] font-bold uppercase tracking-[1.5px] transition-all ${
+                      lessonView === "quiz" ? "bg-white text-black" : "text-white/40 hover:text-white/70"
+                    }`}
+                  >
+                    Quiz ({lesson.questions.length}Q)
+                  </button>
+                </div>
+
+                {/* Reading view */}
+                {lessonView === "reading" && (
+                  <div className="max-w-[720px]">
+                    {lesson.description.split("\n\n").map((para, i) => (
+                      <p key={i} className="text-[0.91rem] text-white/60 leading-[1.9] mb-5">
+                        {para.trim()}
+                      </p>
+                    ))}
+                    <button
+                      onClick={() => { setLessonView("quiz"); setQuizAnswers({}); setQuizSubmitted(false) }}
+                      className="mt-4 flex items-center gap-3 px-6 py-3 bg-[var(--btb-red)] text-white text-[0.78rem] font-bold uppercase tracking-[2px] rounded-lg hover:opacity-90 transition-opacity"
+                    >
+                      Take the Quiz <ArrowRight size={15} />
+                    </button>
+                  </div>
+                )}
+
+                {/* Quiz view */}
+                {lessonView === "quiz" && (
+                  <div className="max-w-[720px] space-y-8">
+                    {lesson.questions.map((q, qi) => (
+                      <div key={qi} className="p-6 rounded-xl border border-white/[0.08] bg-white/[0.02]">
+                        <p className="text-[0.88rem] font-semibold text-white mb-4 leading-relaxed">
+                          <span className="text-[var(--btb-red)] font-display mr-2">{qi + 1}.</span>
+                          {q.question}
+                        </p>
+                        <div className="space-y-2">
+                          {q.options.map((opt) => {
+                            const selected = quizAnswers[qi] === opt
+                            const correct = opt === q.correctAnswer
+                            let cls = "border-white/[0.08] bg-white/[0.02] text-white/50 hover:border-white/20 hover:text-white/70"
+                            if (quizSubmitted) {
+                              if (correct) cls = "border-emerald-400/40 bg-emerald-400/10 text-emerald-300"
+                              else if (selected && !correct) cls = "border-red-400/40 bg-red-400/10 text-red-300"
+                              else cls = "border-white/[0.05] bg-white/[0.01] text-white/25"
+                            } else if (selected) {
+                              cls = "border-[var(--btb-red)]/50 bg-[var(--btb-red)]/10 text-white"
+                            }
+                            return (
+                              <button
+                                key={opt}
+                                disabled={quizSubmitted}
+                                onClick={() => setQuizAnswers(prev => ({ ...prev, [qi]: opt }))}
+                                className={`w-full text-left px-4 py-3 rounded-lg border text-[0.82rem] leading-relaxed transition-all duration-150 ${cls} disabled:cursor-default`}
+                              >
+                                {opt}
+                              </button>
+                            )
+                          })}
+                        </div>
+                        {quizSubmitted && (
+                          <div className={`mt-4 p-4 rounded-lg border text-[0.8rem] leading-relaxed ${
+                            quizAnswers[qi] === q.correctAnswer
+                              ? "border-emerald-400/20 bg-emerald-400/5 text-emerald-300/80"
+                              : "border-amber-400/20 bg-amber-400/5 text-amber-300/80"
+                          }`}>
+                            <span className="font-bold mr-1">{quizAnswers[qi] === q.correctAnswer ? "Correct." : "Incorrect."}</span>
+                            {q.explanation}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+
+                    {/* Submit / result */}
+                    {!quizSubmitted ? (
+                      <button
+                        disabled={Object.keys(quizAnswers).length < lesson.questions.length}
+                        onClick={() => {
+                          setQuizSubmitted(true)
+                          if (lesson.questions.every((q, i) => quizAnswers[i] === q.correctAnswer)) {
+                            markCoachLessonComplete(mod.id, lesson.id)
+                            refreshCoachProgress()
+                          }
+                        }}
+                        className="w-full py-3 bg-[var(--btb-red)] text-white text-[0.78rem] font-bold uppercase tracking-[2px] rounded-lg hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
+                      >
+                        Submit Answers
+                      </button>
+                    ) : (
+                      <div className={`p-6 rounded-xl border text-center ${
+                        allCorrect
+                          ? "border-emerald-400/20 bg-emerald-400/[0.04]"
+                          : "border-amber-400/20 bg-amber-400/[0.04]"
+                      }`}>
+                        {allCorrect ? (
+                          <>
+                            <CheckCircle2 size={32} className="mx-auto text-emerald-400 mb-3" />
+                            <p className="font-display text-lg uppercase tracking-wide text-white mb-1">
+                              Lesson Complete
+                            </p>
+                            <p className="text-[0.8rem] text-white/40">
+                              All answers correct. This lesson is marked complete.
+                            </p>
+                          </>
+                        ) : (
+                          <>
+                            <p className="font-display text-lg uppercase tracking-wide text-white mb-1">
+                              Review and Retry
+                            </p>
+                            <p className="text-[0.8rem] text-white/40 mb-4">
+                              Review the explanations above, then re-read the lesson and try again.
+                            </p>
+                            <button
+                              onClick={() => { setQuizAnswers({}); setQuizSubmitted(false) }}
+                              className="px-5 py-2 border border-white/20 text-white/50 hover:text-white text-[0.72rem] font-bold uppercase tracking-[1.5px] rounded-lg transition-colors"
+                            >
+                              Retry Quiz
+                            </button>
+                          </>
+                        )}
+                        {nextLesson && allCorrect && (
+                          <button
+                            onClick={() => {
+                              setActiveLessonId(nextLesson.id)
+                              setLessonView("reading")
+                              setQuizAnswers({})
+                              setQuizSubmitted(false)
+                              window.scrollTo({ top: (sectionRefs.current["learning"]?.getBoundingClientRect().top ?? 0) + window.scrollY - 88, behavior: "smooth" })
+                            }}
+                            className="mt-4 flex items-center gap-2 mx-auto px-5 py-2.5 bg-white text-black text-[0.75rem] font-bold uppercase tracking-[1.5px] rounded-lg hover:opacity-90 transition-opacity"
+                          >
+                            Next Lesson <ArrowRight size={14} />
+                          </button>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            )
+          })() : activeModuleId ? (() => {
+            /* ── Module Lesson List View ── */
+            const mod = COACH_MODULES.find(m => m.id === activeModuleId)
+            if (!mod) return null
+            const completed = coachProgress.completedLessons[mod.id] ?? []
+
+            return (
+              <div>
+                <button
+                  onClick={() => setActiveModuleId(null)}
+                  className="flex items-center gap-2 text-white/40 hover:text-white transition-colors text-[0.78rem] font-semibold uppercase tracking-[1.5px] mb-8"
+                >
+                  <ArrowLeft size={15} /> All Modules
+                </button>
+
+                <div className="mb-10">
+                  <div className="text-[0.65rem] font-bold uppercase tracking-[4px] text-[var(--btb-red)] mb-3">
+                    {completed.length} of {mod.lessons.length} lessons complete
+                  </div>
+                  <h2 className="font-display text-[clamp(1.8rem,4vw,2.8rem)] uppercase tracking-wide leading-[0.92] mb-3">
+                    {mod.icon} {mod.title}
+                  </h2>
+                  <p className="text-[0.85rem] text-white/35 max-w-[540px] leading-relaxed">
+                    {mod.description}
+                  </p>
+                  {/* Progress bar */}
+                  <div className="mt-6 max-w-[400px]">
+                    <div className="h-1.5 bg-white/[0.07] rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-[var(--btb-red)] rounded-full transition-all duration-500"
+                        style={{ width: `${mod.lessons.length > 0 ? (completed.length / mod.lessons.length) * 100 : 0}%` }}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  {mod.lessons.map((lesson, i) => {
+                    const done = completed.includes(lesson.id)
+                    return (
+                      <button
+                        key={lesson.id}
+                        onClick={() => {
+                          setActiveLessonId(lesson.id)
+                          setLessonView("reading")
+                          setQuizAnswers({})
+                          setQuizSubmitted(false)
+                          window.scrollTo({ top: (sectionRefs.current["learning"]?.getBoundingClientRect().top ?? 0) + window.scrollY - 88, behavior: "smooth" })
+                        }}
+                        className={`group w-full text-left p-6 rounded-xl border transition-all duration-200 ${
+                          done
+                            ? "border-emerald-400/15 bg-emerald-400/[0.02] hover:border-emerald-400/25"
+                            : "border-white/[0.07] bg-white/[0.02] hover:border-white/[0.15] hover:bg-white/[0.03]"
+                        }`}
+                      >
+                        <div className="flex items-start gap-4">
+                          <div className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-[0.7rem] font-display mt-0.5 ${
+                            done ? "bg-emerald-400/20 text-emerald-400" : "bg-white/[0.06] text-white/30"
+                          }`}>
+                            {done ? <CheckCircle2 size={16} /> : String(i + 1).padStart(2, "0")}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex flex-wrap items-center gap-2 mb-1">
+                              <h4 className="font-display text-[0.97rem] uppercase tracking-wide text-white">
+                                {lesson.title}
+                              </h4>
+                              {done && (
+                                <span className="text-[0.58rem] font-bold uppercase tracking-[2px] text-emerald-400/60 border border-emerald-400/15 px-2 py-0.5 rounded-full">
+                                  Complete
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-[0.78rem] text-white/30 leading-relaxed">
+                              {lesson.questions.length} quiz question{lesson.questions.length !== 1 ? "s" : ""}
+                            </p>
+                          </div>
+                          <ArrowRight size={16} className="shrink-0 text-white/20 group-hover:text-white/50 mt-1 transition-colors" />
+                        </div>
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+            )
+          })() : (
+            /* ── Module Grid View ── */
+            <div>
+              <div className="mb-10">
+                <div className="text-[0.65rem] font-bold uppercase tracking-[4px] text-[var(--btb-red)] mb-4">
+                  Coach Education
+                </div>
+                <h2 className="font-display text-[clamp(2rem,4vw,3rem)] uppercase tracking-wide leading-[0.92] mb-3">
+                  4 Modules.
+                  <br />
+                  Real Coaching Content.
+                </h2>
+                <p className="text-[0.84rem] text-white/35 max-w-[440px] leading-relaxed">
+                  Philosophy, practice planning, film study, and player development — the complete BTB coaching education curriculum.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {COACH_MODULES.map((mod) => {
+                  const completed = (coachProgress.completedLessons[mod.id] ?? []).length
+                  const total = mod.lessons.length
+                  const pct = total > 0 ? Math.round((completed / total) * 100) : 0
+                  return (
+                    <button
+                      key={mod.id}
+                      onClick={() => {
+                        setActiveModuleId(mod.id)
+                        setActiveLessonId(null)
+                        window.scrollTo({ top: (sectionRefs.current["learning"]?.getBoundingClientRect().top ?? 0) + window.scrollY - 88, behavior: "smooth" })
+                      }}
+                      className="group text-left p-7 rounded-xl border border-white/[0.07] bg-white/[0.02] hover:border-white/[0.15] hover:bg-white/[0.04] transition-all duration-200"
+                    >
+                      <div className="flex items-start justify-between mb-5">
+                        <span className="text-3xl">{mod.icon}</span>
+                        {pct === 100 ? (
+                          <span className="text-[0.6rem] font-bold uppercase tracking-[2px] text-emerald-400/70 border border-emerald-400/20 bg-emerald-400/5 px-2.5 py-1 rounded-full">
+                            Complete
+                          </span>
+                        ) : pct > 0 ? (
+                          <span className="text-[0.6rem] font-bold uppercase tracking-[2px] text-amber-400/60 border border-amber-400/15 bg-amber-400/5 px-2.5 py-1 rounded-full">
+                            In Progress
+                          </span>
+                        ) : null}
+                      </div>
+                      <h3 className="font-display text-[1.1rem] uppercase tracking-wide text-white mb-2">
+                        {mod.title}
+                      </h3>
+                      <p className="text-[0.78rem] text-white/35 leading-relaxed mb-5">
+                        {mod.description}
+                      </p>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-[0.68rem] text-white/25 font-semibold uppercase tracking-[1px]">
+                          {completed}/{total} lessons
+                        </span>
+                        <span className="text-[0.68rem] text-white/25 font-semibold">{pct}%</span>
+                      </div>
+                      <div className="h-1 bg-white/[0.07] rounded-full overflow-hidden">
+                        <div
+                          className={`h-full rounded-full transition-all duration-500 ${pct === 100 ? "bg-emerald-500" : "bg-[var(--btb-red)]"}`}
+                          style={{ width: `${pct}%` }}
+                        />
+                      </div>
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
@@ -1061,6 +1457,116 @@ export function CoachesHubPage({ gender }: CoachesHubPageProps) {
               <p className="text-[0.85rem] text-white/40 mb-1">No payment record found</p>
               <p className="text-[0.72rem] text-white/20">
                 Contact BTB operations if you believe this is an error.
+              </p>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════ */}
+      {/*  PLAYER PROGRESS DASHBOARD                                    */}
+      {/* ══════════════════════════════════════════════════════════════ */}
+      <section
+        id="playerprogress"
+        ref={(el) => { sectionRefs.current["playerprogress"] = el }}
+        className="py-20 px-6 border-t border-white/[0.07]"
+      >
+        <div className="max-w-[1000px] mx-auto">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+            <div>
+              <div className="text-[0.65rem] font-bold uppercase tracking-[4px] text-[var(--btb-red)] mb-4">
+                Player Progress
+              </div>
+              <h2 className="font-display text-[clamp(2rem,4vw,3rem)] uppercase tracking-wide leading-[0.92] mb-2">
+                Academy<br /><span className="text-white/20">Completion</span>
+              </h2>
+              <p className="text-[0.82rem] text-white/35 max-w-[420px] leading-relaxed">
+                Live view of every player's academy progress — pulled from Airtable in real time.
+              </p>
+            </div>
+            <button
+              onClick={loadPlayerProgress}
+              disabled={progressLoading}
+              className="flex items-center gap-2 px-5 py-2.5 border border-white/[0.1] text-white/50 hover:text-white hover:border-white/30 transition-colors text-[0.72rem] font-bold uppercase tracking-[1.5px] rounded-lg disabled:opacity-40"
+            >
+              <TrendingUp size={14} />
+              {progressLoading ? "Loading..." : progressLoaded ? "Refresh" : "Load Progress"}
+            </button>
+          </div>
+
+          {!progressLoaded && !progressLoading && (
+            <div className="p-12 rounded-xl border border-white/[0.07] bg-white/[0.02] text-center">
+              <GraduationCap size={32} className="mx-auto text-white/10 mb-4" />
+              <p className="text-white/30 text-[0.84rem]">Click "Load Progress" to fetch live player data from Airtable.</p>
+            </div>
+          )}
+
+          {progressLoading && (
+            <div className="p-12 rounded-xl border border-white/[0.07] bg-white/[0.02] text-center">
+              <p className="text-white/30 text-[0.84rem] animate-pulse">Fetching player progress...</p>
+            </div>
+          )}
+
+          {progressLoaded && playerProgress.length === 0 && (
+            <div className="p-12 rounded-xl border border-white/[0.07] bg-white/[0.02] text-center">
+              <Users size={32} className="mx-auto text-white/10 mb-4" />
+              <p className="text-white/30 text-[0.84rem]">No player progress recorded yet for {genderLabel} academy.</p>
+              <p className="text-white/20 text-[0.72rem] mt-1">Progress appears here as players complete lessons.</p>
+            </div>
+          )}
+
+          {progressLoaded && playerProgress.length > 0 && (
+            <div className="space-y-3">
+              {/* Header */}
+              <div className="grid grid-cols-[1fr_120px_80px] gap-4 px-5 py-2 text-[0.6rem] font-bold uppercase tracking-[2px] text-white/25">
+                <span>Player</span>
+                <span className="text-center">Courses</span>
+                <span className="text-right">Overall</span>
+              </div>
+
+              {playerProgress.map((player) => {
+                const displayName = player.playerName || `${player.userId.slice(0, 12)}…`
+                const displayEmail = player.playerEmail || null
+                return (
+                <div key={player.userId} className="bg-white/[0.02] border border-white/[0.07] rounded-xl overflow-hidden">
+                  {/* Player summary row */}
+                  <div className="grid grid-cols-[1fr_120px_80px] gap-4 px-5 py-4 items-center">
+                    <div>
+                      <p className="text-[0.82rem] font-semibold text-white truncate">{displayName}</p>
+                      <p className="text-[0.68rem] text-white/25 mt-0.5">
+                        {displayEmail && <span className="mr-2 text-white/20">{displayEmail}</span>}
+                        {player.courses.length} course{player.courses.length !== 1 ? "s" : ""} started
+                        {player.lastActive && <span className="ml-2">· Last: {player.lastActive}</span>}
+                      </p>
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      {player.courses.map((c) => (
+                        <div key={c.courseId} className="flex items-center gap-2">
+                          <span className="text-[9px] font-bold uppercase tracking-wider text-white/30 w-16 truncate">{c.courseId.replace(`${gender}-`, "")}</span>
+                          <div className="flex-1 h-1 bg-white/[0.08] rounded-full overflow-hidden">
+                            <div
+                              className={`h-full rounded-full transition-all ${
+                                c.pct === 100 ? "bg-emerald-500" : "bg-[var(--btb-red)]"
+                              }`}
+                              style={{ width: `${c.pct}%` }}
+                            />
+                          </div>
+                          <span className="text-[9px] font-bold text-white/30 w-8 text-right">{c.pct}%</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="text-right">
+                      <span className={`font-display text-xl ${player.totalPct === 100 ? "text-emerald-400" : "text-white"}`}>
+                        {player.totalPct}%
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              )
+              })}
+
+              <p className="text-[0.68rem] text-white/20 text-center pt-4">
+                {playerProgress.length} player{playerProgress.length !== 1 ? "s" : ""} with recorded progress · Open Airtable for full detail
               </p>
             </div>
           )}

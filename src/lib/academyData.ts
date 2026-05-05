@@ -17,12 +17,15 @@ export interface QuizQuestion {
   scenario?: string // extra context for scenario questions
 }
 
+export type Position = "all" | "attack" | "midfield" | "defense" | "goalie" | "fogo"
+
 export interface AcademyLesson {
   id: string
   lessonNumber: number
   title: string
   topic: "Fundamentals" | "Lacrosse IQ" | "Mental Game" | "Character"
   pillar: Pillar
+  position?: Position   // undefined = "all" (applies to every position)
   description: string
   videoUrl?: string
   diagrams?: FieldDiagramSpec[]
@@ -45,6 +48,7 @@ export interface WallOfFameEntry {
   name: string
   program: "boys" | "girls"
   tier: AgeTier
+  courseId: string
   completedAt: string
 }
 
@@ -58,79 +62,150 @@ export const PILLAR_CONFIG: Record<Pillar, { label: string; description: string 
 
 export const PILLAR_ORDER: Pillar[] = ["game", "leadership", "team"]
 
+export const POSITION_CONFIG: Record<Position, { label: string; short: string }> = {
+  all:      { label: "All Positions", short: "All" },
+  attack:   { label: "Attack",        short: "ATT" },
+  midfield: { label: "Midfield",      short: "MID" },
+  defense:  { label: "Defense",       short: "DEF" },
+  goalie:   { label: "Goalie",        short: "GK" },
+  fogo:     { label: "FOGO",           short: "FO" },
+}
+
+export const POSITION_ORDER: Position[] = ["all", "attack", "midfield", "defense", "goalie", "fogo"]
+
+// ─── API ENDPOINTS ────────────────────────────────────────────────────
+
+const PROGRESS_API = "/.netlify/functions/academy-progress"
+const WOF_API      = "/.netlify/functions/academy-wof"
+
 // ─── WALL OF FAME ─────────────────────────────────────────────────────
+// Backed by Airtable via academy-wof function.
+// Falls back to empty array if the API is unreachable.
 
-const WOF_KEY = "btb-wall-of-fame"
-
-const SEED_WALL: WallOfFameEntry[] = [
-  { name: "Jake Morrison", program: "boys", tier: "middle", completedAt: "2026-02-22" },
-  { name: "Sophia Marino", program: "girls", tier: "youth", completedAt: "2026-03-03" },
-  { name: "Liam O'Brien", program: "boys", tier: "high", completedAt: "2026-03-10" },
-  { name: "Ava Rodriguez", program: "girls", tier: "middle", completedAt: "2026-03-14" },
-]
-
-export function getWallOfFame(): WallOfFameEntry[] {
+export async function getWallOfFame(): Promise<WallOfFameEntry[]> {
   try {
-    const raw = localStorage.getItem(WOF_KEY)
-    if (raw) return JSON.parse(raw)
-    localStorage.setItem(WOF_KEY, JSON.stringify(SEED_WALL))
-    return SEED_WALL
+    const res = await fetch(WOF_API)
+    if (!res.ok) throw new Error("WOF fetch failed")
+    const data = await res.json()
+    return (data.entries || []) as WallOfFameEntry[]
   } catch {
-    return SEED_WALL
+    return []
   }
 }
 
-export function addToWallOfFame(name: string, program: Gender, tier: AgeTier): WallOfFameEntry[] {
-  const entries = getWallOfFame()
-  const entry: WallOfFameEntry = {
-    name,
-    program,
-    tier,
-    completedAt: new Date().toISOString().split("T")[0],
+export async function addToWallOfFame(
+  name: string,
+  gender: Gender,
+  tier: AgeTier,
+  courseId: string,
+): Promise<void> {
+  try {
+    await fetch(WOF_API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, gender, tier, courseId }),
+    })
+  } catch {
+    // Non-fatal — wall of fame write failure silently ignored
   }
-  const updated = [...entries, entry]
-  localStorage.setItem(WOF_KEY, JSON.stringify(updated))
-  return updated
 }
 
 // ─── PROGRESS TRACKING ────────────────────────────────────────────────
+// Backed by Airtable via academy-progress function.
+// Uses localStorage as a write-through cache so the UI stays instant:
+//   - Writes go to cache first, then sync to Airtable in the background
+//   - Reads come from cache; full sync from Airtable on initial load
 
-const PROGRESS_KEY = "btb-academy-progress"
+const PROGRESS_CACHE_KEY = "btb-academy-progress-v2"
 
-interface AcademyProgress {
+export interface AcademyProgress {
   [courseId: string]: {
     completedLessons: string[]
     completedAt?: string
   }
 }
 
-export function getAcademyProgress(): AcademyProgress {
+function readCache(): AcademyProgress {
   try {
-    const raw = localStorage.getItem(PROGRESS_KEY)
+    const raw = localStorage.getItem(PROGRESS_CACHE_KEY)
     return raw ? JSON.parse(raw) : {}
   } catch {
     return {}
   }
 }
 
-export function markLessonComplete(courseId: string, lessonId: string): void {
-  const progress = getAcademyProgress()
-  if (!progress[courseId]) {
-    progress[courseId] = { completedLessons: [] }
+function writeCache(progress: AcademyProgress): void {
+  try {
+    localStorage.setItem(PROGRESS_CACHE_KEY, JSON.stringify(progress))
+  } catch { /* storage full — non-fatal */ }
+}
+
+// Sync all progress for a user from Airtable into local cache
+export async function syncProgressFromServer(userId: string): Promise<AcademyProgress> {
+  try {
+    const res = await fetch(`${PROGRESS_API}?userId=${encodeURIComponent(userId)}`)
+    if (!res.ok) throw new Error("Sync failed")
+    const data = await res.json()
+    const progressMap: AcademyProgress = data.progressMap || {}
+    writeCache(progressMap)
+    return progressMap
+  } catch {
+    // Network error — return whatever is cached
+    return readCache()
   }
+}
+
+// Read progress from cache (call syncProgressFromServer on mount for freshness)
+export function getAcademyProgress(): AcademyProgress {
+  return readCache()
+}
+
+// Mark a lesson complete: update cache immediately, persist to Airtable async
+export function markLessonComplete(courseId: string, lessonId: string, userId?: string, playerName?: string, playerEmail?: string): void {
+  const progress = readCache()
+  if (!progress[courseId]) progress[courseId] = { completedLessons: [] }
   if (!progress[courseId].completedLessons.includes(lessonId)) {
     progress[courseId].completedLessons.push(lessonId)
   }
-  localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress))
+  writeCache(progress)
+
+  // Background sync to Airtable (fire-and-forget)
+  if (userId) {
+    fetch(PROGRESS_API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        userId,
+        courseId,
+        completedLessons: progress[courseId].completedLessons,
+        completedAt: progress[courseId].completedAt,
+        ...(playerName  ? { playerName }  : {}),
+        ...(playerEmail ? { playerEmail } : {}),
+      }),
+    }).catch(() => { /* non-fatal */ })
+  }
 }
 
-export function markCourseComplete(courseId: string): void {
-  const progress = getAcademyProgress()
-  if (!progress[courseId]) {
-    progress[courseId] = { completedLessons: [] }
+// Mark a full course complete: update cache + Airtable
+export function markCourseComplete(courseId: string, userId?: string): void {
+  const progress = readCache()
+  if (!progress[courseId]) progress[courseId] = { completedLessons: [] }
+  const completedAt = new Date().toISOString().split("T")[0]
+  progress[courseId].completedAt = completedAt
+  writeCache(progress)
+
+  if (userId) {
+    fetch(PROGRESS_API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        userId,
+        courseId,
+        completedLessons: progress[courseId].completedLessons,
+        completedAt,
+      }),
+    }).catch(() => { /* non-fatal */ })
   }
-  progress[courseId].completedAt = new Date().toISOString().split("T")[0]
-  localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress))
 }
 
 // ─── COURSE DATA ──────────────────────────────────────────────────────
@@ -146,7 +221,7 @@ const TIERS: { tier: AgeTier; label: string; ageRange: string; gradYears: string
 const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
   {
     id: "boys-youth-l1",
-    videoUrl: "https://www.youtube.com/watch?v=qXhkg0wEKDY",
+    videoUrl: "https://www.youtube.com/watch?v=DFYpbgqY9vw",
     lessonNumber: 1,
     title: "Welcome to Lacrosse",
     topic: "Fundamentals",
@@ -311,7 +386,7 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
   },
   {
     id: "boys-youth-l2",
-    videoUrl: "https://www.youtube.com/watch?v=a4fWOtC8C7Q",
+    videoUrl: "https://www.youtube.com/watch?v=ovd8u9ETUBk",
     lessonNumber: 2,
     title: "How to Hold and Cradle Your Stick",
     topic: "Fundamentals",
@@ -434,7 +509,7 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
   },
   {
     id: "boys-youth-l3",
-    videoUrl: "https://www.youtube.com/watch?v=4iOD3TjV6D8",
+    videoUrl: "https://www.youtube.com/watch?v=qtwKIxyOdGk",
     lessonNumber: 3,
     title: "Catching and Throwing",
     topic: "Fundamentals",
@@ -508,7 +583,7 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
   },
   {
     id: "boys-youth-l4",
-    videoUrl: "https://www.youtube.com/watch?v=UI-ZteQ8JGU",
+    videoUrl: "https://www.youtube.com/watch?v=qtwKIxyOdGk",
     lessonNumber: 4,
     title: "Being a Great Teammate",
     topic: "Character",
@@ -720,7 +795,7 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
   },
   {
     id: "boys-youth-l6",
-    videoUrl: "https://www.youtube.com/watch?v=l-gQLqv9f4o",
+    videoUrl: "https://www.youtube.com/watch?v=eI7WKifE8aI",
     lessonNumber: 6,
     title: "The BTB Standard",
     topic: "Mental Game",
@@ -794,7 +869,7 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
   },
   {
     id: "boys-youth-l7",
-    videoUrl: "https://www.youtube.com/watch?v=l5-EwrhsMzY",
+    videoUrl: "https://www.youtube.com/watch?v=4KXp28yNO5Q",
     lessonNumber: 7,
     title: "Leading by Example",
     topic: "Character",
@@ -868,7 +943,7 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
   },
   {
     id: "boys-youth-l8",
-    videoUrl: "https://www.youtube.com/watch?v=dCVlRFWOjgE",
+    videoUrl: "https://www.youtube.com/watch?v=rbL9yXyCXtQ",
     lessonNumber: 8,
     title: "Respecting the Game",
     topic: "Character",
@@ -942,7 +1017,7 @@ const BOYS_YOUTH_LESSONS: AcademyLesson[] = [
   },
   {
     id: "boys-youth-l9",
-    videoUrl: "https://www.youtube.com/watch?v=S02D9QzDe4s",
+    videoUrl: "https://www.youtube.com/watch?v=2v4vfqctG88",
     lessonNumber: 9,
     title: "Why Teams Win",
     topic: "Mental Game",
@@ -1258,6 +1333,7 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
   },
   {
     id: "boys-middle-l2",
+    videoUrl: "https://www.youtube.com/watch?v=ovd8u9ETUBk",
     lessonNumber: 2,
     title: "Dodging Fundamentals",
     topic: "Fundamentals",
@@ -1322,7 +1398,6 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
       scenario: "1v1 from up top. Defender is glued to your right hip. Every move you make, he mirrors. You need to create space NOW.",
     },
     ],
-    videoUrl: "https://www.youtube.com/watch?v=vQfmOqWZa_o",
     keyTakeaways: [
       "Three core dodges: split, roll, face. Each beats a different defender posture.",
       "Split dodge: switch hands, change direction. The change of pace is what beats them.",
@@ -1406,10 +1481,12 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
   },
   {
     id: "boys-middle-l3",
+    videoUrl: "https://www.youtube.com/watch?v=VxGmfQUvX_k",
     lessonNumber: 3,
     title: "Defensive Footwork and Positioning",
     topic: "Fundamentals",
     pillar: "game",
+      position: "defense",
     description: `Good defense in lacrosse starts with footwork. Most young defenders try to swing their stick at the ball — that's a mistake. The best defenders move their feet, stay in position, and force the offense into bad spots.\n\nDEFENSIVE FUNDAMENTALS\n\n1. Breakdown Position\nKnees bent, weight on the balls of your feet, hips low, stick out in front. This is your defensive stance. From here you can move in any direction instantly. Standing tall means you're already beat.\n\n2. Footwork: Slide-Step, Never Cross\nWhen the offense moves, you shuffle. Slide left, slide right — always keeping your hips square to the ball carrier. NEVER cross your feet. Crossing = losing balance = getting beat.\n\n3. The Approach\nWhen closing out on a ball carrier, don't run straight at him. Take an angle that forces him to one side. Take away the middle of the field and push him toward the sideline or toward your help.\n\n4. Stick Checks\nUse quick "poke checks" — a short jab toward the hands or stick head. These are more effective than wild, swinging checks. The goal isn't to take the ball away every time. The goal is to disrupt, force a bad decision, and slow the dodger down so your slide can arrive.\n\nDEFENSIVE COMMUNICATION\nDefense is a talking game. Every defender needs these calls:\n- "I got ball!" — I'm on the ball carrier\n- "I got two!" or "I'm hot!" — I'm the first slide\n- "I got three!" — I'm the second slide\n- "Check!" — The ball carrier picked up his stick to pass — tighten up\n- "Fire! Fire!" — Slide NOW\n\nTHE CARDINAL RULE\nStay between your man and the goal. If you're between your man and the goal, you've already won most of the battle. If he gets past you, your team is scrambling.\n\nCOACHING POINTS\n- Defense is 80% footwork, 20% stick work\n- Poke checks > wild swings. Controlled, quick, directed.\n- The player who communicates on defense is worth more than the player who just checks hard`,
     questions: [
       {
@@ -1470,7 +1547,6 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
       scenario: "Right wing dodge from up top. The attackman is faster than you and trying to get to the middle for an inside roll.",
     },
     ],
-    videoUrl: "https://www.youtube.com/watch?v=UGRkkLFv-Vw",
     keyTakeaways: [
       "Defense is 80% footwork, 20% stick work. Move feet, not stick.",
       "Slide-step (never cross feet) — keep hips square to the ball carrier.",
@@ -2167,10 +2243,12 @@ const BOYS_MIDDLE_LESSONS: AcademyLesson[] = [
 const BOYS_HIGH_LESSONS: AcademyLesson[] = [
   {
     id: "boys-high-l1",
+    videoUrl: "https://www.youtube.com/watch?v=GCceU3eGBrc",
     lessonNumber: 1,
     title: "Advanced Offensive Sets",
     topic: "Lacrosse IQ",
     pillar: "game",
+      position: "attack",
     description: `By high school, you need to understand offensive systems — not just how to score on your own, but how your team creates scoring chances together through sets, motion, and ball reversal.\n\nOFFENSIVE SETS\n\n1. 2-2-2 Formation\nTwo attackmen up top, two midfielders on the wings, two attackmen low (one at each side of the crease/GLE). This is a balanced formation that gives you scoring threats from every angle.\n\n2. 1-4-1 Formation\nOne player at the top (called "the point"), four spread across the middle, one behind the goal at X. This set stretches the defense horizontally and creates isolation dodge opportunities.\n\n3. 3-3 Formation\nThree attackmen across the top, three forming the bottom arc. This is the classic look — good for ball movement and off-ball picks.\n\nKEY CONCEPTS\n\nMotion: Off-ball players are constantly moving — cutting, screening, repositioning. Good motion is hard to defend because the defense can never settle. The keys are timing and spacing (5+ yards apart so defenses can't double-team).\n\nBall Reversal: Moving the ball from one side of the field to the other. Defenses are designed to slide toward the ball. When you reverse quickly (topside to X, X to the other wing), the defense has to scramble — that's when openings appear.\n\nPick the Picker: A concept where the player who just set a pick immediately gets a pick set for them. The defense is still recovering from the first action when the second one hits. This is a staple of elite offenses.\n\nReading Slides: Don't dodge into help. Before you commit to a dodge, look for the slide. If you see it coming early, pass to the player the slider left. If you don't see help, dodge hard and finish. Patience creates better shots than forced 1v1 dodges.\n\nCOACHING POINTS\n- Watch film of college offenses running 2-2-2 and 1-4-1 — pause and study the off-ball movement\n- The best offenses don't need highlight-reel dodges — they move the ball and find the open man\n- "Throw it forward, look inside" — move the ball up the field, then find the player cutting to the crease`,
     questions: [
       {
@@ -2231,7 +2309,6 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
       scenario: "1-4-1 set. You're at the point. Right wing comes up to set you a pick. Their crease defender has been the slide all game.",
     },
     ],
-    videoUrl: "https://www.youtube.com/watch?v=S8k2L9UXriU",
     keyTakeaways: [
       "2-2-2: balanced — every spot is a scoring threat. Best for ball reversal + pick-the-picker.",
       "1-4-1: stretches D horizontally. Point and X dodgers get isolation lanes.",
@@ -2322,10 +2399,12 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
   },
   {
     id: "boys-high-l2",
+    videoUrl: "https://www.youtube.com/watch?v=rbL9yXyCXtQ",
     lessonNumber: 2,
     title: "Slide Packages and Team Defense",
     topic: "Lacrosse IQ",
     pillar: "game",
+      position: "defense",
     description: `Team defense at the high school level requires every player to understand the slide package — the system your team uses to help each other when an offensive player beats his man. If you don't know the slide package, you're a liability.\n\nSLIDE SYSTEMS\n\n1. Adjacent Slide\nWhen the on-ball defender gets beat, the player adjacent (next to him) slides to stop the dodger. The next defender "fills" — rotating to cover the player the slider left. Everyone moves together like a chain reaction. This is the most common system.\n\n2. Crease Slide\nThe slide comes from a defender near the crease — whoever is guarding the offensive player closest to the goal. This slide arrives earlier (the crease defender is closest to the dodger) but leaves the most dangerous area open, requiring perfect rotations.\n\n3. Recovery\nAfter the slide stops the ball, everyone has to recover. The slider gets back to his man, the fill gets back to his man, and the defense resets. The whole sequence — slide, stop, fill, recover — should take 2-3 seconds.\n\nCOMMUNICATION\nSlides don't work without talking. Your goalie is the quarterback:\n- "Fire!" — Slide NOW\n- "Hold!" — Stay on your man, don't slide yet\n- "Two!" — I'm the second slide if we need it\n- "Crank!" — Check sticks, the ball carrier is winding up to shoot\n- "Clear!" — We have the ball, push it out\n\nThe biggest mistake: hesitating. If you're the slider, GO. Don't wait to see if the on-ball defender recovers. Late slides are worse than no slides — the defense is out of position AND the ball carrier has a head of steam.\n\nSSDM DEFENSE\nShort-Stick Defensive Middie — the midfielder who plays lockdown defense on the other team's best offensive middie. This player has to be able to guard in space, communicate slides, and play team defense at an elite level. Some of the best SSDM defenders in college are the smartest players on the field, not the biggest.\n\nCOACHING POINTS\n- Practice slides in 3v2, 4v3, and 5v4 situations\n- Every player — including attackmen — should know the slide package for rides and transition\n- Film study: watch how the defense rotates after the initial slide. That recovery is where most breakdowns happen`,
     questions: [
       {
@@ -2386,7 +2465,6 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
       scenario: "X attackman is dodging hard, splitting two defenders, headed for the middle of the field. The crease attackman pops out to a wing.",
     },
     ],
-    videoUrl: "https://www.youtube.com/watch?v=7uDxcG8BXZ8",
     keyTakeaways: [
       "Adjacent slide: from the player next to the dodger. Crease defender stays home.",
       "Crease slide (sandwich): crease defender is first slide; adjacent rotates to fill crease.",
@@ -3104,6 +3182,7 @@ const BOYS_HIGH_LESSONS: AcademyLesson[] = [
 const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
   {
     id: "girls-youth-l1",
+    videoUrl: "https://www.youtube.com/watch?v=QrH4dilJi3c",
     lessonNumber: 1,
     title: "Welcome to Girls Lacrosse",
     topic: "Fundamentals",
@@ -3277,7 +3356,6 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
         ]
       },
     ],
-    videoUrl: "https://www.youtube.com/watch?v=qXhkg0wEKDY",
   },
   {
     id: "girls-youth-l2",
@@ -3478,7 +3556,7 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
   },
   {
     id: "girls-youth-l4",
-    videoUrl: "https://www.youtube.com/watch?v=UI-ZteQ8JGU",
+    videoUrl: "https://www.youtube.com/watch?v=7deaRXF70Q8",
     lessonNumber: 4,
     title: "Being a Great Teammate",
     topic: "Character",
@@ -3690,7 +3768,7 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
   },
   {
     id: "girls-youth-l6",
-    videoUrl: "https://www.youtube.com/watch?v=l-gQLqv9f4o",
+    videoUrl: "https://www.youtube.com/watch?v=QrH4dilJi3c",
     lessonNumber: 6,
     title: "The BTB Standard",
     topic: "Mental Game",
@@ -3764,7 +3842,7 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
   },
   {
     id: "girls-youth-l7",
-    videoUrl: "https://www.youtube.com/watch?v=l5-EwrhsMzY",
+    videoUrl: "https://www.youtube.com/watch?v=RwMQvpad-XE",
     lessonNumber: 7,
     title: "Leading by Example",
     topic: "Character",
@@ -3838,7 +3916,7 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
   },
   {
     id: "girls-youth-l8",
-    videoUrl: "https://www.youtube.com/watch?v=dCVlRFWOjgE",
+    videoUrl: "https://www.youtube.com/watch?v=3f3EEGr6WZk",
     lessonNumber: 8,
     title: "Respecting the Game",
     topic: "Character",
@@ -3912,7 +3990,7 @@ const GIRLS_YOUTH_LESSONS: AcademyLesson[] = [
   },
   {
     id: "girls-youth-l9",
-    videoUrl: "https://www.youtube.com/watch?v=S02D9QzDe4s",
+    videoUrl: "https://www.youtube.com/watch?v=2v4vfqctG88",
     lessonNumber: 9,
     title: "Why Teams Win",
     topic: "Mental Game",
@@ -4240,6 +4318,7 @@ const GIRLS_MIDDLE_LESSONS: AcademyLesson[] = [
   },
   {
     id: "girls-middle-l2",
+    videoUrl: "https://www.youtube.com/watch?v=7deaRXF70Q8",
     lessonNumber: 2,
     title: "Dodging in the Girls Game",
     topic: "Fundamentals",
@@ -4304,7 +4383,6 @@ const GIRLS_MIDDLE_LESSONS: AcademyLesson[] = [
       scenario: "1v1 at the top of the 8m. Defender is glued to your right hip. Every move you make, she mirrors.",
     },
     ],
-    videoUrl: "https://www.youtube.com/watch?v=vQfmOqWZa_o",
     keyTakeaways: [
       "Three core dodges: split, roll, face. Each beats a different defender posture.",
       "In girls — be aware of shooting space. Don't dodge into a defender if it puts her in your shot path inside the 8m.",
@@ -4388,10 +4466,12 @@ const GIRLS_MIDDLE_LESSONS: AcademyLesson[] = [
   },
   {
     id: "girls-middle-l3",
+    videoUrl: "https://www.youtube.com/watch?v=3f3EEGr6WZk",
     lessonNumber: 3,
     title: "Defensive Footwork",
     topic: "Fundamentals",
     pillar: "game",
+      position: "defense",
     description: `Good defense in girls lacrosse starts with your feet, not your stick. The best defenders move their feet, stay in position, and force the ball carrier into bad spots.\n\nDEFENSIVE FUNDAMENTALS\n\n1. Breakdown Position\nKnees bent, weight on the balls of your feet, hips low, stick out in a "check-ready" position. This is your defensive stance. Standing upright is the worst thing a defender can do — you lose all reaction time.\n\n2. Footwork: Shuffle, Don't Cross\nWhen the attacker moves, you slide-step. Never cross your feet. Slide left, slide right, always keeping your hips square to the ball carrier. Crossing your feet means losing balance and getting beat.\n\n3. Approach Angle\nWhen closing out on a ball carrier, approach at an angle that forces her to one side. Don't run straight at her — she'll dodge around you. Take away one side and force her to the other.\n\n4. Stick Positioning\nKeep your stick in a "check-ready" position — up and active, ready for a controlled check on the stick side. In girls lacrosse, checks must be controlled and directed at the stick, not the body. Wild swings get flagged.\n\nDEFENSIVE COMMUNICATION — THE VOCABULARY\nEvery defender needs to know these calls:\n- "Ball!" — I'm defending the ball carrier\n- "Help!" or "Help right/left!" — I'm one slide away, ready to help\n- "Ball up top!" — Ball is at the top of the 12-meter\n- "Ball low!" — Ball is at X (behind the goal)\n- "Crash!" — Immediate help needed, slide NOW\n\nCOACHING POINTS\n- If you can communicate when you're tired, you can communicate any time\n- Stay between your player and the goal — that's the #1 rule of defense\n- Defense is 80% positioning, 20% stick checks`,
     questions: [
       {
@@ -4452,7 +4532,6 @@ const GIRLS_MIDDLE_LESSONS: AcademyLesson[] = [
       scenario: "Right-side dodge. Attacker is faster than you. She's heading toward the 8m looking to drive.",
     },
     ],
-    videoUrl: "https://www.youtube.com/watch?v=UGRkkLFv-Vw",
     keyTakeaways: [
       "Defense is footwork first. Move feet, not stick.",
       "Inside the 8m, you MUST be marking up (covering an attacker). No standing in shot lanes — that's shooting space.",
@@ -5124,10 +5203,12 @@ const GIRLS_MIDDLE_LESSONS: AcademyLesson[] = [
 const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
   {
     id: "girls-high-l1",
+    videoUrl: "https://www.youtube.com/watch?v=IEt5iXnMtsw",
     lessonNumber: 1,
     title: "Advanced Offensive Concepts",
     topic: "Lacrosse IQ",
     pillar: "game",
+      position: "attack",
     description: `By high school, you should understand offensive systems — not just how to score on your own, but how the team creates scoring chances together. Great high school offenses run sets, motion concepts, and ball reversals to manipulate defenses.\n\nA "set" is an organized offensive formation. The most common in girls lacrosse are the 3-3 (three players up high, three down low) and the 1-3-2 (one player up top, three across the middle, two down low). Each set creates different angles and dodging opportunities.\n\n"Motion offense" means players are constantly moving — cutting, screening, repositioning — to create openings. Good motion offenses are hard to defend because the defense can never settle. The keys are timing (cuts have to happen at the right moment) and spacing (players have to stay 5+ yards apart so defenses can't double team easily).\n\n"Ball reversal" is moving the ball from one side of the field to the other quickly. Defenses are designed to slide and help where the ball is. When you reverse the ball quickly, the defense has to scramble to get in new position — and that's when openings appear.\n\nHere's the most important advanced concept: don't dodge into help. Look for the slide before you commit. If you see help coming, pass the ball to your open teammate. If you don't see help, dodge hard and finish. Patient ball movement creates better looks than forced 1v1 dodges.\n\nThe best high school offenses have players who know their roles. The best dodgers initiate. The best shooters position for shots. The best passers create assists. Know what you're best at and play to it.`,
     questions: [
       {
@@ -5188,7 +5269,6 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
       scenario: "1-3-2 set. You're at the high point. Right wing comes up to set you a pick. Their crease defender has been the slide all game.",
     },
     ],
-    videoUrl: "https://www.youtube.com/watch?v=S8k2L9UXriU",
     keyTakeaways: [
       "Common settled sets: 3-2-1, 1-3-2 (around the 12m fan), and high-2 / low-2.",
       "Off-ball cuts are the heart of girls offense — back doors, fades, picks at the 8m.",
@@ -5278,10 +5358,12 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
   },
   {
     id: "girls-high-l2",
+    videoUrl: "https://www.youtube.com/watch?v=2v4vfqctG88",
     lessonNumber: 2,
     title: "Team Defense and Slide Packages",
     topic: "Lacrosse IQ",
     pillar: "game",
+      position: "defense",
     description: `Team defense at the high school level requires every player to understand the slide package — your team's system for helping each other when a ball carrier beats her defender.\n\nSLIDE SYSTEMS\n\n1. Adjacent Slide\nWhen the on-ball defender gets beat, the defender closest to her (adjacent) slides to stop the ball carrier. The next defender rotates to fill the gap left by the slider. Everyone shifts together like a chain reaction. This is the most common system.\n\n2. Crease Slide\nThe slide comes from a defender near the crease — usually whoever is guarding the player closest to the goal. This slide arrives faster but is harder to teach because it requires perfect communication and rotations.\n\n3. Recovery After the Slide\nThe slider's job isn't just to stop the dodge — it's to recover back to her player once the threat is neutralized. Slide, stop the ball, recover. The whole defense has to rotate during this sequence and then reset.\n\nCOMMUNICATION IS NON-NEGOTIABLE\nYour goalie calls the slides. Your defenders point and communicate constantly:\n- "Ball!" — I have the ball carrier\n- "Help right!" / "Help left!" — I'm one pass away, ready to slide from this side\n- "Crash!" — Slide NOW, we need immediate help\n- "Recover!" — Get back to your player, the threat is over\n\nSilent defenses lose. If your team doesn't talk, your slides will be late, your rotations will break down, and you'll give up easy goals.\n\nTHE BIGGEST MISTAKE\nHesitating on the slide. If you're the slider, GO. Don't wait to see if the on-ball defender recovers — by then it's too late. Slide hard, slide early, trust your teammates to fill behind you. A late slide is worse than no slide at all.\n\nCOACHING POINTS\n- Every player on the field should know the slide package — not just defenders\n- Practice slides in 3v2, 4v3, and 5v4 situations before going 6v6\n- Film study: watch where the slides come from and how the defense recovers`,
     questions: [
       {
@@ -5342,7 +5424,6 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
       scenario: "First home is dodging hard, splitting two defenders, headed for the middle. Crease attacker pops out to a wing.",
     },
     ],
-    videoUrl: "https://www.youtube.com/watch?v=7uDxcG8BXZ8",
     keyTakeaways: [
       "Adjacent slide: from the player next to the dodger. Crease defender stays home.",
       "Crease (sandwich) slide: crease defender first; adjacent rotates to fill crease.",
@@ -5463,6 +5544,7 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
   },
   {
     id: "girls-high-l3",
+    videoUrl: "https://www.youtube.com/watch?v=dxvAw7zudVg",
     lessonNumber: 3,
     title: "How to Watch Film",
     topic: "Lacrosse IQ",
@@ -5527,7 +5609,6 @@ const GIRLS_HIGH_LESSONS: AcademyLesson[] = [
       scenario: "You watched film of your last 4 games. After every turnover, you drift to the right side — leaving your defensive responsibility uncovered.",
     },
     ],
-    videoUrl: "https://www.youtube.com/watch?v=4LHsrseSKak",
     keyTakeaways: [
       "Watch ONE thing per viewing: defensive slides, off-ball cuts, draw battles — pick.",
       "Pause and predict: stop the clip, guess the next move, then watch and check.",
@@ -6084,4 +6165,800 @@ function getCourseDescription(tier: AgeTier): string {
     case "high":
       return "Compete at the highest level. Advanced systems, film study, and college prep."
   }
+}
+
+// ─── POSITION-SPECIFIC BONUS LESSONS ──────────────────────────────────
+// These inject into all tiers. Position-tagged so players can filter to
+// exactly the content relevant to them.
+
+export const GOALIE_LESSONS: AcademyLesson[] = [
+  {
+    id: "pos-goalie-l1",
+    videoUrl: "https://www.youtube.com/watch?v=q1UVaJsLehw",
+    lessonNumber: 101,
+    title: "The Goalie Mindset",
+    topic: "Mental Game",
+    pillar: "leadership",
+    position: "goalie",
+    description: `The goalie position is the hardest in lacrosse — and it produces some of the strongest leaders on any team. You are the only player on the field who sees everything in front of you. That view comes with responsibility.
+
+Every save is forgotten in thirty seconds. Every goal allowed lives in your head for the rest of the game unless you train yourself to let it go. The 5-second rule is mandatory for goalies: feel the frustration, reset physically (tap your stick to the post, take a breath, reset your stance), and refocus. The next shot is the only one that matters.
+
+The best goalies are the best communicators. You direct traffic. When the ball is on the wing and your slide is developing, you have to call it clearly before it happens: "Slide left, rotate right." Your defenders are relying on you to be their eyes. If you go quiet, your defense goes blind.
+
+Goalies also set the emotional temperature of the team. When you stay calm under pressure, your defense stays calm. When you get rattled, everyone feels it. This isn't pressure — it's power. You control the energy of ten players just by how you carry yourself between shots.
+
+At BTB, we develop goalies who lead from the crease. That means studying film, knowing offensive tendencies, directing defense, and bouncing back from goals like they never happened. The physical saves get you on the field. The mental game keeps you there.`,
+    questions: [
+      {
+        question: "What is the 5-second rule for goalies?",
+        options: ["Score within 5 seconds of a save", "Feel frustration for 5 seconds, then physically reset and refocus", "Clear the ball in 5 seconds", "Take 5 steps before throwing"],
+        correctAnswer: 1,
+        explanation: "The 5-second reset prevents one goal from turning into three. Feel it, reset, move on.",
+      },
+      {
+        question: "Why is communication so critical for goalies?",
+        options: ["It's not — just make saves", "Goalies direct the entire defense and are the only one who sees the whole field", "To motivate teammates", "Only matters in college"],
+        correctAnswer: 1,
+        explanation: "The goalie sees everything. Calling slides, rotations, and clears keeps the defense organized.",
+      },
+      {
+        question: "How does a goalie's emotional state affect the team?",
+        options: ["It doesn't", "A calm goalie keeps the defense calm — a rattled goalie rattles everyone", "Only affects the goalie", "Only matters in close games"],
+        correctAnswer: 1,
+        explanation: "Goalies set the emotional temperature. Leadership from the crease is as important as saves.",
+      },
+    ],
+  },
+  {
+    id: "pos-goalie-l2",
+    videoUrl: "https://www.youtube.com/watch?v=15BSKp0cvgg",
+    lessonNumber: 102,
+    title: "Arc Positioning and Angles",
+    topic: "Fundamentals",
+    pillar: "game",
+    position: "goalie",
+    description: `Goalie positioning is angle math. The further you come off your line toward the ball, the smaller the shooter's target. This is called cutting down the angle — and it's the most important technical concept in goalkeeping.
+
+The arc is the curved path along the front of your crease. As the ball moves, you move along the arc to stay centered between the ball and the center of the cage. If the ball is at the top center, you're at the top of your arc. If the ball moves to the right wing, you shift right along your arc. You never stand flat-footed in the center of the cage — that gives the shooter the whole net.
+
+Step and lead with your top hand. When a shot comes, your first movement is a step toward the ball with the foot on that side. Your top hand leads the save — it's the first thing you present to the shooter. Keep your hands in front of your body, not behind you. Hands behind your body turn your body into the wall, not your stick.
+
+For dodges from behind the cage: stay in front of your line, track the ball with your feet, and don't commit until the shooter commits. Most goals on the back side happen because the goalie moves too early. Be patient, let the attacker show you where they're going, then react.
+
+Every practice session, spend 10 minutes on arc movement with no shots — just tracking. Walk the arc as the ball moves around the perimeter. Burn the footwork into muscle memory so it's automatic under pressure.`,
+    questions: [
+      {
+        question: "What does 'cutting down the angle' mean?",
+        options: ["Moving to the side of the cage", "Stepping toward the ball to reduce the shooter's target", "Staying in the center", "Crouching down"],
+        correctAnswer: 1,
+        explanation: "Moving toward the shooter reduces the visible net. The further out you step (within reason), the smaller the target.",
+      },
+      {
+        question: "Which body part leads a save?",
+        options: ["Your feet", "Your shoulder", "Your top hand", "Your chest"],
+        correctAnswer: 2,
+        explanation: "Lead with your top hand — it's the first thing presented to the shooter and controls the save.",
+      },
+      {
+        question: "On a dodge from behind the cage, when should a goalie commit?",
+        options: ["Immediately when they see the attacker", "Before the attacker moves", "After the attacker commits to a direction", "Never move"],
+        correctAnswer: 2,
+        explanation: "Moving too early gives the attacker a free lane. Be patient — react after they commit.",
+      },
+    ],
+  },
+]
+
+export const ATTACK_LESSONS: AcademyLesson[] = [
+  {
+    id: "pos-attack-l1",
+    videoUrl: "https://www.youtube.com/watch?v=ovd8u9ETUBk",
+    lessonNumber: 103,
+    title: "Dodging with Purpose",
+    topic: "Fundamentals",
+    pillar: "game",
+    position: "attack",
+    description: `A dodge isn't just moving with the ball — it's a decision. Every dodge should have a purpose: get to the cage, create a slide, or force a switch you can exploit. Dodging without a read is just running around.
+
+The split dodge is your foundation. It works because you're changing your hands and direction at the same moment, forcing the defender to react to two threats simultaneously. The key is timing: sell the inside move first (shoulder dip, stutter step), then split away. If you split without selling the fake, a good defender won't bite and you've wasted your dodge.
+
+The roll dodge is your answer when the defender plays your hands. Come at the defender, feel contact on your body or stick, then roll away using your body as a barrier between your stick and their check. The roll creates legal protection — your body shields the ball. Plant hard, roll tight to the defender (not wide), and accelerate out of the roll.
+
+The face dodge is underused at the youth level. When a defender pokes or checks, let the ball go wide and bring it back as their stick misses. It's a small movement that creates a massive window — if you do it right, you gain two full steps.
+
+The read that matters most: where is the slide coming from? Before you dodge, identify your adjacent defender. If they're watching you, your dodge draws a slide and you need to be ready to move the ball immediately. If they're turned away, you may have a lane all the way to the cage. Dodge into a read, not into a wall.`,
+    questions: [
+      {
+        question: "What makes a split dodge effective?",
+        options: ["Pure speed", "Selling the inside move first, then splitting away", "Using only your dominant hand", "Dodging at the defender's feet"],
+        correctAnswer: 1,
+        explanation: "The fake before the split forces the defender to react to two threats. Without the sell, a good defender won't bite.",
+      },
+      {
+        question: "What is the key mechanic of a roll dodge?",
+        options: ["Roll away from the defender wide", "Roll tight to the defender using your body as a barrier", "Switch hands mid-roll", "Only used from behind the cage"],
+        correctAnswer: 1,
+        explanation: "Rolling tight uses your body as legal protection. Rolling wide gives the defender a chance to recover.",
+      },
+      {
+        question: "Before every dodge, what should an attacker identify?",
+        options: ["Who the goalie is", "Where the slide is coming from", "The score", "How far they are from the cage"],
+        correctAnswer: 1,
+        explanation: "Identifying the slide before the dodge determines whether you finish or immediately distribute the ball.",
+      },
+    ],
+  },
+  {
+    id: "pos-attack-l2",
+    videoUrl: "https://www.youtube.com/watch?v=4KXp28yNO5Q",
+    lessonNumber: 104,
+    title: "Feeding and Playing Behind",
+    topic: "Lacrosse IQ",
+    pillar: "game",
+    position: "attack",
+    description: `Playing behind the goal is an art form. The X position (directly behind the cage) is one of the most valuable spots on the field — from X, you can see the entire offense and defense simultaneously. Great attackmen spend time behind the cage reading the whole picture, not just looking for their own dodge.
+
+The key rule feeding from behind: feed to space, not to the player. Your cutter doesn't catch where they are — they catch where they're going. Lead them toward the cage, into the crease, or to a spot where they can catch and shoot in one motion. A feed that requires your cutter to stop, adjust, and reset is a turnover waiting to happen.
+
+The two most dangerous feeds from X: the wrap feed (swing the ball from one side of the cage to the other as your teammate cuts through the crease from the opposite direction) and the skip feed (pick up a cutter on the far side of the field when the defense has overloaded to your side). Develop comfort delivering both.
+
+Patience at X is a skill. You don't need to force something every time you receive the ball behind. Reset, let your cutters set up their defenders, identify who has the worst matchup, and then initiate. A great X attackman is like a point guard — they make everyone else better.
+
+The behind-the-cage dodge: the most valuable is the sweep dodge to GLE (goal line extended). Carry from X, sweep toward GLE, either finish on the near pipe or draw the slide and feed the crease. This is a dangerous move because defenders can't body-check from behind — they can only play your stick, and a protected stick at full speed is nearly unstoppable.`,
+    questions: [
+      {
+        question: "When feeding from behind the goal, where should you aim the pass?",
+        options: ["To where the cutter is", "To where the cutter is going", "At the defender", "Always to the crease"],
+        correctAnswer: 1,
+        explanation: "Feed to space — lead the cutter toward the cage so they can catch and shoot in one motion.",
+      },
+      {
+        question: "What makes the X position so valuable?",
+        options: ["It's closest to the goal", "You can see the entire offense and defense simultaneously", "Defenders can't slide from there", "The goalie can't see you"],
+        correctAnswer: 1,
+        explanation: "X provides a full-field view — making it the best place to read and distribute the ball.",
+      },
+      {
+        question: "What is the key to being patient at X?",
+        options: ["Always dodge immediately", "Let cutters set up their defenders before initiating", "Only use skip feeds", "Wait for the coach to call a play"],
+        correctAnswer: 1,
+        explanation: "Patience at X lets the offense develop. Rush it and you force bad decisions under pressure.",
+      },
+    ],
+  },
+]
+
+export const DEFENSE_LESSONS: AcademyLesson[] = [
+  {
+    id: "pos-defense-l1",
+    videoUrl: "https://www.youtube.com/watch?v=VxGmfQUvX_k",
+    lessonNumber: 105,
+    title: "On-Ball Defense Fundamentals",
+    topic: "Fundamentals",
+    pillar: "game",
+    position: "defense",
+    description: `On-ball defense is not just about stopping the guy with the ball — it's about forcing him to make a decision you're already ready for. Great on-ball defenders don't react. They dictate.
+
+Your stance is everything. Feet shoulder-width apart, slight bend in the knees, weight on the balls of your feet. Never stand flat-footed — a flat-footed defender is dead. Your hips should be lower than the attacker's, your stick active but controlled. Wild stick movement wastes energy and puts you off-balance.
+
+Force direction. Before the dodge happens, decide where you want the attacker to go — usually toward your help (toward the slide). If the slide is on the left, force right. Body angle and foot placement communicate this to the attacker before they've decided. Make the easy path feel closed and the forced path feel possible. Then when they take the forced path — you and your slide are both ready.
+
+The check: less is more. Stick checks should be short and sharp — a full swing takes you off-balance and opens a lane. A quick poke, slap, or lift is enough to disrupt a catch or interrupt a dodge. Check with your top hand, recover immediately. If you miss a check, get your feet back under you before attempting another.
+
+Body positioning on a dodge: when the attacker commits to a split, you need to drop your lead foot back and cut off their lane. Don't lunge — drop step. Lunging leaves you flat and easy to beat. The drop step keeps your body between the attacker and the cage. If you get beat, chase on the inside lane and trust your slide.`,
+    questions: [
+      {
+        question: "What does 'force direction' mean in on-ball defense?",
+        options: ["Always push the attacker to the sideline", "Use your body angle to dictate where the attacker goes — usually toward your help", "Run at the attacker as fast as possible", "Check as hard as you can"],
+        correctAnswer: 1,
+        explanation: "Forcing direction means you and your slide are both set before the dodge happens. You control the read.",
+      },
+      {
+        question: "What is the correct response to a split dodge?",
+        options: ["Lunge at the attacker", "Drop step to cut off the lane while staying on your feet", "Swing your stick hard", "Call for help immediately"],
+        correctAnswer: 1,
+        explanation: "A drop step keeps you balanced. Lunging leaves you flat and easy to blow by.",
+      },
+      {
+        question: "How should stick checks be executed?",
+        options: ["Full arm swings for maximum power", "Short, sharp pokes or lifts — recover immediately after", "Never check, just play the body", "Check constantly to tire the attacker"],
+        correctAnswer: 1,
+        explanation: "Wild checks put you off balance. Short checks disrupt without sacrificing positioning.",
+      },
+    ],
+  },
+  {
+    id: "pos-defense-l2",
+    videoUrl: "https://www.youtube.com/watch?v=rbL9yXyCXtQ",
+    lessonNumber: 106,
+    title: "Slides, Rotations, and Communication",
+    topic: "Lacrosse IQ",
+    pillar: "game",
+    position: "defense",
+    description: `Sliding is a team skill. When it works, it's because every defender on the field anticipated the moment, communicated early, and moved before the play developed. When it breaks down, it's usually because of silence.
+
+The two primary slide packages: adjacent and crease. Adjacent slides come from the defender closest to the ball — they crash on the dodge and leave their man. Crease slides come from the crease defender (or a middie dropping), who crashes while adjacent defenders rotate to fill. The slide package your team runs depends on your personnel and your opponent's tendencies — but every player needs to know both.
+
+Communication sequence: The on-ball defender calls "Help!" the second they feel beat. The sliding defender calls "Slide!" before they move. The hot (the player covering the open man left by the slide) calls "I'm hot!" so everyone knows the rotation is set. Three calls, one clean slide. If any of them are missing, the rotation breaks.
+
+The second slide — the "hot" — is where most slide packages die. Everyone knows to slide on the dodge. Almost no one is ready to be the second slide if the ball is moved to the hot. Study film and understand: when the ball is moved to your hot, are you ready to slide again? Do you know who becomes the new hot? This chain of rotations is what separates disciplined defenses from ones that give up easy goals.
+
+Clearing after a save: the goalie's call starts the clear. "Ball! Ball! Ball!" means the goalie has it. Your job is to create a clear lane by moving away from the ball and letting the distribution develop. Bunching up around the goalie is the number one cause of botched clears — spread out and give the goalie options.`,
+    questions: [
+      {
+        question: "What are the three communication calls in a clean slide?",
+        options: ["Ready, Set, Go", "Help! / Slide! / I'm hot!", "Ball, Ball, Ball", "Switch, Rotate, Fill"],
+        correctAnswer: 1,
+        explanation: "Three specific calls chain the slide together. Missing any one of them breaks the rotation.",
+      },
+      {
+        question: "Where do most slide packages break down?",
+        options: ["On the initial slide", "On the second slide — when the ball moves to the hot", "At the start of the possession", "During clears"],
+        correctAnswer: 1,
+        explanation: "Everyone knows to slide on the dodge. Few are ready to be the second slide when the ball moves to the hot.",
+      },
+      {
+        question: "What is the correct positioning for defenders during a clear?",
+        options: ["Stay close to the goalie to help", "Spread out to give the goalie clear lanes and options", "All go to the same side", "Wait for the goalie to call your name"],
+        correctAnswer: 1,
+        explanation: "Spreading out creates clear passing lanes. Bunching is the number one cause of turnover clears.",
+      },
+    ],
+  },
+]
+
+export const MIDFIELD_LESSONS: AcademyLesson[] = [
+  {
+    id: "pos-midfield-l1",
+    videoUrl: "https://www.youtube.com/watch?v=BsilXuJ6Hrk",
+    lessonNumber: 107,
+    title: "The Midfielder's Two-Way Responsibility",
+    topic: "Lacrosse IQ",
+    pillar: "game",
+    position: "midfield",
+    description: `The midfield is the engine of any lacrosse team — and the most physically and mentally demanding position on the field. You have to be able to play offense and defense on the same possession, sometimes within ten seconds of each other. No other position in lacrosse demands that.
+
+The most important habit for a midfielder: get back. When the ball turns over on offense, your first thought is "where is my man?" and your second thought is "how fast can I get there?" Defensive middies who don't get back after an offensive possession leave your team in a man-down situation every time. This is the number one thing coaches look for in a midfielder — does he get back?
+
+On offense, the midfielder's primary job is moving the ball and creating transitions. You're the connector between attack and defense. When you carry the ball past midline, you need to read the situation immediately: is there a lane? Is the attack ready? Is your adjacent striker open? The best midfielders don't force dodges — they play at the pace the defense gives them.
+
+The fast break is where middies win games. When you intercept or win a ground ball in the defensive end, your first look is always upfield. Attack has a step? Throw it immediately. The defense can't recover to a ball that's already past midfield. Hesitating on a fast break is one of the most costly mistakes a midfielder can make.
+
+Physical conditioning is non-negotiable. If you're the kind of midfielder who needs a sub every two minutes, you're limiting your team's options. Work on your conditioning with purpose: sprint intervals, not long slow runs. Your game is thirty yards at full speed, a 10-second break, then thirty yards at full speed again. Train like that.`,
+    questions: [
+      {
+        question: "What is the most important habit for a midfielder after a turnover?",
+        options: ["Sprint to the ball", "Immediately locate your man and get back on defense", "Yell at the attacker who lost the ball", "Wait to see if the team gets it back"],
+        correctAnswer: 1,
+        explanation: "A midfielder who doesn't get back leaves the team in a man-down situation every time.",
+      },
+      {
+        question: "On a fast break, when should you throw the ball to an open attacker?",
+        options: ["After you cross midfield", "Immediately if the attacker has a step — don't hesitate", "Only if the coach signals", "After surveying the field for 3 seconds"],
+        correctAnswer: 1,
+        explanation: "Hesitating on a fast break lets the defense recover. Move the ball immediately when the opportunity is there.",
+      },
+      {
+        question: "What type of conditioning best prepares a midfielder?",
+        options: ["Long slow distance runs", "Sprint intervals that mirror game situations — 30 yards hard, brief rest, repeat", "Only practice drills", "Weight training only"],
+        correctAnswer: 1,
+        explanation: "Midfield is sprint-based. Train with sprint intervals, not long slow runs.",
+      },
+    ],
+  },
+]
+
+// ─── INJECT POSITION LESSONS INTO COURSES ────────────────────────────
+// Override getAcademyCourses to merge position-specific bonus lessons
+
+// ─── MIDFIELD BONUS LESSONS (appended to MIDFIELD_LESSONS) ───────────
+
+const MIDFIELD_LESSONS_EXTRA: AcademyLesson[] = [
+  {
+    id: "pos-midfield-l2",
+    videoUrl: "https://www.youtube.com/watch?v=mQi0UQz_8ls",
+    lessonNumber: 108,
+    title: "Reading the Ride and Clear",
+    topic: "Lacrosse IQ",
+    pillar: "game",
+    position: "midfield",
+    description: `The ride and clear is where midfield IQ separates good players from great ones. Every time possession changes, you're either riding (trying to force a turnover as the defense clears) or clearing (trying to move the ball safely to your offense). You'll be in both roles multiple times every game.
+
+RIDING: The midfielder's job on a ride is to apply pressure on the clearing defenders while not getting beat for an easy outlet. Pick your man — usually the defender who is one pass away from the goalie — and apply controlled pressure. Don't over-commit to the point where you get spun around and they've got a 4v3 going the other way. Ride with your stick active, cutting off the passing lane, and forcing the ball toward the sideline.
+
+The most valuable thing a middie can do on a ride: make the clearing team use their time. Every second you make them burn is a second your offense doesn't have to defend. A well-organized ride that runs out the shot clock — even if you don't cause a turnover — is a win.
+
+CLEARING: When your team has the ball and is clearing, your job is to get open. Get width — run toward your sideline and create a clear passing lane away from the defense. Don't crowd the goalie or your defensemen. The goalie needs options: one defender going up each sideline, one midfielder filling the middle corridor, and one attacker breaking toward midfield to give the longest outlet.
+
+The cardinal mistake midfielders make on clears: running toward the ball instead of away from it. Instinct says go help — instinct is wrong. Running toward the ball brings your defender with you and eliminates the space. Run away, create space, give your teammate a lane.
+
+Timing on the clear: when your defenseman has the ball and is being pressured, your signal to break is when his feet stop moving. A defender standing still is about to make a pass — that's when you sprint to your lane and give a target.`,
+    questions: [
+      {
+        question: "What is a midfielder's primary job when riding?",
+        options: [
+          "Sprint to the goalie and check his stick",
+          "Apply controlled pressure on a clearing defender while cutting off the passing lane",
+          "Wait at midfield for the clear",
+          "Pressure every defender at once",
+        ],
+        correctAnswer: 1,
+        explanation: "Controlled pressure on one clearing lane — forcing the ball toward the sideline without over-committing.",
+      },
+      {
+        question: "On a clear, why should midfielders run AWAY from the ball?",
+        options: [
+          "To rest",
+          "Running toward the ball brings a defender with you and eliminates space",
+          "The coach tells you to",
+          "It's not true — run to the ball",
+        ],
+        correctAnswer: 1,
+        explanation: "Creating space is the job. Running toward the ball collapses lanes. Run away, create the outlet.",
+      },
+      {
+        question: "When is the right moment for a midfielder to sprint to his clearing lane?",
+        options: [
+          "Immediately after the goalie makes a save",
+          "When the defenseman's feet stop moving — he's about to make a pass",
+          "When the coach calls for it",
+          "At the start of the possession",
+        ],
+        correctAnswer: 1,
+        explanation: "A defender standing still is about to pass. That's your signal to break to your lane and give a target.",
+      },
+    ],
+  },
+  {
+    id: "pos-midfield-l3",
+    videoUrl: "https://www.youtube.com/watch?v=zEtzK0HGeao",
+    lessonNumber: 109,
+    title: "Wing Play and Transition Offense",
+    topic: "Lacrosse IQ",
+    pillar: "game",
+    position: "midfield",
+    description: `Wing play is the most undercoached skill in lacrosse. Most players think of the wings as just a spot to run through on transition — but elite midfielders use the wings to control tempo, create angles, and set up the entire offensive system.
+
+THE WING AS AN OUTLET: When your defense has the ball in your defensive end, the wings are the safest clearing outlets. A midfielder running hard at the wing sideline gives the clearing defenseman a passing target that is away from the ride pressure. As soon as you receive the pass on the wing, you have two decisions: push pace if you have a numbers advantage, or hold the ball and let the offense set up if you don't.
+
+TRANSITION READS FROM THE WING: As you carry the ball up the wing in transition, you're reading three things simultaneously. First: is the goalie outlet pass open for a fast break? Second: is your adjacent attacker open for a quick pass inside? Third: are you getting pressure, and do you need to reset? The answer to the first question determines everything that follows. If there's a break — push it. If there isn't — slow down and set up.
+
+THE WING IN SETTLED OFFENSE: Too many middies disappear once the ball reaches the attackmen in settled offense. Don't. As a midfielder in settled offense, you have two jobs: crashing on shots (get to the crease, be there for the rebound) and maintaining defensive balance (if you go to the crease, someone has to be ready to get back if the ball turns over). Every time the ball goes to the wing in settled offense, the closest midfielder should be moving — either cutting or positioning to crash.
+
+CHANGING THE POINT OF ATTACK: One of the most valuable things a wing midfielder can do is skip the ball to the opposite wing. Defenses collapse toward the ball — a skip pass from one wing to the other shifts the entire defense and creates an open look before the defense can recover. If you're on the wing and the far side looks open — don't hesitate.`,
+    questions: [
+      {
+        question: "What are a midfielder's two jobs in settled offense?",
+        options: [
+          "Dodge and shoot",
+          "Crash on shots for rebounds AND maintain defensive balance if the ball turns over",
+          "Stand at the midline and watch",
+          "Feed the attack only",
+        ],
+        correctAnswer: 1,
+        explanation: "Crashing creates second-chance opportunities. Maintaining balance prevents fast breaks the other way.",
+      },
+      {
+        question: "Why is a skip pass from one wing to the other so valuable?",
+        options: [
+          "It's a long pass that impresses scouts",
+          "It shifts the entire defense and creates an open look before the defense can recover",
+          "It avoids the defense entirely",
+          "Only works in man-up situations",
+        ],
+        correctAnswer: 1,
+        explanation: "Defenses collapse toward the ball. A skip pass outpaces the defensive rotation and creates open shots.",
+      },
+      {
+        question: "On transition from the wing, what is the FIRST thing you read?",
+        options: [
+          "Is there a defensive player near you",
+          "Is the goalie outlet or fast break opportunity available",
+          "What the coach wants",
+          "Where the ball is going next",
+        ],
+        correctAnswer: 1,
+        explanation: "The fast break question comes first — if the break is on, push pace immediately. Everything else follows.",
+      },
+    ],
+  },
+  {
+    id: "pos-midfield-l4",
+    videoUrl: "https://www.youtube.com/watch?v=BsilXuJ6Hrk",
+    lessonNumber: 110,
+    title: "Defensive Responsibilities Off-Ball",
+    topic: "Fundamentals",
+    pillar: "game",
+    position: "midfield",
+    description: `Off-ball defense is where midfield games are won and lost. When you're not on the ball — which is most of the time — your positioning, communication, and anticipation determine whether your team gives up goals or forces turnovers.
+
+POSITIONING OFF-BALL: As a midfielder defending off-ball, you want to be in a position where you can see both your man AND the ball at the same time. This is called "playing the triangle" — you, your man, and the ball form a triangle, and you position yourself inside that triangle, closer to the goal, with your head on a swivel. If you turn your back to the ball to face your man, you lose track of the entire game. If you face only the ball, your man runs free.
+
+SLIDE READINESS: In most defensive systems, the on-ball midfielder is the primary slide for an adjacent dodger. Before the dodge happens, you need to know: "If the ball carrier beats my teammate, am I ready to go?" This means you're actively watching the ball carrier's speed and direction, not standing flat on your heels. You're on the balls of your feet, hips low, ready to crash the moment your teammate calls "Help!"
+
+SWITCHING AND COMMUNICATION: When two offensive players set a pick, midfielders have to communicate immediately. "Switch!" means you trade defensive assignments. "Fight through!" means your teammate is going to push through the pick and stay with his man. These two calls have to happen before the pick is set — if you're calling them after, you're already late. The defender who goes through the pick first makes the call.
+
+BALL WATCHING: The most common off-ball defensive mistake is ball watching — you get so focused on watching the ball that your man runs to an open spot and you don't notice until it's too late. Discipline yourself to split your attention: two glances at the ball for every one check on your man. Watch his hips, not his hands — hips tell you where a player is actually going.`,
+    questions: [
+      {
+        question: "What does 'playing the triangle' mean for off-ball defenders?",
+        options: [
+          "Standing in a triangle formation with teammates",
+          "Positioning between your man and the ball so you can see both simultaneously",
+          "Guarding three players at once",
+          "A zone defense concept",
+        ],
+        correctAnswer: 1,
+        explanation: "The triangle is you, your man, and the ball. Stay inside it so you can see both without turning your back on either.",
+      },
+      {
+        question: "When should a pick-switch or fight-through call be made?",
+        options: [
+          "After the pick is set",
+          "Before the pick is set — if you're calling it after, you're already late",
+          "Only if the coach signals",
+          "Never — figure it out as it happens",
+        ],
+        correctAnswer: 1,
+        explanation: "Communication has to happen before the screen. Post-pick calls are reactive and usually too late.",
+      },
+      {
+        question: "What body part should you watch to know where an offensive player is going?",
+        options: [
+          "Their hands",
+          "Their eyes",
+          "Their hips — hips tell you the true direction",
+          "Their stick head",
+        ],
+        correctAnswer: 2,
+        explanation: "Hips don't lie. Hands and eyes can fake — where the hips go is where the player is going.",
+      },
+    ],
+  },
+  {
+    id: "pos-midfield-l5",
+    videoUrl: "https://www.youtube.com/watch?v=qtwKIxyOdGk",
+    lessonNumber: 111,
+    title: "The Complete Midfielder",
+    topic: "Mental Game",
+    pillar: "leadership",
+    position: "midfield",
+    description: `The great midfielders in lacrosse share one characteristic: they don't hide. When their team is tired, they're still running. When there's a 50/50 ground ball at midfield with a minute left, they're going for it. When the offense stalls, they're the ones who make a move to break it open. They don't wait for the game to come to them.
+
+This is the standard for a complete midfielder: every shift counts. You don't ease into a shift. You don't coast when your team has a comfortable lead. Every time you're on the field, you play at the pace that sets the tone for everyone around you. Your energy is contagious — and so is your lack of energy.
+
+GROUND BALLS ARE YOUR GAME. The midfield battle is decided at midfield, and midfield battles are decided on the ground. If you're not winning your share of ground balls, you're not doing your job. This requires more than athleticism — it requires mental commitment. You have to be willing to go to the ground, take contact, and come up with the ball in situations where the outcome is uncertain. Players who hesitate on ground balls lose them. Players who commit — fully, without flinching — win them.
+
+BE THE CONNECTOR. The best middies aren't necessarily the best athletes on the field. They're the ones who make the team work better as a unit. They communicate on every defensive rotation. They release the ball quickly in transition to keep the pace. They crash on shots to give their attack second chances. They get back on defense to protect their goalie. They do the work that doesn't show up in the stat sheet but shows up in the final score.
+
+SELF-SCOUTING: After every game, ask yourself three questions. Did I get back on defense every possession? Did I win my share of ground balls? Did I keep my pace up for the full game? If you can honestly answer yes to all three, you had a good game — regardless of whether you scored.`,
+    questions: [
+      {
+        question: "What sets great midfielders apart from good ones?",
+        options: [
+          "Speed and size",
+          "They don't hide — they compete on every shift, every ground ball, every defensive rep",
+          "They score the most goals",
+          "They have the best dodges",
+        ],
+        correctAnswer: 1,
+        explanation: "Great midfielders are consistent. They compete on every play, set the tone with their energy, and do the unsexy work.",
+      },
+      {
+        question: "Why do players who hesitate on ground balls lose them?",
+        options: [
+          "They're slower",
+          "Full commitment wins ground balls — hesitation creates doubt and the opponent fills the space",
+          "Ground balls are random",
+          "Smaller players can't win ground balls",
+        ],
+        correctAnswer: 1,
+        explanation: "Ground balls go to the player who commits fully. Hesitation costs you the split-second that decides possession.",
+      },
+      {
+        question: "What are the three self-scout questions a midfielder should ask after every game?",
+        options: [
+          "How many goals, assists, and ground balls did I get?",
+          "Did I get back on defense? Did I win ground balls? Did I keep my pace the full game?",
+          "Did I play well? Did the coach notice me? Did we win?",
+          "Did I dodge well? Did I shoot on goal? Did I communicate?",
+        ],
+        correctAnswer: 1,
+        explanation: "These three questions cover the three core responsibilities of a midfielder — they reveal your real contribution regardless of stats.",
+      },
+    ],
+  },
+]
+
+// ─── FOGO LESSONS ─────────────────────────────────────────────────────
+
+export const FOGO_LESSONS: AcademyLesson[] = [
+  {
+    id: "pos-fogo-l1",
+    videoUrl: "https://www.youtube.com/watch?v=9N53S_RpBR8",
+    lessonNumber: 112,
+    title: "What Is FOGO and Why It Matters",
+    topic: "Lacrosse IQ",
+    pillar: "game",
+    position: "fogo",
+    description: `FOGO stands for Face-Off, Get Off. It's a specialized role — the player who takes faceoffs and then immediately comes off the field after the faceoff is won or lost. In modern lacrosse, the FOGO has become one of the most strategically important positions on the field. Teams that dominate faceoffs control possession — and the team that controls possession controls the game.
+
+The math is simple. A college team might take 30 faceoffs in a game. If you win 60% of them, that's 6 extra possessions over your opponent. At the high school level where average goals per possession are low, those extra possessions are the difference between winning and losing. A dominant FOGO is worth more than most people realize.
+
+The position requires an unusual combination of skills: explosive athleticism, hand-eye coordination, tactical intelligence, and mental toughness. Faceoffs are one-on-one competitions that happen under full stadium attention at the start of every possession. A FOGO who flinches mentally — who lets a loss carry into the next faceoff — will cost their team games.
+
+The FOGO role is also evolving. Modern teams are using hybrid FOGOs — players who are good enough on faceoffs to start them but skilled enough as midfielders to stay on the field and contribute in transition. If you want to play at the next level, developing your game beyond faceoffs makes you far more valuable.
+
+Your goal: master the faceoff first. Then expand your game outward from there. The technical skills come first. The tactical intelligence develops over time. And the mental toughness — the ability to reset after a loss and compete just as hard on the next one — is what separates the best from the rest.`,
+    questions: [
+      {
+        question: "What does FOGO stand for?",
+        options: ["Face-Off Get Out", "Face-Off, Get Off", "First On, Go Offense", "Faceoff Only Game Option"],
+        correctAnswer: 1,
+        explanation: "Face-Off, Get Off — the player takes the faceoff and rotates off the field after possession is decided.",
+      },
+      {
+        question: "Why is winning faceoffs so valuable?",
+        options: [
+          "It looks impressive",
+          "Extra possessions directly translate to more scoring opportunities — the team with more possessions controls the game",
+          "Only matters in close games",
+          "Faceoffs are worth a point",
+        ],
+        correctAnswer: 1,
+        explanation: "Possession = opportunity. Winning 60% of 30 faceoffs is 6 extra possessions over your opponent — that decides games.",
+      },
+      {
+        question: "What separates the best FOGOs from the rest mentally?",
+        options: [
+          "They never lose a faceoff",
+          "They reset after every loss and compete just as hard on the next one",
+          "They're always the fastest",
+          "They never show emotion",
+        ],
+        correctAnswer: 1,
+        explanation: "Faceoffs are won and lost constantly. The mental reset between them — not letting one loss bleed into the next — is the mark of elite FOGOs.",
+      },
+    ],
+  },
+  {
+    id: "pos-fogo-l2",
+    videoUrl: "https://www.youtube.com/watch?v=9N53S_RpBR8",
+    lessonNumber: 113,
+    title: "The Clamp — Foundation of Every Faceoff",
+    topic: "Fundamentals",
+    pillar: "game",
+    position: "fogo",
+    description: `The clamp is the foundational faceoff technique. Before you learn any counters or specialty moves, you need to master the clamp — because everything in faceoffs is built around this base.
+
+SETUP: Your stick is placed with the head flat on the ground, facing toward the opponent's head. Your top hand grips the throat of the stick (just below the head), your bottom hand is at mid-shaft. Weight is forward on your fingertips and toes — you are coiled like a spring. Hips low. Eyes locked on the ball.
+
+THE CLAMP: On the whistle, your top hand drives the head of your stick down and over the ball, trapping it against the ground. At the same moment, your body drives forward low, using your hip and shoulder to fight for position over the ball. The goal is to trap the ball under your stick and use your body position to control where it goes next.
+
+BODY POSITION WINS: The physical battle in a faceoff happens in the two seconds after the whistle. The player who wins that battle wins the faceoff more than 80% of the time. Low body position — lower than your opponent — gives you leverage. If your hips are higher than his, he's winning the physical battle. Drive your hips down and forward, not up.
+
+THE EXIT: After the clamp, you have a decision. If you have clean possession, rake the ball to your dominant side and exit to that wing. If it's a contested battle, use your body to shield the ball while your teammates arrive to support. The mistake most FOGOs make is rushing the exit before they have control — losing a ball you already won is the most costly mistake in faceoffs.
+
+REPETITION IS EVERYTHING: The clamp feels awkward at first. It becomes automatic only through thousands of reps. Every day: 20 setup reps, 20 whistle-reaction reps, and 20 full clamp-and-exit reps. Track your time from whistle to possession. Over months, this becomes muscle memory.`,
+    questions: [
+      {
+        question: "What determines who wins the physical battle in a faceoff?",
+        options: [
+          "Who is bigger",
+          "Who has lower body position — lower hips win the leverage battle",
+          "Who has the better stick",
+          "Who is faster off the whistle",
+        ],
+        correctAnswer: 1,
+        explanation: "Low body position wins leverage. The player whose hips are lower controls the battle over the ball more than 80% of the time.",
+      },
+      {
+        question: "When should a FOGO attempt the exit after a clamp?",
+        options: [
+          "Immediately after the whistle",
+          "Only when they have clean possession — rushing the exit before control leads to costly turnovers",
+          "After their teammates arrive",
+          "As fast as physically possible",
+        ],
+        correctAnswer: 1,
+        explanation: "A ball you win and then lose is the worst outcome. Don't exit until you have control.",
+      },
+      {
+        question: "How should a FOGO practice the clamp to build it into muscle memory?",
+        options: [
+          "Only in game situations",
+          "Daily reps: 20 setup, 20 whistle-reaction, 20 full clamp-and-exit — track time from whistle to possession",
+          "Watch film only",
+          "Practice once a week at team practice",
+        ],
+        correctAnswer: 1,
+        explanation: "Thousands of reps over months build muscle memory. Daily structured practice with tracking is how you develop a repeatable technique.",
+      },
+    ],
+  },
+  {
+    id: "pos-fogo-l3",
+    videoUrl: "https://www.youtube.com/watch?v=9N53S_RpBR8",
+    lessonNumber: 114,
+    title: "Counters — The Plunger, Motorcycle, and Jam",
+    topic: "Lacrosse IQ",
+    pillar: "game",
+    position: "fogo",
+    description: `Once you've mastered the clamp, you need counters. Every opponent you face will have a tendency — a preferred faceoff move they go to most often. Your job before every game is to know your opponent's go-to move, and have a practiced counter ready.
+
+THE PLUNGER: The plunger is used when your opponent tries to clamp early or has a very heavy top-hand pressure. Instead of fighting his clamp, you drive your hands straight down — plunging the butt end of your stick toward the ground — which causes your head to pop up and over his, getting above his stick before he can trap the ball. From there, you rake or drive through for possession. The plunger works against early, aggressive clampers.
+
+THE MOTORCYCLE: Named for the grip motion that initiates it. On the whistle, your top hand rotates the stick — like revving a motorcycle — which flips the head of your stick face-down, driving the ball toward your dominant side. This is a speed move — it works because of quickness off the whistle before your opponent can react. If you're beating your opponent to the ball consistently, the motorcycle keeps you in control without a physical battle.
+
+THE JAM: The jam is used against opponents who rake quickly to their strong side after the clamp. Instead of fighting the clamp, you drive your stick into the side of their stick — jamming their rake — and use the disruption to come over the top and control the ball. Timing is everything on the jam: you're anticipating their move, not reacting to it.
+
+SCOUTING YOUR OPPONENT: Before every game, watch your opponent's faceoff tendencies on film if you have it. Three questions: What is his setup position? What does he do in the first half-second after the whistle? Where does the ball usually end up? The answers tell you exactly which counter to use. Faceoffs have a chess-match quality — the FOGO who out-thinks his opponent wins more than the one who just out-muscles him.`,
+    questions: [
+      {
+        question: "When is the plunger most effective?",
+        options: [
+          "Against slow opponents",
+          "Against opponents who clamp early or apply heavy top-hand pressure",
+          "In every faceoff situation",
+          "Only in college lacrosse",
+        ],
+        correctAnswer: 1,
+        explanation: "The plunger counters an aggressive early clamp — popping up and over the opponent's stick before they trap the ball.",
+      },
+      {
+        question: "What makes the motorcycle move effective?",
+        options: [
+          "Physical strength",
+          "Speed off the whistle — it gets the ball moving before the opponent can react",
+          "It works against every opponent",
+          "The unusual grip",
+        ],
+        correctAnswer: 1,
+        explanation: "The motorcycle is a speed move. It beats opponents who haven't yet locked in their clamp, using quickness rather than strength.",
+      },
+      {
+        question: "What three things should you look for when scouting an opponent's faceoff tendencies?",
+        options: [
+          "Their height, weight, and experience level",
+          "Their setup position, what they do in the first half-second, and where the ball usually ends up",
+          "Their team's record, their coach's system, and their uniform",
+          "Their dominant hand, stick length, and mesh type",
+        ],
+        correctAnswer: 1,
+        explanation: "Setup, first movement, and typical ball location tell you exactly which counter to prepare for each opponent.",
+      },
+    ],
+  },
+  {
+    id: "pos-fogo-l4",
+    videoUrl: "https://www.youtube.com/watch?v=9N53S_RpBR8",
+    lessonNumber: 115,
+    title: "The FOGO Mindset and Mental Routine",
+    topic: "Mental Game",
+    pillar: "leadership",
+    position: "fogo",
+    description: `The FOGO position is as much mental as physical. You compete one-on-one, in front of both teams, after every goal and at the start of every period. There is nowhere to hide. Every win and every loss is visible to everyone on the field.
+
+This visibility is a gift, not a burden. The FOGOs who last — who develop into truly elite faceoff specialists — are the ones who learn to thrive in that pressure rather than wilt under it.
+
+THE RESET ROUTINE: Every elite FOGO develops a reset routine for after a loss. Not a superstition — a physical reset. For some it's a specific breath. For others it's touching the end of their stick to the ground. For others it's a short phrase they say internally. Whatever the specific action, the function is always the same: it signals to your nervous system that the last faceoff is over and the next one starts clean. Without a routine, your brain carries the last loss into the next competition — and compound losses are how FOGOs fall apart.
+
+THE COMPETITION MINDSET: Every faceoff is a one-on-one competition. You will face opponents who are faster, stronger, or more technically polished than you. The players who win in those matchups are usually the ones who compete harder, not better. Competing harder means: lower body position when it's uncomfortable, fighting for the ball when you don't have clean possession, and refusing to concede the faceoff before it's over. Faceoffs are decided on determination as often as they're decided on technique.
+
+STUDYING YOUR OWN FILM: The best FOGOs in the country watch film of their own faceoffs the same way QBs study game tape. What is your win rate from each body position? What moves work against which type of opponent? Where are you losing faceoffs — in the clamp, in the battle for the ball, or in the exit? Honest self-analysis is the fastest way to identify and fix the specific part of your game that's costing you possessions.
+
+THE ROLE ON THE SIDELINE: Between faceoffs, your job is to study the opponent's FOGO. Watch every faceoff you're not in. What's his tell? What does he do when he wins? What does he do when he loses? The preparation you do on the sideline is often more valuable than anything you do on the field.`,
+    questions: [
+      {
+        question: "What is the purpose of a FOGO's reset routine after a lost faceoff?",
+        options: [
+          "To look calm to teammates",
+          "To signal to your nervous system that the last faceoff is over and the next one starts clean",
+          "To gain extra time between faceoffs",
+          "To distract the opponent",
+        ],
+        correctAnswer: 1,
+        explanation: "A physical reset routine prevents one loss from carrying into the next. Compound losses are how FOGOs fall apart mentally.",
+      },
+      {
+        question: "What do winning FOGOs do differently against physically superior opponents?",
+        options: [
+          "Use only speed moves",
+          "Compete harder — lower body position, fighting for every loose ball, refusing to concede early",
+          "Avoid physical battles",
+          "Ask to switch opponents",
+        ],
+        correctAnswer: 1,
+        explanation: "Determination closes skill gaps. Lower position, fight for the ball, and never concede before the faceoff is actually over.",
+      },
+      {
+        question: "What should a FOGO do while on the sideline between faceoffs?",
+        options: [
+          "Rest and conserve energy",
+          "Study the opponent's FOGO — watch for tendencies, tells, and patterns",
+          "Talk to teammates about other things",
+          "Stretch and warm up",
+        ],
+        correctAnswer: 1,
+        explanation: "Sideline preparation — scouting the opponent in real time — is often more valuable than anything done on the field.",
+      },
+    ],
+  },
+]
+
+const BOYS_POSITION_LESSONS: AcademyLesson[] = [
+  ...GOALIE_LESSONS,
+  ...ATTACK_LESSONS,
+  ...DEFENSE_LESSONS,
+  ...MIDFIELD_LESSONS,
+  ...MIDFIELD_LESSONS_EXTRA,
+  ...FOGO_LESSONS,
+]
+
+// Girls position lessons: same structure, gender-appropriate videos
+const GIRLS_POSITION_LESSONS: AcademyLesson[] = [
+  // Goalie
+  {
+    ...GOALIE_LESSONS[0],
+    id: "pos-goalie-girls-l1",
+    videoUrl: "https://www.youtube.com/watch?v=wORmAJzdBMI",  // Women's Lacrosse Goalie Training
+  },
+  {
+    ...GOALIE_LESSONS[1],
+    id: "pos-goalie-girls-l2",
+    videoUrl: "https://www.youtube.com/watch?v=pgJzzpjrdFA",  // Ropes Video Shooting Space - Girls
+  },
+  // Attack
+  {
+    ...ATTACK_LESSONS[0],
+    id: "pos-attack-girls-l1",
+    videoUrl: "https://www.youtube.com/watch?v=7deaRXF70Q8",  // Top 3 Dodge Moves Girls
+  },
+  {
+    ...ATTACK_LESSONS[1],
+    id: "pos-attack-girls-l2",
+    videoUrl: "https://www.youtube.com/watch?v=RwMQvpad-XE",  // Taylor Cummings Cutting
+  },
+  // Defense
+  {
+    ...DEFENSE_LESSONS[0],
+    id: "pos-defense-girls-l1",
+    videoUrl: "https://www.youtube.com/watch?v=3f3EEGr6WZk",  // Women's Lacrosse Defensive Footwork
+  },
+  {
+    ...DEFENSE_LESSONS[1],
+    id: "pos-defense-girls-l2",
+    videoUrl: "https://www.youtube.com/watch?v=2v4vfqctG88",  // Intro to Team Defense Adjacent Slides
+  },
+  // Midfield
+  {
+    ...MIDFIELD_LESSONS[0],
+    id: "pos-midfield-girls-l1",
+    videoUrl: "https://www.youtube.com/watch?v=IEt5iXnMtsw",  // NORTH 2-3-1 Motion
+  },
+  {
+    ...MIDFIELD_LESSONS[1],
+    id: "pos-midfield-girls-l2",
+    videoUrl: "https://www.youtube.com/watch?v=dxvAw7zudVg",  // Charlotte North Shooting Drill
+  },
+  ...(MIDFIELD_LESSONS_EXTRA.map((l, i) => ({
+    ...l,
+    id: `pos-midfield-girls-extra-l${i + 1}`,
+  }))),
+  // FOGO → Draw for girls
+  ...FOGO_LESSONS.map((l, i) => ({
+    ...l,
+    id: `pos-draw-girls-l${i + 1}`,
+  })),
+]
+
+export function getAcademyCoursesWithPositions(gender: Gender): AcademyCourse[] {
+  const base = getAcademyCourses(gender)
+  const positionLessons = gender === "boys" ? BOYS_POSITION_LESSONS : GIRLS_POSITION_LESSONS
+  // Add position-specific lessons to each course (they show under position filter)
+  return base.map((course) => ({
+    ...course,
+    lessons: [...course.lessons, ...positionLessons],
+  }))
 }

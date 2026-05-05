@@ -7,6 +7,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+  (function () {
+    var key = 'btbPlaybookStudioUnlocked';
+    if (sessionStorage.getItem(key) === 'yes') return;
+    var pass = prompt('Enter BTB coach password:');
+    if (pass === '#BTBCOACH26') {
+      sessionStorage.setItem(key, 'yes');
+      return;
+    }
+    alert('Coach access required.');
+    window.location.href = '/login?redirect=/playbook-studio.html';
+  })();
+</script>
 <style>
   :root {
     --btb-red: #D22630;
