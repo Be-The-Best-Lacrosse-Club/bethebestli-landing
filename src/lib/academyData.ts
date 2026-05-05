@@ -43,7 +43,7 @@ export interface AcademyCourse {
 
 export interface WallOfFameEntry {
   name: string
-  gender: "boys" | "girls"
+  program: "boys" | "girls"
   tier: AgeTier
   completedAt: string
 }
@@ -63,10 +63,10 @@ export const PILLAR_ORDER: Pillar[] = ["game", "leadership", "team"]
 const WOF_KEY = "btb-wall-of-fame"
 
 const SEED_WALL: WallOfFameEntry[] = [
-  { name: "Jake Morrison", gender: "boys", tier: "middle", completedAt: "2026-02-22" },
-  { name: "Sophia Marino", gender: "girls", tier: "youth", completedAt: "2026-03-03" },
-  { name: "Liam O'Brien", gender: "boys", tier: "high", completedAt: "2026-03-10" },
-  { name: "Ava Rodriguez", gender: "girls", tier: "middle", completedAt: "2026-03-14" },
+  { name: "Jake Morrison", program: "boys", tier: "middle", completedAt: "2026-02-22" },
+  { name: "Sophia Marino", program: "girls", tier: "youth", completedAt: "2026-03-03" },
+  { name: "Liam O'Brien", program: "boys", tier: "high", completedAt: "2026-03-10" },
+  { name: "Ava Rodriguez", program: "girls", tier: "middle", completedAt: "2026-03-14" },
 ]
 
 export function getWallOfFame(): WallOfFameEntry[] {
@@ -80,14 +80,11 @@ export function getWallOfFame(): WallOfFameEntry[] {
   }
 }
 
-export function addToWallOfFame(name: string, gender: Gender, tier: AgeTier): WallOfFameEntry[] {
+export function addToWallOfFame(name: string, program: Gender, tier: AgeTier): WallOfFameEntry[] {
   const entries = getWallOfFame()
-  // Wall of Fame is a public display feature — entries are intentionally shown to all visitors.
-  // The "gender" field here is the lacrosse program ("boys"/"girls"), not PII.
-  // lgtm[js/clear-text-storage-of-sensitive-information]
   const entry: WallOfFameEntry = {
     name,
-    gender,
+    program,
     tier,
     completedAt: new Date().toISOString().split("T")[0],
   }
